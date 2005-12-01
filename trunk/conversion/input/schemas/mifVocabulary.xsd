@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by David Markwell (The Clinical Information Consultancy) -->
+<xs:schema targetNamespace="urn:hl7-org:v3/mif" xmlns="urn:hl7-org:v3/mif" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sch="http://www.ascc.net/xml/schematron" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="mifBase.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+********************************************************************************
+Author: Initial development by Lloyd McKenzie, Dec. 2002
+Revision by David Markwell, Oct 2003
+(c) 2002, 2003 by HL7 Inc.
+
+Purpose:
+	Defines concepts related to vocabulary.
+
+Designed to allow representation as multiple separate packages each containing one or more:
+	- value set
+	- vocabulary domain
+	- code system
+	Each of these sub-elements has a packageLocation allowing the individual components to be referenced and repackaged as necessary.
+
+Programatic rules (rules that apply but are not schema or schematron-enforced):
+	- domain/implementedByValueSet must be unique by context + relativePreference
+	- codeSystem/usesCode/relatedCode must not recurse.  (I.e. tracing path from usesCode to relatedCodes should never loop.)
+	- valueSet/referencedValueSet must not recurse.  (I.e. tracing path from valueSet to referencedValueSet should never loop.)
+	- valuesets should use 'definingExpressions' if they are drawn from 'external' code systems
+	- validation that codes exist when the CodeSystem is defined by reference
+********************************************************************************
+		</xs:documentation>
+	</xs:annotation>
+	<xs:element name="vocabularyModel" type="VocabularyModel">
+		<xs:annotation>
+			<xs:documentation>Information about one or more vocabulary domains, code systems and/or value sets.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="vocabularyDomain" type="VocabularyDomain">
+		<xs:annotation>
+			<xs:documentation>Information about a vocabulary domain that constrains the values of one or more coded attributes in a static model.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="valueSet" type="ValueSet">
+		<xs:annotation>
+			<xs:documentation>Information about a value set that implements a vocabulary domain in one or more contexts.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="codeSystem" type="CodeSystem">
+		<xs:annotation>
+			<xs:documentation>Information about a code system that is referenced by one or mode value sets.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CodeSystem">
+		<xs:annotation>
+			<xs:documentation>Information about a code system that is referenced by one or mode value sets.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Package">
+				<xs:sequence>
+					<xs:element name="annotations" type="VocabularyAnnotations" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Descriptive information about the code system.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="supportedRelationship" type="SupportedRelationship" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Identifies a type of relationship between codes that is supported by this code system.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="conceptCode" type="ConceptCode" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A single coded concept as represented in the code system</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="externalServer" type="ExternalServerInfo" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Reference to an external server able to access the contents of this code system.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="codeSystemType" type="CodeSystemKind" use="required">
+					<xs:annotation>
+						<xs:documentation>Identifies the relationship of the coding system to the standard.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="codeSystemId" type="Oid" use="required"/>
+				<xs:attribute name="fullName" type="LongDescriptiveName" use="optional">
+					<xs:annotation>
+						<xs:documentation>The name for the coding system as published by the maintaining organization.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="releaseId" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>The name for the coding system as published by the maintaining organization.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="version" type="Version" use="optional">
+					<xs:annotation>
+						<xs:documentation>Version included here as version id of external code system</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="internalId" type="Uuid" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CodeSystemRef">
+		<xs:annotation>
+			<xs:documentation>Reference to a coding system including its package location and OID.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PackageRef">
+				<xs:attribute name="oid" type="Oid" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConceptCode">
+		<xs:annotation>
+			<xs:documentation>A single coded concept as represented in the containing code system.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="historyItem" type="HistoryItem" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Tracking information about previous versions of this concept.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="annotations" type="VocabularyAnnotations" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Descriptive information about the concept.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="conceptDesignation" type="ConceptDesignation" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Preferred and alternative designation for this concept in a specified language.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="conceptRelationship" type="ConceptRelationship" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A relationship between this concept and another coded concept in the same code system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="conceptProperty" type="ConceptProperty" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>An additional property of the concept expressed as a coded name with an associated value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="internalId" type="Uuid" use="required"/>
+		<xs:attribute name="code" type="ShortDescriptiveName" use="required">
+			<xs:annotation>
+				<xs:documentation>The mnemonic or id of the code that is supported by the code system.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="printName" type="ShortDescriptiveName" use="required">
+			<xs:annotation>
+				<xs:documentation>The default name to display for the code.  (This may be superceded by a business name for a particular context.)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ConceptDesignation">
+		<xs:annotation>
+			<xs:documentation>A preferred or alternative designation for a concept in a specified language.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="language" type="xs:language" use="optional" default="en"/>
+		<xs:attribute name="preferredForLanguage" type="xs:boolean" use="required"/>
+		<xs:attribute name="text" type="LongDescriptiveName" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ConceptProperty">
+		<xs:annotation>
+			<xs:documentation>A property of a concept expressed as a coded name with an associated value.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="propertyCode" type="BasicFormalName" use="required"/>
+		<xs:attribute name="propertyValue" type="LongDescriptiveName" use="required"/>
+		<xs:attribute name="language" type="xs:language" use="optional" default="en"/>
+	</xs:complexType>
+	<xs:complexType name="ConceptRelationship">
+		<xs:annotation>
+			<xs:documentation>A relationship between the containing coded concept and another concept in the same code system.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="relationCode" type="RelationCode" use="required"/>
+		<xs:attribute name="relationTarget" type="ShortDescriptiveName" use="required"/>
+		<xs:attribute name="relationInverse" type="xs:boolean" use="optional" default="false"/>
+	</xs:complexType>
+	<xs:complexType name="ExternalServerInfo">
+		<xs:annotation>
+			<xs:documentation>Information about an external server that provides access to the contents of the containing code system.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="serverName" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ImplementedByValueSet">
+		<xs:annotation>
+			<xs:documentation>A reference to a value set that implements the containing vocabulary domain in a specified context.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ValueSetRef">
+				<xs:attribute name="relativePreference" type="xs:positiveInteger" use="optional" default="1">
+					<xs:annotation>
+						<xs:documentation>Identifies the relative preference for the coding system within the context.  Lower numbers indicate higher preference.  Implementors are strongly encouraged to use the 'most preferred' coding system.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="context" type="ContextKind" use="required">
+					<xs:annotation>
+						<xs:documentation>Identifies the context(s) associated with the business name.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ReferencedCode">
+		<xs:annotation>
+			<xs:documentation>A reference to a code that is included in or excluded from the containing value set.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="conceptCode" type="ShortDescriptiveName" use="required">
+			<xs:annotation>
+				<xs:documentation>The mnemonic or id of the code that is supported by the code system.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="relationCode" type="RelationCode" use="optional"/>
+		<xs:attribute name="includeReferencedCode" type="xs:boolean" use="optional" default="true"/>
+		<xs:attribute name="leafOnly" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="isHeadCode" type="xs:boolean" use="optional" default="false"/>
+	</xs:complexType>
+	<xs:complexType name="ReferencedValueSet">
+		<xs:annotation>
+			<xs:documentation>A reference to a value set whose members are included in or excluded from the containing value set.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ValueSetRef">
+				<xs:attribute name="operation" type="Operation" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SupportedRelationship">
+		<xs:annotation>
+			<xs:documentation>A type of relationship supported both by the containing code system and by the HL7 vocabulary model.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="relationCode" type="RelationCode" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ValueSet">
+		<xs:annotation>
+			<xs:documentation>Information about a value set that implements a vocabulary domain in one or more contexts.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Package">
+				<xs:sequence>
+					<xs:element name="codeSystemPackageRef" type="CodeSystemRef" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Refers to the location of package containing information about the scheme on which this value set is based.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="vocabularyDomainRef" type="PackageRef" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Refers to a vocabulary domain implemented by this value set.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="annotations" type="VocabularyAnnotations" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Descriptive information about this value set.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="referencedValueSet" type="ReferencedValueSet" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Indicates that this value set includes or excludes the codes defined in the indicated valueset.</xs:documentation>
+							<xs:appinfo>
+								<sch:pattern name="Validate valueset-valueset reference">
+									<sch:rule context="mif:valueSet/mif:referencedValueSet">
+										<sch:report test="count(ancestor::mif:vocabularyModel/mif:valueSet[@valueSetId=current()/@valueSetId]|
+														ancestor::mif:vocabularyModel/mif:valueSetRef[@valueSetId=current()/@valueSetId]|)=0">
+										ERROR: Specified valueSet does not exist in current model.</sch:report>
+									</sch:rule>
+								</sch:pattern>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="referencedCode" type="ReferencedCode" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Identifies a code that is part of the value-set.</xs:documentation>
+							<xs:appinfo>
+								<sch:pattern name="Validate valueset code">
+									<sch:rule context="mif:valueSet/mif:referencesCode">
+										<sch:report test="count(ancestor::mif:vocabularyModel/mif:codeSystem[@codeSystemName=current()/@codeSystemName])!=0 and
+													count(ancestor::mif:vocabularyModel/mif:codeSystem[@codeSystemName=current()/parent::mif:valueSet/@codeSystemName]/
+														mif:usesCode[@code=current()/parent::mif:valueSet/@headCode])=0">
+										ERROR: Specified code does not exist in coding system.</sch:report>
+									</sch:rule>
+								</sch:pattern>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="valueSetId" type="Oid" use="required">
+					<xs:annotation>
+						<xs:documentation>A unique identifier for the value-set.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="basedOnCodeSystem" type="Oid" use="required">
+					<xs:annotation>
+						<xs:documentation>The unique name for the coding system from which codes are drawn for this value-set.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="basedOnCodeSystemVersion" type="Version" use="optional">
+					<xs:annotation>
+						<xs:documentation>The version for the coding system from which codes are drawn for this value-set.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="allCodes" type="xs:boolean" use="optional" default="false"/>
+				<xs:attribute name="isTaxonomicSet" type="xs:boolean" use="optional" default="true"/>
+				<xs:attribute name="definingExpression" type="LongDescriptiveName" use="optional"/>
+				<xs:attribute name="internalId" type="Uuid" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ValueSetRef">
+		<xs:annotation>
+			<xs:documentation>Reference to a value set including its package location and OID.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PackageRef">
+				<xs:attribute name="valueSetId" type="Oid" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="VocabularyAnnotations">
+		<xs:annotation>
+			<xs:documentation>Annotations applicable to a vocabulary model, code system, concept code, vocabulary domain or value set.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="Annotations">
+				<xs:sequence>
+					<xs:choice minOccurs="0">
+						<xs:group ref="Description"/>
+					</xs:choice>
+					<xs:group ref="UsageNotes" minOccurs="0"/>
+					<xs:group ref="BallotComment" minOccurs="0"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="VocabularyDomain">
+		<xs:annotation>
+			<xs:documentation>Information about a vocabulary domain that constrains the values of one or more coded attributes in a static model.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Package">
+				<xs:sequence>
+					<xs:element name="annotations" type="VocabularyAnnotations" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Descriptive information about this vocabulary domain.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="domainRelationship" type="DomainRelationship" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>A reference to another domain that is related to this domain.</xs:documentation>
+							<xs:appinfo>
+								<sch:pattern name="Validate specialized domain">
+									<sch:rule context="mif:specializedDomain">
+										<sch:report test="count(ancestor::mif:vocabularyModel/mif:domain[@name=current()/@name]|
+																	ancestor::mif:vocabularyModel/mif:domainRef[@name=current()/@name)=0">
+										ERROR: Specified domain is not defined or referenced by this model.</sch:report>
+									</sch:rule>
+								</sch:pattern>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="implementedByValueSet" type="ImplementedByValueSet" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Identifies a valueset by which the domain can be represented, as well as the contexts and preference level of the use of that valueset for the domain.</xs:documentation>
+							<xs:appinfo>
+								<sch:pattern name="Validate Implemented valueset">
+									<sch:rule context="mif:implementedByValueSet">
+										<sch:report test="count(ancestor::mif:vocabularyModel/mif:valueSet[@valueSetId=current()/@valueSetId]|
+																	ancestor::mif:vocabularyModel/mif:valueSetRef[@valueSetId=current()/@valueSetId)=0">
+										ERROR: Specified valueset is not defined or referenced by this model.</sch:report>
+									</sch:rule>
+								</sch:pattern>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="VocabularyModel">
+		<xs:annotation>
+			<xs:documentation>A package containing information about one or more vocabulary domains, code systems and/or value sets.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Package">
+				<xs:sequence>
+					<xs:element name="codeSystem" type="CodeSystem" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Information about a code system that is referenced by one or more value sets.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="vocabularyDomain" type="VocabularyDomain" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Information about a vocabulary domain that constrains the value of one or more coded attributes in a static model.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="valueSet" type="ValueSet" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Information about a value set that implements one or more vocabulary domains in a specified context.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="representationKind" type="VocabularyRelationshipStyle" use="required">
+					<xs:annotation>
+						<xs:documentation>UML: Not exposed.  All models will be represented in UML as 'flat'</xs:documentation>
+						<xs:documentation>Identifies whether the model is represented in its flat or serializable form.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="CodeSystemKind">
+		<xs:annotation>
+			<xs:documentation>Indication of whether this is an internal or extenal code system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="EnumerationValue">
+			<xs:enumeration value="I"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="IE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Operation">
+		<xs:annotation>
+			<xs:documentation>Indication of whether to include or exclude the referenced value set contents</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="EnumerationValue">
+			<xs:enumeration value="include"/>
+			<xs:enumeration value="exclude"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RelationCode">
+		<xs:annotation>
+			<xs:documentation>Code representing a type of relationship between concepts or vocabulary domains.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Specializes">
+				<xs:annotation>
+					<xs:documentation>The child code is a more narrow version of concept represented by the parent code.  I.e. Every child concept is also a valid parent concept.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ComponentOf">
+				<xs:annotation>
+					<xs:documentation>The child code is a part of the concept represented by the parent code.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="InGroup">
+				<xs:annotation>
+					<xs:documentation>The child code is part of a group represented by the parent.  The child code is not necessarily substutible for the parent..</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VocabularyRelationshipStyle">
+		<xs:annotation>
+			<xs:documentation>Indicates if this package represents relationship in the model once (short) or also inclusion of inverse relationships (full).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="EnumerationValue">
+			<xs:enumeration value="short"/>
+			<xs:enumeration value="full"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DomainRelationship">
+		<xs:complexContent>
+			<xs:extension base="ConceptRelationship">
+				<xs:sequence>
+					<xs:element name="packageRef" type="PackageRef" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Reference to the location of the package containing the related vocabulary domain.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

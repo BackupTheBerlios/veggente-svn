@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="020000">
+  <packageLocation xmlns:mif="urn:hl7-org:v3/mif" root="DEFN" section="IM" subSection="CO" domain="CT" artifact="MT-deprecated" realm="UV" version="01"/>
+  <header xmlns:mif="urn:hl7-org:v3/mif">
+    <renderingInformation schemaVersion="1" application="RoseTree 3.0.8">
+      <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: transformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+ Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
+ Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: transformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+    </renderingInformation>
+    <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
+      <notation>All rights reserved.</notation>
+    </legalese>
+  </header>
+  <derivationSupplier xmlns:mif="urn:hl7-org:v3/mif" staticModelDerivationId="1">
+    <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+  </derivationSupplier>
+  <derivationSupplier xmlns:mif="urn:hl7-org:v3/mif" staticModelDerivationId="2">
+    <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="RM-deprecated" id="020000"/>
+  </derivationSupplier>
+  <derivationSupplier xmlns:mif="urn:hl7-org:v3/mif" staticModelDerivationId="3">
+    <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="HD-deprecated" realm="UV" version="01" id="020000"/>
+  </derivationSupplier>
+  <ownedEntryPoint xmlns:mif="urn:hl7-org:v3/mif" useKind="SemanticPayload">
+    <annotations>
+      <description>
+        <text>
+          <p>26 Nov 2003 Used in situations where an encounter or service needs to refer back to the appointment that scheduled the event.</p>
+        </text>
+      </description>
+    </annotations>
+    <specializedClass>
+      <class name="Appointment" isAbstract="false">
+        <derivationSupplier staticModelDerivationId="1" className="ActHeir"/>
+        <derivationSupplier staticModelDerivationId="2" className="Appointment"/>
+        <derivationSupplier staticModelDerivationId="3" className="Appointment"/>
+        <annotations/>
+        <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="ACT">
+          <annotations/>
+          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+          <derivationSupplier staticModelDerivationId="2" className="Appointment" attributeName="classCode"/>
+          <derivationSupplier staticModelDerivationId="3" className="Appointment" attributeName="classCode"/>
+          <type name="CS"/>
+          <supplierDomainSpecification codingStrength="CNE" domainName="ActClassRoot" mnemonic="ACT"/>
+        </attribute>
+        <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="APT">
+          <annotations/>
+          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+          <derivationSupplier staticModelDerivationId="2" className="Appointment" attributeName="moodCode"/>
+          <derivationSupplier staticModelDerivationId="3" className="Appointment" attributeName="moodCode"/>
+          <type name="CS"/>
+          <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="APT"/>
+        </attribute>
+        <attribute name="id" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+          <annotations>
+            <designComments>
+              <text>
+                <p>filler appointment id</p>
+              </text>
+            </designComments>
+          </annotations>
+          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="id"/>
+          <derivationSupplier staticModelDerivationId="2" className="Appointment" attributeName="id"/>
+          <derivationSupplier staticModelDerivationId="3" className="Appointment" attributeName="id"/>
+          <type name="II"/>
+        </attribute>
+        <attribute name="code" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+          <annotations/>
+          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+          <derivationSupplier staticModelDerivationId="2" className="Appointment" attributeName="code"/>
+          <derivationSupplier staticModelDerivationId="3" className="Appointment" attributeName="code"/>
+          <type name="CD"/>
+          <supplierDomainSpecification codingStrength="CWE" domainName="ActCode"/>
+        </attribute>
+        <attribute name="effectiveTime" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+          <annotations/>
+          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="effectiveTime"/>
+          <derivationSupplier staticModelDerivationId="2" className="Appointment" attributeName="effectiveTime"/>
+          <derivationSupplier staticModelDerivationId="3" className="Appointment" attributeName="effectiveTime"/>
+          <type name="GTS"/>
+        </attribute>
+        <association sortKey="1">
+          <targetConnection name="outboundRelationship1" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="BZ">
+            <annotations/>
+            <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+            <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="referencedOrder"/>
+            <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="referencedOrder"/>
+            <participantClass>
+              <class name="ReferencedOrder" isAbstract="false">
+                <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                <derivationSupplier staticModelDerivationId="2" className="ReferencedOrder"/>
+                <derivationSupplier staticModelDerivationId="3" className="ReferencedOrder"/>
+                <annotations/>
+                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="OREF">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ReferencedOrder" attributeName="typeCode"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ReferencedOrder" attributeName="typeCode"/>
+                  <type name="CS"/>
+                  <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="OREF"/>
+                </attribute>
+                <association sortKey="1">
+                  <targetConnection name="target" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                    <annotations/>
+                    <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                    <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="actRequest"/>
+                    <derivationSupplier staticModelDerivationId="3" className="ActRelationship" associationEndName="actRequest"/>
+                    <participantClass>
+                      <class name="ActRequest" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ActHeir"/>
+                        <derivationSupplier staticModelDerivationId="2" className="ActRequest"/>
+                        <derivationSupplier staticModelDerivationId="3" className="ActRequest"/>
+                        <annotations/>
+                        <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="ACT">
+                          <annotations/>
+                          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                          <derivationSupplier staticModelDerivationId="2" className="ActRequest" attributeName="classCode"/>
+                          <derivationSupplier staticModelDerivationId="3" className="ActRequest" attributeName="classCode"/>
+                          <type name="CS"/>
+                          <supplierDomainSpecification codingStrength="CNE" domainName="ActClassRoot" mnemonic="ACT"/>
+                        </attribute>
+                        <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
+                          <annotations/>
+                          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                          <derivationSupplier staticModelDerivationId="2" className="ActRequest" attributeName="moodCode"/>
+                          <derivationSupplier staticModelDerivationId="3" className="ActRequest" attributeName="moodCode"/>
+                          <type name="CS"/>
+                          <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
+                        </attribute>
+                        <attribute name="id" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                          <annotations/>
+                          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="id"/>
+                          <derivationSupplier staticModelDerivationId="2" className="ActRequest" attributeName="id"/>
+                          <derivationSupplier staticModelDerivationId="3" className="ActRequest" attributeName="id"/>
+                          <type name="II"/>
+                        </attribute>
+                      </class>
+                    </participantClass>
+                  </targetConnection>
+                  <sourceConnection>
+                    <nonTraversableConnection participantClassName="ReferencedOrder"/>
+                  </sourceConnection>
+                </association>
+              </class>
+            </participantClass>
+          </targetConnection>
+          <sourceConnection>
+            <nonTraversableConnection participantClassName="Appointment"/>
+          </sourceConnection>
+        </association>
+        <association sortKey="2">
+          <targetConnection name="outboundRelationship2" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="BZ">
+            <annotations/>
+            <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+            <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="scheduleRequest"/>
+            <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="scheduleRequest"/>
+            <participantClass>
+              <class name="ScheduleRequest" isAbstract="false">
+                <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                <derivationSupplier staticModelDerivationId="2" className="ScheduleRequest"/>
+                <derivationSupplier staticModelDerivationId="3" className="ScheduleRequest"/>
+                <annotations/>
+                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="SCH">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ScheduleRequest" attributeName="typeCode"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ScheduleRequest" attributeName="typeCode"/>
+                  <type name="CS"/>
+                  <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="SCH"/>
+                </attribute>
+                <association sortKey="1">
+                  <targetConnection name="target" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                    <annotations/>
+                    <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                    <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="actAppointmentRequest"/>
+                    <derivationSupplier staticModelDerivationId="3" className="ActRelationship" associationEndName="actAppointmentRequest"/>
+                    <participantClass>
+                      <class name="ActAppointmentRequest" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ActHeir"/>
+                        <derivationSupplier staticModelDerivationId="2" className="ActAppointmentRequest"/>
+                        <derivationSupplier staticModelDerivationId="3" className="ActAppointmentRequest"/>
+                        <annotations/>
+                        <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="ACT">
+                          <annotations/>
+                          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                          <derivationSupplier staticModelDerivationId="2" className="ActAppointmentRequest" attributeName="classCode"/>
+                          <derivationSupplier staticModelDerivationId="3" className="ActAppointmentRequest" attributeName="classCode"/>
+                          <type name="CS"/>
+                          <supplierDomainSpecification codingStrength="CNE" domainName="ActClassRoot" mnemonic="ACT"/>
+                        </attribute>
+                        <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="ARQ">
+                          <annotations/>
+                          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                          <derivationSupplier staticModelDerivationId="2" className="ActAppointmentRequest" attributeName="moodCode"/>
+                          <derivationSupplier staticModelDerivationId="3" className="ActAppointmentRequest" attributeName="moodCode"/>
+                          <type name="CS"/>
+                          <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="ARQ"/>
+                        </attribute>
+                        <attribute name="id" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                          <annotations/>
+                          <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="id"/>
+                          <derivationSupplier staticModelDerivationId="2" className="ActAppointmentRequest" attributeName="id"/>
+                          <derivationSupplier staticModelDerivationId="3" className="ActAppointmentRequest" attributeName="id"/>
+                          <type name="II"/>
+                        </attribute>
+                      </class>
+                    </participantClass>
+                  </targetConnection>
+                  <sourceConnection>
+                    <nonTraversableConnection participantClassName="ScheduleRequest"/>
+                  </sourceConnection>
+                </association>
+              </class>
+            </participantClass>
+          </targetConnection>
+          <sourceConnection>
+            <nonTraversableConnection participantClassName="Appointment"/>
+          </sourceConnection>
+        </association>
+      </class>
+    </specializedClass>
+  </ownedEntryPoint>
+</serializedStaticModel>
