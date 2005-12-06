@@ -1,4 +1,25 @@
 <?xml version="1.0"?>
+<!-- 
+	Transform HL7 Reference Information Model (RIM) expressed in MIF format
+	into a W3C OWL ontology
+     
+     Copyright(c) 2005 Alessio Carenini <carenini@gmail.com>     
+
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+     the Free Software Foundation; either version 2 of the License, or
+     (at your option) any later version.
+     
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+     
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+-->
 <!DOCTYPE rdf:RDF [
  <!ENTITY xsd  "http://www.w3.org/2001/XMLSchema#" >
     ]>
@@ -41,8 +62,30 @@
 	<!-- RIM Association -->
 	<xsl:template match="hl7:ownedAssociation">
 			<owl:ObjectProperty>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>_<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
+					</xsl:attribute>
 					<xsl:call-template name="add_dcinfo"/>
-					<xsl:apply-templates select="hl7:connections"/>
+					<rdfs:range>
+							<xsl:attribute name="rdf:resource">
+									<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:connections/hl7:traversableConnection[2]/@participantClassName"/>
+							</xsl:attribute>
+					</rdfs:range>
+					<rdfs:domain>
+							<xsl:attribute name="rdf:resource">
+									<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>
+							</xsl:attribute>
+					</rdfs:domain>
+			</owl:ObjectProperty>
+			<owl:ObjectProperty>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:connections/hl7:traversableConnection[2]/@participantClassName"/>_<xsl:value-of select="hl7:connections/hl7:traversableConnection[2]/@name"/>
+					</xsl:attribute>
+					<owl:inverseOf>
+							<xsl:attribute name="rdf:resource">
+									<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>_<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
+							</xsl:attribute>
+					</owl:inverseOf>
 			</owl:ObjectProperty>
 	</xsl:template>
 	<!-- RIM Class -->
@@ -64,9 +107,11 @@
 							</xsl:for-each>
 					</xsl:for-each>
 					<xsl:apply-templates select="hl7:attribute" mode="constraints"/>
+					<xsl:apply-templates select="../../hl7:ownedAssociation/hl7:connections/hl7:traversableConnection[@participantClassName=$class_name]" mode="constraints"/>
 			</owl:Class>
 			<xsl:apply-templates select="hl7:attribute" mode="class"/>
 	</xsl:template>
+	<!-- Class attribute-->
 	<xsl:template match="hl7:attribute" mode="class">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:about">
@@ -85,6 +130,7 @@
 					</rdfs:domain>
 			</owl:ObjectProperty>
 	</xsl:template>
+	<!-- Class attribute constraints-->
 	<xsl:template match="hl7:attribute" mode="constraints">
 			<rdfs:subClassOf>
 					<owl:Restriction>
@@ -94,29 +140,40 @@
 									</xsl:attribute>
 							</owl:onProperty>
 							<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@minimumMultiplicity"/></owl:minCardinality>
-							<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@maximumMultiplicity"/></owl:maxCardinality>
+							<xsl:if test="not(@maximumMultiplicity='*')">
+									<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@maximumMultiplicity"/></owl:maxCardinality>
+							</xsl:if>
 					</owl:Restriction>
 			</rdfs:subClassOf>
 	</xsl:template>
-	<xsl:template match="hl7:connections">
-			<rdfs:range>
-					<xsl:attribute name="rdf:resource">
-							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select=""/>
-					</xsl:attribute>
-			</rdfs:range>
-			<rdfs:domain>
-					<xsl:attribute name="rdf:resource">
-							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select=""/>
-					</xsl:attribute>
-			</rdfs:domain>
+	<!-- Associations constraints-->
+	<xsl:template match="hl7:traversableConnection" mode="constraints">
+			<rdfs:subClassOf>
+					<owl:Restriction>
+							<owl:onProperty>
+									<xsl:attribute name="rdf:resource">
+											<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@participantClassName"/>_<xsl:value-of select="@name"/>
+									</xsl:attribute>
+							</owl:onProperty>
+							<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@minimumMultiplicity"/></owl:minCardinality>
+							<xsl:if test="not(@maximumMultiplicity='*')">
+									<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@maximumMultiplicity"/></owl:maxCardinality>
+							</xsl:if>
+					</owl:Restriction>
+			</rdfs:subClassOf>
 	</xsl:template>
+	<!-- Add Dublin Core info. Just for completeness... -->
 	<xsl:template name="add_dcinfo">
-			<dc:identifier>
-					<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@name"/>
-			</dc:identifier>
-			<dc:description>
-					<xsl:value-of select="hl7:annotations/hl7:definition"/>
-			</dc:description>
+			<xsl:if test="@name">
+					<dc:identifier>
+							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@name"/>
+					</dc:identifier>
+			</xsl:if>
+			<xsl:if test="hl7:annotations/hl7:definition">
+					<dc:description>
+							<xsl:value-of select="hl7:annotations/hl7:definition"/>
+					</dc:description>
+			</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>
 	
