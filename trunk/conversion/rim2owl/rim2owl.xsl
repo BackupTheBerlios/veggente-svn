@@ -146,11 +146,20 @@
 									</xsl:attribute>
 							</owl:onProperty>
 							<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@minimumMultiplicity"/></owl:minCardinality>
-							<xsl:if test="not(@maximumMultiplicity='*')">
-									<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@maximumMultiplicity"/></owl:maxCardinality>
-							</xsl:if>
 					</owl:Restriction>
 			</rdfs:subClassOf>
+			<xsl:if test="not(@maximumMultiplicity='*')">
+					<rdfs:subClassOf>
+							<owl:Restriction>
+									<owl:onProperty>
+											<xsl:attribute name="rdf:resource">
+													<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@name"/>
+											</xsl:attribute>
+									</owl:onProperty>
+									<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@maximumMultiplicity"/></owl:maxCardinality>
+							</owl:Restriction>
+					</rdfs:subClassOf>
+			</xsl:if>
 	</xsl:template>
 <!-- Associations constraints-->
 	<xsl:template match="hl7:traversableConnection" mode="constraints">
@@ -162,11 +171,20 @@
 									</xsl:attribute>
 							</owl:onProperty>
 							<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@minimumMultiplicity"/></owl:minCardinality>
-							<xsl:if test="not(@maximumMultiplicity='*')">
-									<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@maximumMultiplicity"/></owl:maxCardinality>
-							</xsl:if>
 					</owl:Restriction>
 			</rdfs:subClassOf>
+			<xsl:if test="not(@maximumMultiplicity='*')">
+					<rdfs:subClassOf>
+							<owl:Restriction>
+									<owl:onProperty>
+											<xsl:attribute name="rdf:resource">
+													<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@participantClassName"/>_<xsl:value-of select="@name"/>
+											</xsl:attribute>
+									</owl:onProperty>
+									<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@maximumMultiplicity"/></owl:maxCardinality>
+							</owl:Restriction>
+					</rdfs:subClassOf>
+			</xsl:if>
 	</xsl:template>
 <!-- Add Dublin Core info. Just for completeness... -->
 	<xsl:template name="add_info">
