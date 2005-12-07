@@ -21,8 +21,10 @@
 
 -->
 <!DOCTYPE rdf:RDF [
- <!ENTITY xsd  "http://www.w3.org/2001/XMLSchema#" >
-    ]>
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY xsd  "http://www.w3.org/2001/XMLSchema#" >
+]>
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -49,7 +51,11 @@
 					<dc:description>
 							<xsl:value-of select="hl7:historyItem/hl7:description"/>
 					</dc:description>
+					<owl:imports>
+							<xsl:attribute name="rdf:resource"><xsl:value-of select="$rim_dt"/></xsl:attribute>
+					</owl:imports>
 			</owl:Ontology>
+			<owl:AnnotationProperty rdf:about="&rdfs;comment"/>
 			<xsl:apply-templates/>
 	</xsl:template>
 	<xsl:template match="hl7:historyItem"><!-- Eliminare ed integrare nell'about dell'ontologia --></xsl:template>
@@ -59,13 +65,13 @@
 	<xsl:template match="hl7:ownedClass">
 			<xsl:apply-templates/>
 	</xsl:template>
-	<!-- RIM Association -->
+<!-- RIM Association -->
 	<xsl:template match="hl7:ownedAssociation">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:about">
 							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>_<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
 					</xsl:attribute>
-					<xsl:call-template name="add_dcinfo"/>
+					<xsl:call-template name="add_info"/>
 					<rdfs:range>
 							<xsl:attribute name="rdf:resource">
 									<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:connections/hl7:traversableConnection[2]/@participantClassName"/>
@@ -88,12 +94,12 @@
 					</owl:inverseOf>
 			</owl:ObjectProperty>
 	</xsl:template>
-	<!-- RIM Class -->
+<!-- RIM Class -->
 	<xsl:template match="hl7:class">
 			<xsl:variable name="class_name" select="@name"/>
 			<owl:Class>
 					<xsl:attribute name="rdf:ID"><xsl:value-of select="@name"/></xsl:attribute>
-					<xsl:call-template name="add_dcinfo"/>
+					<xsl:call-template name="add_info"/>
 					<xsl:for-each select="../../hl7:ownedClass/hl7:class">
 							<xsl:variable name="temp_name" select="@name"/>
 							<xsl:for-each select="hl7:specializationChild">
@@ -111,13 +117,13 @@
 			</owl:Class>
 			<xsl:apply-templates select="hl7:attribute" mode="class"/>
 	</xsl:template>
-	<!-- Class attribute-->
+<!-- Class attribute-->
 	<xsl:template match="hl7:attribute" mode="class">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:about">
 							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@name"/>
 					</xsl:attribute>
-					<xsl:call-template name="add_dcinfo"/>
+					<xsl:call-template name="add_info"/>
 					<rdfs:range>
 							<xsl:attribute name="rdf:resource">
 									<xsl:value-of select="$rim_dt"/>#<xsl:value-of select="hl7:type/@name"/>
@@ -130,7 +136,7 @@
 					</rdfs:domain>
 			</owl:ObjectProperty>
 	</xsl:template>
-	<!-- Class attribute constraints-->
+<!-- Class attribute constraints-->
 	<xsl:template match="hl7:attribute" mode="constraints">
 			<rdfs:subClassOf>
 					<owl:Restriction>
@@ -146,7 +152,7 @@
 					</owl:Restriction>
 			</rdfs:subClassOf>
 	</xsl:template>
-	<!-- Associations constraints-->
+<!-- Associations constraints-->
 	<xsl:template match="hl7:traversableConnection" mode="constraints">
 			<rdfs:subClassOf>
 					<owl:Restriction>
@@ -162,17 +168,17 @@
 					</owl:Restriction>
 			</rdfs:subClassOf>
 	</xsl:template>
-	<!-- Add Dublin Core info. Just for completeness... -->
-	<xsl:template name="add_dcinfo">
-			<xsl:if test="@name">
+<!-- Add Dublin Core info. Just for completeness... -->
+	<xsl:template name="add_info">
+			<!--	<xsl:if test="@name">
 					<dc:identifier>
 							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@name"/>
 					</dc:identifier>
-			</xsl:if>
+			</xsl:if>-->
 			<xsl:if test="hl7:annotations/hl7:definition">
-					<dc:description>
+					<rdfs:comment rdf:datatype="&xsd;string">
 							<xsl:value-of select="hl7:annotations/hl7:definition"/>
-					</dc:description>
+					</rdfs:comment>
 			</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>
