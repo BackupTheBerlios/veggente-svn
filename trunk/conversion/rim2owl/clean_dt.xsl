@@ -3,22 +3,20 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:hl7_dt="http://veggente.berlios.de/ns/RIMDatatype#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-	xmlns:owl="http://www.w3.org/2002/07/owl#">
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:RIMDatatype="http://veggente.berlios.de/ns/RIMDatatype#"
+	xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	>
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:param name="rim_ns" select="'http://veggente.berlios.de/ns/RIMOntology'"/>
 	<xsl:param name="rim_dt" select="'http://veggente.berlios.de/ns/RIMDatatype'"/>
-	<xsl:param name="rim_st" select="'http://veggente.berlios.de/ns/RIMSimpletype'"/>
 	<!-- TODO 
 		List/Vector/Bag types defined in a UML/C++ style are not processed
 	-->
 	<xsl:template match="/rdf:RDF">
 			<rdf:RDF>
-					<owl:Ontology>
-							<xsl:attribute name="rdf:about" select="$rim_st"/>
-							<owl:imports>
-									<xsl:attribute name="rdf:resource" select="$rim_dt"/>
-							</owl:imports>
-					</owl:Ontology>
+					<xsl:copy-of select="child::node()"/>
 					<xsl:apply-templates select="hl7_dt:HL7_Data_Type/hl7_dt:alias"/>
 			</rdf:RDF>
 	</xsl:template>

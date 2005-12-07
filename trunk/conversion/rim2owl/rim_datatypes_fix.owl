@@ -1,10 +1,854 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:hl7_dt="http://veggente.berlios.de/ns/RIMDatatype#"
+<rdf:RDF xmlns:RIMDatatype="http://veggente.berlios.de/ns/RIMDatatype#"
+         xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:hl7_dt="http://veggente.berlios.de/ns/RIMDatatype#"
          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:owl="http://www.w3.org/2002/07/owl#">
-   <owl:Ontology rdf:about="http://veggente.berlios.de/ns/RIMSimpletype">
-      <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMDatatype"/>
-   </owl:Ontology>
+
+<!-- Ontology Information -->
+<owl:Ontology rdf:about="http://veggente.berlios.de/ns/RIMDatatype"/>
+   <!-- Classes -->
+  <RIMDatatype:HL7_Data_Value rdf:about="#ASKU">
+      <RIMDatatype:concept rdf:datatype="http://www.w3.org/2001/XMLSchema#string">asked but unknown</RIMDatatype:concept>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#UNK"/>
+  </RIMDatatype:HL7_Data_Value>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#AddressPart">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ADXP</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#CharacterString"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#BAG">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BAG</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#BagOfAD">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BAG&lt;AD&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#BAG"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#PostalAddress"/>
+            <owl:onProperty rdf:resource="#members"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#BagOfEN">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BAG&lt;EN&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#BAG"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#EntityName"/>
+            <owl:onProperty rdf:resource="#members"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#BagOfTel">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BAG&lt;TEL&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#BAG"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#TelecommunicationAddress"/>
+            <owl:onProperty rdf:resource="#members"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#BinaryData">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BIN</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#Boolean">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BL</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            <owl:onProperty rdf:resource="#value"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#CharacterString">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ST</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#EncapsulatedData"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            <owl:onProperty rdf:resource="#value"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#CodedSimpleValue">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CS</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A restriction of the concept descriptor (CD). CS suppresses all properties of the CD, except for code and display name. The code system and code system version is fixed by the context in which the CS value occurs. CS is used for coded attributes that have a single HL7-defined value set.</rdfs:comment>
+      <rdfs:subClassOf rdf:resource="#ConceptDescriptor"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#CodedValue">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CV</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A restriction of the concept descriptor (CD). CV suppresses the CD properties translation and modifier. CV is used when any reasonable use case will require only a single code value to be sent.</rdfs:comment>
+      <rdfs:subClassOf rdf:resource="#ConceptDescriptor"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            <owl:onProperty rdf:resource="#translation"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            <owl:onProperty rdf:resource="#modifier"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#CodedwithCategory">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CC</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#ConceptDescriptor"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#CodedwithEquivalents">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CE</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A restriction of the concept descriptor (CD). CE suppresses the CD modifier property. The CE also restricts the translation property such that the translation is a set of CV values that may not themselves contain translations. Used when the use alternative codes may exist.</rdfs:comment>
+      <rdfs:subClassOf rdf:resource="#ConceptDescriptor"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:TopLevel_Class rdf:about="#Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </RIMDatatype:TopLevel_Class>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#ConceptDescriptor">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CD</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A descriptor for a concept, usually through a code from a coding system. For complex domains, such as findings, diagnoses, the concept descriptor may contain translations into other coding systems or free text descriptions. This data type also supports post-coordinated (compositional) coding. Use of this
+data type is typically constrained, hiding some of the power and complexity of
+the concept descriptor.</rdfs:comment>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#ConceptRole">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CR</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#DataValue">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ANY</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#EncapsulatedData">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ED</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#BinaryData"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            <owl:onProperty rdf:resource="#type"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#EntityName">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EN</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#EntityNamePart">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENP</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#CharacterString"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#EventRelatedPIVL">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EIVL</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#SetOfTS"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#GeneralTimingSpecification">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GTS</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#SetOfTS"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <owl:Class rdf:about="#HL7_Data_Type">
+      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="#HL7_Data_Value">
+      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </owl:Class>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#IVL">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IVL</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#IVLOfInt">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IVL&lt;INT&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#IVL"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#IntegerNumber"/>
+            <owl:onProperty rdf:resource="#high"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#IntegerNumber"/>
+            <owl:onProperty rdf:resource="#low"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#InstanceIdentifier">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">II</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#IntegerNumber">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INT</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#Quantity"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+            <owl:onProperty rdf:resource="#value"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#List">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LIST</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#ListOfInt">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LIST&lt;INT&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#List"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#MonetaryAmount">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MO</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#Quantity"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Value rdf:about="#NA">
+      <RIMDatatype:concept rdf:datatype="http://www.w3.org/2001/XMLSchema#string">not applicable</RIMDatatype:concept>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#NI"/>
+  </RIMDatatype:HL7_Data_Value>
+
+  <RIMDatatype:HL7_Data_Value rdf:about="#NASK">
+      <RIMDatatype:concept rdf:datatype="http://www.w3.org/2001/XMLSchema#string">not asked</RIMDatatype:concept>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#UNK"/>
+  </RIMDatatype:HL7_Data_Value>
+
+  <RIMDatatype:HL7_Data_Value rdf:about="#NAV">
+      <RIMDatatype:concept rdf:datatype="http://www.w3.org/2001/XMLSchema#string">temporarily unavailable</RIMDatatype:concept>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#ASKU"/>
+  </RIMDatatype:HL7_Data_Value>
+
+  <RIMDatatype:HL7_Data_Value rdf:about="#NI">
+      <RIMDatatype:concept rdf:datatype="http://www.w3.org/2001/XMLSchema#string">no information</RIMDatatype:concept>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#NullFlavor"/>
+  </RIMDatatype:HL7_Data_Value>
+
+  <RIMDatatype:HL7_Data_Value rdf:about="#NINF">
+      <RIMDatatype:concept rdf:datatype="http://www.w3.org/2001/XMLSchema#string">negative infinity</RIMDatatype:concept>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#OTH"/>
+  </RIMDatatype:HL7_Data_Value>
+
+  <RIMDatatype:HL7_Data_Value rdf:about="#NP">
+      <RIMDatatype:concept rdf:datatype="http://www.w3.org/2001/XMLSchema#string">not present</RIMDatatype:concept>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NP is a presentation layer concept, not an aplication layer concept. All values not present in a message must be replaced by the applicable default value, or no-information (NI) if no other default value is defined</rdfs:comment>
+      <rdfs:subClassOf rdf:resource="#OTH"/>
+  </RIMDatatype:HL7_Data_Value>
+
+  <owl:Class rdf:about="#NullFlavor">
+      <rdfs:subClassOf rdf:resource="#Concept"/>
+  </owl:Class>
+
+  <RIMDatatype:HL7_Data_Value rdf:about="#OTH">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#NullFlavor"/>
+  </RIMDatatype:HL7_Data_Value>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#ObjectIdentifier">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OID</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#OrganizationName">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ON</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#EntityName"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Value rdf:about="#PINF">
+      <RIMDatatype:concept rdf:datatype="http://www.w3.org/2001/XMLSchema#string">positive infinity</RIMDatatype:concept>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#OTH"/>
+  </RIMDatatype:HL7_Data_Value>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#PeriodicIntervalOfTime">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PIVL</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The periodic interval of time specifies an interval of time that recurs periodically. Phase is the interval of time that gets repeated. Period is the length of time between repetitions.</rdfs:comment>
+      <rdfs:subClassOf rdf:resource="#SetOfTS"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            <owl:onProperty rdf:resource="#period"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#PersonName">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PN</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#EntityName"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#PhysicalQuantity">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PQ</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#Quantity"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#PointInTime">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TS</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#Quantity"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#PostalAddress">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AD</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#Quantity">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QTY</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#Ratio">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RTO</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#Quantity"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#RealNumber">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REAL</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#Quantity"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#SET">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SET</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#SetOfCE">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SET&lt;CE&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#SET"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#CodedwithEquivalents"/>
+            <owl:onProperty rdf:resource="#members"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#SetOfCS">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SET&lt;CS&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">S</rdfs:comment>
+      <rdfs:subClassOf rdf:resource="#SET"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#CodedSimpleValue"/>
+            <owl:onProperty rdf:resource="#members"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#SetOfII">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SET&lt;II&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#SET"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#InstanceIdentifier"/>
+            <owl:onProperty rdf:resource="#members"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#SetOfPQ">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SET&lt;PQ&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#SET"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#PhysicalQuantity"/>
+            <owl:onProperty rdf:resource="#members"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#SetOfTS">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SET&lt;TS&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">set of time points</rdfs:comment>
+      <rdfs:subClassOf rdf:resource="#SET"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#StringWithVariables">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STV</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">StringWithVariable is a string that can have references to variables embedded among the characters. The references can be expanded by the literal representations the variable's value.</rdfs:comment>
+      <rdfs:subClassOf rdf:resource="#CharacterString"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#TelecommunicationAddress">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TEL</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#UniversalResourceLocator"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#TimeInterval">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IVL&lt;TS&gt;</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#IVL"/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#PointInTime"/>
+            <owl:onProperty rdf:resource="#high"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#PointInTime"/>
+            <owl:onProperty rdf:resource="#low"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+  </RIMDatatype:HL7_Data_Type>
+
+  <owl:Class rdf:about="#TopLevel_Class">
+      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </owl:Class>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#TrivialName">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TN</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#EntityName"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <RIMDatatype:HL7_Data_Value rdf:about="#UNK">
+      <RIMDatatype:concept rdf:datatype="http://www.w3.org/2001/XMLSchema#string">unknown</RIMDatatype:concept>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#NI"/>
+  </RIMDatatype:HL7_Data_Value>
+
+  <RIMDatatype:HL7_Data_Type rdf:about="#UniversalResourceLocator">
+      <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">URL</RIMDatatype:alias>
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      <rdfs:subClassOf rdf:resource="#DataValue"/>
+  </RIMDatatype:HL7_Data_Type>
+
+  <owl:Class rdf:about="http://protege.stanford.edu/plugins/owl/protege#PAL-CONSTRAINT"/>
+  <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#string">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdfs:Datatype>
+
+  <owl:Class rdf:about="http://www.w3.org/2002/07/owl#Class"/>
+  <owl:Class rdf:about="http://www.w3.org/2002/07/owl#imports"/>
+  <owl:Class rdf:nodeID="b88">
+      <owl:unionOf rdf:parseType="Collection">
+         <rdf:Description rdf:about="#Boolean"/>
+         <rdf:Description rdf:about="#CharacterString"/>
+         <rdf:Description rdf:about="#IntegerNumber"/>
+         <rdf:Description rdf:about="#MonetaryAmount"/>
+         <rdf:Description rdf:about="#PhysicalQuantity"/>
+         <rdf:Description rdf:about="#RealNumber"/>
+      </owl:unionOf>
+  </owl:Class>
+
+  <owl:Class rdf:nodeID="b89">
+      <owl:unionOf rdf:parseType="Collection">
+         <rdf:Description rdf:about="#EncapsulatedData"/>
+         <rdf:Description rdf:about="#InstanceIdentifier"/>
+      </owl:unionOf>
+  </owl:Class>
+
+  <owl:Class rdf:nodeID="b90">
+      <owl:unionOf rdf:parseType="Collection">
+         <rdf:Description rdf:about="#BAG"/>
+         <rdf:Description rdf:about="#List"/>
+         <rdf:Description rdf:about="#SetOfCE"/>
+         <rdf:Description rdf:about="#SetOfCS"/>
+         <rdf:Description rdf:about="#SetOfII"/>
+         <rdf:Description rdf:about="#SetOfPQ"/>
+      </owl:unionOf>
+  </owl:Class>
+
+   <!-- Datatypes -->
+  <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#boolean"/>
+  <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#float"/>
+  <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#int"/>
+
+   <!-- Annotation Properties -->
+  <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
+  <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#label"/>
+
+   <!-- Datatype Properties -->
+  <owl:DatatypeProperty rdf:about="#_DEFINITION">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">:DEFINITION</rdfs:label>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#_DEFINITION-NAME">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">:DEFINITION-NAME</rdfs:label>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#_KB-SAVE">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">:KB-SAVE</rdfs:label>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#_STARTUP-EXPRESSION">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">:STARTUP-EXPRESSION</rdfs:label>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#_STARTUP-FILE">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">:STARTUP-FILE</rdfs:label>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#alias">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#HL7_Data_Type"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#assigningAuthorityName">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#InstanceIdentifier"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#boolean_connective">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#charset">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#EncapsulatedData"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#code">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#ConceptDescriptor"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#codeSystemName">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#ConceptDescriptor"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#codedSystemVersion">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#ConceptDescriptor"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#compression">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#EncapsulatedData"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#concept">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#HL7_Data_Value"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#denominator">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#Ratio"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#description">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#displayName">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#ConceptDescriptor"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#extension">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#InstanceIdentifier"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#institutionSpecifiedTime">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Boolean property indicating whether the exact timing is up to the person or organization executing the time plan.</rdfs:comment>
+      <rdfs:domain rdf:resource="#PeriodicIntervalOfTime"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#label">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#language">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#EncapsulatedData"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#leaf">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#ObjectIdentifier"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#number_of_cycles">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#numerator">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:resource="#Ratio"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#operator">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#referenced_as">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">value of "term" slot is a string by which the variable can be referenced elsewhere (e.g., as part of a string)</rdfs:comment>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#specification">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#value">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+      <rdfs:domain rdf:nodeID="b88"/>
+      <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://protege.stanford.edu/plugins/owl/protege#PAL-NAME"/>
+  <owl:DatatypeProperty rdf:about="http://protege.stanford.edu/plugins/owl/protege#PAL-RANGE"/>
+  <owl:DatatypeProperty rdf:about="http://protege.stanford.edu/plugins/owl/protege#PAL-STATEMENT"/>
+
+   <!-- Object Properties -->
+  <owl:ObjectProperty rdf:about="#address_parts">
+      <rdfs:domain rdf:resource="#PostalAddress"/>
+  </owl:ObjectProperty>
+
+  <owl:FunctionalProperty rdf:about="#alignment">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A periodic pinterval may be specified alingned to the calendar underlying the phase. An aligned peirodic interval is synchronized with the calendar</rdfs:comment>
+      <rdfs:domain rdf:resource="#PeriodicIntervalOfTime"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#butleaf">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#ObjectIdentifier"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#calender">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#PointInTime"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#codeSystem">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#ConceptDescriptor"/>
+  </owl:FunctionalProperty>
+
+  <owl:ObjectProperty rdf:about="#criteria"/>
+  <owl:FunctionalProperty rdf:about="#currency">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#MonetaryAmount"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#datatype">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#effective_time">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#InstanceIdentifier"/>
+  </owl:FunctionalProperty>
+
+  <owl:ObjectProperty rdf:about="#entity_name_parts">
+      <rdfs:domain rdf:resource="#EntityName"/>
+  </owl:ObjectProperty>
+
+  <owl:FunctionalProperty rdf:about="#expression">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#high">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#IVL"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#low">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#IVL"/>
+  </owl:FunctionalProperty>
+
+  <owl:ObjectProperty rdf:about="#members">
+      <rdfs:domain rdf:nodeID="b90"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#modifier">
+      <rdfs:domain rdf:resource="#ConceptDescriptor"/>
+  </owl:ObjectProperty>
+
+  <owl:FunctionalProperty rdf:about="#nullFlavor">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#DataValue"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#offset">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#PointInTime"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#originalText">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#ConceptDescriptor"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#period">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The period specifies how frequently the periodic interval recurs. The period is a physical quantity in the dimensionof time.</rdfs:comment>
+      <rdfs:domain rdf:resource="#PeriodicIntervalOfTime"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#phase">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#PeriodicIntervalOfTime"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#repeat_every">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#root">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#InstanceIdentifier"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#time_zone">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#PointInTime"/>
+  </owl:FunctionalProperty>
+
+  <owl:ObjectProperty rdf:about="#translation">
+      <rdfs:domain rdf:resource="#ConceptDescriptor"/>
+  </owl:ObjectProperty>
+
+  <owl:FunctionalProperty rdf:about="#type">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:nodeID="b89"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#unit">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+      <rdfs:domain rdf:resource="#PhysicalQuantity"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#until">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+
+  <owl:FunctionalProperty rdf:about="#variable">
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+
+   <!-- Instances -->
+  <protege:PAL-CONSTRAINT rdf:about="#HL7DataTypes_00048">
+      <protege:PAL-NAME rdf:datatype="http://www.w3.org/2001/XMLSchema#string">all slots are bound</protege:PAL-NAME>
+      <protege:PAL-RANGE rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(defrange ?slot :FRAME :SLOT)
+(defrange ?class :FRAME :CLASS)</protege:PAL-RANGE>
+      <protege:PAL-STATEMENT rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(forall ?slot 
+  (exists ?class
+    (or (own-slot-of ?slot ?class)
+          (template-slot-of ?slot ?class)
+    )
+  )
+)</protege:PAL-STATEMENT>
+  </protege:PAL-CONSTRAINT>
+
    <owl:Class rdf:ID="ADXP">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPart"/>
    </owl:Class>
