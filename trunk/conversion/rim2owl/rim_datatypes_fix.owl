@@ -97,6 +97,36 @@
 		    <RIMDatatype:alias rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SC</RIMDatatype:alias>
 		    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
 		    <rdfs:subClassOf rdf:resource="#CharacterString"/>
+		    <rdfs:subClassOf>
+				     <owl:Restriction>
+						      <owl:onProperty rdf:resource="#code"/>
+						      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+				     </owl:Restriction>
+		    </rdfs:subClassOf>
+		    <rdfs:subClassOf>
+				     <owl:Restriction>
+						      <owl:onProperty rdf:resource="#codeSystem"/>
+						      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+				     </owl:Restriction>
+		    </rdfs:subClassOf>
+		    <rdfs:subClassOf>
+				     <owl:Restriction>
+						      <owl:onProperty rdf:resource="#codeSystemName"/>
+						      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+				     </owl:Restriction>
+		    </rdfs:subClassOf>
+		    <rdfs:subClassOf>
+				     <owl:Restriction>
+						      <owl:onProperty rdf:resource="#codeSystemVersion"/>
+						      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+				     </owl:Restriction>
+		    </rdfs:subClassOf>
+		    <rdfs:subClassOf>
+				     <owl:Restriction>
+						      <owl:onProperty rdf:resource="#displayName"/>
+						      <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+				     </owl:Restriction>
+		    </rdfs:subClassOf>
   </RIMDatatype:HL7_Data_Type>
   
   <RIMDatatype:HL7_Data_Type rdf:about="#CodedSimpleValue">
@@ -840,8 +870,39 @@ the concept descriptor.</rdfs:comment>
   <owl:FunctionalProperty rdf:about="#variable">
       <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </owl:FunctionalProperty>
+  <!--
+  <owl:ObjectProperty rdf:about="#code">
+		  <rdfs:domain rdf:resource="#CharacterStringWithCode"/>
+		  <rdfs:range rdf:resource="#ST"/>
+  </owl:ObjectProperty>
 
-   <!-- Instances -->
+  <owl:ObjectProperty rdf:about="#codeSystemName">
+		  <rdfs:domain rdf:resource="#CharacterStringWithCode"/>
+		  <rdfs:range rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#codeSystemVersion">
+		  <rdfs:domain rdf:resource="#CharacterStringWithCode"/>
+		  <rdfs:range rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#displayName">
+		  <rdfs:domain rdf:resource="#CharacterStringWithCode"/>
+		  <rdfs:range rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#codeSystem">
+		  <rdfs:domain rdf:resource="#CharacterStringWithCode"/>
+		  <rdfs:range rdf:resource="#UID"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#language">
+		  <rdfs:domain rdf:resource="#CharacterStringWithCode"/>
+		  <rdfs:range rdf:resource="#CS"/>
+  </owl:ObjectProperty>
+  -->
+		  
+<!-- Instances -->
   <protege:PAL-CONSTRAINT rdf:about="#HL7DataTypes_00048">
       <protege:PAL-NAME rdf:datatype="http://www.w3.org/2001/XMLSchema#string">all slots are bound</protege:PAL-NAME>
       <protege:PAL-RANGE rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(defrange ?slot :FRAME :SLOT)
@@ -860,6 +921,15 @@ the concept descriptor.</rdfs:comment>
    </owl:Class>
    <owl:Class rdf:ID="BAG">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG"/>
+   </owl:Class>
+   <owl:Class rdf:ID="BAG_AD_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BagOfAD"/>
+   </owl:Class>
+   <owl:Class rdf:ID="BAG_EN_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BagOfEN"/>
+   </owl:Class>
+   <owl:Class rdf:ID="BAG_TEL_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BagOfTel"/>
    </owl:Class>
    <owl:Class rdf:ID="BIN">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BinaryData"/>
@@ -912,6 +982,9 @@ the concept descriptor.</rdfs:comment>
    <owl:Class rdf:ID="IVL">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
    </owl:Class>
+   <owl:Class rdf:ID="IVL_INT_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVLOfInt"/>
+   </owl:Class>
    <owl:Class rdf:ID="II">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#InstanceIdentifier"/>
    </owl:Class>
@@ -920,6 +993,9 @@ the concept descriptor.</rdfs:comment>
    </owl:Class>
    <owl:Class rdf:ID="LIST">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#List"/>
+   </owl:Class>
+   <owl:Class rdf:ID="LIST_INT_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ListOfInt"/>
    </owl:Class>
    <owl:Class rdf:ID="MO">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#MonetaryAmount"/>
@@ -957,11 +1033,29 @@ the concept descriptor.</rdfs:comment>
    <owl:Class rdf:ID="SET">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
    </owl:Class>
+   <owl:Class rdf:ID="SET_CE_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOfCE"/>
+   </owl:Class>
+   <owl:Class rdf:ID="SET_CS_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOfCS"/>
+   </owl:Class>
+   <owl:Class rdf:ID="SET_II_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOfII"/>
+   </owl:Class>
+   <owl:Class rdf:ID="SET_PQ_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOfPQ"/>
+   </owl:Class>
+   <owl:Class rdf:ID="SET_TS_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOfTS"/>
+   </owl:Class>
    <owl:Class rdf:ID="STV">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#StringWithVariables"/>
    </owl:Class>
    <owl:Class rdf:ID="TEL">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TelecommunicationAddress"/>
+   </owl:Class>
+   <owl:Class rdf:ID="IVL_TS_">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TimeInterval"/>
    </owl:Class>
    <owl:Class rdf:ID="TN">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TrivialName"/>
