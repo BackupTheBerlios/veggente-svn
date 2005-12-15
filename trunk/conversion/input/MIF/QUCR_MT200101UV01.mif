@@ -1,0 +1,284 @@
+<serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="200101">
+   <packageLocation root="DEFN" section="IM" subSection="QU" domain="CR" artifact="MT-deprecated" realm="UV" version="01" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.10">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+ Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
+ Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="QU" domain="CR" artifact="RM-deprecated" id="200000"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="3" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="QU" domain="CR" artifact="HD-deprecated" realm="UV" version="01" id="200100"/>
+   </derivationSupplier>
+   <ownedEntryPoint useKind="SemanticPayload" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
+            <text>
+               <p>Entry point for eligibility query request message</p>
+            </text>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="ParameterList" isAbstract="false">
+            <derivationSupplier staticModelDerivationId="1" className="ParameterList"/>
+            <derivationSupplier staticModelDerivationId="2" className="ParameterList"/>
+            <derivationSupplier staticModelDerivationId="3" className="ParameterList"/>
+            <annotations/>
+            <attribute name="id" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+               <annotations>
+                  <designComments>
+                     <text>
+                        <p>Query Identifier</p>
+                     </text>
+                  </designComments>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Parameter" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="2" className="ParameterList" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="3" className="ParameterList" attributeName="id"/>
+               <type name="II"/>
+            </attribute>
+            <association sortKey="1">
+               <targetConnection name="carrierRole.id" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="ZZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="ParameterList" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ParameterList" associationEndName="carrierRole.id"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ParameterList" associationEndName="carrierRole.id"/>
+                  <participantClass>
+                     <class name="CarrierRole.id" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="CarrierRole.id"/>
+                        <derivationSupplier staticModelDerivationId="3" className="CarrierRole.id"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>Carrier ID</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="CarrierRole.id" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="3" className="CarrierRole.id" attributeName="value"/>
+                           <type name="II"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ParameterList"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="2">
+               <targetConnection name="coveredPartyAsPatient.Id" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="ZZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="ParameterList" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ParameterList" associationEndName="coveredPartyAsPatient.Id"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ParameterList" associationEndName="coveredPartyAsPatient.Id"/>
+                  <participantClass>
+                     <class name="CoveredPartyAsPatient.Id" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="CoveredPartyAsPatient.Id"/>
+                        <derivationSupplier staticModelDerivationId="3" className="CoveredPartyAsPatient.Id"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>e.g. Personal Health Number, policy id + member number</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="CoveredPartyAsPatient.Id" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="3" className="CoveredPartyAsPatient.Id" attributeName="value"/>
+                           <type name="II"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ParameterList"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="3">
+               <targetConnection name="coveredPartyAsPatientPerson.BirthTime" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="ZZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="ParameterList" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ParameterList" associationEndName="coveredPartyAsPatientPerson.BirthTime"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ParameterList" associationEndName="coveredPartyAsPatientPerson.BirthTime"/>
+                  <participantClass>
+                     <class name="CoveredPartyAsPatientPerson.BirthTime" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="CoveredPartyAsPatientPerson.BirthTime"/>
+                        <derivationSupplier staticModelDerivationId="3" className="CoveredPartyAsPatientPerson.BirthTime"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="CoveredPartyAsPatientPerson.BirthTime" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="3" className="CoveredPartyAsPatientPerson.BirthTime" attributeName="value"/>
+                           <type name="TS"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ParameterList"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="4">
+               <targetConnection name="coveredPartyAsPatientPerson.Name" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="ZZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="ParameterList" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ParameterList" associationEndName="coveredPartyAsPatientPerson.Name"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ParameterList" associationEndName="coveredPartyAsPatientPerson.Name"/>
+                  <participantClass>
+                     <class name="CoveredPartyAsPatientPerson.Name" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="CoveredPartyAsPatientPerson.Name"/>
+                        <derivationSupplier staticModelDerivationId="3" className="CoveredPartyAsPatientPerson.Name"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="CoveredPartyAsPatientPerson.Name" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="3" className="CoveredPartyAsPatientPerson.Name" attributeName="value"/>
+                           <type name="PN"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ParameterList"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="5">
+               <targetConnection name="coveredPartyAsPatientRole.Code" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="ZZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="ParameterList" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ParameterList" associationEndName="coveredPartyAsPatientRole.Code"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ParameterList" associationEndName="coveredPartyAsPatientRole.Code"/>
+                  <participantClass>
+                     <class name="CoveredPartyAsPatientRole.Code" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="CoveredPartyAsPatientRole.Code"/>
+                        <derivationSupplier staticModelDerivationId="3" className="CoveredPartyAsPatientRole.Code"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>Relationship to Policy Holder</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="CoveredPartyAsPatientRole.Code" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="3" className="CoveredPartyAsPatientRole.Code" attributeName="value"/>
+                           <type name="CS"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ParameterList"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="6">
+               <targetConnection name="policyOrAccount.Id" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="ZZ">
+                  <annotations>
+                     <designComments>
+                        <text>
+                           <p>This parameter may not be present if the requestor does not know the policy id (e.g. WCB claim #). The association is required, so a NullFlavor is required to indicate why the policy number is not present in the query request. In the absence of policy id, then the name, date of birth and relationship code are required.</p>
+                        </text>
+                     </designComments>
+                  </annotations>
+                  <derivationSupplier staticModelDerivationId="1" className="ParameterList" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ParameterList" associationEndName="policyOrAccount.Id"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ParameterList" associationEndName="policyOrAccount.Id"/>
+                  <participantClass>
+                     <class name="PolicyOrAccount.Id" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="PolicyOrAccount.Id"/>
+                        <derivationSupplier staticModelDerivationId="3" className="PolicyOrAccount.Id"/>
+                        <annotations>
+                           <designComments>
+                              <text>
+                                 <p>This parameter may not be present if the requestor does not know the policy id (e.g. WCB claim #). The association is required, so a NullFlavor is required to indicate why the policy number is not present in the query request. In the absence of policy id, then the name, date of birth and relationship code are required.</p>
+                              </text>
+                           </designComments>
+                        </annotations>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>Policy identifiers, including plan, group as required</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="PolicyOrAccount.Id" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="3" className="PolicyOrAccount.Id" attributeName="value"/>
+                           <type name="II"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ParameterList"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="7">
+               <targetConnection name="serviceDate" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="ZZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="ParameterList" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ParameterList" associationEndName="serviceDate"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ParameterList" associationEndName="serviceDate"/>
+                  <participantClass>
+                     <class name="ServiceDate" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="ServiceDate"/>
+                        <derivationSupplier staticModelDerivationId="3" className="ServiceDate"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>Service date</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="ServiceDate" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="3" className="ServiceDate" attributeName="value"/>
+                           <type name="IVL">
+                              <supplierBindingArgumentDatatype name="TS"/>
+                           </type>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ParameterList"/>
+               </sourceConnection>
+            </association>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
+</serializedStaticModel>

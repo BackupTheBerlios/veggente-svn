@@ -1,0 +1,122 @@
+<serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="101101">
+   <packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.10">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+ Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
+ Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <annotations xmlns:mif="urn:hl7-org:v3/mif">
+      <designComments>
+         <text>
+            <p>This message type is used to query a Person Registry for records matching a person identifier.</p>
+         </text>
+      </designComments>
+   </annotations>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="QU" domain="PA" artifact="RM-deprecated" id="101101"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="3" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="QU" domain="PA" artifact="HD-deprecated" id="101101"/>
+   </derivationSupplier>
+   <ownedEntryPoint useKind="SemanticPayload" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
+            <text>
+               <p>This R-MIM defines the message used to query a Person Registry for records matching a person identifier.</p>
+            </text>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="ParameterList" isAbstract="false">
+            <derivationSupplier staticModelDerivationId="1" className="ParameterList"/>
+            <derivationSupplier staticModelDerivationId="2" className="ParameterList"/>
+            <derivationSupplier staticModelDerivationId="3" className="ParameterList"/>
+            <annotations>
+               <definition>
+                  <text>
+                     <p>Parameter list for a query by person identifier query</p>
+                  </text>
+               </definition>
+            </annotations>
+            <attribute name="id" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations>
+                  <definition>
+                     <text>
+                        <p>Identifier(s) for a parameter list</p>
+                     </text>
+                  </definition>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Parameter" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="2" className="ParameterList" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="3" className="ParameterList" attributeName="id"/>
+               <type name="II"/>
+            </attribute>
+            <association sortKey="1">
+               <targetConnection name="person.id" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R" sortKey="ZZ">
+                  <annotations>
+                     <definition>
+                        <text>
+                           <p>A person identifier (without scoping organization information)</p>
+                        </text>
+                     </definition>
+                  </annotations>
+                  <derivationSupplier staticModelDerivationId="1" className="ParameterList" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ParameterList" associationEndName="person.id"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ParameterList" associationEndName="person.id"/>
+                  <participantClass>
+                     <class name="Person.id" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Person.id"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Person.id"/>
+                        <annotations>
+                           <definition>
+                              <text>
+                                 <p>A person identifier (without scoping organization information)</p>
+                              </text>
+                           </definition>
+                        </annotations>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>An identifier</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person.id" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person.id" attributeName="value"/>
+                           <type name="II"/>
+                        </attribute>
+                        <attribute name="semanticsText" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" defaultValue="Person.id">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="semanticsText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person.id" attributeName="semanticsText"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person.id" attributeName="semanticsText"/>
+                           <type name="ST"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ParameterList"/>
+               </sourceConnection>
+            </association>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
+</serializedStaticModel>

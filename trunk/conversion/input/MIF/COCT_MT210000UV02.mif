@@ -1,213 +1,212 @@
-<?xml version="1.0"?>
 <serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="210000">
-  <packageLocation xmlns:mif="urn:hl7-org:v3/mif" root="DEFN" section="IM" subSection="CO" domain="CT" artifact="MT-deprecated" realm="UV" version="02"/>
-  <header xmlns:mif="urn:hl7-org:v3/mif">
-    <renderingInformation schemaVersion="1" application="RoseTree 3.0.8">
-      <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+   <packageLocation root="DEFN" section="IM" subSection="CO" domain="CT" artifact="MT-deprecated" realm="UV" version="02" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.10">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
  HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
   Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
-  Package Id Conversion: $Id: transformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
   HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
  Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
  Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
   Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
-  Package Id Conversion: $Id: transformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
-    </renderingInformation>
-    <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
-      <notation>All rights reserved.</notation>
-    </legalese>
-  </header>
-  <derivationSupplier xmlns:mif="urn:hl7-org:v3/mif" staticModelDerivationId="1">
-    <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
-  </derivationSupplier>
-  <derivationSupplier xmlns:mif="urn:hl7-org:v3/mif" staticModelDerivationId="2">
-    <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="RM-deprecated" id="210000"/>
-  </derivationSupplier>
-  <derivationSupplier xmlns:mif="urn:hl7-org:v3/mif" staticModelDerivationId="3">
-    <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="HD-deprecated" realm="UV" version="02" id="210000"/>
-  </derivationSupplier>
-  <ownedEntryPoint xmlns:mif="urn:hl7-org:v3/mif" useKind="SemanticPayload">
-    <annotations>
-      <description>
-        <text>
-          <p>Options related to an order.</p>
-        </text>
-      </description>
-    </annotations>
-    <specializedClass>
-      <class name="OrderOption" isAbstract="true">
-        <derivationSupplier staticModelDerivationId="1" className="Act"/>
-        <derivationSupplier staticModelDerivationId="2" className="OrderOption"/>
-        <derivationSupplier staticModelDerivationId="3" className="OrderOption"/>
-        <annotations/>
-        <specializationChild sortKey="1">
-          <specializedClass>
-            <class name="AutoRepeatPermission" isAbstract="false">
-              <derivationSupplier staticModelDerivationId="1" className="Observation"/>
-              <derivationSupplier staticModelDerivationId="2" className="AutoRepeatPermission"/>
-              <derivationSupplier staticModelDerivationId="3" className="AutoRepeatPermission"/>
-              <annotations/>
-              <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="OBS">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
-                <derivationSupplier staticModelDerivationId="2" className="AutoRepeatPermission" attributeName="classCode"/>
-                <derivationSupplier staticModelDerivationId="3" className="AutoRepeatPermission" attributeName="classCode"/>
-                <type name="CS"/>
-                <supplierDomainSpecification codingStrength="CNE" domainName="ActClassObservation" mnemonic="OBS"/>
-              </attribute>
-              <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
-                <derivationSupplier staticModelDerivationId="2" className="AutoRepeatPermission" attributeName="moodCode"/>
-                <derivationSupplier staticModelDerivationId="3" className="AutoRepeatPermission" attributeName="moodCode"/>
-                <type name="CS"/>
-                <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
-              </attribute>
-              <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="AUTO">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
-                <derivationSupplier staticModelDerivationId="2" className="AutoRepeatPermission" attributeName="code"/>
-                <derivationSupplier staticModelDerivationId="3" className="AutoRepeatPermission" attributeName="code"/>
-                <type name="CE"/>
-                <supplierDomainSpecification codingStrength="CWE" domainName="ActCode" mnemonic="AUTO"/>
-              </attribute>
-              <attribute name="value" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Observation" attributeName="value"/>
-                <derivationSupplier staticModelDerivationId="2" className="AutoRepeatPermission" attributeName="value"/>
-                <derivationSupplier staticModelDerivationId="3" className="AutoRepeatPermission" attributeName="value"/>
-                <type name="BL"/>
-              </attribute>
-            </class>
-          </specializedClass>
-        </specializationChild>
-        <specializationChild sortKey="2">
-          <specializedClass>
-            <class name="Dillution" isAbstract="false">
-              <derivationSupplier staticModelDerivationId="1" className="Observation"/>
-              <derivationSupplier staticModelDerivationId="2" className="Dillution"/>
-              <derivationSupplier staticModelDerivationId="3" className="Dillution"/>
-              <annotations/>
-              <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="OBS">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
-                <derivationSupplier staticModelDerivationId="2" className="Dillution" attributeName="classCode"/>
-                <derivationSupplier staticModelDerivationId="3" className="Dillution" attributeName="classCode"/>
-                <type name="CS"/>
-                <supplierDomainSpecification codingStrength="CNE" domainName="ActClassObservation" mnemonic="OBS"/>
-              </attribute>
-              <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
-                <derivationSupplier staticModelDerivationId="2" className="Dillution" attributeName="moodCode"/>
-                <derivationSupplier staticModelDerivationId="3" className="Dillution" attributeName="moodCode"/>
-                <type name="CS"/>
-                <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
-              </attribute>
-              <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="DILUTION">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
-                <derivationSupplier staticModelDerivationId="2" className="Dillution" attributeName="code"/>
-                <derivationSupplier staticModelDerivationId="3" className="Dillution" attributeName="code"/>
-                <type name="CE"/>
-                <supplierDomainSpecification codingStrength="CWE" domainName="ActCode" mnemonic="DILUTION"/>
-              </attribute>
-              <attribute name="value" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Observation" attributeName="value"/>
-                <derivationSupplier staticModelDerivationId="2" className="Dillution" attributeName="value"/>
-                <derivationSupplier staticModelDerivationId="3" className="Dillution" attributeName="value"/>
-                <type name="RTO">
-                  <supplierBindingArgumentDatatype name="QTY"/>
-                  <supplierBindingArgumentDatatype name="QTY"/>
-                </type>
-              </attribute>
-            </class>
-          </specializedClass>
-        </specializationChild>
-        <specializationChild sortKey="3">
-          <specializedClass>
-            <class name="EndogenousContent" isAbstract="false">
-              <derivationSupplier staticModelDerivationId="1" className="Observation"/>
-              <derivationSupplier staticModelDerivationId="2" className="EndogenousContent"/>
-              <derivationSupplier staticModelDerivationId="3" className="EndogenousContent"/>
-              <annotations/>
-              <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="OBS">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
-                <derivationSupplier staticModelDerivationId="2" className="EndogenousContent" attributeName="classCode"/>
-                <derivationSupplier staticModelDerivationId="3" className="EndogenousContent" attributeName="classCode"/>
-                <type name="CS"/>
-                <supplierDomainSpecification codingStrength="CNE" domainName="ActClassObservation" mnemonic="OBS"/>
-              </attribute>
-              <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
-                <derivationSupplier staticModelDerivationId="2" className="EndogenousContent" attributeName="moodCode"/>
-                <derivationSupplier staticModelDerivationId="3" className="EndogenousContent" attributeName="moodCode"/>
-                <type name="CS"/>
-                <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
-              </attribute>
-              <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="ENDC">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
-                <derivationSupplier staticModelDerivationId="2" className="EndogenousContent" attributeName="code"/>
-                <derivationSupplier staticModelDerivationId="3" className="EndogenousContent" attributeName="code"/>
-                <type name="CE"/>
-                <supplierDomainSpecification codingStrength="CWE" domainName="ActCode" mnemonic="ENDC"/>
-              </attribute>
-              <attribute name="value" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Observation" attributeName="value"/>
-                <derivationSupplier staticModelDerivationId="2" className="EndogenousContent" attributeName="value"/>
-                <derivationSupplier staticModelDerivationId="3" className="EndogenousContent" attributeName="value"/>
-                <type name="PQ"/>
-              </attribute>
-            </class>
-          </specializedClass>
-        </specializationChild>
-        <specializationChild sortKey="4">
-          <specializedClass>
-            <class name="ReflexPermission" isAbstract="false">
-              <derivationSupplier staticModelDerivationId="1" className="Observation"/>
-              <derivationSupplier staticModelDerivationId="2" className="ReflexPermission"/>
-              <derivationSupplier staticModelDerivationId="3" className="ReflexPermission"/>
-              <annotations/>
-              <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="OBS">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
-                <derivationSupplier staticModelDerivationId="2" className="ReflexPermission" attributeName="classCode"/>
-                <derivationSupplier staticModelDerivationId="3" className="ReflexPermission" attributeName="classCode"/>
-                <type name="CS"/>
-                <supplierDomainSpecification codingStrength="CNE" domainName="ActClassObservation" mnemonic="OBS"/>
-              </attribute>
-              <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
-                <derivationSupplier staticModelDerivationId="2" className="ReflexPermission" attributeName="moodCode"/>
-                <derivationSupplier staticModelDerivationId="3" className="ReflexPermission" attributeName="moodCode"/>
-                <type name="CS"/>
-                <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
-              </attribute>
-              <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="REFLEX">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
-                <derivationSupplier staticModelDerivationId="2" className="ReflexPermission" attributeName="code"/>
-                <derivationSupplier staticModelDerivationId="3" className="ReflexPermission" attributeName="code"/>
-                <type name="CE"/>
-                <supplierDomainSpecification codingStrength="CWE" domainName="ActCode" mnemonic="REFLEX"/>
-              </attribute>
-              <attribute name="value" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
-                <annotations/>
-                <derivationSupplier staticModelDerivationId="1" className="Observation" attributeName="value"/>
-                <derivationSupplier staticModelDerivationId="2" className="ReflexPermission" attributeName="value"/>
-                <derivationSupplier staticModelDerivationId="3" className="ReflexPermission" attributeName="value"/>
-                <type name="BL"/>
-              </attribute>
-            </class>
-          </specializedClass>
-        </specializationChild>
-      </class>
-    </specializedClass>
-  </ownedEntryPoint>
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="RM-deprecated" id="210000"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="3" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="HD-deprecated" realm="UV" version="02" id="210000"/>
+   </derivationSupplier>
+   <ownedEntryPoint useKind="SemanticPayload" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
+            <text>
+               <p>Options related to an order.</p>
+            </text>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="OrderOption" isAbstract="true">
+            <derivationSupplier staticModelDerivationId="1" className="Act"/>
+            <derivationSupplier staticModelDerivationId="2" className="OrderOption"/>
+            <derivationSupplier staticModelDerivationId="3" className="OrderOption"/>
+            <annotations/>
+            <specializationChild sortKey="1">
+               <specializedClass>
+                  <class name="AutoRepeatPermission" isAbstract="false">
+                     <derivationSupplier staticModelDerivationId="1" className="Observation"/>
+                     <derivationSupplier staticModelDerivationId="2" className="AutoRepeatPermission"/>
+                     <derivationSupplier staticModelDerivationId="3" className="AutoRepeatPermission"/>
+                     <annotations/>
+                     <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="OBS">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                        <derivationSupplier staticModelDerivationId="2" className="AutoRepeatPermission" attributeName="classCode"/>
+                        <derivationSupplier staticModelDerivationId="3" className="AutoRepeatPermission" attributeName="classCode"/>
+                        <type name="CS"/>
+                        <supplierDomainSpecification codingStrength="CNE" domainName="ActClassObservation" mnemonic="OBS"/>
+                     </attribute>
+                     <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                        <derivationSupplier staticModelDerivationId="2" className="AutoRepeatPermission" attributeName="moodCode"/>
+                        <derivationSupplier staticModelDerivationId="3" className="AutoRepeatPermission" attributeName="moodCode"/>
+                        <type name="CS"/>
+                        <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
+                     </attribute>
+                     <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="AUTO">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+                        <derivationSupplier staticModelDerivationId="2" className="AutoRepeatPermission" attributeName="code"/>
+                        <derivationSupplier staticModelDerivationId="3" className="AutoRepeatPermission" attributeName="code"/>
+                        <type name="CE"/>
+                        <supplierDomainSpecification codingStrength="CWE" domainName="ActCode" mnemonic="AUTO"/>
+                     </attribute>
+                     <attribute name="value" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Observation" attributeName="value"/>
+                        <derivationSupplier staticModelDerivationId="2" className="AutoRepeatPermission" attributeName="value"/>
+                        <derivationSupplier staticModelDerivationId="3" className="AutoRepeatPermission" attributeName="value"/>
+                        <type name="BL"/>
+                     </attribute>
+                  </class>
+               </specializedClass>
+            </specializationChild>
+            <specializationChild sortKey="2">
+               <specializedClass>
+                  <class name="Dillution" isAbstract="false">
+                     <derivationSupplier staticModelDerivationId="1" className="Observation"/>
+                     <derivationSupplier staticModelDerivationId="2" className="Dillution"/>
+                     <derivationSupplier staticModelDerivationId="3" className="Dillution"/>
+                     <annotations/>
+                     <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="OBS">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Dillution" attributeName="classCode"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Dillution" attributeName="classCode"/>
+                        <type name="CS"/>
+                        <supplierDomainSpecification codingStrength="CNE" domainName="ActClassObservation" mnemonic="OBS"/>
+                     </attribute>
+                     <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Dillution" attributeName="moodCode"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Dillution" attributeName="moodCode"/>
+                        <type name="CS"/>
+                        <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
+                     </attribute>
+                     <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="DILUTION">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Dillution" attributeName="code"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Dillution" attributeName="code"/>
+                        <type name="CE"/>
+                        <supplierDomainSpecification codingStrength="CWE" domainName="ActCode" mnemonic="DILUTION"/>
+                     </attribute>
+                     <attribute name="value" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Observation" attributeName="value"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Dillution" attributeName="value"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Dillution" attributeName="value"/>
+                        <type name="RTO">
+                           <supplierBindingArgumentDatatype name="QTY"/>
+                           <supplierBindingArgumentDatatype name="QTY"/>
+                        </type>
+                     </attribute>
+                  </class>
+               </specializedClass>
+            </specializationChild>
+            <specializationChild sortKey="3">
+               <specializedClass>
+                  <class name="EndogenousContent" isAbstract="false">
+                     <derivationSupplier staticModelDerivationId="1" className="Observation"/>
+                     <derivationSupplier staticModelDerivationId="2" className="EndogenousContent"/>
+                     <derivationSupplier staticModelDerivationId="3" className="EndogenousContent"/>
+                     <annotations/>
+                     <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="OBS">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                        <derivationSupplier staticModelDerivationId="2" className="EndogenousContent" attributeName="classCode"/>
+                        <derivationSupplier staticModelDerivationId="3" className="EndogenousContent" attributeName="classCode"/>
+                        <type name="CS"/>
+                        <supplierDomainSpecification codingStrength="CNE" domainName="ActClassObservation" mnemonic="OBS"/>
+                     </attribute>
+                     <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                        <derivationSupplier staticModelDerivationId="2" className="EndogenousContent" attributeName="moodCode"/>
+                        <derivationSupplier staticModelDerivationId="3" className="EndogenousContent" attributeName="moodCode"/>
+                        <type name="CS"/>
+                        <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
+                     </attribute>
+                     <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="ENDC">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+                        <derivationSupplier staticModelDerivationId="2" className="EndogenousContent" attributeName="code"/>
+                        <derivationSupplier staticModelDerivationId="3" className="EndogenousContent" attributeName="code"/>
+                        <type name="CE"/>
+                        <supplierDomainSpecification codingStrength="CWE" domainName="ActCode" mnemonic="ENDC"/>
+                     </attribute>
+                     <attribute name="value" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Observation" attributeName="value"/>
+                        <derivationSupplier staticModelDerivationId="2" className="EndogenousContent" attributeName="value"/>
+                        <derivationSupplier staticModelDerivationId="3" className="EndogenousContent" attributeName="value"/>
+                        <type name="PQ"/>
+                     </attribute>
+                  </class>
+               </specializedClass>
+            </specializationChild>
+            <specializationChild sortKey="4">
+               <specializedClass>
+                  <class name="ReflexPermission" isAbstract="false">
+                     <derivationSupplier staticModelDerivationId="1" className="Observation"/>
+                     <derivationSupplier staticModelDerivationId="2" className="ReflexPermission"/>
+                     <derivationSupplier staticModelDerivationId="3" className="ReflexPermission"/>
+                     <annotations/>
+                     <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="OBS">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                        <derivationSupplier staticModelDerivationId="2" className="ReflexPermission" attributeName="classCode"/>
+                        <derivationSupplier staticModelDerivationId="3" className="ReflexPermission" attributeName="classCode"/>
+                        <type name="CS"/>
+                        <supplierDomainSpecification codingStrength="CNE" domainName="ActClassObservation" mnemonic="OBS"/>
+                     </attribute>
+                     <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                        <derivationSupplier staticModelDerivationId="2" className="ReflexPermission" attributeName="moodCode"/>
+                        <derivationSupplier staticModelDerivationId="3" className="ReflexPermission" attributeName="moodCode"/>
+                        <type name="CS"/>
+                        <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
+                     </attribute>
+                     <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="REFLEX">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+                        <derivationSupplier staticModelDerivationId="2" className="ReflexPermission" attributeName="code"/>
+                        <derivationSupplier staticModelDerivationId="3" className="ReflexPermission" attributeName="code"/>
+                        <type name="CE"/>
+                        <supplierDomainSpecification codingStrength="CWE" domainName="ActCode" mnemonic="REFLEX"/>
+                     </attribute>
+                     <attribute name="value" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                        <annotations/>
+                        <derivationSupplier staticModelDerivationId="1" className="Observation" attributeName="value"/>
+                        <derivationSupplier staticModelDerivationId="2" className="ReflexPermission" attributeName="value"/>
+                        <derivationSupplier staticModelDerivationId="3" className="ReflexPermission" attributeName="value"/>
+                        <type name="BL"/>
+                     </attribute>
+                  </class>
+               </specializedClass>
+            </specializationChild>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
 </serializedStaticModel>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<staticModel xmlns="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="0210" title="HL7 Reference Information Model" representationKind="flat" isSerializable="false" xsi:noNamespaceSchemaLocation="../schemas/mifStaticModelFlat.xsd">
-  <historyItem dateTime="6/30/2005" version="02-10">
+<staticModel xmlns="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="0211" title="HL7 Reference Information Model" representationKind="flat" isSerializable="false" xsi:noNamespaceSchemaLocation="..\schemas\mifStaticModelFlat.xsd">
+  <historyItem dateTime="9/19/2005" version="02-11">
     <description>
-      <p>This version of the RIM reflects corrections and changes approved in harmonization through March 09, 2005. This version is the tenth of the RIMs that contain content that will be part of Release 2 of the normative RIM.</p>
+      <p>This version of the RIM reflects changes approved in harmonization through July 14, 2005. This version is the eleventh of the RIMs that contain content that will be part of Release 2 of the normative RIM.</p>
       <p>Questions should be addressed to the co-chairs of the Methodology and Modeling Committee and/or sent to the M&amp;M e-mail list at mnm@lists.hl7.org</p>
     </description>
   </historyItem>
   <packageLocation root="DEFN" realm="Universal" artifact="RIM"/>
   <header>
-    <renderingInformation schemaVersion="1" renderingTime="9/9/2005 8T:30:33" application="RoseTree 3.0.9">
+    <renderingInformation schemaVersion="1" renderingTime="11/20/2005T23:42:53" application="RoseTree 3.0.10">
       <renderingNotes>This model was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
  Transform: $RCSfile: RoseTreeRimToMIFStaticModel.xsl,v $ $Revision: 1.4 $ $Date: 2005/04/17 03:20:15 $</renderingNotes>
     </renderingInformation>
@@ -956,8 +956,6 @@
         <transition name="complete" startStateName="suspended" endStateName="completed"/>
         <transition name="revise" startStateName="suspended" endStateName="suspended"/>
       </behavior>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <stewardCommittee id="C12" name="Patient_care"/>
       <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true">
         <annotations>
           <definition>
@@ -968,18 +966,6 @@
               <p>The Act.classCode must be a generalization of the specific Act concept (e.g., as expressed in Act.code), in other words, the Act concepts conveyed in an Act must be specializations of the Act.classCode. Especially, the classCode is not a "modifier" or the Act.code that can alter the meaning of a class code. (See Act.code for contrast.)</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^2^00132^Patient Class |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^6^00360^Transaction Type |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^7^00361^Transaction Code |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^9^00363^Transaction Description - Alt |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="ActClass" codingStrength="CNE"/>
@@ -1020,45 +1006,6 @@
               <p>A unique identifier for the Act.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^18^00121^Patient Account Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MRG^3^00213^Prior Patient Account Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| BLG^3^00236^Account ID |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^2^00356^Transaction ID |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^14^00368^Insurance Plan ID |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^2^00368^Insurance Plan ID |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| DG1^8^00382^Diagnostic Related Group |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| DRG^1^00382^Diagnostic Related Group |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^14^00439^Authorization Information |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^35^00460^Company Plan Code |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^46^00471^Prior Insurance Plan ID |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^2^00503^Certification Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| UB2^12^00564^Document Control Number |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="II"/>
@@ -1075,42 +1022,6 @@
               <p><i>Discussion:</i> Act.code is not a required attribute of Act. Rather than naming the kind of Act using an Act.code, one can specify the Act using only the class code and other attributes and properties of the Act. In general and more commonly, the kind of Act is readily specified by an ActRelationship specifying that this Act instantiates another Act in definition mood. Or, even without reference to an act definition, the act may be readily described by other attributes, ActRelationships and Participations. For example, the kind of SubstanceAdministration may be readily described by referring to the specific drug, as the Participation of an Entity representing that drug.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^18^00148^Patient Type |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^18^00148^Patient Type |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^15^00440^Plan Type |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^31^00456^Type of Agreement Code |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^21^00492^Blood Deductible |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^28^00499^Room Coverage Type/Amount |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^29^00500^Policy Type/Amount |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^30^00501^Daily Deductible |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^12^00513^Non-Concur Code/Description |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| DRG^8^00770^DRG Payor |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^47^01227^Coverage Type |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| LRL^4^01227^Coverage Type |</text>
-          </mapping>
         </annotations>
         <type name="CD"/>
         <supplierDomainSpecification domainName="ActCode" codingStrength="CWE"/>
@@ -1169,9 +1080,6 @@
               <p>Free text descriptions are used to help an individual interpret the content and context of the act, but all information relevant for automated functions must be communicated using the proper attributes and associated objects.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^8^00362^Transaction Description |</text>
-          </mapping>
         </annotations>
         <type name="ED"/>
       </attribute>
@@ -1183,24 +1091,6 @@
               <p><b>Design Advisory: </b>This attribute was defined in the original RIM as repeating, owing to the presence of nested states in the state machines. In actual practice, however, there is never a need to communicate more than a single status value. therefore, committees are advised to <b>constrain this attribute to a maximum cardinality of 1</b> in all message designs. </p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^32^00457^Billing Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^16^00487^Champus Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^23^00524^Second Opinion Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^24^00525^Second Opinion Documentation Received |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV2^16^00717^Purge Status Code |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV2^24^00725^Patient Status Code |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="ActStatus" codingStrength="CNE"/>
@@ -1223,45 +1113,6 @@
               <p>For example, the time a driver needs to go to the pick-up location A and then return from drop-off location B to some home base, is included in the physical activity, but does not matter from the perspective of the payload's transportation. Another example is: a person's work hours (effectiveTime) may be from 8 AM to 5 PM, no matter whether that person needs 10 minutes for the commute or 2 hours. The commute is necessary to be at work, but it is not essential for the work hours.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^25^00155^Contract Effective Date |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^30^00160^Transfer to Bad Debt Date |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^35^00165^Delete Account Date |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^41^00171^Account Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^44^00174^Admit Date/Time |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^45^00175^Discharge Date/Time |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^5^00359^Transaction Posting Date |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^13^00417^Guarantor Date - Begin |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^6^00507^Certification Date/Time |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^9^00510^Certification Begin Date |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^13^00514^Non-Concur Effective Date/Time |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^22^00523^Second Opinion Date |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV2^17^00718^Purge Status Date |</text>
-          </mapping>
         </annotations>
         <type name="GTS"/>
       </attribute>
@@ -1275,18 +1126,6 @@
               <p>ActivityTime indicates when an Act occurs, not when an Act is recorded. Many applications track the time an observation is recorded rather than the precise time during which an observation is made, in which case Participation.time (e.g. of the Author) should be used. These recorded observations can take place during an encounter, and the time of the encounter often provides enough information so that activityTime isn't clinically relevant.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^4^00358^Transaction Date |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^29^00454^Verification Date/Time |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^7^00508^Certification Modify Date/Time |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| DRG^2^00769^DRG Assigned Date/Time |</text>
-          </mapping>
         </annotations>
         <type name="GTS"/>
       </attribute>
@@ -1311,12 +1150,6 @@
               <p><i>Discussion:</i> This attribute is used in orders to indicate the ordered priority, and in event documentation it indicates the actual priority used to perform the act. In definition mood it indicates the available priorities.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^4^00134^Admission Type |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV2^25^00726^Visit Priority Code |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="CE"/>
@@ -1332,12 +1165,6 @@
               <p>To mitigate some of the inference-risk, aggregations of data should assume the confidentiality level of the most confidential action in the aggregation.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^27^00452^Release Information Code |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV2^21^00722^Visit Publicity Code |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="CE"/>
@@ -1426,18 +1253,6 @@
               <p>The reasonCode remains as a place for common reasons that are not related to a prior Act or any other condition expressed in Acts. Indicators that something was required by law or was on the request of a patient etc. may qualify. However, if that piece of legislation, regulation, or the contract or the patient request can be represented as an Act (and they usually can), the reasonCode should not be used.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^29^00159^Transfer to Bad Debt Code |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^34^00164^Delete Account Indicator |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV2^4^00184^Transfer Reason |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^17^00518^Appeal Reason |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="CE"/>
@@ -1496,8 +1311,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <stewardCommittee id="C12" name="Patient_care"/>
       <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true">
         <annotations>
           <definition>
@@ -1511,60 +1324,6 @@
               <p>5.) A host of functional relationships including support, cause, derivation, etc. generalized under the notion of "pertinence".</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^3^00357^Transaction Batch ID |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^15^00369^Insurance Amount |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^17^00370^Fee Schedule |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^25^00450^Rpt of Eligibility Flag |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^33^00458^Lifetime Reserve Days |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^34^00459^Delay Before L. R. Day |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^37^00462^Policy Deductible |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^39^00464^Policy Limit - Days |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^19^00490^Baby Coverage |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^20^00491^Combine Baby Bill |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^21^00492^Blood Deductible |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^24^00495^Non-Covered Insurance Code |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^28^00499^Room Coverage Type/Amount |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^29^00500^Policy Type/Amount |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^30^00501^Daily Deductible |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^5^00506^Penalty |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^20^00521^Pre-Certification Req/Window |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^67^00807^Copay Limit Flag |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="ActRelationshipType" codingStrength="CNE"/>
@@ -1746,7 +1505,21 @@
           </definition>
         </annotations>
         <type name="CS"/>
-        <supplierDomainSpecification domainName="ActRelationshipSubset" codingStrength="CNE"/>
+        <supplierDomainSpecification domainName="AssociationSubset" codingStrength="CNE"/>
+      </attribute>
+      <attribute name="uncertaintyCode" sortKey="16" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+        <annotations>
+          <definition>
+            <text>
+              <p>A code indicating whether the specific relationship between the source and target Acts has been asserted to be uncertain in any way. </p>
+              <p><i>Examples:</i> A particular exposure event is suspected but not known to have caused a particular symptom.</p>
+              <p><i>Constraints:</i> Uncertainty asserted using this attribute applies only to the relationship between two acts. The certainty of the acts themselves should be conveyed via Act.uncertaintyCode.</p>
+              <p><i>Discussion:</i> Note that very vague uncertainty may be thought related to ActRelationship.negationInd, however, the two concepts are really independent. One may be very uncertain about whether a relationship exists (e.g. not sure whether a drug contains an ingredient) an event, but that does not mean that one is certain about the negation of the relationship (e.g. A drug definitively does not contain an ingredient).</p>
+            </text>
+          </definition>
+        </annotations>
+        <type name="CE"/>
+        <supplierDomainSpecification domainName="ActUncertainty" codingStrength="CNE"/>
       </attribute>
     </class>
   </ownedClass>
@@ -1769,8 +1542,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <stewardCommittee id="C12" name="Patient_care"/>
       <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true">
         <annotations>
           <definition>
@@ -1779,24 +1550,6 @@
               <p><i>Constraints:</i> The Participant.typeCode contains only categories that have crisp semantic relevance in the scope of HL7. It is a coded attribute without exceptions and no alternative coding systems allowed.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^20^00445^Assignment of Benefits |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^21^00446^Coordination of Benefits |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^22^00447^Coord of Ben. Priority |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^5^00476^Mail Claim Party |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^19^00490^Baby Coverage |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^59^00799^Policy Scope |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="ParticipationType" codingStrength="CNE"/>
@@ -1955,6 +1708,18 @@
         <type name="CE"/>
         <supplierDomainSpecification domainName="SubstitutionCondition" codingStrength="CWE"/>
       </attribute>
+      <attribute name="subsetCode" sortKey="14" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+        <annotations>
+          <definition>
+            <text>
+              <p>Used to indicate that the participation is a filtered subset of the total participations of the same type owned by the Act. </p>
+              <p>Used when there is a need to limit the participations to the first, the last, the next or some other filtered subset.</p>
+            </text>
+          </definition>
+        </annotations>
+        <type name="CS"/>
+        <supplierDomainSpecification domainName="ParticipationAssociationSubset" codingStrength="CNE"/>
+      </attribute>
       <specializationChild childClassName="ManagedParticipation" sortKey="1"/>
     </class>
   </ownedClass>
@@ -1970,7 +1735,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
       <attribute name="balanceAmt" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -2053,7 +1817,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
     </class>
   </ownedClass>
   <ownedClass>
@@ -2093,7 +1856,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
       <attribute name="subjectOrientationCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -2119,8 +1881,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <stewardCommittee id="C12" name="Patient_care"/>
       <attribute name="energyQuantity" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -2282,12 +2042,6 @@
               <p><i>Examples:</i> $0.20/mg; $250/day; $50</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^10^00364^Transaction Quantity |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FT1^22^00374^Unit Cost |</text>
-          </mapping>
         </annotations>
         <type name="RTO">
           <supplierBindingArgumentDatatype name="MO"/>
@@ -2423,7 +2177,6 @@
         <transition name="cancel" startStateName="pending" endStateName="cancelled"/>
         <transition name="revise" startStateName="pending" endStateName="pending"/>
       </behavior>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
       <attribute name="id" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
         <annotations>
           <definition>
@@ -2465,8 +2218,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <interestedCommittee id="C12" name="Patient_care"/>
       <attribute name="value" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
         <annotations>
           <definition>
@@ -2493,18 +2244,6 @@
               <p>(13) Uncertainty of values is specified using the Probability and Probability Distribution data type extensions (UVP, PPD). If a statistical sample is reported with absolute frequencies of categories a Bag collection (BAG) can be used efficiently.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^34^00145^Ambulatory Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^32^00145^Ambulatory Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^18^00145^Ambulatory Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^15^00145^Ambulatory Status |</text>
-          </mapping>
         </annotations>
         <type name="ANY"/>
       </attribute>
@@ -2571,9 +2310,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
-      <interestedCommittee id="C047" name="Orders_Observations"/>
-      <interestedCommittee id="C12" name="Patient_care"/>
       <attribute name="admissionReferralSourceCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -2581,12 +2317,6 @@
               <p>The source of the referral for a patient encounter.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^14^00144^Admit Source |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV2^36^00737^Newborn Baby Indicator |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="EncounterReferralSource" codingStrength="CWE"/>
@@ -2599,9 +2329,6 @@
               <p><i>Discussion:</i> The actual days quantity cannot be simply calculated from the admission and discharge dates because of possible leaves of absence.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV2^11^00712^Actual Length of Inpatient Stay |</text>
-          </mapping>
         </annotations>
         <type name="PQ"/>
       </attribute>
@@ -2612,9 +2339,6 @@
               <p>A code depicting the disposition of the patient at the time of discharge (e.g., discharged to home, expired, against medical advice, etc.). While the encounter is still "active" (the encounter doesn't have an end date yet) this attribute should be interpreted as the expected discharge disposition. When the encounter is "completed" this field contains the actual discharge disposition.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^36^00166^Discharge Disposition |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="EncounterDischargeDisposition" codingStrength="CWE"/>
@@ -2626,9 +2350,6 @@
               <p>An indication that pre-admission tests are required for this patient encounter.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^12^00142^Preadmit Test Indicator |</text>
-          </mapping>
         </annotations>
         <type name="BL"/>
       </attribute>
@@ -2639,9 +2360,6 @@
               <p>A code identifying special courtesies extended to the patient. For example, no courtesies, extended courtesies, professional courtesy, VIP courtesies.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^22^00152^Courtesy Code |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="CE"/>
@@ -2677,8 +2395,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <stewardCommittee id="C12" name="Patient_care"/>
       <attribute name="methodCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
         <annotations>
           <definition>
@@ -2747,7 +2463,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
       <attribute name="detectionMethodCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -2795,8 +2510,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <stewardCommittee id="C12" name="Patient_care"/>
       <attribute name="routeCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -2922,8 +2635,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <stewardCommittee id="C12" name="Patient_care"/>
       <attribute name="quantity" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -2964,7 +2675,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C12" name="Patient_care"/>
       <attribute name="ownershipLevelCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -3049,12 +2759,6 @@
               <p><i>Rationale:</i> Due to the extremely large number of potential values for a code set representing all physical things in the universe, the class code indicates both the subtype branch of the Entity hierarchy used as well as a high level classifier to represent the instance of Entity. This can be used to constrain the eligible value domains for the Entity.code attribute.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^10^00414^Guarantor Type |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| LOC^3^00945^Location Type-LOC |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="EntityClass" codingStrength="CNE"/>
@@ -3094,9 +2798,6 @@
               <p><i>Rationale:</i> For each Entity, the value for this attribute is drawn from one of several coding systems depending on the Entity.classCode, such as living subjects (animal and plant taxonomies), chemical substance (e.g., IUPAC code), organizations, insurance company, government agency, hospital, park, lake, syringe, etc. It is possible that Entity.code may be so fine grained that it represents a single instance. An example is the CDC vaccine manufacturer code, modeled as a concept vocabulary, when in fact each concept refers to a single instance.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^14^00485^Champus Service |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="EntityCode" codingStrength="CWE"/>
@@ -3140,12 +2841,6 @@
               <p><i>Rationale:</i> Names and descriptions of entities are typically more meaningful to human viewers than numeric, mnemonic or abbreviated code values. The description allows for additional context about the entity to be conveyed to human viewers without impacting the functional components of the message.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV2^5^00185^Patient Valuables |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV2^6^00186^Patient Valuables Location |</text>
-          </mapping>
         </annotations>
         <type name="ED"/>
       </attribute>
@@ -3166,9 +2861,9 @@
           <definition>
             <text>
               <p>An interval of time specifying the period in which the Entity physically existed. </p>
-              <p><i>Examples:</i> Birthdate/Deathdate, ManufactureDate/DisposalDate</p>
+              <p><i>Examples:</i> ManufactureDate/DisposalDate</p>
               <p><i>Constraints:</i> This period may represent past, present or future time periods.</p>
-              <p><i>Rationale:</i> Physical entities have specified periods in which they exist. Human beings are born, live their lives and die. Equipment is manufactured, placed in service, retired and salvaged. The relevance of this attribute is in planning, availability and retrospective analysis.</p>
+              <p><i>Rationale:</i> Physical entities have specified periods in which they exist. Equipment is manufactured, placed in service, retired and salvaged. The relevance of this attribute is in planning, availability and retrospective analysis.</p>
             </text>
           </definition>
         </annotations>
@@ -3183,57 +2878,6 @@
               <p>A telecommunication address for the Entity.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^13^00116^Phone Number - Home |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^6^00195^Business Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^6^00410^Guarantor Ph Num- Home |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^7^00411^Guarantor Ph Num-Business |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^18^00422^Guarantor Employer Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^7^00432^Insurance Co Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^16^00517^Certification Contact Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^19^00520^Certification Agency Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| OM1^17^00602^Telephone Number of Section |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| OM1^29^00614^Phone Number of Outside Site |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^46^00749^Contact Person's Telephone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^31^00749^Contact Person's Telephone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^50^00790^Employer Contact Person Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^53^00793^Insured's Contact Person Telephone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^58^00798^Insurance Co Contact Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^63^00803^Insured's Telephone Number - Home |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^64^00804^Insured's Employer Telephone Number |</text>
-          </mapping>
         </annotations>
         <type name="BAG">
           <supplierBindingArgumentDatatype name="TEL"/>
@@ -3284,7 +2928,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
       <attribute name="languageCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -3295,18 +2938,6 @@
               <p><i>Rationale:</i> Many individuals and devices have the capability to communicate at varying levels in multiple languages. This code specifies a language capability that the entity wishes to make known.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^36^00118^Primary Language |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^34^00118^Primary Language |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^20^00118^Primary Language |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^15^00118^Primary Language |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="HumanLanguage" codingStrength="CWE"/>
@@ -3359,8 +2990,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <stewardCommittee id="C12" name="Patient_care"/>
       <attribute name="capacityQuantity" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -3450,7 +3079,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C10" name="Inter_enterprise"/>
       <attribute name="manufacturerModelName" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -3527,8 +3155,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <interestedCommittee id="C036" name="PAFM"/>
       <attribute name="administrativeGenderCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -3537,24 +3163,8 @@
               <p><i>Examples:</i> female, male </p>
               <p><i>Discussion:</i> This attribute does not include terms related to clinical gender. Gender is a complex physiological, genetic and sociological concept that requires multiple observations in order to be comprehensively described. The purpose of this attribute is to provide a high level classification that can additionally be used for the appropriate allocation of inpatient bed assignment.</p>
               <p><i>Constraints:</i> This code is used for administrative purposes. </p>
-              <p>ExtRef: This information is reported on UB FL 15.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^15^00111^Sex |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^8^00111^Sex |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| STF^5^00111^Sex |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^9^00413^Guarantor Sex |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^43^00468^Insured's Sex |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="AdministrativeGender" codingStrength="CWE"/>
@@ -3566,21 +3176,6 @@
               <p>The date and time of a living subject's birth or hatching.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^16^00110^Date/Time of Birth |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^7^00110^Date/Time of Birth |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| STF^6^00110^Date/Time of Birth |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^8^00412^Guarantor Date/Time of Birth |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^18^00443^Insured's Date of Birth |</text>
-          </mapping>
         </annotations>
         <type name="TS"/>
       </attribute>
@@ -3611,9 +3206,6 @@
               <p>An indication as to whether the living subject is part of a multiple birth.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^24^00127^Multiple Birth Indicator |</text>
-          </mapping>
         </annotations>
         <type name="BL"/>
       </attribute>
@@ -3624,9 +3216,6 @@
               <p>The order in which this living subject was born if part of a multiple birth.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^25^00128^Birth Order |</text>
-          </mapping>
         </annotations>
         <type name="INT"/>
       </attribute>
@@ -3638,9 +3227,6 @@
               <p><i>Discussion:</i> This attribute specifies whether an individual living subject has donated or is willing to donate an organ.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PD1^8^00760^Organ Donor |</text>
-          </mapping>
         </annotations>
         <type name="BL"/>
       </attribute>
@@ -3716,8 +3302,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <interestedCommittee id="C12" name="Patient_care"/>
       <attribute name="formCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -3781,7 +3365,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
       <attribute name="addr" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
         <annotations>
           <definition>
@@ -3789,33 +3372,6 @@
               <p>The postal and/or residential address of an organization.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^11^00114^Patient Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^12^00115^County Code |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^4^00193^Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^5^00409^Guarantor Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^17^00421^Guarantor Employer Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^5^00430^Insurance Company Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^19^00444^Insured's Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^44^00469^Insured's Employer Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| OM1^28^00613^Address of Outside Site(s) |</text>
-          </mapping>
         </annotations>
         <type name="BAG">
           <supplierBindingArgumentDatatype name="AD"/>
@@ -3846,8 +3402,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
-      <interestedCommittee id="C047" name="Orders_Observations"/>
       <attribute name="addr" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
         <annotations>
           <definition>
@@ -3855,33 +3409,6 @@
               <p>The postal and/or residential address of a Person.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^11^00114^Patient Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^12^00115^County Code |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^4^00193^Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^5^00409^Guarantor Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^17^00421^Guarantor Employer Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^5^00430^Insurance Company Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^19^00444^Insured's Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^44^00469^Insured's Employer Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| OM1^28^00613^Address of Outside Site(s) |</text>
-          </mapping>
         </annotations>
         <type name="BAG">
           <supplierBindingArgumentDatatype name="AD"/>
@@ -3896,21 +3423,6 @@
               <p><i>Rationale:</i> This information is reported on UB FL 16</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^43^00119^Marital Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^14^00119^Marital Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^16^00119^Marital Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| STF^17^00119^Marital Status |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^30^00781^Guarantor Marital Status Code |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="MaritalStatus" codingStrength="CWE"/>
@@ -3934,18 +3446,6 @@
               <p><i>Examples:</i> vision impaired, hearing impaired.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^52^00753^Handicap |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^48^00753^Handicap |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^36^00753^Handicap |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PD1^6^00753^Handicap |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="CE"/>
@@ -3961,18 +3461,6 @@
               <p><i>Discussion:</i> Used for discharge planning, social service assessment, psychosocial evaluation.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^37^00742^Living Arrangement |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^35^00742^Living Arrangement |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^21^00742^Living Arrangement |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PD1^2^00742^Living Arrangement |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="LivingArrangement" codingStrength="CWE"/>
@@ -3984,18 +3472,6 @@
               <p>The primary religious preference of a person (e.g. Hinduism, Islam, Roman Catholic Church).</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^41^00120^Religion |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^39^00120^Religion |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^25^00120^Religion |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^17^00120^Religion |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="ReligiousAffiliation" codingStrength="CWE"/>
@@ -4007,15 +3483,6 @@
               <p>A value representing the race of a person.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^71^00113^Race |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^35^00113^Race |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^10^00113^Race |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="CE"/>
@@ -4029,18 +3496,6 @@
               <p>The ethnic group of the person.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^44^00125^Ethnic Group |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^42^00125^Ethnic Group |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^28^00125^Ethnic Group |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^22^00125^Ethnic Group |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="CE"/>
@@ -4062,7 +3517,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
       <attribute name="mobileInd" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -4082,30 +3536,6 @@
               <p><i>Constraints:</i> Must be the address that allows the physical location of the place on a map.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| RXD^13^00299^Deliver-to Location |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| RXE^8^00299^Deliver-to Location |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| RXG^11^00299^Deliver-to Location |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| RXO^8^00299^Deliver-to Location |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| RXA^11^00353^Administered-at Location |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| LOC^5^00948^Location Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| RXD^13^01303^Dispense-to Location |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| RXG^11^01303^Dispense-to Location |</text>
-          </mapping>
         </annotations>
         <type name="AD"/>
       </attribute>
@@ -4115,7 +3545,6 @@
             <text>
               <p>A free text note that carries information related to a site that is useful for entities accessing that site. </p>
               <p><i>Discussion:</i> The attribute could include directions for finding the site when address information is inadequate, GPS information is not available, and/or the entity accessing the site cannot make direct use of the GPS information. It could also include information useful to people visiting the location. E.g., "Last house on the right", "If owner not present, check whereabouts with neighbor down the road".</p>
-              <p>ExtRef: PHCDM-02.01.04.01(Public Health Common Data Model)</p>
             </text>
           </definition>
         </annotations>
@@ -4245,7 +3674,6 @@
         <transition name="reactivate" startStateName="terminated" endStateName="active"/>
         <transition name="revise" startStateName="terminated" endStateName="terminated"/>
       </behavior>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
       <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true">
         <annotations>
           <definition>
@@ -4317,33 +3745,6 @@
               <p>An address for the Entity while in the Role.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^11^00114^Patient Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^12^00115^County Code |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^4^00193^Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^5^00409^Guarantor Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^17^00421^Guarantor Employer Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^5^00430^Insurance Company Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^19^00444^Insured's Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^44^00469^Insured's Employer Address |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| OM1^28^00613^Address of Outside Site(s) |</text>
-          </mapping>
         </annotations>
         <type name="BAG">
           <supplierBindingArgumentDatatype name="AD"/>
@@ -4356,57 +3757,6 @@
               <p>A telecommunication address for the Entity while in the Role.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^13^00116^Phone Number - Home |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^6^00195^Business Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^6^00410^Guarantor Ph Num- Home |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^7^00411^Guarantor Ph Num-Business |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^18^00422^Guarantor Employer Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN1^7^00432^Insurance Co Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^16^00517^Certification Contact Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN3^19^00520^Certification Agency Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| OM1^17^00602^Telephone Number of Section |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| OM1^29^00614^Phone Number of Outside Site |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^46^00749^Contact Person's Telephone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^31^00749^Contact Person's Telephone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^50^00790^Employer Contact Person Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^53^00793^Insured's Contact Person Telephone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^58^00798^Insurance Co Contact Phone Number |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^63^00803^Insured's Telephone Number - Home |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^64^00804^Insured's Employer Telephone Number |</text>
-          </mapping>
         </annotations>
         <type name="BAG">
           <supplierBindingArgumentDatatype name="TEL"/>
@@ -4420,9 +3770,6 @@
               <p><b>Design Advisory: </b>This attribute was defined in the original RIM as repeating, owing to the presence of nested states in the state machines. In actual practice, however, there is never a need to communicate more than a single status value. therefore, committees are advised to <b>constrain this attribute to a maximum cardinality of 1</b> in all message designs. </p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PID^27^00130^Veterans Military Status |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="RoleStatus" codingStrength="CNE"/>
@@ -4448,6 +3795,8 @@
               <p>1.) Paper-based certificate: the ED data type may refer to some document or file that can be retrieved through an electronic interface to a hardcopy archive.</p>
               <p>2.) Electronic certificate: this attribute can represent virtually any electronic certification scheme, such as, an electronically (including digitally) signed electronic text document.</p>
               <p>3.) Digital certificate (public key certificate): in particular, this attribute can represent digital certificates, as an inline data block or by reference to such data. The certificate data block would be constructed in accordance to a digital certificate standard, such as X509, SPKI, PGP, etc.</p>
+              <p>4. The 'security' code provided with a credit card</p>
+              <p>5. The 'version number' associated with a particular copy of an insurance or health card</p>
               <p>The certificate subject is the Entity that plays the Role. The certificate issuer is the Entity that scopes the Role.</p>
             </text>
           </definition>
@@ -4463,30 +3812,6 @@
               <p>To mitigate some of the inference-risk, aggregations of data should assume the confidentiality level of the most confidential action in the aggregation.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^38^00743^Publicity Indicator |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^36^00743^Publicity Indicator |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^22^00743^Publicity Indicator |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PD1^11^00743^Publicity Indicator |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^39^00744^Protection Indicator |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^37^00744^Protection Indicator |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^23^00744^Protection Indicator |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PD1^12^00744^Protection Indicator |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="CE"/>
@@ -4592,8 +3917,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C04" name="Orders_observations"/>
-      <stewardCommittee id="C12" name="Patient_care"/>
       <attribute name="approachSiteCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -4645,7 +3968,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
       <attribute name="jobCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -4653,18 +3975,6 @@
               <p>A code specifying an employer-defined categorization of work, used primarily for payroll/remuneration purposes and not necessarily indicative of an employee's specific work assignments, responsibilities and privileges. Examples are accountant, programmer analyst, patient care associate, staff nurse, etc.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^11^00200^Next of Kin/Associated Parties Job Code/Class |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^50^00786^Job Code/Class |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^47^00786^Job Code/Class |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| STF^19^00786^Job Code/Class |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="EmployeeJob" codingStrength="CWE"/>
@@ -4676,21 +3986,6 @@
               <p>The title of the job held, for example, Vice President, Senior Technical Analyst. This is a local name for the employee's occupation that doesn't necessarily correspond to any scheme for categorizing occupation. Trading partners that need a coded standard should be using Employee "occupation" attribute.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^10^00199^Next of Kin/Associated Parties Job Title |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^23^00494^Special Coverage Approval Title |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^49^00785^Job Title |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^46^00785^Job Title |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| STF^18^00785^Job Title |</text>
-          </mapping>
         </annotations>
         <type name="SC"/>
         <supplierDomainSpecification domainName="JobTitleName" codingStrength="CWE"/>
@@ -4702,18 +3997,6 @@
               <p>A code qualifying the employment regarding frequency or periodicity, such as, full-time vs. part-time.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| NK1^11^00200^Next of Kin/Associated Parties Job Code/Class |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| GT1^50^00786^Job Code/Class |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| IN2^47^00786^Job Code/Class |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| STF^19^00786^Job Code/Class |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="EmployeeJobClass" codingStrength="CWE"/>
@@ -4786,7 +4069,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
       <attribute name="recertificationTime" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -4809,7 +4091,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C03" name="Pt_admin_Finance"/>
       <attribute name="veryImportantPersonCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -4817,9 +4098,6 @@
               <p>A code specifying the Patient's special status granted by the scoper organization, often resulting in preferred treatment and special considerations. For example, board member, diplomat, etc.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| PV1^16^00146^VIP Indicator |</text>
-          </mapping>
         </annotations>
         <type name="CE"/>
         <supplierDomainSpecification domainName="PatientImportance" codingStrength="CWE"/>
@@ -4882,21 +4160,14 @@
           <supplierBindingArgumentDatatype name="II"/>
         </type>
       </attribute>
-      <specializationChild childClassName="Act" sortKey="1"/>
-      <specializationChild childClassName="ActRelationship" sortKey="2"/>
-      <specializationChild childClassName="Participation" sortKey="3"/>
-      <specializationChild childClassName="Entity" sortKey="4"/>
-      <specializationChild childClassName="LanguageCommunication" sortKey="5"/>
-      <specializationChild childClassName="Role" sortKey="6"/>
-      <specializationChild childClassName="RoleLink" sortKey="7"/>
-      <specializationChild childClassName="Acknowledgement" sortKey="8"/>
-      <specializationChild childClassName="AttentionLine" sortKey="9"/>
-      <specializationChild childClassName="CommunicationFunction" sortKey="10"/>
-      <specializationChild childClassName="Transmission" sortKey="11"/>
-      <specializationChild childClassName="Parameter" sortKey="12"/>
-      <specializationChild childClassName="QueryEvent" sortKey="13"/>
-      <specializationChild childClassName="SelectionExpression" sortKey="14"/>
-      <specializationChild childClassName="SortControl" sortKey="15"/>
+      <specializationChild childClassName="Acknowledgement" sortKey="1"/>
+      <specializationChild childClassName="AttentionLine" sortKey="2"/>
+      <specializationChild childClassName="CommunicationFunction" sortKey="3"/>
+      <specializationChild childClassName="Transmission" sortKey="4"/>
+      <specializationChild childClassName="Parameter" sortKey="5"/>
+      <specializationChild childClassName="QueryEvent" sortKey="6"/>
+      <specializationChild childClassName="SelectionExpression" sortKey="7"/>
+      <specializationChild childClassName="SortControl" sortKey="8"/>
     </class>
   </ownedClass>
   <ownedClass>
@@ -4951,7 +4222,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
       <attribute name="typeCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -4959,9 +4229,6 @@
               <p>This attribute contains an acknowledgement code as described in the HL7 message processing rules.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSA^1^00018^Acknowledgement Code |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="AcknowledgementType" codingStrength="CNE"/>
@@ -4973,9 +4240,6 @@
               <p>This attribute is used in the sequence number protocol.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSA^4^00021^Expected Sequence Number |</text>
-          </mapping>
         </annotations>
         <type name="INT"/>
       </attribute>
@@ -5058,7 +4322,6 @@
               <p>Identifies a position within the message being acknowledged that is related to the message.</p>
               <p>Discussion: Not all messages will have an associated location. Some messages may relate to multiple locations.</p>
               <p>Example: There is no location for a missing element, and there may be two locations if two elements violate a conditionality constraint.</p>
-              <p>OpenIssue: The specific format for the string that defines the message location needs to be identified. This might be xPath or possibly OCL</p>
             </text>
           </definition>
         </annotations>
@@ -5070,11 +4333,18 @@
   </ownedClass>
   <ownedClass>
     <class name="Attachment" isAbstract="false">
+      <annotations>
+        <definition>
+          <text>
+            <p>Contains arbitrary attachments of data blocks to which can be referred to from the interior of the message. Attachments are referred to from the message body using the reference functionality of the ED data type.</p>
+          </text>
+        </definition>
+      </annotations>
       <attribute name="id" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
             <text>
-              <p>A unique identifier for the Attachment.</p>
+              <p>Identifies the attachment being linked to by an ED attribute contained elsewhere in the interaction.</p>
             </text>
           </definition>
         </annotations>
@@ -5084,7 +4354,7 @@
         <annotations>
           <definition>
             <text>
-              <p>The semantic content of the attachment.</p>
+              <p>Contains the data block which plays the role of an attachment.</p>
             </text>
           </definition>
         </annotations>
@@ -5101,7 +4371,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
       <attribute name="keyWordText" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -5134,81 +4403,40 @@
           </text>
         </definition>
       </annotations>
-      <attribute name="versionCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
-        <annotations>
-          <definition>
-            <text>
-              <p>This attribute is matched by the receiving system to its own version to be sure the message will be interpreted correctly.</p>
-              <p><i>Note:</i> This attribute is also present in the sibling class, Batch. This change was made rather than moving this attribute to their common ancestor class, Transmission. This decision was taken because we do not have all the methodology and backwards compatibility issues worked out. Once we have established our backwards compatibility, we should promote this attribute to the parent. The problem is the sequencing of attributes within the HDF and their impact on the ITSs.</p>
-            </text>
-          </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSH^12^00012^Version ID |</text>
-          </mapping>
-        </annotations>
-        <type name="CS"/>
-        <supplierDomainSpecification domainName="HL7StandardVersionCode" codingStrength="CNE"/>
-      </attribute>
-      <attribute name="interactionId" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
-        <annotations>
-          <definition>
-            <text>
-              <p>The interaction identifier is a reference to the unique information interchange derived from the V3 MDF for specifying a message.</p>
-              <p><i>Note:</i> This attribute is also present in the sibling class, Message. This change was made rather than moving this attribute to their common ancestor class, Transmission. This decision was taken because we do not have all the methodology and backwards compatibility issues worked out. Once we have established our backwards compatibility, we should promote this attribute to the parent. The problem is the sequencing of attributes within the HDF and their impact on the ITSs.</p>
-            </text>
-          </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSH^9^00009^Message Type |</text>
-          </mapping>
-        </annotations>
-        <type name="II"/>
-      </attribute>
-      <attribute name="referenceControlId" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+      <attribute name="referenceControlId" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
             <text>
               <p>This attribute indicates the control identifier of the batch when it was originally transmitted.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| BHS^12^00092^Reference Batch Control ID |</text>
-          </mapping>
         </annotations>
         <type name="II"/>
       </attribute>
-      <attribute name="name" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+      <attribute name="name" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
             <text>
               <p>This attribute is used by the application processing the batch.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| BHS^9^00089^Batch Name/ID/Type |</text>
-          </mapping>
         </annotations>
         <type name="SC"/>
         <supplierDomainSpecification domainName="BatchName" codingStrength="CWE"/>
       </attribute>
-      <attribute name="batchComment" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+      <attribute name="batchComment" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
         <annotations>
           <definition>
             <text>
               <p>This attribute is available to capture comments related to the batch.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| BHS^10^00090^Batch Comment |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| BTS^2^00090^Batch Comment |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="ST"/>
         </type>
       </attribute>
-      <attribute name="transmissionQuantity" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+      <attribute name="transmissionQuantity" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
             <text>
@@ -5218,16 +4446,13 @@
         </annotations>
         <type name="INT"/>
       </attribute>
-      <attribute name="batchTotalNumber" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+      <attribute name="batchTotalNumber" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
         <annotations>
           <definition>
             <text>
               <p>The batch total. It is possible that more than a single batch total exists.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| BTS^3^00095^Batch Totals |</text>
-          </mapping>
         </annotations>
         <type name="SET">
           <supplierBindingArgumentDatatype name="INT"/>
@@ -5244,7 +4469,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
       <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -5277,37 +4501,7 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
-      <attribute name="versionCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
-        <annotations>
-          <definition>
-            <text>
-              <p>This attribute is matched by the receiving system to its own version to be sure the message will be interpreted correctly.</p>
-              <p><i>Note:</i> This attribute is also present in the sibling class, Message. This change was made rather than moving this attribute to their common ancestor class, Transmission. This decision was taken because we do not have all the methodology and backwards compatibility issues worked out. Once we have established our backwards compatibility, we should promote this attribute to the parent. The problem is the sequencing of attributes within the HDF and their impact on the ITSs.</p>
-            </text>
-          </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSH^12^00012^Version ID |</text>
-          </mapping>
-        </annotations>
-        <type name="CS"/>
-        <supplierDomainSpecification domainName="HL7StandardVersionCode" codingStrength="CNE"/>
-      </attribute>
-      <attribute name="interactionId" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
-        <annotations>
-          <definition>
-            <text>
-              <p>The interaction identifier is a reference to the unique information interchange derived from the V3 MDF for specifying a message.</p>
-              <p><i>Note:</i> This attribute is also present in the sibling class, Batch. This change was made rather than moving this attribute to their common ancestor class, Transmission. This decision was taken because we do not have all the methodology and backwards compatibility issues worked out. Once we have established our backwards compatibility, we should promote this attribute to the parent. The problem is the sequencing of attributes within the HDF and their impact on the ITSs.</p>
-            </text>
-          </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSH^9^00009^Message Type |</text>
-          </mapping>
-        </annotations>
-        <type name="II"/>
-      </attribute>
-      <attribute name="profileId" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+      <attribute name="profileId" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
         <annotations>
           <definition>
             <text>
@@ -5320,49 +4514,40 @@
           <supplierBindingArgumentDatatype name="II"/>
         </type>
       </attribute>
-      <attribute name="processingCode" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+      <attribute name="processingCode" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
             <text>
               <p>This attribute defines whether the message is part of a production, training, or debugging system.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSH^11^00011^Processing ID |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="ProcessingID" codingStrength="CNE"/>
       </attribute>
-      <attribute name="processingModeCode" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+      <attribute name="processingModeCode" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
             <text>
               <p>This attribute defines whether the message is being sent in current processing, archive mode, initial load mode, restore from archive mode, etc.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSH^11^00011^Processing ID |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="ProcessingMode" codingStrength="CNE"/>
       </attribute>
-      <attribute name="acceptAckCode" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+      <attribute name="acceptAckCode" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
             <text>
               <p>The attribute identifies the conditions under which accept acknowledgements are required to be returned in response to this message.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSH^15^00015^Accept Acknowledgement Type |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="AcknowledgementCondition" codingStrength="CNE"/>
       </attribute>
-      <attribute name="responseCode" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+      <attribute name="responseCode" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
             <text>
@@ -5373,25 +4558,21 @@
         <type name="CS"/>
         <supplierDomainSpecification domainName="ResponseLevel" codingStrength="CNE"/>
       </attribute>
-      <attribute name="sequenceNumber" sortKey="8" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+      <attribute name="sequenceNumber" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
             <text>
               <p>This attribute is provided for implementing the sequence number protocol. This field is incremented by one for each subsequent value assignment.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSH^13^00013^Sequence Number |</text>
-          </mapping>
         </annotations>
         <type name="INT"/>
       </attribute>
-      <attribute name="attachmentText" sortKey="9" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+      <attribute name="attachmentText" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
         <annotations>
           <definition>
             <text>
               <p>Contains arbitrary attachments of data blocks to which can be referred to from the interior of the message. Any ITS is advised to represent the attachments behind the main message body. Attachments are referred to from the message body using the reference functionality of the ED data type.</p>
-              <p>OpenIssue: Use of this attribute has been superseded by the addition of the Attachment class to the RIM, and further use if this attribute is deprecated in favor of the new approach.</p>
               <p>OpenIssue: Constrain the use of the ED data type in the attachment message type. Additionally, the appropriateness of this attribute in the Message class is in question. An alternative to consider would be the placement of this attribute in a new class maintaining a 0 to many relationship with the Message class.</p>
             </text>
           </definition>
@@ -5411,7 +4592,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
       <attribute name="id" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -5419,18 +4599,6 @@
               <p>Unique identifier of the transmission.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSA^2^00010^Message Control ID |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSH^10^00010^Message Control ID |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FHS^11^00077^File Control ID |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| BHS^11^00091^Batch Control ID |</text>
-          </mapping>
         </annotations>
         <type name="II"/>
       </attribute>
@@ -5441,15 +4609,6 @@
               <p>The date/time that the sending system created the transmission. If the time zone is specified, it will be used throughout the transmission as the default time zone.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| MSH^7^00007^Date/Time of Message |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FHS^7^00073^File Creation Date/Time |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| BHS^7^00087^Batch Creation Date/Time |</text>
-          </mapping>
         </annotations>
         <type name="TS"/>
       </attribute>
@@ -5460,12 +4619,6 @@
               <p>This attribute is specified for applications to implement security features for a transmission. Its use is not further specified at this time.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| FHS^8^00074^File Security |</text>
-          </mapping>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| BHS^8^00088^Batch Security |</text>
-          </mapping>
         </annotations>
         <type name="ST"/>
       </attribute>
@@ -5480,6 +4633,29 @@
         <type name="CS"/>
         <supplierDomainSpecification domainName="ResponseMode" codingStrength="CNE"/>
       </attribute>
+      <attribute name="versionCode" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+        <annotations>
+          <definition>
+            <text>
+              <p>This attribute is matched by the receiving system to its own version to be sure the message will be interpreted correctly.</p>
+              <p><i>Note:</i> This attribute is also present in the sibling class, Message. This change was made rather than moving this attribute to their common ancestor class, Transmission. This decision was taken because we do not have all the methodology and backwards compatibility issues worked out. Once we have established our backwards compatibility, we should promote this attribute to the parent. The problem is the sequencing of attributes within the HDF and their impact on the ITSs.</p>
+            </text>
+          </definition>
+        </annotations>
+        <type name="CS"/>
+        <supplierDomainSpecification domainName="HL7StandardVersionCode" codingStrength="CNE"/>
+      </attribute>
+      <attribute name="interactionId" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+        <annotations>
+          <definition>
+            <text>
+              <p>The interaction identifier is a reference to the unique information interchange derived from the V3 MDF for specifying a message.</p>
+              <p><i>Note:</i> This attribute is also present in the sibling class, Batch. This change was made rather than moving this attribute to their common ancestor class, Transmission. This decision was taken because we do not have all the methodology and backwards compatibility issues worked out. Once we have established our backwards compatibility, we should promote this attribute to the parent. The problem is the sequencing of attributes within the HDF and their impact on the ITSs.</p>
+            </text>
+          </definition>
+        </annotations>
+        <type name="II"/>
+      </attribute>
       <specializationChild childClassName="Batch" sortKey="1"/>
       <specializationChild childClassName="Message" sortKey="2"/>
     </class>
@@ -5493,9 +4669,6 @@
               <p>When more than one criteria is to be applied in the evaluation of candidate instances, a conjunction is supplied to identify how to relate an additional criteria.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| VTQ^5^00700^Selection Criteria |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="SQLConjunction" codingStrength="CNE"/>
@@ -5576,7 +4749,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
       <attribute name="queryResponseCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -5584,9 +4756,6 @@
               <p>This attribute allows the responding system to return a precise response status.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| QAK^2^00708^Query Response Status |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="QueryResponse" codingStrength="CNE"/>
@@ -5632,7 +4801,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
     </class>
   </ownedClass>
   <ownedClass>
@@ -5644,7 +4812,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
     </class>
   </ownedClass>
   <ownedClass>
@@ -5656,7 +4823,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
       <attribute name="startResultNumber" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -5686,7 +4852,6 @@
           <text>
             <p>This abstract class is used to gather the parts of a message interaction that are specific to a query message interaction.</p>
             <p>Rationale: A message element type is defined by a TC to meet a messaging requirement for a query response (like the response message element type for a demographics query). An instance of such a message element type would be represented as a query message interaction in this revised view of the V3 query/response model. The "return_element_group" would identify the RIM view that would be similar in form to the RIM view specified in a declarative or imperative application message interaction.</p>
-            <p>OpenIssue: State names need to be re-visited.</p>
           </text>
         </definition>
       </annotations>
@@ -5710,7 +4875,6 @@
         <transition name="executeQuerySpec" startStateName="new" endStateName="executing"/>
         <transition name="create" startStateName="null" endStateName="new"/>
       </behavior>
-      <stewardCommittee id="C02" name="Control_Query"/>
       <attribute name="queryId" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -5739,7 +4903,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C02" name="Control_Query"/>
       <attribute name="modifyCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -5781,9 +4944,6 @@
               <p>Identifies the time frame in which the response is expected.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| QRD^3^00027^Query Priority |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="QueryPriority" codingStrength="CNE"/>
@@ -5795,9 +4955,6 @@
               <p>Defines the maximum size of the response that can be accepted by the requesting application.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| QRD^7^00031^Quantity Limited Request |</text>
-          </mapping>
         </annotations>
         <type name="INT"/>
       </attribute>
@@ -5846,9 +5003,6 @@
               <p>Identifies common relational operators used in selection criteria.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| VTQ^5^00700^Selection Criteria |</text>
-          </mapping>
         </annotations>
         <type name="CS"/>
         <supplierDomainSpecification domainName="RelationalOperator" codingStrength="CNE"/>
@@ -5860,9 +5014,6 @@
               <p>Value supplied for comparison using criteria.</p>
             </text>
           </definition>
-          <mapping sourceName="HL7v2" sourceVersion="2.3">
-            <text>| VTQ^5^00700^Selection Criteria |</text>
-          </mapping>
         </annotations>
         <type name="ST"/>
       </attribute>
@@ -5927,8 +5078,6 @@
           </text>
         </definition>
       </annotations>
-      <stewardCommittee id="C09" name="Medical_records"/>
-      <interestedCommittee id="C20" name="XML"/>
       <attribute name="completionCode" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -5982,11 +5131,9 @@
         <definition>
           <text>
             <p>A structure is a container within a document. Structures have captions which can be coded. Structures can nest, and structures can contain entries.</p>
-            <p>OpenIssue: The name of this class, and the allowable ActClass values, will be revised so as to be consistent with the ActContainer hierarchy, which is currently undergoing review. (November 2004)</p>
           </text>
         </definition>
       </annotations>
-      <interestedCommittee id="C20" name="XML"/>
       <attribute name="setId" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
         <annotations>
           <definition>
@@ -6104,7 +5251,7 @@
       </definition>
     </annotations>
     <connections>
-      <traversableConnection name="communicationFunction" minimumMultiplicity="1" maximumMultiplicity="*" participantClassName="CommunicationFunction" sortKey="D"/>
+      <traversableConnection name="communicationFunction" minimumMultiplicity="1" maximumMultiplicity="*" participantClassName="CommunicationFunction"/>
       <traversableConnection name="entity" minimumMultiplicity="0" maximumMultiplicity="*" participantClassName="Entity" sortKey="Z"/>
     </connections>
   </ownedAssociation>

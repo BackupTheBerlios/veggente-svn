@@ -1,0 +1,1918 @@
+<serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="101002">
+   <packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.10">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+ Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
+ Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <annotations xmlns:mif="urn:hl7-org:v3/mif">
+      <designComments>
+         <text>
+            <p>This message type is used to report that an existing record in a person registry was or is to be revised.</p>
+         </text>
+      </designComments>
+   </annotations>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="AM" subSection="PR" domain="PA" artifact="RM-deprecated" id="101002"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="3" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="AM" subSection="PR" domain="PA" artifact="HD-deprecated" id="101002"/>
+   </derivationSupplier>
+   <ownedEntryPoint useKind="SemanticPayload" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
+            <text>
+               <p>This R-MIM defines the message used to report that an existing record in a person registry was or is to be revised.</p>
+            </text>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="IdentifiedPerson" isAbstract="false">
+            <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+            <derivationSupplier staticModelDerivationId="2" className="IdentifiedPerson"/>
+            <derivationSupplier staticModelDerivationId="3" className="IdentifiedPerson"/>
+            <annotations>
+               <definition>
+                  <text>
+                     <p>The primary record for the focal person in a person registry</p>
+                  </text>
+               </definition>
+               <designComments>
+                  <text>
+                     <p>No statusCode attribute</p>
+                  </text>
+               </designComments>
+            </annotations>
+            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="IDENT">
+               <annotations>
+                  <definition>
+                     <text>
+                        <p>Structural attribute; this is an "identified" entity</p>
+                     </text>
+                  </definition>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="IdentifiedPerson" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="IdentifiedPerson" attributeName="classCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="RoleClass" mnemonic="IDENT"/>
+            </attribute>
+            <attribute name="id" sortKey="2" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R">
+               <annotations>
+                  <definition>
+                     <text>
+                        <p>One or more identifiers designated for the focal person by this person registry. Note, this is a mandatory attribute; it makes no sense to have a record in an identified person registry that does not have an identifier.</p>
+                     </text>
+                  </definition>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="2" className="IdentifiedPerson" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="3" className="IdentifiedPerson" attributeName="id"/>
+               <type name="SET">
+                  <supplierBindingArgumentDatatype name="II"/>
+               </type>
+            </attribute>
+            <attribute name="addr" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+               <annotations>
+                  <definition>
+                     <text>
+                        <p>Address(es) for corresponding with the focal person in the context of this person registry</p>
+                     </text>
+                  </definition>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="addr"/>
+               <derivationSupplier staticModelDerivationId="2" className="IdentifiedPerson" attributeName="addr"/>
+               <derivationSupplier staticModelDerivationId="3" className="IdentifiedPerson" attributeName="addr"/>
+               <type name="BAG">
+                  <supplierBindingArgumentDatatype name="AD"/>
+               </type>
+            </attribute>
+            <attribute name="telecom" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+               <annotations>
+                  <definition>
+                     <text>
+                        <p>Telecommunication address(es) for communicating with the focal person in the context of this person registry</p>
+                     </text>
+                  </definition>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="telecom"/>
+               <derivationSupplier staticModelDerivationId="2" className="IdentifiedPerson" attributeName="telecom"/>
+               <derivationSupplier staticModelDerivationId="3" className="IdentifiedPerson" attributeName="telecom"/>
+               <type name="BAG">
+                  <supplierBindingArgumentDatatype name="TEL"/>
+               </type>
+            </attribute>
+            <attribute name="effectiveTime" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations>
+                  <definition>
+                     <text>
+                        <p>An interval of time specifying the period during which this record in a person registry is in effect, if such time limit is applicable and known</p>
+                     </text>
+                  </definition>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="effectiveTime"/>
+               <derivationSupplier staticModelDerivationId="2" className="IdentifiedPerson" attributeName="effectiveTime"/>
+               <derivationSupplier staticModelDerivationId="3" className="IdentifiedPerson" attributeName="effectiveTime"/>
+               <type name="IVL">
+                  <supplierBindingArgumentDatatype name="TS"/>
+               </type>
+            </attribute>
+            <association sortKey="2">
+               <targetConnection name="identifiedPerson" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                  <annotations>
+                     <definition>
+                        <text>
+                           <p>A subtype of LivingSubject representing a human being</p>
+                        </text>
+                     </definition>
+                     <designComments>
+                        <text>
+                           <p>Either Person.name or Person.id must be non-null</p>
+                        </text>
+                     </designComments>
+                  </annotations>
+                  <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="player"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="identifiedPerson"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="identifiedPerson"/>
+                  <participantClass>
+                     <class name="Person" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Person"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Person"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Person"/>
+                        <annotations>
+                           <definition>
+                              <text>
+                                 <p>A subtype of LivingSubject representing a human being</p>
+                              </text>
+                           </definition>
+                           <designComments>
+                              <text>
+                                 <p>Either Person.name or Person.id must be non-null</p>
+                              </text>
+                           </designComments>
+                        </annotations>
+                        <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="PSN">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>Structural attribute; this is a "person" entity</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="classCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="classCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="classCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="EntityClass" mnemonic="PSN"/>
+                        </attribute>
+                        <attribute name="determinerCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="INSTANCE">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>Structural attribute; this is a specific person</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="determinerCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="determinerCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="determinerCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="EntityDeterminer" mnemonic="INSTANCE"/>
+                        </attribute>
+                        <attribute name="id" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" conformance="R">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>Identifier(s) for this person. Note that these identifiers can only be used for matching purposes since no scoping organization or status information is included.</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="id"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="id"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="id"/>
+                           <type name="SET">
+                              <supplierBindingArgumentDatatype name="II"/>
+                           </type>
+                        </attribute>
+                        <attribute name="name" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" conformance="R">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>Name(s) for this person</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="name"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="name"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="name"/>
+                           <type name="BAG">
+                              <supplierBindingArgumentDatatype name="PN"/>
+                           </type>
+                        </attribute>
+                        <attribute name="desc" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>A textual representation of this person. Descriptions are meant to be shown to interested human individuals.</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="desc"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="desc"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="desc"/>
+                           <type name="ED"/>
+                        </attribute>
+                        <attribute name="telecom" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>Telecommunication address(es) for communicating with this person</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="telecom"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="telecom"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="telecom"/>
+                           <type name="BAG">
+                              <supplierBindingArgumentDatatype name="TEL"/>
+                           </type>
+                        </attribute>
+                        <attribute name="administrativeGenderCode" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>A value representing the gender (sex) of this person. Note: this attribute does not include terms related to clinical gender which is a complex physiological, genetic and sociological concept that requires multiple observations in order to be comprehensively described.</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="LivingSubject" attributeName="administrativeGenderCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="administrativeGenderCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="administrativeGenderCode"/>
+                           <type name="CE"/>
+                           <supplierDomainSpecification codingStrength="CWE" domainName="AdministrativeGender"/>
+                        </attribute>
+                        <attribute name="birthTime" sortKey="8" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>The date and time this person was born</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="LivingSubject" attributeName="birthTime"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="birthTime"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="birthTime"/>
+                           <type name="TS"/>
+                        </attribute>
+                        <attribute name="deceasedInd" sortKey="9" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>An indication that this person is dead</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="LivingSubject" attributeName="deceasedInd"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="deceasedInd"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="deceasedInd"/>
+                           <type name="BL"/>
+                        </attribute>
+                        <attribute name="deceasedTime" sortKey="10" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>The date and time this person died</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="LivingSubject" attributeName="deceasedTime"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="deceasedTime"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="deceasedTime"/>
+                           <type name="TS"/>
+                        </attribute>
+                        <attribute name="multipleBirthInd" sortKey="11" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>An indication that this person was part of a multiple birth</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="LivingSubject" attributeName="multipleBirthInd"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="multipleBirthInd"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="multipleBirthInd"/>
+                           <type name="BL"/>
+                        </attribute>
+                        <attribute name="multipleBirthOrderNumber" sortKey="12" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>The order in which this person was born if part of a multiple birth</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="LivingSubject" attributeName="multipleBirthOrderNumber"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="multipleBirthOrderNumber"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="multipleBirthOrderNumber"/>
+                           <type name="INT"/>
+                        </attribute>
+                        <attribute name="addr" sortKey="13" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>Address(es) for corresponding with this person</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Person" attributeName="addr"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="addr"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="addr"/>
+                           <type name="BAG">
+                              <supplierBindingArgumentDatatype name="AD"/>
+                           </type>
+                        </attribute>
+                        <attribute name="maritalStatusCode" sortKey="14" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <definition>
+                                 <text>
+                                    <p>A value representing the domestic partnership status of this person</p>
+                                 </text>
+                              </definition>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Person" attributeName="maritalStatusCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Person" attributeName="maritalStatusCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Person" attributeName="maritalStatusCode"/>
+                           <type name="CE"/>
+                           <supplierDomainSpecification codingStrength="CWE" domainName="MaritalStatus"/>
+                        </attribute>
+                        <association sortKey="8">
+                           <targetConnection name="asOtherIDs" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="AA________">
+                              <annotations>
+                                 <definition>
+                                    <text>
+                                       <p>An identifying relationship between the focal living subject and a scoping organization. Note that this could be an identifier used by the primary scoping organization in a different context.</p>
+                                    </text>
+                                 </definition>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="playedRole"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="asOtherIDs"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="asOtherIDs"/>
+                              <participantClass>
+                                 <class name="OtherIDs" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="OtherIDs"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="OtherIDs"/>
+                                    <annotations>
+                                       <definition>
+                                          <text>
+                                             <p>An identifying relationship between the focal living subject and a scoping organization. Note that this could be an identifier used by the primary scoping organization in a different context.</p>
+                                          </text>
+                                       </definition>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="ROL">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Structural attribute. This can be any specialization of "role" except for Citizen, Employee, Student, or Member.</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="OtherIDs" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="OtherIDs" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleClassRoot" mnemonic="ROL"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="2" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>One or more identifiers issued to the focal living subject by the associated assigningOrganization</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="OtherIDs" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="OtherIDs" attributeName="id"/>
+                                       <type name="SET">
+                                          <supplierBindingArgumentDatatype name="II"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="statusCode" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value specifying the state of this identifying relationship (based on the RIM Role class state-machine), for example, active, terminated, nullified</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="OtherIDs" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="OtherIDs" attributeName="statusCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleStatus"/>
+                                    </attribute>
+                                    <attribute name="effectiveTime" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>An interval of time specifying the period during which this identifying relationship is in effect, if such time limit is applicable and known</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="OtherIDs" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="OtherIDs" attributeName="effectiveTime"/>
+                                       <type name="IVL">
+                                          <supplierBindingArgumentDatatype name="TS"/>
+                                       </type>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="scopingOrganization" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="BZ">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="scoper"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="scopingOrganization"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="scopingOrganization"/>
+                                          <participantClass>
+                                             <reference name="E_OrganizationIdentified-confirmable"/>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="OtherIDs"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Person"/>
+                           </sourceConnection>
+                        </association>
+                        <association sortKey="4">
+                           <targetConnection name="asEmployee" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="AAAAAE____">
+                              <annotations>
+                                 <definition>
+                                    <text>
+                                       <p>A relationship of the focal person with an organization to receive wages or salary. The purpose of this class is to identify the type of relationship the employee has to the employer rather than the nature of the work actually performed.</p>
+                                    </text>
+                                 </definition>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="playedRole"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="asEmployee"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="asEmployee"/>
+                              <participantClass>
+                                 <class name="Employee" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="Employee"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="Employee"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="Employee"/>
+                                    <annotations>
+                                       <definition>
+                                          <text>
+                                             <p>A relationship of the focal person with an organization to receive wages or salary. The purpose of this class is to identify the type of relationship the employee has to the employer rather than the nature of the work actually performed.</p>
+                                          </text>
+                                       </definition>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="EMP">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Structural attribute; this is an "employee" role</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Employee" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Employee" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleClassEmployee" mnemonic="EMP"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Employee identifier(s) for the focal person in this employment relationship</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Employee" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Employee" attributeName="id"/>
+                                       <type name="SET">
+                                          <supplierBindingArgumentDatatype name="II"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="negationInd" sortKey="3" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Role (BL) Employee with negationInd "true" and no EmployerOrganization conveys that the focal person is not employed</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="negationInd"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Employee" attributeName="negationInd"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Employee" attributeName="negationInd"/>
+                                       <type name="BL"/>
+                                    </attribute>
+                                    <attribute name="addr" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>The focal person's work address(es) for this employment relationship (addr.use = WP)</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="addr"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Employee" attributeName="addr"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Employee" attributeName="addr"/>
+                                       <type name="BAG">
+                                          <supplierBindingArgumentDatatype name="AD"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="telecom" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>The focal person's work telecommunications address(es) for this employment relationship (telecom.use = WP)</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="telecom"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Employee" attributeName="telecom"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Employee" attributeName="telecom"/>
+                                       <type name="BAG">
+                                          <supplierBindingArgumentDatatype name="TEL"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="statusCode" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value specifying the state of this employment relationship (based on the RIM Role class state-machine), for example, active, suspended, terminated</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Employee" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Employee" attributeName="statusCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleStatus"/>
+                                    </attribute>
+                                    <attribute name="effectiveTime" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>An interval of time specifying the period during which this employment relationship is in effect, if such time limit is applicable and known</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Employee" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Employee" attributeName="effectiveTime"/>
+                                       <type name="IVL">
+                                          <supplierBindingArgumentDatatype name="TS"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="jobTitleName" sortKey="8" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>The title of the job held, for example, Vice President, Senior Technical Analyst. This is a local name for the employee's occupation that does not necessarily correspond to any scheme for categorizing occupation. Trading partners that need a coded standard should be using Employee "occupation" attribute.</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Employee" attributeName="jobTitleName"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Employee" attributeName="jobTitleName"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Employee" attributeName="jobTitleName"/>
+                                       <type name="SC"/>
+                                    </attribute>
+                                    <attribute name="jobClassCode" sortKey="9" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A code qualifying the employment regarding frequency or periodicity, such as, full-time vs. part-time</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Employee" attributeName="jobClassCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Employee" attributeName="jobClassCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Employee" attributeName="jobClassCode"/>
+                                       <type name="CE"/>
+                                       <supplierDomainSpecification codingStrength="CWE" domainName="EmployeeJobClass"/>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="employerOrganization" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="scoper"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="employerOrganization"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="employerOrganization"/>
+                                          <participantClass>
+                                             <reference name="E_OrganizationContact"/>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="Employee"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Person"/>
+                           </sourceConnection>
+                        </association>
+                        <association sortKey="2">
+                           <targetConnection name="asCitizen" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" conformance="R" sortKey="AAAAAF____">
+                              <annotations>
+                                 <definition>
+                                    <text>
+                                       <p>A formal relationship between the focal person (player) who owes loyalty to and is entitled by birth or naturalization to the protection of a nation (scoper)</p>
+                                    </text>
+                                 </definition>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="playedRole"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="asCitizen"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="asCitizen"/>
+                              <participantClass>
+                                 <class name="Citizen" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="Citizen"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="Citizen"/>
+                                    <annotations>
+                                       <definition>
+                                          <text>
+                                             <p>A formal relationship between the focal person (player) who owes loyalty to and is entitled by birth or naturalization to the protection of a nation (scoper)</p>
+                                          </text>
+                                       </definition>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="CIT">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Structural attribute; this is a "citizen" role</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Citizen" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Citizen" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleClass" mnemonic="CIT"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Identifier(s) for the focal person as a citizen of a nation</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Citizen" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Citizen" attributeName="id"/>
+                                       <type name="SET">
+                                          <supplierBindingArgumentDatatype name="II"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="effectiveTime" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>An interval of time specifying the period during which this citizenship is in effect, if such time limit is applicable and known</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Citizen" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Citizen" attributeName="effectiveTime"/>
+                                       <type name="IVL">
+                                          <supplierBindingArgumentDatatype name="TS"/>
+                                       </type>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="politicalNation" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="BZ">
+                                          <annotations>
+                                             <definition>
+                                                <text>
+                                                   <p>A politically organized body of people bonded by territory and known as a nation</p>
+                                                </text>
+                                             </definition>
+                                          </annotations>
+                                          <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="scoper"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="politicalNation"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="politicalNation"/>
+                                          <participantClass>
+                                             <class name="Nation" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="Organization"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="Nation"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="Nation"/>
+                                                <annotations>
+                                                   <definition>
+                                                      <text>
+                                                         <p>A politically organized body of people bonded by territory and known as a nation</p>
+                                                      </text>
+                                                   </definition>
+                                                </annotations>
+                                                <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="NAT">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>Structural attribute; this is a 'nation' type of entity</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="classCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Nation" attributeName="classCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Nation" attributeName="classCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="EntityClass" mnemonic="NAT"/>
+                                                </attribute>
+                                                <attribute name="determinerCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="INSTANCE">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>Structural attribute; this is a specific entity</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="determinerCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Nation" attributeName="determinerCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Nation" attributeName="determinerCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="EntityDeterminer" mnemonic="INSTANCE"/>
+                                                </attribute>
+                                                <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>A value that identifies a nation state</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="code"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Nation" attributeName="code"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Nation" attributeName="code"/>
+                                                   <type name="CE"/>
+                                                   <supplierDomainSpecification codingStrength="CWE" domainName="NationEntityType"/>
+                                                </attribute>
+                                                <attribute name="name" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>A non-unique textual identifier or moniker for this nation</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="name"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Nation" attributeName="name"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Nation" attributeName="name"/>
+                                                   <type name="ON"/>
+                                                </attribute>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="Citizen"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Person"/>
+                           </sourceConnection>
+                        </association>
+                        <association sortKey="10">
+                           <targetConnection name="asStudent" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="AAAAAQ____">
+                              <annotations>
+                                 <definition>
+                                    <text>
+                                       <p>An enrollment of the focal person as a student of a school</p>
+                                    </text>
+                                 </definition>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="playedRole"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="asStudent"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="asStudent"/>
+                              <participantClass>
+                                 <class name="Student" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="Student"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="Student"/>
+                                    <annotations>
+                                       <definition>
+                                          <text>
+                                             <p>An enrollment of the focal person as a student of a school</p>
+                                          </text>
+                                       </definition>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="STD">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Structural attribute; this is a "student" role</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Student" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Student" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleClass" mnemonic="STD"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Student identifier(s) for the focal person in this school enrollment relationship</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Student" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Student" attributeName="id"/>
+                                       <type name="SET">
+                                          <supplierBindingArgumentDatatype name="II"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="addr" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Address(es) for corresponding with the focal person in the context of this school enrollment</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="addr"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Student" attributeName="addr"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Student" attributeName="addr"/>
+                                       <type name="BAG">
+                                          <supplierBindingArgumentDatatype name="AD"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="telecom" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Telecommunication address(es) for communicating with the focal person in the context of this school enrollment</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="telecom"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Student" attributeName="telecom"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Student" attributeName="telecom"/>
+                                       <type name="BAG">
+                                          <supplierBindingArgumentDatatype name="TEL"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="statusCode" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value specifying the state of this school enrollment (based on the RIM Role class state-machine), for example, active, suspended, terminated</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Student" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Student" attributeName="statusCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleStatus"/>
+                                    </attribute>
+                                    <attribute name="effectiveTime" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>An interval of time specifying the period during which this school enrollment is in effect, if such time limit is applicable and known</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Student" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Student" attributeName="effectiveTime"/>
+                                       <type name="IVL">
+                                          <supplierBindingArgumentDatatype name="TS"/>
+                                       </type>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="schoolOrganization" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="scoper"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="schoolOrganization"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="schoolOrganization"/>
+                                          <participantClass>
+                                             <reference name="E_OrganizationContact"/>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="Student"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Person"/>
+                           </sourceConnection>
+                        </association>
+                        <association sortKey="7">
+                           <targetConnection name="asMember" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="AABF______">
+                              <annotations>
+                                 <definition>
+                                    <text>
+                                       <p>A membership of the playing living subject in a group such as family, tribe, or religious organization</p>
+                                    </text>
+                                 </definition>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="playedRole"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="asMember"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="asMember"/>
+                              <participantClass>
+                                 <class name="Member" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="Member"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="Member"/>
+                                    <annotations>
+                                       <definition>
+                                          <text>
+                                             <p>A membership of the playing living subject in a group such as family, tribe, or religious organization</p>
+                                          </text>
+                                       </definition>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="MBR">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Structural attribute; this is a "member" role</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Member" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Member" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleClass" mnemonic="MBR"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Identifier(s) for this membership</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Member" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Member" attributeName="id"/>
+                                       <type name="SET">
+                                          <supplierBindingArgumentDatatype name="II"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="code" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value further specifying the type of membership the playing living subject has in the scoping entity, drawn from the MemberRoleType domain</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="code"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Member" attributeName="code"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Member" attributeName="code"/>
+                                       <type name="CE"/>
+                                       <supplierDomainSpecification codingStrength="CWE" domainName="MemberRoleType"/>
+                                    </attribute>
+                                    <attribute name="statusCode" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value specifying the state of this membership (based on the RIM Role class state-machine), for example, active, suspended, terminated</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Member" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Member" attributeName="statusCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleStatus"/>
+                                    </attribute>
+                                    <attribute name="effectiveTime" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>An interval of time specifying the period during which this membership is in effect, if such time limit is applicable and known</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Member" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Member" attributeName="effectiveTime"/>
+                                       <type name="IVL">
+                                          <supplierBindingArgumentDatatype name="TS"/>
+                                       </type>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="group" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="BZ">
+                                          <annotations>
+                                             <definition>
+                                                <text>
+                                                   <p>A group of which the focal person is a member</p>
+                                                </text>
+                                             </definition>
+                                             <designComments>
+                                                <text>
+                                                   <p>Either id or name must be valued</p>
+                                                </text>
+                                             </designComments>
+                                          </annotations>
+                                          <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="scoper"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="group"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="group"/>
+                                          <participantClass>
+                                             <class name="Group" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="Organization"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="Group"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="Group"/>
+                                                <annotations>
+                                                   <definition>
+                                                      <text>
+                                                         <p>A group of which the focal person is a member</p>
+                                                      </text>
+                                                   </definition>
+                                                   <designComments>
+                                                      <text>
+                                                         <p>Either id or name must be valued</p>
+                                                      </text>
+                                                   </designComments>
+                                                </annotations>
+                                                <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="ORG">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>Structural attribute; this is a type of organization</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="classCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="classCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="classCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="EntityClassOrganization" mnemonic="ORG"/>
+                                                </attribute>
+                                                <attribute name="determinerCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="INSTANCE">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>Structural attribute; this is a specific entity</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="determinerCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="determinerCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="determinerCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="EntityDeterminer" mnemonic="INSTANCE"/>
+                                                </attribute>
+                                                <attribute name="id" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>Identifier(s) for this Group</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="id"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="id"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="id"/>
+                                                   <type name="SET">
+                                                      <supplierBindingArgumentDatatype name="II"/>
+                                                   </type>
+                                                </attribute>
+                                                <attribute name="code" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>A value further specifying the type of Group drawn from the OrganizationEntityType domain, for example 'religious institution'</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="code"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="code"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="code"/>
+                                                   <type name="CE"/>
+                                                   <supplierDomainSpecification codingStrength="CWE" domainName="OrganizationEntityType"/>
+                                                </attribute>
+                                                <attribute name="quantity" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>The number or quantity of the Group, with appropriate units</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="quantity"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="quantity"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="quantity"/>
+                                                   <type name="INT"/>
+                                                </attribute>
+                                                <attribute name="name" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>A non-unique textual identifier or moniker for the Group</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="name"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="name"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="name"/>
+                                                   <type name="BAG">
+                                                      <supplierBindingArgumentDatatype name="EN"/>
+                                                   </type>
+                                                </attribute>
+                                                <attribute name="desc" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>A textual or multimedia depiction of the Group</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="desc"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="desc"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="desc"/>
+                                                   <type name="ED"/>
+                                                </attribute>
+                                                <attribute name="statusCode" sortKey="8" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>A value representing whether the information associated with the Group is currently active or inactive</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="statusCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="statusCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="statusCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="EntityStatus"/>
+                                                </attribute>
+                                                <attribute name="existenceTime" sortKey="9" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>An interval of time specifying the period in which this Group physically existed if such time interval is applicable and known</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="existenceTime"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="existenceTime"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="existenceTime"/>
+                                                   <type name="IVL">
+                                                      <supplierBindingArgumentDatatype name="TS"/>
+                                                   </type>
+                                                </attribute>
+                                                <attribute name="telecom" sortKey="10" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>Telecommunication address(es) for communicating with this group</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="telecom"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="telecom"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="telecom"/>
+                                                   <type name="BAG">
+                                                      <supplierBindingArgumentDatatype name="TEL"/>
+                                                   </type>
+                                                </attribute>
+                                                <attribute name="addr" sortKey="11" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                   <annotations>
+                                                      <definition>
+                                                         <text>
+                                                            <p>An address for corresponding with this group</p>
+                                                         </text>
+                                                      </definition>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Organization" attributeName="addr"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Group" attributeName="addr"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Group" attributeName="addr"/>
+                                                   <type name="AD"/>
+                                                </attribute>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="Member"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Person"/>
+                           </sourceConnection>
+                        </association>
+                        <association sortKey="3">
+                           <targetConnection name="contactParty" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="BAAAADAA__">
+                              <annotations>
+                                 <definition>
+                                    <text>
+                                       <p>A person or an organization that provides or receives information regarding the scoping living subject</p>
+                                    </text>
+                                 </definition>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="scopedRole"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="contactParty"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="contactParty"/>
+                              <participantClass>
+                                 <class name="ContactParty" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="ContactParty"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="ContactParty"/>
+                                    <annotations>
+                                       <definition>
+                                          <text>
+                                             <p>A person or an organization that provides or receives information regarding the scoping living subject</p>
+                                          </text>
+                                       </definition>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="CON">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Structural attribute; this is a "contact party" role</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="ContactParty" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="ContactParty" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleClassContact" mnemonic="CON"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Identifier(s) for this contact party relationship</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="ContactParty" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="ContactParty" attributeName="id"/>
+                                       <type name="SET">
+                                          <supplierBindingArgumentDatatype name="II"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="code" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value further specifying what type of contact this is, drawn from the ContactRoleType domain. The current values are "next of kin" and "emergency contact".</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="code"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="ContactParty" attributeName="code"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="ContactParty" attributeName="code"/>
+                                       <type name="CE"/>
+                                       <supplierDomainSpecification codingStrength="CWE" domainName="ContactRoleType"/>
+                                    </attribute>
+                                    <attribute name="negationInd" sortKey="4" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A ContactParty with negationInd "true" and no playing entity conveys that the scoping living subject does not have a specified contact</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="negationInd"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="ContactParty" attributeName="negationInd"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="ContactParty" attributeName="negationInd"/>
+                                       <type name="BL"/>
+                                    </attribute>
+                                    <attribute name="addr" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Address(es) for corresponding with this person or organization as a contact for the scoping living subject</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="addr"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="ContactParty" attributeName="addr"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="ContactParty" attributeName="addr"/>
+                                       <type name="BAG">
+                                          <supplierBindingArgumentDatatype name="AD"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="telecom" sortKey="6" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>One or more telecommunication addresses for communicating with this person or organization as a contact for the scoping living subject</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="telecom"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="ContactParty" attributeName="telecom"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="ContactParty" attributeName="telecom"/>
+                                       <type name="BAG">
+                                          <supplierBindingArgumentDatatype name="TEL"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="statusCode" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value specifying the state of this contact party relationship (based on the RIM Role class state-machine), for example, active, suspended, terminated</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="ContactParty" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="ContactParty" attributeName="statusCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleStatus"/>
+                                    </attribute>
+                                    <attribute name="effectiveTime" sortKey="8" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>An interval of time specifying the period during which this contact party relationship is in effect, if such time limit is applicable and known</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="ContactParty" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="ContactParty" attributeName="effectiveTime"/>
+                                       <type name="IVL">
+                                          <supplierBindingArgumentDatatype name="TS"/>
+                                       </type>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="contactEntityChoice" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="player"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="contactEntityChoice"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="contactEntityChoice"/>
+                                          <participantClassSpecialization className="E_OrganizationIdentified-confirmable" traversalName="contactOrganization"/>
+                                          <participantClassSpecialization className="E_PersonIdentified-confirmable" traversalName="contactPerson"/>
+                                          <participantClass>
+                                             <class name="EntityChoice" isAbstract="true">
+                                                <derivationSupplier staticModelDerivationId="1" className="Entity"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="EntityChoice"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="EntityChoice"/>
+                                                <annotations/>
+                                                <specializationChild sortKey="1">
+                                                   <specializedClass>
+                                                      <commonModelElementRef name="E_OrganizationIdentified-confirmable" isAbstract="false">
+                                                         <derivationSupplier staticModelDerivationId="1" className="Organization"/>
+                                                         <derivationSupplier staticModelDerivationId="2" className="E_OrganizationIdentified-confirmable"/>
+                                                         <derivationSupplier staticModelDerivationId="3" className="E_OrganizationIdentified-confirmable"/>
+                                                         <annotations/>
+                                                      </commonModelElementRef>
+                                                   </specializedClass>
+                                                </specializationChild>
+                                                <specializationChild sortKey="2">
+                                                   <specializedClass>
+                                                      <commonModelElementRef name="E_PersonIdentified-confirmable" isAbstract="false">
+                                                         <derivationSupplier staticModelDerivationId="1" className="Person"/>
+                                                         <derivationSupplier staticModelDerivationId="2" className="E_PersonIdentified-confirmable"/>
+                                                         <derivationSupplier staticModelDerivationId="3" className="E_PersonIdentified-confirmable"/>
+                                                         <annotations/>
+                                                      </commonModelElementRef>
+                                                   </specializedClass>
+                                                </specializationChild>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="ContactParty"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Person"/>
+                           </sourceConnection>
+                        </association>
+                        <association sortKey="5">
+                           <targetConnection name="guardian" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="BAAAADB___">
+                              <annotations>
+                                 <definition>
+                                    <text>
+                                       <p>A person or organization that is legally responsible for the care and management of the scoping living subject</p>
+                                    </text>
+                                 </definition>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="scopedRole"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="guardian"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="guardian"/>
+                              <participantClass>
+                                 <class name="Guardian" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="Guardian"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="Guardian"/>
+                                    <annotations>
+                                       <definition>
+                                          <text>
+                                             <p>A person or organization that is legally responsible for the care and management of the scoping living subject</p>
+                                          </text>
+                                       </definition>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="GUARD">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Structural attribute; this is a "guardian" role</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Guardian" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Guardian" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleClass" mnemonic="GUARD"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Identifier(s) for this guardian relationship</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Guardian" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Guardian" attributeName="id"/>
+                                       <type name="SET">
+                                          <supplierBindingArgumentDatatype name="II"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="negationInd" sortKey="3" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A Guardian with negationInd "true" and no guardianEntityChoice conveys that the scoping living subject does not have a guardian</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="negationInd"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Guardian" attributeName="negationInd"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Guardian" attributeName="negationInd"/>
+                                       <type name="BL"/>
+                                    </attribute>
+                                    <attribute name="addr" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Address(es) for corresponding with this person or organization as guardian for the scoping living subject</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="addr"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Guardian" attributeName="addr"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Guardian" attributeName="addr"/>
+                                       <type name="BAG">
+                                          <supplierBindingArgumentDatatype name="AD"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="telecom" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Telecommunication address(es) for communicating with this person or organization as guardian for the scoping living subject</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="telecom"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Guardian" attributeName="telecom"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Guardian" attributeName="telecom"/>
+                                       <type name="BAG">
+                                          <supplierBindingArgumentDatatype name="TEL"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="statusCode" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value specifying the state of this guardian relationship (based on the RIM Role class state-machine), for example, active, suspended, terminated</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Guardian" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Guardian" attributeName="statusCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleStatus"/>
+                                    </attribute>
+                                    <attribute name="effectiveTime" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>An interval of time specifying the period during which this guardian relationship is in effect, if such time limit is applicable and known</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Guardian" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Guardian" attributeName="effectiveTime"/>
+                                       <type name="IVL">
+                                          <supplierBindingArgumentDatatype name="TS"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="certificateText" sortKey="8" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A facsimile of the legal document establishing guardianship</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="certificateText"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="Guardian" attributeName="certificateText"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="Guardian" attributeName="certificateText"/>
+                                       <type name="ED"/>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="guardianEntityChoice" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="player"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="guardianEntityChoice"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="guardianEntityChoice"/>
+                                          <participantClassSpecialization className="E_OrganizationIdentified-confirmable" traversalName="guardianOrganization"/>
+                                          <participantClassSpecialization className="E_PersonIdentified-confirmable" traversalName="guardianPerson"/>
+                                          <participantClass>
+                                             <reference name="EntityChoice"/>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="Guardian"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Person"/>
+                           </sourceConnection>
+                        </association>
+                        <association sortKey="9">
+                           <targetConnection name="personalRelationship" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="BAAAB_____">
+                              <annotations>
+                                 <definition>
+                                    <text>
+                                       <p>A personal relationship between the focal living subject and another living subject</p>
+                                    </text>
+                                 </definition>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="scopedRole"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="personalRelationship"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="personalRelationship"/>
+                              <participantClass>
+                                 <class name="PersonalRelationship" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="PersonalRelationship"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="PersonalRelationship"/>
+                                    <annotations>
+                                       <definition>
+                                          <text>
+                                             <p>A personal relationship between the focal living subject and another living subject</p>
+                                          </text>
+                                       </definition>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="PRS">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Structural attribute; this is a "personal relationship" role</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="PersonalRelationship" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="PersonalRelationship" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleClass" mnemonic="PRS"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Identifier(s) for this personal relationship</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="PersonalRelationship" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="PersonalRelationship" attributeName="id"/>
+                                       <type name="SET">
+                                          <supplierBindingArgumentDatatype name="II"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A required value specifying the type of personal relationship between the relationshipHolder and the scoping living subject drawn from the PersonalRelationshipRoleType domain, for example, spouse, parent, unrelated friend</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="code"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="PersonalRelationship" attributeName="code"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="PersonalRelationship" attributeName="code"/>
+                                       <type name="CE"/>
+                                       <supplierDomainSpecification codingStrength="CWE" domainName="PersonalRelationshipRoleType"/>
+                                    </attribute>
+                                    <attribute name="negationInd" sortKey="4" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A PersonalRelationship with negationInd "true" and no relationshipHolder conveys that the scoping living subject has no recorded personal relationships</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="negationInd"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="PersonalRelationship" attributeName="negationInd"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="PersonalRelationship" attributeName="negationInd"/>
+                                       <type name="BL"/>
+                                    </attribute>
+                                    <attribute name="statusCode" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value specifying the state of this personal relationship (based on the RIM Role class state-machine), for example, following divorce a spouse relationship would be "terminated"</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="PersonalRelationship" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="PersonalRelationship" attributeName="statusCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleStatus"/>
+                                    </attribute>
+                                    <attribute name="effectiveTime" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>An interval of time specifying the period during which this personal relationship is in effect, if such time is applicable and known</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="PersonalRelationship" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="PersonalRelationship" attributeName="effectiveTime"/>
+                                       <type name="IVL">
+                                          <supplierBindingArgumentDatatype name="TS"/>
+                                       </type>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="relationshipHolder" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="player"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="relationshipHolder"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="relationshipHolder"/>
+                                          <participantClass>
+                                             <commonModelElementRef name="E_PersonUniversal" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="Person"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="E_PersonUniversal"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="E_PersonUniversal"/>
+                                                <annotations/>
+                                             </commonModelElementRef>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="PersonalRelationship"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Person"/>
+                           </sourceConnection>
+                        </association>
+                        <association sortKey="1">
+                           <targetConnection name="birthPlace" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="BAABL_____">
+                              <annotations>
+                                 <definition>
+                                    <text>
+                                       <p>The birthplace of the focal living subject</p>
+                                    </text>
+                                 </definition>
+                                 <designComments>
+                                    <text>
+                                       <p>Birthplace.addr must be valued if E_Place.name is null</p>
+                                    </text>
+                                 </designComments>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="scopedRole"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="birthPlace"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="birthPlace"/>
+                              <participantClass>
+                                 <class name="BirthPlace" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="BirthPlace"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="BirthPlace"/>
+                                    <annotations>
+                                       <definition>
+                                          <text>
+                                             <p>The birthplace of the focal living subject</p>
+                                          </text>
+                                       </definition>
+                                       <designComments>
+                                          <text>
+                                             <p>Birthplace.addr must be valued if E_Place.name is null</p>
+                                          </text>
+                                       </designComments>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="BIRTHPL">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>Structural attribute; this is a "birthplace" role</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="BirthPlace" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="BirthPlace" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleClass" mnemonic="BIRTHPL"/>
+                                    </attribute>
+                                    <attribute name="addr" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A living subject's birth place represented as an address. Note: Either BirthPlace.addr or an associated Place.name must be valued</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="addr"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="BirthPlace" attributeName="addr"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="BirthPlace" attributeName="addr"/>
+                                       <type name="BAG">
+                                          <supplierBindingArgumentDatatype name="AD"/>
+                                       </type>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="birthplace" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="player"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="birthplace"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="birthplace"/>
+                                          <participantClass>
+                                             <commonModelElementRef name="E_PlaceUniversal" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="Place"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="E_PlaceUniversal"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="E_PlaceUniversal"/>
+                                                <annotations/>
+                                             </commonModelElementRef>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="BirthPlace"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Person"/>
+                           </sourceConnection>
+                        </association>
+                        <association sortKey="6">
+                           <targetConnection name="languageCommunication" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="CZ">
+                              <annotations>
+                                 <definition>
+                                    <text>
+                                       <p>A language communication capability of the focal person</p>
+                                    </text>
+                                 </definition>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="languageCommunication"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="languageCommunication"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="languageCommunication"/>
+                              <participantClass>
+                                 <class name="LanguageCommunication" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="LanguageCommunication"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="LanguageCommunication"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="LanguageCommunication"/>
+                                    <annotations>
+                                       <definition>
+                                          <text>
+                                             <p>A language communication capability of the focal person</p>
+                                          </text>
+                                       </definition>
+                                    </annotations>
+                                    <attribute name="languageCode" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value representing a language for which the focal person has some level of proficiency for written or spoken communication. Examples: Spanish, Italian, German, English, American Sign</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="LanguageCommunication" attributeName="languageCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="LanguageCommunication" attributeName="languageCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="LanguageCommunication" attributeName="languageCode"/>
+                                       <type name="CE"/>
+                                       <supplierDomainSpecification codingStrength="CWE" domainName="HumanLanguage"/>
+                                    </attribute>
+                                    <attribute name="modeCode" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value representing the person's method of expression of this language Examples: expressed spoken, expressed written, expressed signed, received spoken, received written, received signed</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="LanguageCommunication" attributeName="modeCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="LanguageCommunication" attributeName="modeCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="LanguageCommunication" attributeName="modeCode"/>
+                                       <type name="CE"/>
+                                       <supplierDomainSpecification codingStrength="CWE" domainName="LanguageAbilityMode"/>
+                                    </attribute>
+                                    <attribute name="proficiencyLevelCode" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>A value representing the person's level of proficiency in this language. Examples: excellent, good, fair, poor</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="LanguageCommunication" attributeName="proficiencyLevelCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="LanguageCommunication" attributeName="proficiencyLevelCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="LanguageCommunication" attributeName="proficiencyLevelCode"/>
+                                       <type name="CE"/>
+                                       <supplierDomainSpecification codingStrength="CWE" domainName="LanguageAbilityProficiency"/>
+                                    </attribute>
+                                    <attribute name="preferenceInd" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                       <annotations>
+                                          <definition>
+                                             <text>
+                                                <p>An indicator specifying whether or not this language is preferred by the focal person for the associated mode</p>
+                                             </text>
+                                          </definition>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="LanguageCommunication" attributeName="preferenceInd"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="LanguageCommunication" attributeName="preferenceInd"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="LanguageCommunication" attributeName="preferenceInd"/>
+                                       <type name="BL"/>
+                                    </attribute>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Person"/>
+                           </sourceConnection>
+                        </association>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="IdentifiedPerson"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="1">
+               <targetConnection name="assigningOrganization" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="scoper"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="assigningOrganization"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="assigningOrganization"/>
+                  <participantClass>
+                     <commonModelElementRef name="E_OrganizationContact" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Organization"/>
+                        <derivationSupplier staticModelDerivationId="2" className="E_OrganizationContact"/>
+                        <derivationSupplier staticModelDerivationId="3" className="E_OrganizationContact"/>
+                        <annotations/>
+                     </commonModelElementRef>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="IdentifiedPerson"/>
+               </sourceConnection>
+            </association>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
+</serializedStaticModel>

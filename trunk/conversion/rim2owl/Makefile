@@ -5,6 +5,8 @@ main: xsl
 xsl:
 	$(SAXON) -sall ../input/MIF/rim.coremif rim2owl.xsl > rim.owl
 	$(SAXON) rim_datatypes.owl clean_dt.xsl > rim_datatypes_fix.owl
+	$(SAXON) -sall ../input/cmetinfo.coremif clean_dt.xsl > rim_cmet.owl
 install:
 	scp rim.owl $(ACCOUNT):$(REMOTE_DIR)/RIMOntology
 	scp rim_datatypes_fix.owl $(ACCOUNT):$(REMOTE_DIR)/RIMDatatype
+	scp rim_cmet.owl $(ACCOUNT):$(REMOTE_DIR)/RIM_CMET

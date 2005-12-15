@@ -1,0 +1,275 @@
+<mif:dynamicModel xmlns:mif="urn:hl7-org:v3/mif">
+   <mif:header>
+      <mif:renderingInformation schemaVersion="1" application="RoseTree 3.0.10">
+         <mif:renderingNotes>This document was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ PubDB to MIF Transform: $RCSfile: PubDbXmlToMIF.xsl,v $ $Revision: 1.8 $ $Date: 2005/07/09 20:19:24 $
+  Fix names transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  HTML to MIF Markup transform: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</mif:renderingNotes>
+      </mif:renderingInformation>
+      <mif:legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
+         <mif:notation>All rights reserved.</mif:notation>
+      </mif:legalese>
+   </mif:header>
+   <mif:hl7Interaction name="101001" title="Person Event Activate Notification">
+      <mif:businessName name="New Person Added"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="101001"/>
+      <mif:annotations>
+         <mif:description>This notification occurs when a record is <b xmlns="urn:hl7-org:v3/mif">added </b>to a person registry. An informer sends to a tracker the registration event in a Master File / Reg Event Notification Control Act (MFMI_MT700701) and a copy of the person record in a New Person message (PRPA_MT101001).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="101001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" id="101001" traversalName="identifiedPerson"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101201" title="Person Event Activate Request">
+      <mif:businessName name="Add New Person Request"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="101201"/>
+      <mif:annotations>
+         <mif:description/>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="101201"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700721" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" id="101001"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101202" title="Person Event Activate Confirmation">
+      <mif:businessName name="Add New Person Request Accepted"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="101202"/>
+      <mif:annotations>
+         <mif:description/>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="101202"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700721" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" id="101106"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101203" title="Person Event Activate Rejection">
+      <mif:businessName name="Add New Person Request Rejected"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="101203"/>
+      <mif:annotations>
+         <mif:description/>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="101203"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700721" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" id="101106"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101002" title="Person Event Revise Notification">
+      <mif:businessName name="Person Information Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="101002"/>
+      <mif:annotations>
+         <mif:description>This notification occurs when a record is <b xmlns="urn:hl7-org:v3/mif">revised </b>in a person registry. An informer sends to a tracker the registration event in a Master File / Reg Event Notification Control Act (MFMI_MT700701) and a copy of the updated person record in a Revised Person message (PRPA_MT101002). Note that the focal act of the message is the <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent</i> and its <i xmlns="urn:hl7-org:v3/mif">id </i>must be the same as the initial <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent </i>that added the record to the registry.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="101002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" id="101002" traversalName="identifiedPerson"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101204" title="Person Event Revise Request">
+      <mif:businessName name="Revise Person Information Request"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="101204"/>
+      <mif:annotations>
+         <mif:description/>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="101204"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700721" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" id="101002"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101205" title="Person Event Revise Confirmation">
+      <mif:businessName name="Revise Person Information Request Accepted"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="101205"/>
+      <mif:annotations>
+         <mif:description/>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="101205"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700721" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" id="101102"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101206" title="Person Event Revise Rejection">
+      <mif:businessName name="Revise Person Information Request Rejected"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="101206"/>
+      <mif:annotations>
+         <mif:description/>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="101206"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700721" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" id="101102"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101003" title="Person Event Nullify Notification">
+      <mif:businessName name="Person Nullified"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="101003"/>
+      <mif:annotations>
+         <mif:description>This notification occurs when an erroneous registration in a person registry is <b xmlns="urn:hl7-org:v3/mif">nullified</b>. An informer sends to a tracker the nullified registration in a Master File / Reg Event Notification Control Act (MFMI_MT700701) and the associated person record in a Nullified Person message (PRPA_MT101003). Note that the focal act of the message is the <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent </i>and its <i xmlns="urn:hl7-org:v3/mif">id </i>must be the same as the initial <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent </i>that added the record to the registry.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="101999"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" id="101003" traversalName="identifiedPerson"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101004" title="Person Event Obsolete Notification">
+      <mif:businessName name="Resolve Duplicate Person Registrations"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="101004"/>
+      <mif:annotations>
+         <mif:description>This notification occurs following <b xmlns="urn:hl7-org:v3/mif">duplicate resolution</b> in a person registry. An informer sends to a tracker the registration event in a Master File / Reg Event Notification Control Act (MFMI_MT700701). The surviving <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent </i>(<i xmlns="urn:hl7-org:v3/mif">statusCode </i>of "active") links via the <i xmlns="urn:hl7-org:v3/mif">replacementOf </i>act relationship to the duplicate <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent</i>(s) (<i xmlns="urn:hl7-org:v3/mif">statusCode </i>of "obsolete"). A copy of the surviving person record is sent in a Revised Person message (PRPA_MT101002).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="101004"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" id="101002" traversalName="identifiedPerson"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101105" title="Person Event Find Associated Ids Query">
+      <mif:businessName name="Find Associated Identifiers Query"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" id="101105"/>
+      <mif:annotations>
+         <mif:description>This interaction sends a query to a Person Registry requesting all other identifiers associated with a specific person identifier.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" id="101105"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="020001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="ParameterList" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" id="101101" traversalName="parameterList"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101106" title="Person Event Find Associated Ids Query Response">
+      <mif:businessName name="Find Associated Identifiers Response"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" id="101106"/>
+      <mif:annotations>
+         <mif:description>This interaction returns a set of identifiers associated with a particular person identifier in a Person Registry in response to a Find Associated Identifiers Query.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" id="101106"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700711" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" id="101106" traversalName="registeredRole"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101103" title="Person Event Find Candidates Query">
+      <mif:businessName name="Find Candidates Query"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" id="101103"/>
+      <mif:annotations>
+         <mif:description>This interaction sends a query to a Person Registry requesting a list of candidates that match a particular set of person demographics.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" id="101103"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="020001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="ParameterList" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" id="101103" traversalName="parameterList"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101104" title="Person Event Find Candidates Query Response">
+      <mif:businessName name="Find Candidates Response"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" id="101104"/>
+      <mif:annotations>
+         <mif:description>This interaction returns a list of candidates from a Person Registry that match a particular set of person demographics in response to a Find Candidates Query. The response may also include a score indicating the probability of match for each candidate.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" id="101104"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700711" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" id="101104" traversalName="identifiedPerson"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101101" title="Person Event Get Demographics Query">
+      <mif:businessName name="Get Person Demographics Query"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" id="101101"/>
+      <mif:annotations>
+         <mif:description>This interaction sends a query to a Person Registry requesting demographic information for a specific person identifier.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" id="101101"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="020001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="ParameterList" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" id="101101" traversalName="parameterList"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101102" title="Person Event Get Demographics Query Response">
+      <mif:businessName name="Get Person Demographics Response"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" id="101102"/>
+      <mif:annotations>
+         <mif:description>This interaction returns person demographic information from a Person Registry for a specific person identifier in response to a Get Person Demographics Query.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" id="101102"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700711" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" id="101102" traversalName="identifiedPerson"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="201101" title="Patientlivingsubject Event Activate Notification">
+      <mif:businessName name="New PatientLivingSubject Added"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="201101"/>
+      <mif:annotations>
+         <mif:description>This notification occurs when a record is <b xmlns="urn:hl7-org:v3/mif">added </b>to a patient registry that includes full living subject (person) information. An informer sends to a tracker the registration event in a Master File / Reg Event Notification Control Act (MFMI_MT700701) and a copy of the patient record in a New Patient message (PRPA_MT201101).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="201001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" id="201101" traversalName="patientRole"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="201102" title="Patientlivingsubject Event Revise Notification">
+      <mif:businessName name="PatientLivingSubject Information Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="201102"/>
+      <mif:annotations>
+         <mif:description>This notification occurs when a record is <b xmlns="urn:hl7-org:v3/mif">revised </b>in a patient registry that includes full living subject (person) information. An informer sends to a tracker the registration event in a Master File / Reg Event Notification Control Act (MFMI_MT700701) and a copy of the updated patient record in a Revised Patient message (PRPA_MT201002). Note that the focal act of the message is the <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent </i>and its <i xmlns="urn:hl7-org:v3/mif">id </i>must be the same as the initial <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent </i>that added the record to the registry.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="201002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" id="201102" traversalName="patientRole"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="201103" title="Patientlivingsubject Event Nullify Notification">
+      <mif:businessName name="PatientLivingSubject Nullified"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="201103"/>
+      <mif:annotations>
+         <mif:description>This notification occurs when an erroneous registration in a patient registry that includes full living subject (person) information is <b xmlns="urn:hl7-org:v3/mif">nullified</b>. An informer sends to a tracker the nullified registration in a Master File / Reg Event Notification Control Act (MFMI_MT700701) and the associated patient record in a Nullified Patient message (PRPA_MT201103). Note that the focal act of the message is the <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent </i>and its <i xmlns="urn:hl7-org:v3/mif">id </i>must be the same as the initial <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent </i>that added the record to the registry.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="201999"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" id="201103" traversalName="patientRole"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="201104" title="Patientlivingsubject Event Obsolete Notification">
+      <mif:businessName name="Resolve Duplicate Patient Registrations"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" id="201104"/>
+      <mif:annotations>
+         <mif:description>This notification occurs following <b xmlns="urn:hl7-org:v3/mif">duplicate resolution</b> in a patient registry. An informer sends to a tracker the registration event in a Master File / Reg Event Notification Control Act (MFMI_MT700701). The surviving <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent </i>(<i xmlns="urn:hl7-org:v3/mif">statusCode </i>of "active") links via the <i xmlns="urn:hl7-org:v3/mif">replacementOf </i>act relationship to the duplicate <i xmlns="urn:hl7-org:v3/mif">RegistrationEvent</i>(s) (<i xmlns="urn:hl7-org:v3/mif">statusCode </i>of "obsolete"). A copy of the surviving patient record is sent in a Revised Patient message (PRPA_MT201002).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" id="201004"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" id="201102" traversalName="patientRole"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+</mif:dynamicModel>

@@ -1,142 +1,141 @@
-<?xml version="1.0"?>
 <serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="040203">
-  <packageLocation xmlns:mif="urn:hl7-org:v3/mif" root="DEFN" section="IM" subSection="CO" domain="CT" artifact="MT-deprecated" realm="UV" version="01"/>
-  <header xmlns:mif="urn:hl7-org:v3/mif">
-    <renderingInformation schemaVersion="1" application="RoseTree 3.0.8">
-      <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+   <packageLocation root="DEFN" section="IM" subSection="CO" domain="CT" artifact="MT-deprecated" realm="UV" version="01" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.10">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
  HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
   Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
-  Package Id Conversion: $Id: transformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
   HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
  Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
  Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
   Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
-  Package Id Conversion: $Id: transformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
-    </renderingInformation>
-    <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
-      <notation>All rights reserved.</notation>
-    </legalese>
-  </header>
-  <derivationSupplier xmlns:mif="urn:hl7-org:v3/mif" staticModelDerivationId="1">
-    <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
-  </derivationSupplier>
-  <derivationSupplier xmlns:mif="urn:hl7-org:v3/mif" staticModelDerivationId="2">
-    <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="RM-deprecated" id="040203"/>
-  </derivationSupplier>
-  <derivationSupplier xmlns:mif="urn:hl7-org:v3/mif" staticModelDerivationId="3">
-    <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="HD-deprecated" realm="UV" version="01" id="040203"/>
-  </derivationSupplier>
-  <ownedEntryPoint xmlns:mif="urn:hl7-org:v3/mif" useKind="SemanticPayload">
-    <annotations>
-      <description>
-        <text>
-          <p>16 Mar 2004 Identifies a party (person or organization) acting as a contact party on behalf of a person or organization (scoper).</p>
-        </text>
-      </description>
-    </annotations>
-    <specializedClass>
-      <class name="NotificationParty" isAbstract="false">
-        <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
-        <derivationSupplier staticModelDerivationId="2" className="NotificationParty"/>
-        <derivationSupplier staticModelDerivationId="3" className="NotificationParty"/>
-        <annotations>
-          <designComments>
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="RM-deprecated" id="040203"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="3" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="HD-deprecated" realm="UV" version="01" id="040203"/>
+   </derivationSupplier>
+   <ownedEntryPoint useKind="SemanticPayload" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
             <text>
-              <p>Scoper is not needed for this CMET. Scoper is always same as subject of Act. Can only be used with participation type code of NOTification.</p>
+               <p>16 Mar 2004 Identifies a party (person or organization) acting as a contact party on behalf of a person or organization (scoper).</p>
             </text>
-          </designComments>
-        </annotations>
-        <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="CON">
-          <annotations/>
-          <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
-          <derivationSupplier staticModelDerivationId="2" className="NotificationParty" attributeName="classCode"/>
-          <derivationSupplier staticModelDerivationId="3" className="NotificationParty" attributeName="classCode"/>
-          <type name="CS"/>
-          <supplierDomainSpecification codingStrength="CNE" domainName="RoleClassContact" mnemonic="CON"/>
-        </attribute>
-        <attribute name="id" sortKey="2" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R">
-          <annotations/>
-          <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
-          <derivationSupplier staticModelDerivationId="2" className="NotificationParty" attributeName="id"/>
-          <derivationSupplier staticModelDerivationId="3" className="NotificationParty" attributeName="id"/>
-          <type name="SET">
-            <supplierBindingArgumentDatatype name="II"/>
-          </type>
-        </attribute>
-        <attribute name="code" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
-          <annotations>
-            <designComments>
-              <text>
-                <p>Agnt role code</p>
-              </text>
-            </designComments>
-          </annotations>
-          <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="code"/>
-          <derivationSupplier staticModelDerivationId="2" className="NotificationParty" attributeName="code"/>
-          <derivationSupplier staticModelDerivationId="3" className="NotificationParty" attributeName="code"/>
-          <type name="CE"/>
-          <supplierDomainSpecification codingStrength="CWE" domainName="RoleCode"/>
-        </attribute>
-        <attribute name="addr" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
-          <annotations/>
-          <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="addr"/>
-          <derivationSupplier staticModelDerivationId="2" className="NotificationParty" attributeName="addr"/>
-          <derivationSupplier staticModelDerivationId="3" className="NotificationParty" attributeName="addr"/>
-          <type name="BAG">
-            <supplierBindingArgumentDatatype name="AD"/>
-          </type>
-        </attribute>
-        <attribute name="telecom" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
-          <annotations/>
-          <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="telecom"/>
-          <derivationSupplier staticModelDerivationId="2" className="NotificationParty" attributeName="telecom"/>
-          <derivationSupplier staticModelDerivationId="3" className="NotificationParty" attributeName="telecom"/>
-          <type name="BAG">
-            <supplierBindingArgumentDatatype name="TEL"/>
-          </type>
-        </attribute>
-        <association sortKey="1">
-          <targetConnection name="player1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
-            <annotations/>
-            <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="player"/>
-            <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="contactEntityChoicePlayer"/>
-            <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="contactEntityChoicePlayer"/>
-            <participantClassSpecialization className="E_OrganizationContact" traversalName="player1"/>
-            <participantClassSpecialization className="E_PersonContact" traversalName="player2"/>
-            <participantClass>
-              <class name="EntityChoicePlayer" isAbstract="true">
-                <derivationSupplier staticModelDerivationId="1" className="Entity"/>
-                <derivationSupplier staticModelDerivationId="2" className="EntityChoicePlayer"/>
-                <derivationSupplier staticModelDerivationId="3" className="EntityChoicePlayer"/>
-                <annotations/>
-                <specializationChild sortKey="1">
-                  <specializedClass>
-                    <commonModelElementRef name="E_OrganizationContact" isAbstract="false">
-                      <derivationSupplier staticModelDerivationId="1" className="Organization"/>
-                      <derivationSupplier staticModelDerivationId="2" className="E_OrganizationContact"/>
-                      <derivationSupplier staticModelDerivationId="3" className="E_OrganizationContact"/>
-                      <annotations/>
-                    </commonModelElementRef>
-                  </specializedClass>
-                </specializationChild>
-                <specializationChild sortKey="2">
-                  <specializedClass>
-                    <commonModelElementRef name="E_PersonContact" isAbstract="false">
-                      <derivationSupplier staticModelDerivationId="1" className="Person"/>
-                      <derivationSupplier staticModelDerivationId="2" className="E_PersonContact"/>
-                      <derivationSupplier staticModelDerivationId="3" className="E_PersonContact"/>
-                      <annotations/>
-                    </commonModelElementRef>
-                  </specializedClass>
-                </specializationChild>
-              </class>
-            </participantClass>
-          </targetConnection>
-          <sourceConnection>
-            <nonTraversableConnection participantClassName="NotificationParty"/>
-          </sourceConnection>
-        </association>
-      </class>
-    </specializedClass>
-  </ownedEntryPoint>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="NotificationParty" isAbstract="false">
+            <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+            <derivationSupplier staticModelDerivationId="2" className="NotificationParty"/>
+            <derivationSupplier staticModelDerivationId="3" className="NotificationParty"/>
+            <annotations>
+               <designComments>
+                  <text>
+                     <p>Scoper is not needed for this CMET. Scoper is always same as subject of Act. Can only be used with participation type code of NOTification.</p>
+                  </text>
+               </designComments>
+            </annotations>
+            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="CON">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="NotificationParty" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="NotificationParty" attributeName="classCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="RoleClassContact" mnemonic="CON"/>
+            </attribute>
+            <attribute name="id" sortKey="2" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="2" className="NotificationParty" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="3" className="NotificationParty" attributeName="id"/>
+               <type name="SET">
+                  <supplierBindingArgumentDatatype name="II"/>
+               </type>
+            </attribute>
+            <attribute name="code" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations>
+                  <designComments>
+                     <text>
+                        <p>Agnt role code</p>
+                     </text>
+                  </designComments>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="code"/>
+               <derivationSupplier staticModelDerivationId="2" className="NotificationParty" attributeName="code"/>
+               <derivationSupplier staticModelDerivationId="3" className="NotificationParty" attributeName="code"/>
+               <type name="CE"/>
+               <supplierDomainSpecification codingStrength="CWE" domainName="RoleCode"/>
+            </attribute>
+            <attribute name="addr" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="addr"/>
+               <derivationSupplier staticModelDerivationId="2" className="NotificationParty" attributeName="addr"/>
+               <derivationSupplier staticModelDerivationId="3" className="NotificationParty" attributeName="addr"/>
+               <type name="BAG">
+                  <supplierBindingArgumentDatatype name="AD"/>
+               </type>
+            </attribute>
+            <attribute name="telecom" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="telecom"/>
+               <derivationSupplier staticModelDerivationId="2" className="NotificationParty" attributeName="telecom"/>
+               <derivationSupplier staticModelDerivationId="3" className="NotificationParty" attributeName="telecom"/>
+               <type name="BAG">
+                  <supplierBindingArgumentDatatype name="TEL"/>
+               </type>
+            </attribute>
+            <association sortKey="1">
+               <targetConnection name="contactEntityChoicePlayer" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="player"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="contactEntityChoicePlayer"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="contactEntityChoicePlayer"/>
+                  <participantClassSpecialization className="E_OrganizationContact" traversalName="contactOrganization"/>
+                  <participantClassSpecialization className="E_PersonContact" traversalName="contactPerson"/>
+                  <participantClass>
+                     <class name="EntityChoicePlayer" isAbstract="true">
+                        <derivationSupplier staticModelDerivationId="1" className="Entity"/>
+                        <derivationSupplier staticModelDerivationId="2" className="EntityChoicePlayer"/>
+                        <derivationSupplier staticModelDerivationId="3" className="EntityChoicePlayer"/>
+                        <annotations/>
+                        <specializationChild sortKey="1">
+                           <specializedClass>
+                              <commonModelElementRef name="E_OrganizationContact" isAbstract="false">
+                                 <derivationSupplier staticModelDerivationId="1" className="Organization"/>
+                                 <derivationSupplier staticModelDerivationId="2" className="E_OrganizationContact"/>
+                                 <derivationSupplier staticModelDerivationId="3" className="E_OrganizationContact"/>
+                                 <annotations/>
+                              </commonModelElementRef>
+                           </specializedClass>
+                        </specializationChild>
+                        <specializationChild sortKey="2">
+                           <specializedClass>
+                              <commonModelElementRef name="E_PersonContact" isAbstract="false">
+                                 <derivationSupplier staticModelDerivationId="1" className="Person"/>
+                                 <derivationSupplier staticModelDerivationId="2" className="E_PersonContact"/>
+                                 <derivationSupplier staticModelDerivationId="3" className="E_PersonContact"/>
+                                 <annotations/>
+                              </commonModelElementRef>
+                           </specializedClass>
+                        </specializationChild>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="NotificationParty"/>
+               </sourceConnection>
+            </association>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
 </serializedStaticModel>
