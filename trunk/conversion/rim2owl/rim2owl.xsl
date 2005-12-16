@@ -46,11 +46,10 @@
 					<xsl:attribute name="rdf:about">
 							<xsl:value-of select="$rim_ns"/>
 					</xsl:attribute>
-					<rdfs:comment>Translated HL7 RIM ontology</rdfs:comment>	
 					<rdfs:label>HL7 RIM ontology</rdfs:label>
-					<dc:description>
+					<rdfs:comment>	
 							<xsl:value-of select="hl7:historyItem/hl7:description"/>
-					</dc:description>
+					</rdfs:comment>
 					<owl:imports>
 							<xsl:attribute name="rdf:resource"><xsl:value-of select="$rim_dt"/></xsl:attribute>
 					</owl:imports>

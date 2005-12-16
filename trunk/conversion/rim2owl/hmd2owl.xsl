@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- 
-	Transform an HL7 HMD expressed in MIF format
+	Transform HL7 CMET expressed in MIF format
 	into a W3C OWL ontology
      
      Copyright(c) 2005 Alessio Carenini <carenini@gmail.com>     
@@ -28,7 +28,7 @@
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:hl7="urn:hl7-org:v3/mif"
+	xmlns:mif="urn:hl7-org:v3/mif"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -36,12 +36,37 @@
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:param name="rim_ns" select="'http://veggente.berlios.de/ns/RIMOntology'"/>
 	<xsl:param name="rim_dt" select="'http://veggente.berlios.de/ns/RIMDatatype'"/>
+	<xsl:param name="rim_cm" select="'http://veggente.berlios.de/ns/RIM_CMET'"/>
 	<xsl:template match="/">
 			<rdf:RDF>
-					<xsl:apply-templates select="hl7:serializedStaticModel"/>
+					<owl:Ontology>
+							<xsl:attribute name="rdf:about" select="$rim_cm"/>
+							<rdfs:label>HL7 Common Message Element Type</rdfs:label>
+							<rdfs:comment>CMET translated into OWL</rdfs:comment>
+							<owl:imports>
+									<xsl:attribute name="rdf:resource" select="$rim_ns"/>
+							</owl:imports>
+					</owl:Ontology>
+					<owl:AnnotationProperty rdf:about="&rdfs;comment"/>
+					<xsl:apply-templates select="mif:serializedStaticModel"/>
 			</rdf:RDF>
 	</xsl:template>
-	<xsl:template match="hl7:serializedStaticModel">
+	<xsl:template match="mif:serializedStaticModel">
+			<owl:Class>
+					<xsl:attribute name="rdf:ID" select="@name"/>
+					<xsl:apply-templates select="mif:description"/>
+			</owl:Class>
+	</xsl:template>
+	<xsl:template match="mif:description">
+			<rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
+					<xsl:value-of select="."/>
+			</rdfs:comment>
+	</xsl:template>
+	<xsl:template match="mif:supplierStructuralDomain">
+	</xsl:template>
+	<xsl:template match="mif:specializationChildStaticModel">
+	</xsl:template>
+	<xsl:template match="mif:specializationChildEntryClass">
 	</xsl:template>
 </xsl:stylesheet>
 

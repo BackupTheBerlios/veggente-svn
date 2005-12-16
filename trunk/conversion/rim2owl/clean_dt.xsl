@@ -39,8 +39,9 @@
 	-->
 	<xsl:template match="/rdf:RDF">
 			<rdf:RDF>
-					<xsl:copy-of select="child::node()"/>
-					<xsl:apply-templates select="hl7_dt:HL7_Data_Type/hl7_dt:alias"/>
+					<xsl:copy-of select="owl:*"/>
+					<xsl:apply-templates select="hl7_dt:HL7_Data_Type"/>
+					<xsl:apply-templates select="hl7_dt:TopLevel_Class"/>
 			</rdf:RDF>
 	</xsl:template>
 	<xsl:template match="hl7_dt:alias">
@@ -50,6 +51,26 @@
 							<xsl:attribute name="rdf:resource" select="concat($rim_dt,../@rdf:about)"/>
 					</owl:equivalentClass>
 			</owl:Class>
+	</xsl:template>
+	<xsl:template match="hl7_dt:TopLevel_Class">
+			<owl:Class>
+					<xsl:attribute name="rdf:about" select="@rdf:about"/>
+					<rdfs:subClassOf>
+							<xsl:attribute name="rdf:resource" select="concat($rim_dt,@rdf:about)"/>
+					</rdfs:subClassOf>
+			</owl:Class>
+	</xsl:template>
+	<xsl:template match="hl7_dt:HL7_Data_Type">
+			<owl:Class>
+					<xsl:attribute name="rdf:ID" select="substring-after(translate(@rdf:about,'&lt;&gt;','__'),'#')"/>
+					<rdfs:subClassOf>
+							<xsl:attribute name="rdf:resource" select="concat($rim_dt,'#HL7_Data_Type')"/>
+					</rdfs:subClassOf>
+					<xsl:copy-of select="owl:*"/>
+					<xsl:copy-of select="rdf:*"/>
+					<xsl:copy-of select="rdfs:*"/>
+			</owl:Class>
+			<xsl:apply-templates select="hl7_dt:alias"/>
 	</xsl:template>
 </xsl:stylesheet>
 
