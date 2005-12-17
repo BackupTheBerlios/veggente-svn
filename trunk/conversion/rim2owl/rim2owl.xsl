@@ -55,7 +55,6 @@
 					</owl:imports>
 			</owl:Ontology>
 			<owl:AnnotationProperty rdf:about="&rdfs;comment"/>
-			<xsl:apply-templates/>
 	</xsl:template>
 	<xsl:template match="hl7:historyItem"><!-- Eliminare ed integrare nell'about dell'ontologia --></xsl:template>
 	<xsl:template match="hl7:header"><!-- Informazioni su autori e revisioni --></xsl:template>
