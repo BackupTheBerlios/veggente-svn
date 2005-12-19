@@ -55,15 +55,44 @@
 					</owl:imports>
 			</owl:Ontology>
 			<owl:AnnotationProperty rdf:about="&rdfs;comment"/>
+			<owl:Class rdf:ID="RIM_HL7"/>
+			<xsl:apply-templates select="hl7:ownedSubjectAreaPackage"/>
+			<xsl:apply-templates select="hl7:ownedAssociation"/>
 	</xsl:template>
 	<xsl:template match="hl7:historyItem"><!-- Eliminare ed integrare nell'about dell'ontologia --></xsl:template>
 	<xsl:template match="hl7:header"><!-- Informazioni su autori e revisioni --></xsl:template>
 	<xsl:template match="hl7:annotations"></xsl:template>
 	<xsl:template match="hl7:figure"></xsl:template>
-	<xsl:template match="hl7:ownedClass">
-			<xsl:apply-templates/>
+	
+	<xsl:template match="hl7:ownedSubjectAreaPackage">
+			<xsl:variable name="package" select="@name"/>
+			<owl:Class>
+					<xsl:attribute name="rdf:ID" select="@name"/>
+					<rdfs:subClassOf>
+							<xsl:attribute name="rdf:resource"><xsl:value-of select="$rim_ns"/><xsl:text>#RIM_HL7</xsl:text></xsl:attribute>
+					</rdfs:subClassOf>
+					<xsl:if test="../../hl7:ownedSubjectAreaPackage">
+							<rdfs:subClassOf>
+									<xsl:attribute name="rdf:resource">
+											<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="../../hl7:ownedSubjectAreaPackage/@name"/>
+									</xsl:attribute>
+							</rdfs:subClassOf>
+					</xsl:if>
+			</owl:Class>
+			<xsl:apply-templates>
+					<xsl:with-param name="parent" select="@name"/>
+			</xsl:apply-templates>
 	</xsl:template>
-<!-- RIM Association -->
+	
+	<xsl:template match="hl7:ownedClass">
+			<xsl:param name="parent"/>
+			<xsl:variable name="class_name" select="@name"/>
+			<xsl:apply-templates select="/hl7:staticModel/hl7:ownedClass/hl7:class[@name=$class_name]">
+					<xsl:with-param name="parent" select="$parent"/>
+			</xsl:apply-templates>
+	</xsl:template>
+	
+	<!-- RIM Association -->
 	<xsl:template match="hl7:ownedAssociation">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:about">
@@ -94,11 +123,12 @@
 	</xsl:template>
 <!-- RIM Class -->
 	<xsl:template match="hl7:class">
+			<xsl:param name="parent"/>
 			<xsl:variable name="class_name" select="@name"/>
 			<owl:Class>
 					<xsl:attribute name="rdf:ID"><xsl:value-of select="@name"/></xsl:attribute>
 					<xsl:call-template name="add_info"/>
-					<xsl:for-each select="../../hl7:ownedClass/hl7:class">
+					<xsl:for-each select="/hl7:staticModel/hl7:ownedClass/hl7:class">
 							<xsl:variable name="temp_name" select="@name"/>
 							<xsl:for-each select="hl7:specializationChild">
 									<xsl:if test="@childClassName=$class_name">
@@ -110,6 +140,13 @@
 									</xsl:if>
 							</xsl:for-each>
 					</xsl:for-each>
+					<xsl:if test="$parent">
+							<rdfs:subClassOf>
+									<xsl:attribute name="rdf:resource">
+											<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="$parent"/>
+									</xsl:attribute>
+							</rdfs:subClassOf>
+					</xsl:if>
 					<xsl:apply-templates select="hl7:attribute" mode="constraints"/>
 					<xsl:apply-templates select="../../hl7:ownedAssociation/hl7:connections/hl7:traversableConnection[@participantClassName=$class_name]" mode="constraints"/>
 			</owl:Class>
