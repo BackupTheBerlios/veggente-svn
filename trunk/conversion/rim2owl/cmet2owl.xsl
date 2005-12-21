@@ -31,7 +31,8 @@
 	xmlns:hl7="urn:hl7-org:v3/mif"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-	xmlns:owl="http://www.w3.org/2002/07/owl#">
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#">
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:param name="rim_ns" select="'http://veggente.berlios.de/ns/RIMOntology'"/>
 	<xsl:param name="rim_cm" select="'http://veggente.berlios.de/ns/RIM_CMET'"/>
@@ -66,9 +67,7 @@
 	<!-- TODO: Class naming conventions -->
 	<xsl:template match="hl7:class">
 			<owl:Class>
-					<xsl:attribute name="rdf:ID">
-							<xsl:value-of select="$rim_cm"/>#<xsl:value-of select="@name"/>
-					</xsl:attribute>
+					<xsl:attribute name="rdf:ID" select="@name"/>
 					<rdfs:subClassOf>
 							<xsl:if test="$rim_id">
 									<xsl:attribute name="rdf:resource">
@@ -81,26 +80,29 @@
 			</owl:Class>
 	</xsl:template>
 	<xsl:template match="hl7:attribute">
-			<xsl:if test="hl7:derivationSupplier[staticModelDerivationId=$rim_id]">
+			<xsl:if test="hl7:derivationSupplier[@staticModelDerivationId=$rim_id]">
 					<rdfs:subClassOf>
 							<owl:Restriction>
 									<owl:onProperty>
 											<xsl:attribute name="rdf:resource">
-													<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:derivationSupplier[staticModelDerivationId=$rim_id]/@attributeName">
+													<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:derivationSupplier[@staticModelDerivationId=$rim_id]/@attributeName"/>
 											</xsl:attribute>
+											<xsl:if test="@fixedValue">
+													<owl:hasValue><xsl:value-of select="@fixedValue"/></owl:hasValue>
+											</xsl:if>
 									</owl:onProperty>
 							</owl:Restriction>
 					</rdfs:subClassOf>
 			</xsl:if>
 	</xsl:template>
 	<xsl:template match="hl7:association">
-			<rdfs:subClassOf>
+			<!--			<rdfs:subClassOf>
 					<owl:Restriction>
 							<owl:onProperty>
 									<xsl:attribute name="rdf:resource">
 									</xsl:attribute>
 							</owl:onProperty>
 					</owl:Restriction>
-			</rdfs:subClassOf>
+			</rdfs:subClassOf>-->
 	</xsl:template>
 </xsl:stylesheet>
