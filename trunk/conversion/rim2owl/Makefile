@@ -14,8 +14,10 @@ cmet_container:
 cmet:
 	for i in `/bin/ls $(INPUT_MIF)/*.mif`; do \
 		touch  $(OUTPUT_DIR)/cmet/`basename $$i .mif`;\
-		$(SAXON) -sall $$i cmet2owl.xsl > $(OUTPUT_DIR)/cmet/`basename $$i .mif`;\
+		$(SAXON) -sall $$i cmet2owl.xsl > $(OUTPUT_DIR)/cmet/`basename $$i .mif`;
 	done;
+cmet_test:
+	$(SAXON) -sall $(INPUT_MIF)/COCT_MT230100.mif cmet2owl.xsl >$(OUTPUT_DIR)/cmet/COCT_MT230100.owl
 install: rim_inst dt_inst cmet_inst
 cmet_inst:
 	scp $(OUTPUT_DIR)/rim_cmet.owl $(ACCOUNT):$(REMOTE_DIR)/RIM_CMET
