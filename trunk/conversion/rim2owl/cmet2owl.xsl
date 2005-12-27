@@ -35,8 +35,11 @@
 	xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#">
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:param name="rim_ns" select="'http://veggente.berlios.de/ns/RIMOntology'"/>
-	<xsl:param name="rim_cm" select="'http://veggente.berlios.de/ns/RIM_CMET'"/>
+	<xsl:param name="rim_cm" select="'http://veggente.berlios.de/ns/cmet/'"/>
+	<!-- ID which identifies RIM in import declarations-->
 	<xsl:variable name="rim_id" select="/hl7:serializedStaticModel/hl7:derivationSupplier/hl7:targetStaticModel[@artifact='RIM']/../@staticModelDerivationId"/>
+	<!-- Code of the selected CMET -->
+	<xsl:variable name="cmet_name"><xsl:value-of select="concat(/hl7:serializedStaticModel/hl7:packageLocation/@subSection,/hl7:serializedStaticModel/hl7:packageLocation/@domain)"/>_<xsl:value-of select="substring-before(/hl7:serializedStaticModel/hl7:packageLocation/@artifact,'-')"/><xsl:value-of select="/hl7:serializedStaticModel/@name"/><xsl:value-of select="/hl7:serializedStaticModel/hl7:packageLocation/@realm"/><xsl:value-of select="/hl7:serializedStaticModel/hl7:packageLocation/@version"/></xsl:variable>
 	
 	<xsl:template match="/">
 			<rdf:RDF>
@@ -46,7 +49,7 @@
 	<xsl:template match="hl7:serializedStaticModel">
 			<owl:Ontology>
 					<xsl:attribute name="rdf:about">
-							<xsl:value-of select="$rim_cm"/>
+							<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>
 					</xsl:attribute>
 					<rdfs:label><xsl:value-of select="hl7:ownedEntryPoint/hl7:specializedClass/hl7:class/@name"/></rdfs:label>
 					<rdfs:comment><xsl:value-of select="hl7:ownedEntryPoint/hl7:annotations/hl7:description"/></rdfs:comment>	
@@ -67,7 +70,9 @@
 	<!-- TODO: Class naming conventions -->
 	<xsl:template match="hl7:class">
 			<owl:Class>
-					<xsl:attribute name="rdf:ID" select="@name"/>
+					<xsl:attribute name="rdf:ID">
+							<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="@name"/>
+					</xsl:attribute>
 					<rdfs:subClassOf>
 							<xsl:if test="$rim_id">
 									<xsl:attribute name="rdf:resource">
@@ -75,34 +80,92 @@
 									</xsl:attribute>
 							</xsl:if>
 					</rdfs:subClassOf>
+					<xsl:apply-templates select="hl7:annotations"/>
 					<xsl:apply-templates select="hl7:attribute"/>
-					<xsl:apply-templates select="hl7:association"/>
 			</owl:Class>
+			<xsl:apply-templates select="hl7:association"/>
 	</xsl:template>
+	<xsl:template match="hl7:annotations">
+			<rdfs:comment><xsl:value-of select="."/></rdfs:comment>
+	</xsl:template>
+	<!-- TODO: ObjectProperties are associations between CLASSES! -->
 	<xsl:template match="hl7:attribute">
-			<xsl:if test="hl7:derivationSupplier[@staticModelDerivationId=$rim_id]">
+			<xsl:variable name="parent_ns">
+					<xsl:choose>
+							<xsl:when test="hl7:derivationSupplier[@staticModelDerivationId=$rim_id]">
+									<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:derivationSupplier[@staticModelDerivationId=$rim_id]/@attributeName"/>
+							</xsl:when>
+							<xsl:otherwise>
+									<xsl:value-of select="not_found"/>
+							</xsl:otherwise>
+					</xsl:choose>
+			</xsl:variable>
+			<xsl:if test="@fixedValue">
 					<rdfs:subClassOf>
 							<owl:Restriction>
 									<owl:onProperty>
-											<xsl:attribute name="rdf:resource">
-													<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:derivationSupplier[@staticModelDerivationId=$rim_id]/@attributeName"/>
-											</xsl:attribute>
-											<xsl:if test="@fixedValue">
-													<owl:hasValue><xsl:value-of select="@fixedValue"/></owl:hasValue>
-											</xsl:if>
+											<xsl:attribute name="rdf:resource" select="$parent_ns"/>
 									</owl:onProperty>
+									<owl:hasValue>
+											<xsl:attribute name="rdf:datatype">
+													<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:type/@name"/>
+											</xsl:attribute>
+											<xsl:value-of select="@fixedValue"/>
+									</owl:hasValue>
+							</owl:Restriction>
+					</rdfs:subClassOf>
+			</xsl:if>
+			<xsl:if test="@minimumMultiplicity">
+					<rdfs:subClassOf>
+							<owl:Restriction>
+									<owl:onProperty>
+											<xsl:attribute name="rdf:resource" select="$parent_ns"/>
+									</owl:onProperty>
+									<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@minimumMultiplicity"/></owl:minCardinality>
+							</owl:Restriction>
+					</rdfs:subClassOf>
+			</xsl:if>
+			<xsl:if test="@maximumMultiplicity">
+					<rdfs:subClassOf>
+							<owl:Restriction>
+									<owl:onProperty>
+											<xsl:attribute name="rdf:resource" select="$parent_ns"/>
+									</owl:onProperty>
+									<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@maximumMultiplicity"/></owl:maxCardinality>
 							</owl:Restriction>
 					</rdfs:subClassOf>
 			</xsl:if>
 	</xsl:template>
 	<xsl:template match="hl7:association">
-			<!--			<rdfs:subClassOf>
-					<owl:Restriction>
-							<owl:onProperty>
-									<xsl:attribute name="rdf:resource">
-									</xsl:attribute>
-							</owl:onProperty>
-					</owl:Restriction>
-			</rdfs:subClassOf>-->
+			<owl:ObjectProperty>
+					<xsl:attribute name="rdf:ID">
+							<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="hl7:targetConnection/@name"/>
+					</xsl:attribute>
+					<rdfs:range>
+							<xsl:attribute name="rdf:resource">
+									<xsl:choose>
+											<xsl:when test="hl7:targetConnection/hl7:participantClass/hl7:class">
+													<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="hl7:targetConnection/hl7:participantClass/hl7:class/@name"/>
+											</xsl:when>
+											<xsl:when test="hl7:targetConnection/hl7:participantClass/hl7:reference">
+													<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="hl7:targetConnection/hl7:participantClass/hl7:reference/@name"/>
+											</xsl:when>
+											<xsl:otherwise/>
+									</xsl:choose>
+							</xsl:attribute>
+					</rdfs:range>
+					<rdfs:domain>
+							<xsl:attribute name="rdf:resource">
+									<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="hl7:sourceConnection/hl7:nonTraversableConnection/@participantClassName"/>
+							</xsl:attribute>
+					</rdfs:domain>
+					<rdfs:subPropertyOf>
+							<xsl:attribute name="rdf:resource">
+									<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:targetConnection/hl7:derivationSupplier[@staticModelDerivationId=$rim_id]/@associationEndName"/>
+							</xsl:attribute>
+					</rdfs:subPropertyOf>
+
+			</owl:ObjectProperty>
+			<xsl:apply-templates select="hl7:targetConnection/hl7:participantClass/hl7:class"/>
 	</xsl:template>
 </xsl:stylesheet>
