@@ -1,0 +1,1802 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:hl7="urn:hl7-org:v3/mif"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03">
+      <rdfs:label>PaymentIntent</rdfs:label>
+      <rdfs:comment>Entry Point for Authorization results messages</rdfs:comment>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
+   </owl:Ontology>
+   <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
+   <owl:Class rdf:ID="FICR_HD310500UV03.PaymentIntent">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#FinancialTransaction"/>
+      <rdfs:comment>If an Adjudicator adjudicates for multiple insurance policies (EOBs) for multiple Payors and/or Payees, there would be more than 1 Payment Intent payload in the Results message MoodCode: PRMS - auth, cov ext, invoice PRP - pre-det "I Will Pay"Amt must be positive or 0 for completed Adjudication Results messages Amt must be negative or 0 for Invoice Cancel Results messages</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">XACT</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.statusCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.statusCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.effectiveTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.effectiveTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.amt"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.amt"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PaymentIntent.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PaymentIntent.moodCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#moodCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PaymentIntent.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PaymentIntent.statusCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#statusCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PaymentIntent.effectiveTime">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#effectiveTime"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PaymentIntent.amt">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#amt"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.credit">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PaymentIntentPayee"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PaymentIntent"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.PaymentIntentPayee">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">CREDIT</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PaymentIntentPayee.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.account">
+      <rdfs:range rdf:resource=""/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PaymentIntentPayee"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.debit">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PaymentIntentPayor"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PaymentIntent"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.PaymentIntentPayor">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">DEBIT</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PaymentIntentPayor.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.account">
+      <rdfs:range rdf:resource=""/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PaymentIntentPayor"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.reasonOf">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PaymentIntentReason"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PaymentIntent"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.PaymentIntentReason">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PaymentIntentReason.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.adjudicatedInvoiceElementGroup">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementGroup"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PaymentIntentReason"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#source"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceElementGroup">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#InvoiceElement"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">INVE</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.statusCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.statusCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.netAmt"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.netAmt"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceElementGroup.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceElementGroup.moodCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#moodCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceElementGroup.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceElementGroup.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceElementGroup.statusCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#statusCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceElementGroup.netAmt">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#netAmt"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.author">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceAuthor"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementGroup"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceAuthor">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">AUT</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.time"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.time"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceAuthor.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceAuthor.time">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#time"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.adjudicatorRole">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatorRole"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceAuthor"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#role"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicatorRole">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:comment>NECST only: To note a contact person (adjudicator) for the Provider to contact in case of questions on the EOB, use Adjudication Information codes</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatorRole.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatorRole.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.playingAdjudicatorPerson">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatorPerson"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatorRole"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicatorPerson">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Person"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">PSN</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.determinerCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">INSTANCE</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.name"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.name"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatorPerson.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatorPerson.determinerCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#determinerCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatorPerson.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatorPerson.name">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#name"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.directAuthority">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.DirectAuthorityOver"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatorRole"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundLink"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.DirectAuthorityOver">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleLink"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">DIRAUTH</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.DirectAuthorityOver.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.insuranceCarrierRole">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.InsuranceCarrierRole"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.DirectAuthorityOver"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#source"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.InsuranceCarrierRole">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.InsuranceCarrierRole.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.InsuranceCarrierRole.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.reference">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Reference2"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementGroup"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.Reference2">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment>Adjudicator must include EOB package for downstream Adjudicator.</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">REFR</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Reference2.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.invoiceCoordinationChoice">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.InvoiceCoordinationChoice"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Reference2"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.InvoiceCoordinationChoice">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
+      <rdfs:comment/>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.coverage">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceCoverage"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementGroup"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceCoverage">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment>Allows Payor to adj &amp; pay on different policy</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">COVBY</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.sequenceNumber"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.sequenceNumber"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceCoverage.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceCoverage.sequenceNumber">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#sequenceNumber"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.policyOrAccount">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyOrAccount"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceCoverage"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.PolicyOrAccount">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#FinancialContract"/>
+      <rdfs:comment>id: = Coverage Identifier, extension = Policy.Plan.Group.Contract. Division.Section.Version (or similar). Carrier noted in author participation, and may not be same namespace as OID of id</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">COV</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PolicyOrAccount.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PolicyOrAccount.moodCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#moodCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PolicyOrAccount.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PolicyOrAccount.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.beneficiary">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyBeneficiary"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyOrAccount"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.PolicyBeneficiary">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">BEN</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PolicyBeneficiary.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.coveredPartyAsPatient">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.CoveredPartyAsPatient"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyBeneficiary"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#role"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.CoveredPartyAsPatient">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:comment>Covered Person Identifier (Assigned by carrier - root of OID) = Subscriber+Dependents Can be a single covered party, an organization, an animal or a group of patients and/or a group of animals. Covered party may be a patient who for the purposes of the invoice is a covered party.</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">COVPTY</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.CoveredPartyAsPatient.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.CoveredPartyAsPatient.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.CoveredPartyAsPatient.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.indirectAuthority">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.IndirectAuthorithyOver"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.CoveredPartyAsPatient"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundLink"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.IndirectAuthorithyOver">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleLink"/>
+      <rdfs:comment>Used for family relationships only (for CoverageRoleType = FAMDEP)</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">INDAUTH</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.IndirectAuthorithyOver.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.personalRelationship">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PersonalRelationship"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.IndirectAuthorithyOver"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#source"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.PersonalRelationship">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">PRS</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">FAMMEMB</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PersonalRelationship.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PersonalRelationship.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.holder">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Holder"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyOrAccount"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.Holder">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">HLD</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Holder.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.policyHolder">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyHolder"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Holder"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#role"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.PolicyHolder">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:comment>Subscriber Identifier; required for X12 837 mapping</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">POLHOLD</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PolicyHolder.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PolicyHolder.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.policyHolderChoice">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyHolderChoice"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyHolder"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.PolicyHolderChoice">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Entity"/>
+      <rdfs:comment/>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.author">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyUnderwriter"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyOrAccount"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.PolicyUnderwriter">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">AUT</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.PolicyUnderwriter.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.carrierRole">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.CarrierRole"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.PolicyUnderwriter"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#role"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.CarrierRole">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">UNDWRT</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.CarrierRole.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.CarrierRole.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.limitation">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Limitation"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementGroup"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.Limitation">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">LIMIT</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.negationInd"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.negationInd"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Limitation.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Limitation.negationInd">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#negationInd"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.reservation">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Reservation"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Limitation"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.Reservation">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#FinancialTransaction"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">XACT</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.effectiveTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.effectiveTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.amt"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.amt"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Reservation.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Reservation.moodCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#moodCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Reservation.effectiveTime">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#effectiveTime"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Reservation.amt">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#amt"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.component">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementComponent"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementGroup"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceElementComponent">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceElementComponent.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.adjudicatedInvoiceElementChoice">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementChoice"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementComponent"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicatedInvoiceElementChoice">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
+      <rdfs:comment>Want sum of all adjudication details (info &amp; non-info) to equal what was submitted. For example, the reasons why you refused to pay part of the invoice</rdfs:comment>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.reference">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Reference4"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementChoice"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.Reference4">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment>Used to indicate what the allowable or eligible amount that was what the policy would normally pay. The adjudicated amount may have been reduced for a number of reasons from this allowable amount (e.g. met annual limits).</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">REFR</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Reference4.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.allowable">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Allowable"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Reference4"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.Allowable">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#InvoiceElement"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">INVE</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">DEF</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.netAmt"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.netAmt"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Allowable.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Allowable.moodCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#moodCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Allowable.netAmt">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#netAmt"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.outcomeOf">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedResultOutcome"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedInvoiceElementChoice"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicatedResultOutcome">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicatedResultOutcome.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.adjudicationResult">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResult"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicatedResultOutcome"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#source"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicationResult">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActHeir"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">ADJUD</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResult.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResult.moodCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#moodCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResult.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.trigger">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResultTrigger"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResult"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicationResultTrigger">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment>Select association below for required acts that do not have associated adjudication reason &amp; adjudication information codes.</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">TRIG</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.negationInd"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.negationInd"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResultTrigger.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResultTrigger.negationInd">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#negationInd"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.adjudicationResultRequiredAct">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResultRequiredAct"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResultTrigger"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.pertinentInformation">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdditionalPertinentInformation"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResult"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdditionalPertinentInformation">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdditionalPertinentInformation.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.adjudicationCodeChoice">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationCodeChoice"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdditionalPertinentInformation"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicationCodeChoice">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
+      <rdfs:comment/>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.trigger">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Trigger"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationCodeChoice"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.Trigger">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment>Required actions apply to all associated adjudication result reason codes and adjudicate result information codes</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">TRIG</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.negationInd"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.negationInd"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Trigger.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Trigger.negationInd">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#negationInd"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.adjudicationResultRequiredAct">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResultRequiredAct"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Trigger"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicationResultRequiredAct">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActHeir"/>
+      <rdfs:comment>Id allows for consolidating identical required acts on 1 form</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">RQO</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.text"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.text"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResultRequiredAct.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResultRequiredAct.moodCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#moodCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResultRequiredAct.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResultRequiredAct.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResultRequiredAct.text">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#text"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.directTarget">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.RequiredActDirectTarget"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResultRequiredAct"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.RequiredActDirectTarget">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.RequiredActDirectTarget.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.formRole">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.FormRole"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.RequiredActDirectTarget"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#role"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.FormRole">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:comment>Print form specified for EOB statement when provided to patient</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.FormRole.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.playingForm">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.Form"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.FormRole"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.Form">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ManufacturedMaterial"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.determinerCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">INSTANCE</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.telecom"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.telecom"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Form.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Form.determinerCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#determinerCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Form.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.Form.telecom">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#telecom"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.reference">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResultReference"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResult"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicationResultReference">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment>Multiple references to submitted invoice elements provides support for code substitution where the number of submitted fee items is consolidated on the adjudication results (e.g. 3 items to 1)</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">REFR</owl:hasValue>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationResultReference.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.invoiceElementChoice">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.InvoiceElementChoice"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResultReference"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.InvoiceElementChoice">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
+      <rdfs:comment>MoodCode: PRP - auth, pre-det, cov ext RQO - invoice</rdfs:comment>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.reasonOf">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationObservationReason"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationResult"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="FICR_HD310500UV03.AdjudicationObservationReason">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment>Specific adjudication observations will be added here, such as Drug Contraindications.</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.AdjudicationObservationReason.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="FICR_HD310500UV03.actChoice">
+      <rdfs:range rdf:resource=""/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD310500UV03#FICR_HD310500UV03.AdjudicationObservationReason"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#source"/>
+   </owl:ObjectProperty>
+</rdf:RDF>

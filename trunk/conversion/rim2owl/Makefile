@@ -13,7 +13,7 @@ cmet_container:
 	$(SAXON) -sall $(INPUT_MIF)/cmetinfo.coremif cmet_container.xsl > $(OUTPUT_DIR)/rim_cmet.owl
 # Until further investigation processed CMET are only those with filename *_MT*
 cmet:
-	for i in `/bin/ls $(INPUT_MIF)/*_MT*.mif`; do \
+	for i in `/bin/ls $(INPUT_MIF)/*_*.mif`; do \
 		touch  $(OUTPUT_DIR)/cmet/`basename $$i .mif`;\
 		$(SAXON) -sall $$i cmet2owl.xsl > $(OUTPUT_DIR)/cmet/`basename $$i .mif`;\
 	done;

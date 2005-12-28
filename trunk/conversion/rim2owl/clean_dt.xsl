@@ -32,6 +32,7 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:RIMDatatype="http://veggente.berlios.de/ns/RIMDatatype#"
+	xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:param name="rim_ns" select="'http://veggente.berlios.de/ns/RIMOntology'"/>

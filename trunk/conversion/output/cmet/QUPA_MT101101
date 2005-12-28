@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:hl7="urn:hl7-org:v3/mif"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/QUPA_MT101101">
+      <rdfs:label>ParameterList</rdfs:label>
+      <rdfs:comment>This R-MIM defines the message used to query a Person Registry for records matching a person identifier.</rdfs:comment>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_HD101101"/>
+   </owl:Ontology>
+   <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
+   <owl:Class rdf:ID="QUPA_MT101101.ParameterList">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ParameterList"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_HD101101#QUPA_HD101101.ParameterList"/>
+      <rdfs:comment>Parameter list for a query by person identifier query</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_MT101101#QUPA_MT101101.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_MT101101#QUPA_MT101101.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="QUPA_MT101101.ParameterList.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_HD101101#QUPA_HD101101.ParameterList.id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="QUPA_MT101101.person.id">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_MT101101#QUPA_MT101101.Person.id"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_MT101101#QUPA_MT101101.ParameterList"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#parameter"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:ID="QUPA_MT101101.Person.id">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ParameterItem"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_HD101101#QUPA_HD101101.Person.id"/>
+      <rdfs:comment>A person identifier (without scoping organization information)</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_MT101101#QUPA_MT101101.value"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_MT101101#QUPA_MT101101.value"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_MT101101#QUPA_MT101101.semanticsText"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_MT101101#QUPA_MT101101.semanticsText"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:ID="QUPA_MT101101.Person.id.value">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#value"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_HD101101#QUPA_HD101101.Person.id.value"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:ID="QUPA_MT101101.Person.id.semanticsText">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#semanticsText"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/QUPA_HD101101#QUPA_HD101101.Person.id.semanticsText"/>
+   </owl:ObjectProperty>
+</rdf:RDF>

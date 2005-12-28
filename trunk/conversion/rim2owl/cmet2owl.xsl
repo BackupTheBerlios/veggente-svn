@@ -53,9 +53,25 @@
 					</xsl:attribute>
 					<rdfs:label><xsl:value-of select="hl7:ownedEntryPoint/hl7:specializedClass/hl7:class/@name"/></rdfs:label>
 					<rdfs:comment><xsl:value-of select="hl7:ownedEntryPoint/hl7:annotations/hl7:description"/></rdfs:comment>	
-					<owl:imports>
-							<xsl:attribute name="rdf:resource" select="$rim_ns"/>
-					</owl:imports>
+					<xsl:for-each select="hl7:derivationSupplier">
+							<xsl:choose>
+									<xsl:when test="hl7:targetStaticModel[@artifact='RIM']">
+											<owl:imports>
+													<xsl:attribute name="rdf:resource" select="$rim_ns"/>
+											</owl:imports>
+									</xsl:when>
+									<xsl:when test="contains(hl7:targetStaticModel/@artifact,'RM')"/>
+									<xsl:otherwise>
+											<owl:imports>
+													<xsl:attribute name="rdf:resource">
+															<xsl:value-of select="$rim_cm"/><xsl:call-template name="get_derivation_name">
+																	<xsl:with-param name="id" select="@staticModelDerivationId"/>
+															</xsl:call-template>
+													</xsl:attribute>
+											</owl:imports>
+									</xsl:otherwise>
+							</xsl:choose>
+					</xsl:for-each>
 			</owl:Ontology>
 			<owl:AnnotationProperty rdf:about="&rdfs;comment"/>
 			<xsl:apply-templates select="hl7:ownedEntryPoint"/>
@@ -67,38 +83,57 @@
 			<xsl:apply-templates/>
 	</xsl:template>
 	<!-- Since we haven't any information about RMIMs or DMIMs we can only link to classes in RIM -->
-	<!-- TODO: Class naming conventions -->
+	<!-- TODO: Class naming conventions 
+		Model attributes as NEW ObjectProperties and then use restrictions on them
+	-->
 	<xsl:template match="hl7:class">
 			<owl:Class>
 					<xsl:attribute name="rdf:ID">
 							<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="@name"/>
 					</xsl:attribute>
-					<rdfs:subClassOf>
-							<xsl:if test="$rim_id">
-									<xsl:attribute name="rdf:resource">
-											<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:derivationSupplier[@staticModelDerivationId=$rim_id]/@className"/>
-									</xsl:attribute>
-							</xsl:if>
-					</rdfs:subClassOf>
+					<xsl:for-each select="hl7:derivationSupplier">
+							<xsl:variable name="derivation_id" select="@staticModelDerivationId"/>
+							<xsl:variable name="derivator">
+									<xsl:copy-of select="/hl7:serializedStaticModel/hl7:derivationSupplier[@staticModelDerivationId=$derivation_id]"/>
+							</xsl:variable>
+							<xsl:choose>
+									<xsl:when test="$derivation_id=$rim_id">
+											<rdfs:subClassOf>
+													<xsl:attribute name="rdf:resource">
+															<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@className"/>
+													</xsl:attribute>
+											</rdfs:subClassOf>
+									</xsl:when>
+									<xsl:when test="contains($derivator//hl7:targetStaticModel/@artifact,'RM')"/>
+									<xsl:otherwise>
+											<rdfs:subClassOf>
+													<xsl:attribute name="rdf:resource">
+															<xsl:value-of select="$rim_cm"/>
+															<xsl:call-template name="get_derivation_name">
+																	<xsl:with-param name="id" select="$derivation_id"/>
+															</xsl:call-template>#<xsl:call-template name="get_derivation_name">
+																	<xsl:with-param name="id" select="$derivation_id"/>
+															</xsl:call-template>.<xsl:value-of select="@className"/>
+													</xsl:attribute>
+											</rdfs:subClassOf>
+									</xsl:otherwise>
+							</xsl:choose>
+					</xsl:for-each>
 					<xsl:apply-templates select="hl7:annotations"/>
-					<xsl:apply-templates select="hl7:attribute"/>
+					<xsl:apply-templates select="hl7:attribute" mode="class"/>
 			</owl:Class>
+			<xsl:apply-templates select="hl7:attribute" mode="property"/>
 			<xsl:apply-templates select="hl7:association"/>
 	</xsl:template>
+
 	<xsl:template match="hl7:annotations">
 			<rdfs:comment><xsl:value-of select="."/></rdfs:comment>
 	</xsl:template>
+
 	<!-- TODO: ObjectProperties are associations between CLASSES! -->
-	<xsl:template match="hl7:attribute">
+	<xsl:template match="hl7:attribute" mode="class">
 			<xsl:variable name="parent_ns">
-					<xsl:choose>
-							<xsl:when test="hl7:derivationSupplier[@staticModelDerivationId=$rim_id]">
-									<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:derivationSupplier[@staticModelDerivationId=$rim_id]/@attributeName"/>
-							</xsl:when>
-							<xsl:otherwise>
-									<xsl:value-of select="not_found"/>
-							</xsl:otherwise>
-					</xsl:choose>
+					<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="@name"/>
 			</xsl:variable>
 			<xsl:if test="@fixedValue">
 					<rdfs:subClassOf>
@@ -136,6 +171,43 @@
 					</rdfs:subClassOf>
 			</xsl:if>
 	</xsl:template>
+
+	<xsl:template match="hl7:attribute" mode="property">
+			<owl:ObjectProperty>
+					<xsl:attribute name="rdf:ID">
+							<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
+					</xsl:attribute>
+					<xsl:for-each select="hl7:derivationSupplier">
+							<xsl:variable name="derivation_id" select="@staticModelDerivationId"/>
+							<xsl:variable name="derivator">
+									<xsl:copy-of select="/hl7:serializedStaticModel/hl7:derivationSupplier[@staticModelDerivationId=$derivation_id]"/>
+							</xsl:variable>
+							<xsl:choose>
+									<xsl:when test="$derivation_id=$rim_id">
+											<rdfs:subPropertyOf>
+													<xsl:attribute name="rdf:resource">
+															<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@attributeName"/>
+													</xsl:attribute>
+											</rdfs:subPropertyOf>
+									</xsl:when>
+									<xsl:when test="contains($derivator//hl7:targetStaticModel/@artifact,'RM')"/>
+									<xsl:otherwise>
+											<rdfs:subPropertyOf>
+													<xsl:attribute name="rdf:resource">
+															<xsl:value-of select="$rim_cm"/>
+															<xsl:call-template name="get_derivation_name">
+																	<xsl:with-param name="id" select="$derivation_id"/>
+															</xsl:call-template>#<xsl:call-template name="get_derivation_name">
+																	<xsl:with-param name="id" select="$derivation_id"/>
+															</xsl:call-template>.<xsl:value-of select="@className"/>.<xsl:value-of select="@attributeName"/>
+													</xsl:attribute>
+											</rdfs:subPropertyOf>
+									</xsl:otherwise>
+							</xsl:choose>
+					</xsl:for-each>
+			</owl:ObjectProperty>
+	</xsl:template>
+
 	<xsl:template match="hl7:association">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:ID">
@@ -168,4 +240,13 @@
 			</owl:ObjectProperty>
 			<xsl:apply-templates select="hl7:targetConnection/hl7:participantClass/hl7:class"/>
 	</xsl:template>
+
+	<xsl:template name="get_derivation_name">
+			<xsl:param name="id"/>
+			<xsl:variable name="selected_id">
+					<xsl:copy-of select="/hl7:serializedStaticModel/hl7:derivationSupplier[@staticModelDerivationId=$id]/hl7:targetStaticModel"/>
+			</xsl:variable>
+			<xsl:value-of select="$selected_id//@subSection"/><xsl:value-of select="$selected_id//@domain"/>_<xsl:value-of select="substring-before($selected_id//@artifact,'-')"/><xsl:value-of select="$selected_id//@id"/><xsl:value-of select="$selected_id//@realm"/><xsl:value-of select="$selected_id//@version"/>
+	</xsl:template>
+
 </xsl:stylesheet>
