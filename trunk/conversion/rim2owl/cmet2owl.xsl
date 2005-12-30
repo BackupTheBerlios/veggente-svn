@@ -160,7 +160,7 @@
 							</owl:Restriction>
 					</rdfs:subClassOf>
 			</xsl:if>
-			<xsl:if test="@maximumMultiplicity">
+			<xsl:if test="not(contains(@maximumMultiplicity,'*'))">
 					<rdfs:subClassOf>
 							<owl:Restriction>
 									<owl:onProperty>

@@ -95,8 +95,8 @@
 	<!-- RIM Association -->
 	<xsl:template match="hl7:ownedAssociation">
 			<owl:ObjectProperty>
-					<xsl:attribute name="rdf:about">
-							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>_<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
+					<xsl:attribute name="rdf:ID">
+							<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>_<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
 					</xsl:attribute>
 					<xsl:call-template name="add_info"/>
 					<rdfs:range>
@@ -155,8 +155,8 @@
 <!-- Class attribute-->
 	<xsl:template match="hl7:attribute" mode="class">
 			<owl:ObjectProperty>
-					<xsl:attribute name="rdf:about">
-							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@name"/>
+					<xsl:attribute name="rdf:ID">
+							<xsl:value-of select="@name"/>
 					</xsl:attribute>
 					<xsl:call-template name="add_info"/>
 					<rdfs:range>
