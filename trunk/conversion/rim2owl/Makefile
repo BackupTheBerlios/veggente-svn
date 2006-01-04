@@ -18,10 +18,10 @@ cmet:
 		$(SAXON) -sall $$i cmet2owl.xsl > $(OUTPUT_DIR)/cmet/`basename $$i .mif`;\
 	done;
 cmet_test:
-	$(SAXON) -sall $(INPUT_MIF)/COCT_MT230100.mif cmet2owl.xsl >$(OUTPUT_DIR)/cmet/COCT_MT230100.owl
+	$(SAXON) -sall $(INPUT_MIF)/QUQI_MT120001UV01.mif cmet2owl.xsl >$(OUTPUT_DIR)/cmet/QUQI_MT120001UV01.owl
 install: rim_inst dt_inst cmet_inst
 cmet_testinst:
-	scp $(OUTPUT_DIR)/cmet/COCT_MT230100.owl $(ACCOUNT):$(REMOTE_DIR)/cmet/COCT_MT230100
+	scp $(OUTPUT_DIR)/cmet/QUQI_MT120001UV01.owl $(ACCOUNT):$(REMOTE_DIR)/cmet/QUQI_MT120001UV01
 cmet_inst:
 	scp $(OUTPUT_DIR)/rim_cmet.owl $(ACCOUNT):$(REMOTE_DIR)/RIM_CMET
 	scp $(OUTPUT_DIR)/cmet/* $(ACCOUNT):$(REMOTE_DIR)/cmet/

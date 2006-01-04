@@ -78,7 +78,9 @@
 			</xsl:if>
 	</xsl:template>
 	<xsl:template match="owl:Restriction" mode="restriction">
-			<xsl:variable name="property" select="substring-after(owl:onProperty/@rdf:resource,'#')"/>
+			<xsl:variable name="property">
+					<xsl:value-of select="../..//@rdf:ID"/>.<xsl:value-of select="substring-after(substring-after(owl:onProperty/@rdf:resource,'#'),'.')"/>
+			</xsl:variable>
 			<xsl:variable name="property_result">
 					<xsl:choose>
 							<xsl:when test="(/rdf:RDF/owl:ObjectProperty[@rdf:ID=$property])or(/rdf:RDF/owl:DatatypeProperty[@rdf:ID=$property])">OK</xsl:when>
@@ -94,13 +96,8 @@
 							<xsl:if test="(document($doc_name)//rdf:RDF/owl:ObjectProperty[@rdf:ID=$property])or(document($doc_name)//rdf:RDF/owl:DatatypeProperty[@rdf:ID=$property])">OK</xsl:if>
 					</xsl:for-each>
 			</xsl:variable>
-			property<xsl:value-of select="$property_result"/>fine
-			remote_property<xsl:value-of select="$remote_property_result"/>fine
 			<xsl:if test="($property_result='FAILED') and (not(contains($remote_property_result,'OK')))">
 					<objectRestriction>
-							<xsl:attribute name="class">
-									<xsl:value-of select="../..//@rdf:ID"/>
-							</xsl:attribute>
 							<xsl:attribute name="property">
 									<xsl:value-of select="$property"/>
 							</xsl:attribute>

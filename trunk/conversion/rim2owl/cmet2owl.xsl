@@ -126,6 +126,14 @@
 			<xsl:apply-templates select="hl7:association"/>
 	</xsl:template>
 
+	<xsl:template match="hl7:commonModelElementRef">
+			<owl:Class>
+					<xsl:attribute name="rdf:ID">
+							<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="@name"/>
+					</xsl:attribute>
+			</owl:Class>
+	</xsl:template>
+
 	<xsl:template match="hl7:annotations">
 			<rdfs:comment><xsl:value-of select="."/></rdfs:comment>
 	</xsl:template>
