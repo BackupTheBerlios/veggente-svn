@@ -32,27 +32,38 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
-	xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#">
+	xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+	xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype">
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:param name="rim_ns" select="'http://veggente.berlios.de/ns/RIMOntology'"/>
 	<xsl:param name="rim_cm" select="'http://veggente.berlios.de/ns/cmet/'"/>
+	<xsl:param name="mif_input_path" select="'../input/MIF'"/>
+
+	<!-- Variables -->
+	<!--  Path of cmetinfo.coremif -->
+	<xsl:variable name="rim_cmetlist_path">
+			<xsl:value-of select="$mif_input_path"/><xsl:value-of select="'/cmetinfo.coremif'"/>
+	</xsl:variable>
 	<!-- ID which identifies RIM in import declarations-->
 	<xsl:variable name="rim_id" select="/hl7:serializedStaticModel/hl7:derivationSupplier/hl7:targetStaticModel[@artifact='RIM']/../@staticModelDerivationId"/>
 	<!-- Code of the selected CMET -->
-	<xsl:variable name="cmet_name"><xsl:value-of select="concat(/hl7:serializedStaticModel/hl7:packageLocation/@subSection,/hl7:serializedStaticModel/hl7:packageLocation/@domain)"/>_<xsl:value-of select="substring-before(/hl7:serializedStaticModel/hl7:packageLocation/@artifact,'-')"/><xsl:value-of select="/hl7:serializedStaticModel/@name"/><xsl:value-of select="/hl7:serializedStaticModel/hl7:packageLocation/@realm"/><xsl:value-of select="/hl7:serializedStaticModel/hl7:packageLocation/@version"/></xsl:variable>
+	<xsl:variable name="cmet_name">
+			<xsl:value-of select="concat(/hl7:serializedStaticModel/hl7:packageLocation/@subSection,/hl7:serializedStaticModel/hl7:packageLocation/@domain)"/>_<xsl:value-of select="substring-before(/hl7:serializedStaticModel/hl7:packageLocation/@artifact,'-')"/><xsl:value-of select="/hl7:serializedStaticModel/@name"/><xsl:value-of select="/hl7:serializedStaticModel/hl7:packageLocation/@realm"/><xsl:value-of select="/hl7:serializedStaticModel/hl7:packageLocation/@version"/>
+	</xsl:variable>
 	
 	<xsl:template match="/">
 			<rdf:RDF>
 					<xsl:apply-templates select="hl7:serializedStaticModel"/>
 			</rdf:RDF>
 	</xsl:template>
+	
 	<xsl:template match="hl7:serializedStaticModel">
 			<owl:Ontology>
 					<xsl:attribute name="rdf:about">
 							<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>
 					</xsl:attribute>
 					<rdfs:label><xsl:value-of select="hl7:ownedEntryPoint/hl7:specializedClass/hl7:class/@name"/></rdfs:label>
-					<rdfs:comment><xsl:value-of select="hl7:ownedEntryPoint/hl7:annotations/hl7:description"/></rdfs:comment>	
+					<rdfs:comment><xsl:value-of select="hl7:ownedEntryPoint/hl7:annotations/hl7:description"/></rdfs:comment>
 					<xsl:for-each select="hl7:derivationSupplier">
 							<xsl:choose>
 									<xsl:when test="hl7:targetStaticModel[@artifact='RIM']">
@@ -72,20 +83,37 @@
 									</xsl:otherwise>
 							</xsl:choose>
 					</xsl:for-each>
+					<xsl:apply-templates select="//hl7:commonModelElementRef" mode="import"/>
 			</owl:Ontology>
 			<owl:AnnotationProperty rdf:about="&rdfs;comment"/>
 			<xsl:apply-templates select="hl7:ownedEntryPoint"/>
+			<xsl:apply-templates select="//hl7:commonModelElementRef" mode="class"/>
 	</xsl:template>
+	
+	<xsl:template match="hl7:commonModelElementRef" mode="import">
+			<xsl:variable name="cmet_name" select="@name"/>
+			<xsl:variable name="cmet_element">
+					<xsl:copy-of select="document($rim_cmetlist_path)//hl7:commonModelElementPackage/hl7:ownedCommonModelElement[@name=$cmet_name]"/>
+			</xsl:variable>
+			<owl:imports>
+					<xsl:attribute name="rdf:resource">
+							<xsl:value-of select="$rim_cm"/><xsl:value-of select="concat($cmet_element//hl7:specializationChildStaticModel/@subSection,$cmet_element//hl7:specializationChildStaticModel/@domain)"/>_<xsl:value-of select="substring-before($cmet_element//hl7:specializationChildStaticModel/@artifact,'-')"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@id"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@realm"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@version"/>
+					</xsl:attribute>
+			</owl:imports>
+	</xsl:template>
+	
 	<xsl:template match="hl7:ownedEntryPoint">
 			<xsl:apply-templates select="hl7:specializedClass"/>
 	</xsl:template>
+	
 	<xsl:template match="hl7:specializedClass">
 			<xsl:apply-templates/>
 	</xsl:template>
+	
 	<!-- Since we haven't any information about RMIMs or DMIMs we can only link to classes in RIM -->
 	<!-- TODO: Class naming conventions 
 		Model attributes as NEW ObjectProperties and then use restrictions on them
-	-->
+		-->
 	<xsl:template match="hl7:class">
 			<owl:Class>
 					<xsl:attribute name="rdf:ID">
@@ -126,11 +154,27 @@
 			<xsl:apply-templates select="hl7:association"/>
 	</xsl:template>
 
-	<xsl:template match="hl7:commonModelElementRef">
+	<!-- CMET includes-->
+	<xsl:template match="hl7:commonModelElementRef" mode="class">
+			<xsl:variable name="model_name" select="@name"/>
+			<xsl:variable name="cmet_element">
+					<xsl:copy-of select="document($rim_cmetlist_path)//hl7:commonModelElementPackage/hl7:ownedCommonModelElement[@name=$model_name]"/>
+			</xsl:variable>
+			<xsl:variable name="model_id">
+							<xsl:value-of select="concat($cmet_element//hl7:specializationChildStaticModel/@subSection,$cmet_element//hl7:specializationChildStaticModel/@domain)"/>_<xsl:value-of select="substring-before($cmet_element//hl7:specializationChildStaticModel/@artifact,'-')"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@id"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@realm"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@version"/>
+			</xsl:variable>
+			<xsl:variable name="target_path">
+					<xsl:value-of select="$mif_input_path"/>/<xsl:value-of select="$model_id"/>.mif
+			</xsl:variable>
 			<owl:Class>
 					<xsl:attribute name="rdf:ID">
 							<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="@name"/>
 					</xsl:attribute>
+					<owl:equivalentClass>
+							<xsl:attribute name="rdf:resource">
+									<xsl:value-of select="$rim_cm"/><xsl:value-of select="$model_id"/>#<xsl:value-of select="$model_id"/>.<xsl:value-of select="document($target_path)//hl7:serializedStaticModel/hl7:ownedEntryPoint/hl7:specializedClass/hl7:class/@name"/>
+							</xsl:attribute>
+					</owl:equivalentClass>
 			</owl:Class>
 	</xsl:template>
 
@@ -141,7 +185,7 @@
 	<!-- TODO: ObjectProperties are associations between CLASSES! -->
 	<xsl:template match="hl7:attribute" mode="class">
 			<xsl:variable name="parent_ns">
-					<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="@name"/>
+					<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
 			</xsl:variable>
 			<xsl:if test="@fixedValue">
 					<rdfs:subClassOf>
@@ -150,10 +194,12 @@
 											<xsl:attribute name="rdf:resource" select="$parent_ns"/>
 									</owl:onProperty>
 									<owl:hasValue>
-											<xsl:attribute name="rdf:datatype">
-													<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:type/@name"/>
-											</xsl:attribute>
-											<xsl:value-of select="@fixedValue"/>
+											<xsl:element name="{concat('rim_dt:',hl7:type/@name)}">
+													<xsl:attribute name="rdf:about">
+															<xsl:value-of select="$parent_ns"/><xsl:value-of select="'.fixedValue'"/>
+													</xsl:attribute>
+													<xsl:value-of select="@fixedValue"/>
+											</xsl:element>
 									</owl:hasValue>
 							</owl:Restriction>
 					</rdfs:subClassOf>
@@ -180,6 +226,7 @@
 			</xsl:if>
 	</xsl:template>
 
+	<!-- Attribute=ObjectProperty -->
 	<xsl:template match="hl7:attribute" mode="property">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:ID">
@@ -216,6 +263,7 @@
 			</owl:ObjectProperty>
 	</xsl:template>
 
+	<!-- Association=ObjectProperty -->
 	<xsl:template match="hl7:association">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:ID">

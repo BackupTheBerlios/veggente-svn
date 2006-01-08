@@ -3,6 +3,7 @@ ACCOUNT=carenini@shell.berlios.de
 REMOTE_DIR=/home/groups/veggente/htdocs/ns
 INPUT_MIF=../input/MIF
 OUTPUT_DIR=../output
+CMET_INFO_DIR=$(PWD)/../input/MIF
 main: xsl
 xsl: rim datatype cmet_container
 rim:
@@ -18,7 +19,7 @@ cmet:
 		$(SAXON) -sall $$i cmet2owl.xsl > $(OUTPUT_DIR)/cmet/`basename $$i .mif`;\
 	done;
 cmet_test:
-	$(SAXON) -sall $(INPUT_MIF)/QUQI_MT120001UV01.mif cmet2owl.xsl >$(OUTPUT_DIR)/cmet/QUQI_MT120001UV01.owl
+	$(SAXON) -sall $(INPUT_MIF)/QUQI_MT120001UV01.mif cmet2owl.xsl mif_input_path=$(CMET_INFO_DIR)>$(OUTPUT_DIR)/cmet/QUQI_MT120001UV01.owl
 install: rim_inst dt_inst cmet_inst
 cmet_testinst:
 	scp $(OUTPUT_DIR)/cmet/QUQI_MT120001UV01.owl $(ACCOUNT):$(REMOTE_DIR)/cmet/QUQI_MT120001UV01
