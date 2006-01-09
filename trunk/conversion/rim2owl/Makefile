@@ -14,7 +14,7 @@ cmet_container:
 	$(SAXON) -sall $(INPUT_MIF)/cmetinfo.coremif cmet_container.xsl > $(OUTPUT_DIR)/rim_cmet.owl
 # Until further investigation processed CMET are only those with filename *_MT*
 cmet:
-	for i in `/bin/ls $(INPUT_MIF)/*_*.mif`; do \
+	for i in `/bin/ls -1 $(INPUT_MIF)/*_*.mif`; do \
 		touch  $(OUTPUT_DIR)/cmet/`basename $$i .mif`;\
 		$(SAXON) -sall $$i cmet2owl.xsl > $(OUTPUT_DIR)/cmet/`basename $$i .mif`;\
 	done;
@@ -30,3 +30,8 @@ rim_inst:
 	scp $(OUTPUT_DIR)/rim.owl $(ACCOUNT):$(REMOTE_DIR)/RIMOntology
 dt_inst:
 	scp $(OUTPUT_DIR)/rim_datatypes_fix.owl $(ACCOUNT):$(REMOTE_DIR)/RIMDatatype
+debug:
+	for i in `/bin/ls -1 $(OUTPUT_DIR)/cmet`; do \
+		$(SAXON) -sall $(OUTPUT_DIR)/cmet/$$i debug.xsl > $(OUTPUT_DIR)/debug/$$i.out;\
+	done;
+

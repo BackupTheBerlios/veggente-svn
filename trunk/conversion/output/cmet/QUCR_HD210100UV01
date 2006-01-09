@@ -4,6 +4,7 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01">
       <rdfs:label>PolicyOrAccount</rdfs:label>
@@ -16,103 +17,107 @@
       <rdfs:comment>For ELIGIBILITY, yes/no is derived from the use cases below, based on the requested date and policy: [1] NO: If policy exists, but no longer in effect:. . . . negationInd = F statusCode = completed, aborted effectiveTime = time policy was in effect reasonCode = reasons why policy was terminated [2] YES: If policy exists and in effect:. . . . . . . . . . . .negationInd = F statusCode = active effectiveTime = time policy in effect reasonCode = null [3] NO: If policy exists, but is in effect in the future:.negationInd = F statusCode = new effectiveTime = time policy will be in effect reasonCode = null [4] NO: If policy does not exist:. . . . . . . . . . . . . . . . negationInd = T statusCode = null effectiveTime = null reasonCode = [optional] other policies that may be known id: = Coverage Identifier, extension = Policy.Plan.Group.Contract. Division.Section.Version (or similar). Carrier noted in author participation, and may not be same namespace as OID of id</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">COV</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.classCode.fixedValue">COV</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.moodCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.moodCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.moodCode.fixedValue">EVN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.moodCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.moodCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.id"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.negationInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.negationInd"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.negationInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.negationInd"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.reasonCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyOrAccount.reasonCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -151,19 +156,21 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.typeCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">AUT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyUnderwriter.typeCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyUnderwriter.typeCode.fixedValue">AUT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyUnderwriter.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.PolicyUnderwriter.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -181,31 +188,33 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">UNDWRT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.CarrierRole.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.CarrierRole.classCode.fixedValue">UNDWRT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.CarrierRole.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.CarrierRole.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.CarrierRole.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/QUCR_HD210100UV01#QUCR_HD210100UV01.CarrierRole.id"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>

@@ -4,12 +4,17 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01">
       <rdfs:label>FinancialTransaction</rdfs:label>
       <rdfs:comment>Entry point for post financial transaction messages.</rdfs:comment>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_HD020100UV01"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT280000UV04"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT110100UV04"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030200"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT010000UV01"/>
    </owl:Ontology>
    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
    <owl:Class rdf:ID="FIAB_MT020101UV01.FinancialTransaction">
@@ -18,79 +23,83 @@
       <rdfs:comment>To add to the balance of a patient billing account, the ActFinancialTransactionCode should be "CHRG" with a positive amount. To reduce this balance, the code would be "REV", again with a positive amount.Amount must be &gt;=0Amount must be &gt;=0</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">XACT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.classCode.fixedValue">XACT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.moodCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.moodCode.fixedValue">EVN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.moodCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.moodCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.amt"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.amt"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.amt"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransaction.amt"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -130,13 +139,13 @@
       <rdfs:comment>Allows for posting 1 charge for multiple services</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransactionReason.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.FinancialTransactionReason.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -156,115 +165,119 @@
       <rdfs:comment>The service information (e.g. what was performed) is noted in A_Billable. The price of a service is noted in InvoiceElement. What is posted or charged is noted in FinancialTransaction. Where it was posted to is noted in Account.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">INVE</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.classCode.fixedValue">INVE</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.moodCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.moodCode.fixedValue">EVN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.moodCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.moodCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.unitQuantity"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.unitQuantity"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.unitQuantity"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.unitQuantity"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.unitPriceAmt"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.unitPriceAmt"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.unitPriceAmt"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.unitPriceAmt"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.netAmt"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.netAmt"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.netAmt"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.netAmt"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.factorNumber"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.factorNumber"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.factorNumber"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.factorNumber"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.pointsNumber"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.pointsNumber"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.pointsNumber"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElement.pointsNumber"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -316,13 +329,13 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElementReason.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.InvoiceElementReason.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -347,19 +360,21 @@
       <rdfs:comment>To reference a transaction that is being reversed.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">REFR</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Reference.typeCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Reference.typeCode.fixedValue">REFR</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Reference.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Reference.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -379,43 +394,47 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">XACT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.ReferencedFinancialTransaction.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.ReferencedFinancialTransaction.classCode.fixedValue">XACT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.ReferencedFinancialTransaction.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.ReferencedFinancialTransaction.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.ReferencedFinancialTransaction.moodCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.ReferencedFinancialTransaction.moodCode.fixedValue">EVN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.ReferencedFinancialTransaction.moodCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.ReferencedFinancialTransaction.moodCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.ReferencedFinancialTransaction.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -443,19 +462,21 @@
       <rdfs:comment>Used to indicate which org should be charged for a particular transaction (e.g. employer) when that org is different than the insurance company.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">CREDIT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Credit.typeCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Credit.typeCode.fixedValue">CREDIT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Credit.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Credit.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -480,13 +501,13 @@
       <rdfs:comment>In reality, the financial transaction is either a credit or a debit to the account. In this case, only 1 is specified per financial transaction</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Posting.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Posting.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -506,139 +527,143 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">ACCT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.classCode.fixedValue">ACCT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.moodCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.moodCode.fixedValue">EVN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.moodCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.moodCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.title"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.title"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.title"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.title"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.balanceAmt"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.balanceAmt"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.balanceAmt"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.balanceAmt"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.currencyCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.currencyCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.currencyCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.currencyCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.interestRateQuantity"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.interestRateQuantity"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.interestRateQuantity"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.interestRateQuantity"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.allowedBalanceQuantity"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.allowedBalanceQuantity"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.allowedBalanceQuantity"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Account.allowedBalanceQuantity"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -698,13 +723,13 @@
       <rdfs:comment>The named party for the account. For a patient billing account, this is the patient</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Subject.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Subject.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -724,43 +749,45 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">PAT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PatientRole.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PatientRole.classCode.fixedValue">PAT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PatientRole.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PatientRole.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PatientRole.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.confidentialityCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PatientRole.confidentialityCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.veryImportantPersonCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PatientRole.veryImportantPersonCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.veryImportantPersonCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PatientRole.veryImportantPersonCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -797,13 +824,13 @@
       <rdfs:comment>Used to reference sub-accounts</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Component.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.Component.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -828,13 +855,13 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PertinentInformation.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PertinentInformation.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -848,4 +875,16 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FIAB_MT020101UV01#FIAB_MT020101UV01.PertinentInformation"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#source"/>
    </owl:ObjectProperty>
+   <owl:Class rdf:ID="FIAB_MT020101UV01.A_BillableUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT280000UV04#COCT_MT280000UV04.BillableActChoice"/>
+   </owl:Class>
+   <owl:Class rdf:ID="FIAB_MT020101UV01.A_AccountPayorUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT110100UV04#COCT_MT110100UV04.Account"/>
+   </owl:Class>
+   <owl:Class rdf:ID="FIAB_MT020101UV01.E_PersonUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030200#COCT_MT030200.Person"/>
+   </owl:Class>
+   <owl:Class rdf:ID="FIAB_MT020101UV01.A_EncounterUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT010000UV01#COCT_MT010000UV01.Encounter"/>
+   </owl:Class>
 </rdf:RDF>

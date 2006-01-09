@@ -4,11 +4,14 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD209001">
       <rdfs:label>PublicHealthEntity</rdfs:label>
       <rdfs:comment>Description</rdfs:comment>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT150000UV02"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_MT209002"/>
    </owl:Ontology>
    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
    <owl:Class rdf:ID="PORR_HD209001.PublicHealthEntity">
@@ -25,13 +28,13 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Observed.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Observed.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -49,25 +52,25 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Subject.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Subject.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Subject.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Subject.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -88,133 +91,135 @@
       <rdfs:comment>An observation on the associated entity. This may be used to handle data like height, weight, hair color, eye color, etc.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.moodCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.moodCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.moodCode.fixedValue">EVN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.moodCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.moodCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.id"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.title"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.title"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.title"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.title"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.text"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.text"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.text"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.text"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.value"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.value"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.value"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.value"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.interpretationCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.interpretationCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.methodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.methodCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.targetSiteCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ObservationEvent.targetSiteCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -265,25 +270,25 @@
       <rdfs:comment>Capture's all the information necessary to contact the Investigated Entity</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ContactInfo.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ContactInfo.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.addr"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ContactInfo.addr"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.telecom"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ContactInfo.telecom"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -307,43 +312,45 @@
       <rdfs:comment>Use child class codes of PLC (PLC, CITY, COUNTY, PROVINCE, COUNTRY) to indicate the specific locale. Use code to communicate code of local (i.e.,postal code, city, county, province (or state), country). Public health needs these in coded form, which the AD postal address data type does not provide.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Locale.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Locale.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.determinerCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">INSTANCE</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Locale.determinerCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Locale.determinerCode.fixedValue">INSTANCE</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.determinerCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Locale.determinerCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.determinerCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Locale.determinerCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Locale.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Locale.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -367,19 +374,21 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">TERR</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.TerritorialAuthority.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.TerritorialAuthority.classCode.fixedValue">TERR</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.TerritorialAuthority.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.TerritorialAuthority.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -402,145 +411,145 @@
       <rdfs:comment>Employer is normally a person or an organization.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.id"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.addr"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.addr"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.telecom"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.telecom"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.jobCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.jobCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.jobCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.jobCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.jobTitleName"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.jobTitleName"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.jobTitleName"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.jobTitleName"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.jobClassCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.jobClassCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.jobClassCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.jobClassCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.occupationCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.occupationCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.occupationCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.occupationCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.hazardExposureText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.hazardExposureText"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.hazardExposureText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.hazardExposureText"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.protectiveEquipmentText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.protectiveEquipmentText"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.protectiveEquipmentText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Employment.protectiveEquipmentText"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -599,67 +608,69 @@
       <rdfs:comment>Entity Credentials</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">QUAL</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.classCode.fixedValue">QUAL</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.name"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.name"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.name"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.name"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.certificateText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.certificateText"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.certificateText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.QualifiedEntity.certificateText"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -694,55 +705,57 @@
       <rdfs:comment>With the Role classCode of IDENT, shouldn't the Role.code vocab indicate the specific type of identified role. The vocab for Role code could then be identifier type codes. Identifiers handled separate from entity so that scoping organization information and type code (role.code) for identifier can be communicated.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">IDENT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Identifier.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Identifier.classCode.fixedValue">IDENT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Identifier.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Identifier.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Identifier.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Identifier.id"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Identifier.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Identifier.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Identifier.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Identifier.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -769,61 +782,63 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.determinerCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">INSTANCE</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.determinerCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.determinerCode.fixedValue">INSTANCE</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.determinerCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.determinerCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.determinerCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.determinerCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.id"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.name"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.name"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.telecom"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.telecom"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.addr"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.ScopingOrganization.addr"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -856,55 +871,57 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">OWN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.OwnedEntity.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.OwnedEntity.classCode.fixedValue">OWN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.OwnedEntity.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.OwnedEntity.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.OwnedEntity.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.OwnedEntity.id"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.OwnedEntity.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.OwnedEntity.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.OwnedEntity.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.OwnedEntity.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -936,73 +953,73 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.id"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.quantity"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.quantity"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.quantity"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PartOfWhole.quantity"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1040,25 +1057,25 @@
       <rdfs:comment>Need a Role classCode for place of death (similar to birthplace.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PlaceOfDeath.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PlaceOfDeath.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.addr"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PlaceOfDeath.addr"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.addr"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PlaceOfDeath.addr"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1084,67 +1101,67 @@
       <rdfs:comment>This includes personal relationships, employee/employer relationships, licensee/licensor relationships, etc.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.id"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.confidentialityCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.RelatedEntity.confidentialityCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1182,31 +1199,33 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">BIRTHPL</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Birthplace.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Birthplace.classCode.fixedValue">BIRTHPL</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Birthplace.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Birthplace.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.addr"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Birthplace.addr"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.addr"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Birthplace.addr"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1232,73 +1251,73 @@
       <rdfs:comment>Documents the following: container/content, membership in groups, parts of objects, etc.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.id"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.quantity"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.quantity"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.quantity"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.Parts.quantity"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1336,13 +1355,13 @@
       <rdfs:comment>Public health needs coded information regarding where the entity is located. This includes City, County, Postal Code, State (province) and Country.</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.LocatedEntity.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.LocatedEntity.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1360,4 +1379,10 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD209001#PORR_HD209001.PublicHealthEntity"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scopedRole"/>
    </owl:ObjectProperty>
+   <owl:Class rdf:ID="PORR_HD209001.E_OrganizationUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT150000UV02#COCT_MT150000UV02.Organization"/>
+   </owl:Class>
+   <owl:Class rdf:ID="PORR_HD209001.R_PublicHealthContactPersonUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_MT209002#PORR_MT209002.ContactParty"/>
+   </owl:Class>
 </rdf:RDF>

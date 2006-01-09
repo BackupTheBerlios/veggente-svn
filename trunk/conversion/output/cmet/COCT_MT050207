@@ -4,12 +4,15 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050207">
       <rdfs:label>PatientPerson</rdfs:label>
       <rdfs:comment>30 Sept 2005 Used to contact a person-patient.</rdfs:comment>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050207"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030207"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT150007"/>
    </owl:Ontology>
    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
    <owl:Class rdf:ID="COCT_MT050207.PatientPerson">
@@ -18,37 +21,39 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">PAT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.PatientPerson.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.PatientPerson.classCode.fixedValue">PAT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.PatientPerson.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.PatientPerson.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.PatientPerson.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.addr"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.PatientPerson.addr"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.telecom"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.PatientPerson.telecom"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -79,4 +84,10 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050207#COCT_MT050207.PatientPerson"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scoper"/>
    </owl:ObjectProperty>
+   <owl:Class rdf:ID="COCT_MT050207.E_PersonInformational">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030207#COCT_MT030207.Person"/>
+   </owl:Class>
+   <owl:Class rdf:ID="COCT_MT050207.E_OrganizationInformational">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT150007#COCT_MT150007.Organization"/>
+   </owl:Class>
 </rdf:RDF>

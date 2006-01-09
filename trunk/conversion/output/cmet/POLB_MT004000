@@ -4,12 +4,19 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/POLB_MT004000">
       <rdfs:label>ObservationEventChoice</rdfs:label>
       <rdfs:comment>The Entry Point allows for the selection of either: - a Header which may be used to group multiple Batteries, Observations or Isolates; - a single Battery or - a single Observation or - an Isolate with its associated Batteries/observations to be reported. The initial Act selected should be used as the attachment point for relevant participations that may be inherited by any nested acts.</rdfs:comment>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_HD004000"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT080000"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050004UV01"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT090000UV01"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT001001"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT200000UV01"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT010000UV01"/>
    </owl:Ontology>
    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
    <owl:Class rdf:ID="POLB_MT004000.ObservationEventChoice">
@@ -28,25 +35,25 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Subject2.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Subject2.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Subject2.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Subject2.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -75,31 +82,33 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">RCT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.RecordTarget.typeCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.RecordTarget.typeCode.fixedValue">RCT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.RecordTarget.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.RecordTarget.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.RecordTarget.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.RecordTarget.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -128,37 +137,37 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer.time"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer.time"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -191,91 +200,93 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">AUT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.typeCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.typeCode.fixedValue">AUT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.noteText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.noteText"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.noteText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.noteText"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.time"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.time"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.modeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.modeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.modeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.modeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.signatureCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.signatureCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.signatureCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.signatureCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.signatureText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.signatureText"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.signatureText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Author1.signatureText"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -324,67 +335,69 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">ENT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.typeCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.typeCode.fixedValue">ENT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.noteText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.noteText"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.noteText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.noteText"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.time"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.time"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.modeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.modeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.modeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.DataEnterer.modeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -425,37 +438,37 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InformationRecipient.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InformationRecipient.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InformationRecipient.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InformationRecipient.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InformationRecipient.time"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InformationRecipient.time"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -488,85 +501,85 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.noteText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.noteText"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.noteText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.noteText"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.time"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.time"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.modeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.modeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.modeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.modeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.signatureCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.signatureCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.signatureCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.signatureCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.signatureText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.signatureText"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.signatureText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Verifier.signatureText"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -615,37 +628,37 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InFulfillmentOf1.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InFulfillmentOf1.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InFulfillmentOf1.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InFulfillmentOf1.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InFulfillmentOf1.contextConductionInd"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.InFulfillmentOf1.contextConductionInd"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -683,37 +696,37 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ReplacementOf.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ReplacementOf.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ReplacementOf.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ReplacementOf.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ReplacementOf.contextConductionInd"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ReplacementOf.contextConductionInd"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -741,73 +754,75 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.moodCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.moodCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.moodCode.fixedValue">EVN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.moodCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.moodCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.text"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.text"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.text"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.text"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ActEventPointer.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -847,37 +862,37 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.PertinentInformation.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.PertinentInformation.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.PertinentInformation.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.PertinentInformation.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.PertinentInformation.contextConductionInd"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.PertinentInformation.contextConductionInd"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -910,49 +925,49 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component4.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component4.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component4.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component4.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component4.contextConductionInd"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component4.contextConductionInd"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.sequenceNumber"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component4.sequenceNumber"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.sequenceNumber"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component4.sequenceNumber"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -984,85 +999,87 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.moodCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">EVN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.moodCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.moodCode.fixedValue">EVN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.moodCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.moodCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.moodCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.text"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.text"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.text"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.text"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.effectiveTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.effectiveTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.ProcessStep.effectiveTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1106,49 +1123,49 @@
       <rdfs:comment>Needs to be changed when Type code of collector is available</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer2.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer2.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer2.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer2.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.noteText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer2.noteText"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.noteText"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer2.noteText"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer2.time"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.time"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Performer2.time"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1180,25 +1197,25 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Collector.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Collector.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Collector.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Collector.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1222,73 +1239,73 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.contextConductionInd"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.contextConductionInd"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.sequenceNumber"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.sequenceNumber"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.sequenceNumber"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.sequenceNumber"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.priorityNumber"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.priorityNumber"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.priorityNumber"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.priorityNumber"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.seperatableInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.seperatableInd"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.seperatableInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component2.seperatableInd"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1333,37 +1350,37 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component6.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component6.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component6.contextControlCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextControlCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component6.contextControlCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component6.contextConductionInd"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.contextConductionInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component6.contextConductionInd"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -1385,4 +1402,22 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT004000#POLB_MT004000.Component6"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#source"/>
    </owl:ObjectProperty>
+   <owl:Class rdf:ID="POLB_MT004000.R_SpecimenUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT080000#COCT_MT080000."/>
+   </owl:Class>
+   <owl:Class rdf:ID="POLB_MT004000.R_PatientClinical">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050004UV01#COCT_MT050004UV01.PatientClinical"/>
+   </owl:Class>
+   <owl:Class rdf:ID="POLB_MT004000.R_AssignedEntityUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT090000UV01#COCT_MT090000UV01.AssignedEntity"/>
+   </owl:Class>
+   <owl:Class rdf:ID="POLB_MT004000.A_PlacerOrderUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/POLB_MT001001#POLB_MT001001.RequestChoice"/>
+   </owl:Class>
+   <owl:Class rdf:ID="POLB_MT004000.A_SupportingClinicalInformationUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT200000UV01#COCT_MT200000UV01.ActChoice"/>
+   </owl:Class>
+   <owl:Class rdf:ID="POLB_MT004000.A_EncounterUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT010000UV01#COCT_MT010000UV01.Encounter"/>
+   </owl:Class>
 </rdf:RDF>

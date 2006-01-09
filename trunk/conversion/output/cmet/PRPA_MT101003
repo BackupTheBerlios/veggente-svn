@@ -4,12 +4,14 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/PRPA_MT101003">
       <rdfs:label>IdentifiedPerson</rdfs:label>
       <rdfs:comment>This R-MIM defines the message used to report nullification of an erroneously-entered record in a person registry.</rdfs:comment>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD101003"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT150003UV03"/>
    </owl:Ontology>
    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
    <owl:Class rdf:ID="PRPA_MT101003.IdentifiedPerson">
@@ -18,37 +20,39 @@
       <rdfs:comment>The primary record for the focal person in a person registry</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">IDENT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.IdentifiedPerson.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.IdentifiedPerson.classCode.fixedValue">IDENT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.IdentifiedPerson.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.IdentifiedPerson.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.IdentifiedPerson.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.IdentifiedPerson.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.IdentifiedPerson.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -76,73 +80,77 @@
       <rdfs:comment>A subtype of LivingSubject representing a human beingEither Person.name or Person.id must be non-null</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">PSN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.classCode.fixedValue">PSN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.determinerCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">INSTANCE</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.determinerCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.determinerCode.fixedValue">INSTANCE</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.determinerCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.determinerCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.determinerCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.determinerCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.name"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.name"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.administrativeGenderCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.administrativeGenderCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.administrativeGenderCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.administrativeGenderCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.birthTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.birthTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.birthTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.Person.birthTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -176,4 +184,7 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_MT101003#PRPA_MT101003.IdentifiedPerson"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scoper"/>
    </owl:ObjectProperty>
+   <owl:Class rdf:ID="PRPA_MT101003.E_OrganizationContact">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT150003UV03#COCT_MT150003UV03.Organization"/>
+   </owl:Class>
 </rdf:RDF>

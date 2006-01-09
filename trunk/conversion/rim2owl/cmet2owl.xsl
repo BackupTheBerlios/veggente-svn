@@ -34,8 +34,11 @@
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
 	xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype">
+	
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+	
 	<xsl:param name="rim_ns" select="'http://veggente.berlios.de/ns/RIMOntology'"/>
+	<xsl:param name="rim_dt" select="'http://veggente.berlios.de/ns/RIMDatatype'"/>
 	<xsl:param name="rim_cm" select="'http://veggente.berlios.de/ns/cmet/'"/>
 	<xsl:param name="mif_input_path" select="'../input/MIF'"/>
 
@@ -93,11 +96,11 @@
 	<xsl:template match="hl7:commonModelElementRef" mode="import">
 			<xsl:variable name="cmet_name" select="@name"/>
 			<xsl:variable name="cmet_element">
-					<xsl:copy-of select="document($rim_cmetlist_path)//hl7:commonModelElementPackage/hl7:ownedCommonModelElement[@name=$cmet_name]"/>
+					<xsl:copy-of select="document($rim_cmetlist_path)//hl7:commonModelElementPackage/hl7:ownedCommonModelElement[@name=$cmet_name]/hl7:specializationChildStaticModel"/>
 			</xsl:variable>
 			<owl:imports>
 					<xsl:attribute name="rdf:resource">
-							<xsl:value-of select="$rim_cm"/><xsl:value-of select="concat($cmet_element//hl7:specializationChildStaticModel/@subSection,$cmet_element//hl7:specializationChildStaticModel/@domain)"/>_<xsl:value-of select="substring-before($cmet_element//hl7:specializationChildStaticModel/@artifact,'-')"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@id"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@realm"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@version"/>
+							<xsl:value-of select="$rim_cm"/><xsl:value-of select="concat($cmet_element//@subSection,$cmet_element//@domain)"/>_<xsl:value-of select="substring-before($cmet_element//@artifact,'-')"/><xsl:value-of select="$cmet_element//@id"/><xsl:value-of select="$cmet_element//@realm"/><xsl:value-of select="$cmet_element//@version"/>
 					</xsl:attribute>
 			</owl:imports>
 	</xsl:template>
@@ -158,13 +161,14 @@
 	<xsl:template match="hl7:commonModelElementRef" mode="class">
 			<xsl:variable name="model_name" select="@name"/>
 			<xsl:variable name="cmet_element">
-					<xsl:copy-of select="document($rim_cmetlist_path)//hl7:commonModelElementPackage/hl7:ownedCommonModelElement[@name=$model_name]"/>
+					<xsl:copy-of select="document($rim_cmetlist_path)//hl7:commonModelElementPackage/hl7:ownedCommonModelElement[@name=$model_name]/hl7:specializationChildStaticModel"/>
 			</xsl:variable>
 			<xsl:variable name="model_id">
-							<xsl:value-of select="concat($cmet_element//hl7:specializationChildStaticModel/@subSection,$cmet_element//hl7:specializationChildStaticModel/@domain)"/>_<xsl:value-of select="substring-before($cmet_element//hl7:specializationChildStaticModel/@artifact,'-')"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@id"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@realm"/><xsl:value-of select="$cmet_element//hl7:specializationChildStaticModel/@version"/>
+							<xsl:value-of select="concat($cmet_element//@subSection,$cmet_element//@domain)"/>_<xsl:value-of select="substring-before($cmet_element//@artifact,'-')"/><xsl:value-of select="$cmet_element//@id"/><xsl:value-of select="$cmet_element//@realm"/><xsl:value-of select="$cmet_element//@version"/>
 			</xsl:variable>
-			<xsl:variable name="target_path">
-					<xsl:value-of select="$mif_input_path"/>/<xsl:value-of select="$model_id"/>.mif
+			<xsl:variable name="target_path"><xsl:value-of select="$mif_input_path"/>/<xsl:value-of select="$model_id"/>.mif</xsl:variable>
+			<xsl:variable name="target_element">
+					<xsl:copy-of select="document($target_path)//hl7:serializedStaticModel/hl7:ownedEntryPoint/hl7:specializedClass/hl7:class"/>
 			</xsl:variable>
 			<owl:Class>
 					<xsl:attribute name="rdf:ID">
@@ -172,7 +176,7 @@
 					</xsl:attribute>
 					<owl:equivalentClass>
 							<xsl:attribute name="rdf:resource">
-									<xsl:value-of select="$rim_cm"/><xsl:value-of select="$model_id"/>#<xsl:value-of select="$model_id"/>.<xsl:value-of select="document($target_path)//hl7:serializedStaticModel/hl7:ownedEntryPoint/hl7:specializedClass/hl7:class/@name"/>
+									<xsl:value-of select="$rim_cm"/><xsl:value-of select="$model_id"/>#<xsl:value-of select="$model_id"/>.<xsl:value-of select="$target_element//@name"/>
 							</xsl:attribute>
 					</owl:equivalentClass>
 			</owl:Class>
@@ -183,6 +187,10 @@
 	</xsl:template>
 
 	<!-- TODO: ObjectProperties are associations between CLASSES! -->
+	<xsl:template match="hl7:attribute" mode="fixed_value">
+		
+	</xsl:template>
+	
 	<xsl:template match="hl7:attribute" mode="class">
 			<xsl:variable name="parent_ns">
 					<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
@@ -194,12 +202,38 @@
 											<xsl:attribute name="rdf:resource" select="$parent_ns"/>
 									</owl:onProperty>
 									<owl:hasValue>
-											<xsl:element name="{concat('rim_dt:',hl7:type/@name)}">
+											<xsl:variable name="type">
+													<xsl:choose>
+															<xsl:when test="hl7:type/hl7:supplierBindingArgumentDatatype">
+																	<xsl:value-of select="concat(hl7:type/@name,'_')"/><xsl:value-of select="concat(hl7:type/hl7:supplierBindingArgumentDatatype/@name,'_')"/>
+															</xsl:when>
+															<xsl:otherwise>
+																	<xsl:value-of select="hl7:type/@name"/>
+															</xsl:otherwise>
+													</xsl:choose>
+											</xsl:variable>
+											<rdf:Description>
+													<xsl:attribute name="rdf:ID">
+															<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="../@name"/>.<xsl:value-of select="generate-id()"/>
+													</xsl:attribute>
+													<rdf:type>
+															<xsl:attribute name="rdf:resource">
+																	<xsl:value-of select="$rim_dt"/>#<xsl:value-of select="$type"/>
+															</xsl:attribute>
+													</rdf:type>
+													<rim_dt:fixedValue>
+															<xsl:attribute name="rdf:datatype">
+																	<xsl:value-of select="'http://www.w3.org/2001/XMLSchema#string'"/>
+															</xsl:attribute>
+															<xsl:value-of select="@fixedValue"/>																	
+													</rim_dt:fixedValue>
+											</rdf:Description>
+											<!--											<xsl:element name="{concat('rim_dt:',$type)}">
 													<xsl:attribute name="rdf:about">
 															<xsl:value-of select="$parent_ns"/><xsl:value-of select="'.fixedValue'"/>
 													</xsl:attribute>
 													<xsl:value-of select="@fixedValue"/>
-											</xsl:element>
+											</xsl:element>-->
 									</owl:hasValue>
 							</owl:Restriction>
 					</rdfs:subClassOf>

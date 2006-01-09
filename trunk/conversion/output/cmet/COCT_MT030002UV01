@@ -4,12 +4,14 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT030002UV01">
       <rdfs:label>EntityChoiceSubject</rdfs:label>
       <rdfs:comment>16 Mar 2004 CMET used to specify information for a particular person or non-person living subject such as veterinary subject, plant, alien, etc.</rdfs:comment>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD030002UV01"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT710000UV01"/>
    </owl:Ontology>
    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
    <owl:Class rdf:ID="COCT_MT030002UV01.EntityChoiceSubject">
@@ -28,19 +30,21 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030002UV01#COCT_MT030002UV01.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">BIRTHPL</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030002UV01#COCT_MT030002UV01.BirthPlace.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT030002UV01#COCT_MT030002UV01.BirthPlace.classCode.fixedValue">BIRTHPL</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030002UV01#COCT_MT030002UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030002UV01#COCT_MT030002UV01.BirthPlace.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030002UV01#COCT_MT030002UV01.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030002UV01#COCT_MT030002UV01.BirthPlace.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -54,4 +58,7 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT030002UV01#COCT_MT030002UV01.BirthPlace"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
    </owl:ObjectProperty>
+   <owl:Class rdf:ID="COCT_MT030002UV01.E_PlaceUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT710000UV01#COCT_MT710000UV01.Place"/>
+   </owl:Class>
 </rdf:RDF>

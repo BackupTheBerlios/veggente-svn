@@ -4,12 +4,14 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/POCG_MT000040">
       <rdfs:label>Patient</rdfs:label>
       <rdfs:comment>This model is intended to be a CMET and has the capability of representing any part of the patient pedigree.</rdfs:comment>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000023"/>
    </owl:Ontology>
    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
    <owl:Class rdf:ID="POCG_MT000040.Patient">
@@ -18,25 +20,27 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">PAT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Patient.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Patient.classCode.fixedValue">PAT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Patient.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Patient.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Patient.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -60,115 +64,119 @@
       <rdfs:comment>Person holds details that are not specific the family role. Person is also the scoper of the relative roles (for more details see the V3 RoleCode vocabulary, domain = PersonalRelationshipRoleType).</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">PSN</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.classCode.fixedValue">PSN</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.determinerCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">INSTANCE</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.determinerCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.determinerCode.fixedValue">INSTANCE</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.determinerCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.determinerCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.determinerCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.determinerCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.name"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.name"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.telecom"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.telecom"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.administrativeGenderCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.administrativeGenderCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.administrativeGenderCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.administrativeGenderCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.birthTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.birthTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.birthTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.birthTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.deceasedInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.deceasedInd"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.deceasedInd"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.deceasedInd"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.deceasedTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.deceasedTime"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.deceasedTime"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.deceasedTime"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.raceCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.raceCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.ethnicGroupCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Person.ethnicGroupCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -228,37 +236,39 @@
       <rdfs:comment>The id attribute holds the pedigree-specific id assigned, for example by a pedigree application. Note that this is different than the Person.id which is a more global id. First (and higher)-degree relatives. FAMMEMB could be used for unidentified relatives, but also any of the more specific codes like PRN (parent) or NMTH (natural mother).</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">PRS</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.PersonalRelationship.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.PersonalRelationship.classCode.fixedValue">PRS</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.PersonalRelationship.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.PersonalRelationship.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.PersonalRelationship.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.PersonalRelationship.code"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.code"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.PersonalRelationship.code"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -301,13 +311,13 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Subject3.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Subject3.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -337,13 +347,13 @@
       <rdfs:comment/>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Subject.typeCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.typeCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000040#POCG_MT000040.Subject.typeCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -361,5 +371,8 @@
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040#POCG_HD000040.ClinicalGenomicChoice"/>
       <rdfs:comment/>
+   </owl:Class>
+   <owl:Class rdf:ID="POCG_MT000040.A_GenotypeUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000023#POCG_MT000023.GenotypeLocus"/>
    </owl:Class>
 </rdf:RDF>

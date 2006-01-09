@@ -4,11 +4,14 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/PRPA_HD201103">
       <rdfs:label>PatientRole</rdfs:label>
       <rdfs:comment>This R-MIM defines the message used to report nullification of an erroneously-entered record from a patient registry that includes full living subject (person) information. It includes only enough information to identify the nullified record.</rdfs:comment>
       <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT710000UV01"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT150003UV03"/>
    </owl:Ontology>
    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
    <owl:Class rdf:ID="PRPA_HD201103.PatientRole">
@@ -16,37 +19,39 @@
       <rdfs:comment>The primary record for the focal living subject in a Patient Registry</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">PAT</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.PatientRole.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.PatientRole.classCode.fixedValue">PAT</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.PatientRole.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.PatientRole.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.id"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.PatientRole.id"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.PatientRole.statusCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.statusCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.PatientRole.statusCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -79,25 +84,27 @@
       <rdfs:comment>The birthplace of the focal living subjectBirthplace.addr must be valued if E_Place.name is null</rdfs:comment>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.classCode"/>
-            <owl:hasValue rdf:datatype="http://veggente.berlios.de/ns/RIMOntology#CS">BIRTHPL</owl:hasValue>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.BirthPlace.classCode"/>
+            <owl:hasValue>
+               <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.BirthPlace.classCode.fixedValue">BIRTHPL</rim_dt:CS>
+            </owl:hasValue>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.BirthPlace.classCode"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.classCode"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.BirthPlace.classCode"/>
             <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
          <owl:Restriction>
-            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.addr"/>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.BirthPlace.addr"/>
             <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
          </owl:Restriction>
       </rdfs:subClassOf>
@@ -118,4 +125,10 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PRPA_HD201103#PRPA_HD201103.PatientRole"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scoper"/>
    </owl:ObjectProperty>
+   <owl:Class rdf:ID="PRPA_HD201103.E_PlaceUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT710000UV01#COCT_MT710000UV01.Place"/>
+   </owl:Class>
+   <owl:Class rdf:ID="PRPA_HD201103.E_OrganizationContact">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT150003UV03#COCT_MT150003UV03.Organization"/>
+   </owl:Class>
 </rdf:RDF>
