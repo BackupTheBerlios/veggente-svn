@@ -38,6 +38,26 @@
 	<xsl:param name="rim_cm" select="'http://veggente.berlios.de/ns/RIM_CMETContainer'"/>
 	<xsl:param name="cmet_dir" select="'http://veggente.berlios.de/ns/cmet/'"/>
 	<xsl:template match="/">
+			<xsl:comment>
+	Conversion of HL7 Common Message Element Type index expressed in MIF format
+	into a W3C OWL ontology
+     
+     Copyright(c) 2006 Alessio Carenini &lt;carenini@gmail.com&gt; 
+
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+     the Free Software Foundation; either version 2 of the License, or
+     (at your option) any later version.
+     
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+     
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+			</xsl:comment>
 			<rdf:RDF>
 					<xsl:apply-templates select="hl7:commonModelElementPackage"/>
 			</rdf:RDF>
