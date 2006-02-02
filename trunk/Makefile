@@ -5,7 +5,7 @@ svn_commit:
 	svn commit
 rss: 
 	svn --xml log svn+ssh://carenini@svn.berlios.de/svnroot/repos/veggente/trunk > svn_log.xml
-	xsltproc svnlog.xslt svn_log.xml > devel.rss
+	xsltproc $(WWW_DIR)/svnlog.xslt svn_log.xml > devel.rss
 copy_rss:
 	scp $(WWW_DIR)/devel.rss $(REMOTE):www/
 	scp $(WWW_DIR)/news.rss $(REMOTE):www/
