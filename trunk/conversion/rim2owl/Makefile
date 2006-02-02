@@ -34,4 +34,5 @@ debug:
 	for i in `/bin/ls -1 $(OUTPUT_DIR)/cmet`; do \
 		$(SAXON) -sall $(OUTPUT_DIR)/cmet/$$i debug.xsl > $(OUTPUT_DIR)/debug/$$i.out;\
 	done;
-
+svn_commit:
+	cd ../../; svn commit
