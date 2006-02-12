@@ -9,7 +9,8 @@ iso->rfc822 date conversion code heavily inspired by Steven Engelhardt (http://w
 Tested with libxslt.
 -->
 
-    <xsl:output omit-xml-declaration="no" indent="yes" encoding="UTF-8" method="xml" />       
+<xsl:output omit-xml-declaration="no" indent="yes" encoding="UTF-8" method="xml" />
+<xsl:param name="limit" select="'15'"/>
     
     <xsl:template match="log">
       <rss version="2.0">
@@ -25,7 +26,8 @@ Tested with libxslt.
       </rss>
     </xsl:template>
     
-    <xsl:template match="logentry">
+	<xsl:template match="logentry">
+	  <xsl:if test="position() &lt; $limit">
       <item>
 		   <title>Revision <xsl:value-of select="@revision"/> by <xsl:value-of select="author" /></title>
 		   <link>http://svn.berlios.de/wsvn/veggente/trunk/?rev=<xsl:value-of select="@revision"/>&amp;sc=1</link>
@@ -39,7 +41,8 @@ Tested with libxslt.
            <description><xsl:value-of select="msg" />
                 <xsl:apply-templates select="paths/path" />
            </description>
-      </item>
+   	  </item>
+      </xsl:if>
     </xsl:template>
          
     <xsl:template match="paths/path">
