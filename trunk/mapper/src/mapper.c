@@ -21,6 +21,9 @@ int main (int argc, char **argv) {
 		}
 		fprintf(stdout,"Resulting model\n");
 		owl_model_print_model(&a);
+		owl_model_remove(&a,doap);
+		fprintf(stdout,"\n Dopo la remove \n");
+		owl_model_print_model(&a);
 		owl_model_destroy(&a);
 		return (0);
 }

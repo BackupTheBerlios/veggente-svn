@@ -2,8 +2,6 @@
 #define __OWL_MODEL_H
 
 struct owl_model;
-/*TODO: 
- * permettere anche la cancellazione di un documento dal modello*/
 typedef struct owl_model *owl_model_t;
 
 int owl_model_create(owl_model_t *s);

@@ -20,7 +20,7 @@ int list_destroy(list_data_t* s) {
 		iter=*s;
 		while(iter->next) {
 				if (list_remove_node(s,&iter)!=0) return (-1);
-				iter=iter->next;
+				iter=*s;
 		}
 		if (list_remove_node(s,&iter)!=0) return (-1);
 		return (0);
@@ -34,6 +34,7 @@ int list_add(list_data_t* s, void *data) {
 		
 		/*Allocazione primo elemento*/
 		new_element=(list_data_t)calloc(1,sizeof(struct list_data));
+		if (new_element==NULL) return (-1);
 		new_element->payload=data;
 		fprintf(stdout,"Aggiunta dell'elemento %s\n",(char*)(new_element->payload));
 		new_element->next=NULL;
@@ -65,7 +66,7 @@ int list_remove_node(list_data_t* s, list_data_t* node) {
 				if (iter1->next==*node) {
 						iter2=iter1->next;
 						iter1->next=iter1->next->next;
-						fprintf(stdout,"Rimozione dell'elemento %s\n",(char*)(iter2->payload));
+						fprintf(stdout,"Rimozione di %s\n",(char*)(iter2->payload));
 						free(iter2);
 						return (0);
 				}
