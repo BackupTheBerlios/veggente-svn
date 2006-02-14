@@ -11,11 +11,11 @@ int main (int argc, char **argv) {
 				fprintf(stderr,"ERRORE nella creazione del modello!\n");
 				return (-1);
 		}
-		if (owl_model_add(&a,foaf)!=0) {
+		if (owl_model_add(&a,foaf,1)!=0) {
 				fprintf(stderr,"ERRORE nel parsing\n");
 				return (-1);
 		}
-		if (owl_model_add(&a,doap)!=0) {
+		if (owl_model_add(&a,doap,1)!=0) {
 				fprintf(stderr,"ERRORE nel parsing\n");
 				return (-1);
 		}

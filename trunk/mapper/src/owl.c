@@ -7,7 +7,7 @@
 #include <redland.h>
 #define LIBRDF
 #endif
-struct owl_model {
+struct owl_storage {
 		list_data_t uri_list;
 		/* Redland stuff*/
 		librdf_world* rdf_world;
@@ -15,17 +15,16 @@ struct owl_model {
 		librdf_model* model;
 };
 /* TODO: 
- * 1. Change name from owl_model to owl_storage
+ * 1. Change name from owl_storage to owl_storage
  * 2. Add a list of models and functions to handle multiple models
  * 3. Handle db directory as a parameter to storage creation function
- * 4. Adapt add & remove to a DB use
  * */
-int owl_model_create(owl_model_t *s){
-		owl_model_t t=NULL;
+int owl_storage_create(owl_storage_t *s){
+		owl_storage_t t=NULL;
 		char* storage_options="hash-type='bdb',dir='/tmp/owldb',contexts='yes',write='yes'";
 
-		if (s==(owl_model_t*)NULL) return (-1);
-		t=(owl_model_t)calloc(1,sizeof(struct owl_model));
+		if (s==(owl_storage_t*)NULL) return (-1);
+		t=(owl_storage_t)calloc(1,sizeof(struct owl_storage));
 		if (!t) return (-1);
 		*s=t;
 		t->rdf_world=NULL;
@@ -56,9 +55,9 @@ int owl_model_create(owl_model_t *s){
 		
 		return (0);
 }
-int owl_model_destroy(owl_model_t *s){
-		owl_model_t t=*s;
-		if (s==(owl_model_t*)NULL) return (-1);
+int owl_storage_destroy(owl_storage_t *s){
+		owl_storage_t t=*s;
+		if (s==(owl_storage_t*)NULL) return (-1);
 		if (t->uri_list!=(list_data_t)NULL) {
 				if (list_destroy(&(t->uri_list))!=0) {
 						fprintf(stderr,"Failed to destroy uri list\n");
@@ -71,15 +70,18 @@ int owl_model_destroy(owl_model_t *s){
 		free(t);
 		return 0;
 }
-int owl_model_add(owl_model_t *s, char* uri) {
-		owl_model_t t=*s;
+
+/* If overwrite==1 then first delete URI context, then insert data*/
+int owl_storage_add(owl_storage_t *s, char* uri, int overwrite) {
+		owl_storage_t t=*s;
 		librdf_stream* rdf_stream=NULL;
 		librdf_parser* parser=NULL;
 		librdf_uri* rdf_uri=NULL;
 		librdf_statement* current=NULL;
 		librdf_node* context=NULL;
+		
 		/* Initialize librdf and parse as a stream */
-		if (s==(owl_model_t*)NULL) return (-1);
+		if (s==(owl_storage_t*)NULL) return (-1);
 		fprintf(stdout,"RDF: %s\n",uri);
 		if (list_add(&(t->uri_list),(void*)uri)) {
 				fprintf(stderr,"Failed to add URI to list\n");
@@ -114,10 +116,21 @@ int owl_model_add(owl_model_t *s, char* uri) {
 				librdf_free_parser(parser);
 				return (-1);
 		}
+		if ((overwrite==1)&&(librdf_model_contains_context(t->model,context))) {
+				if (owl_storage_remove(&t,uri)!=0) {
+						fprintf(stderr,"Failed to overwrite %s triples in model\n", uri);
+  						librdf_free_uri(rdf_uri);
+						librdf_free_stream(rdf_stream);
+						librdf_free_parser(parser);
+						librdf_free_node(context);
+						return (-1);
+				}
+		}
 		while (!librdf_stream_end(rdf_stream)) {
 				current=librdf_new_statement_from_statement(librdf_stream_get_object(rdf_stream));
 				if ((current==NULL)||(librdf_model_context_add_statement(t->model,context,current))) {
 						fprintf(stderr,"Failed to add %s triples into model\n", uri);
+						librdf_free_node(context);
 						librdf_free_uri(rdf_uri);
 						librdf_free_stream(rdf_stream);
 						librdf_free_parser(parser);
@@ -126,6 +139,7 @@ int owl_model_add(owl_model_t *s, char* uri) {
 				librdf_free_statement(current);
 				librdf_stream_next(rdf_stream);
 		}
+		librdf_free_node(context);
 		librdf_free_stream(rdf_stream);
   		librdf_free_uri(rdf_uri);
   		librdf_free_parser(parser);
@@ -133,12 +147,12 @@ int owl_model_add(owl_model_t *s, char* uri) {
 }
 
 /* Remove all statements associated with the URI context from storage */
-int owl_model_remove(owl_model_t *s, char* uri) {
-		owl_model_t t=NULL;
+int owl_storage_remove(owl_storage_t *s, char* uri) {
+		owl_storage_t t=NULL;
 		librdf_node* context=NULL;
 		librdf_uri* document_uri=NULL;
 		
-		if ((s==(owl_model_t*)NULL)||(uri==NULL)) return (-1);
+		if ((s==(owl_storage_t*)NULL)||(uri==NULL)) return (-1);
 		t=*s;
 		document_uri=librdf_new_uri(t->rdf_world,(unsigned char*)uri);
 		if (document_uri==NULL) {
@@ -163,17 +177,17 @@ int owl_model_remove(owl_model_t *s, char* uri) {
 }
 		
 /* Merge two owl object with the aid of a map object*/
-int owl_model_merge(owl_model_t *s, char* onto1_uri, char* onto2_uri, char* map_file_uri){
-		owl_model_t t=NULL;
+int owl_storage_merge(owl_storage_t *s, char* onto1_uri, char* onto2_uri, char* map_file_uri){
+		owl_storage_t t=NULL;
 		list_data_t result=NULL;
-		if (s==(owl_model_t*)NULL) return (-1);
+		if (s==(owl_storage_t*)NULL) return (-1);
 		t=*s;
 		if (list_find(&(t->uri_list),&result,(void*)&onto1_uri)) {
 				fprintf (stderr,"Error searching for %s in RDF model\n",onto1_uri);
 				return (-1);
 		}
 		if (result!=NULL) {
-				if(owl_model_add(&t,onto1_uri)) {
+				if(owl_storage_add(&t,onto1_uri,1)) {
 						fprintf (stderr,"Error inserting %s in RDF model\n",onto1_uri);
 						return (-1);
 				}
@@ -183,15 +197,15 @@ int owl_model_merge(owl_model_t *s, char* onto1_uri, char* onto2_uri, char* map_
 				return (-1);
 		}
 		if (result!=NULL) {
-				if(owl_model_add(&t,onto2_uri)) {
+				if(owl_storage_add(&t,onto2_uri,1)) {
 						fprintf (stderr,"Error inserting %s in RDF model\n",onto2_uri);
 						return (-1);
 				}
 		}
 		return 0;
 }
-int owl_model_print_model(owl_model_t *s) {
-		if (s==(owl_model_t*)NULL) return (-1);
+int owl_storage_print_model(owl_storage_t *s) {
+		if (s==(owl_storage_t*)NULL) return (-1);
 		fprintf(stdout,"RDF model output:\n");
 		librdf_model_print((*s)->model, stdout);
 		return (0);
