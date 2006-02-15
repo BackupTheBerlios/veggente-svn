@@ -1747,7 +1747,7 @@ am__tar='${AMTAR} chof - "$$tardir"'; am__untar='${AMTAR} xf -'
 
 
 
-          ac_config_headers="$ac_config_headers config.h"
+          ac_config_headers="$ac_config_headers src/config.h"
 
 
 
@@ -3962,7 +3962,8 @@ done
 
 
 
-for ac_header in unistd.h sys/param.h sys/time.h time.h sys/mkdev.h sys/sysmacros.h string.h memory.h fcntl.h dirent.h sys/ndir.h ndir.h alloca.h locale.h
+
+for ac_header in unistd.h sys/param.h sys/time.h time.h sys/mkdev.h sys/sysmacros.h string.h memory.h fcntl.h dirent.h sys/ndir.h ndir.h alloca.h locale.h redland.h
 do
 as_ac_Header=`echo "ac_cv_header_$ac_header" | $as_tr_sh`
 if eval "test \"\${$as_ac_Header+set}\" = set"; then
@@ -4112,6 +4113,11 @@ fi
 done
 
 
+
+CPPFLAGS="-DVERBOSE"
+CFLAGS="-Wall -pedantic -g -ansi"
+LIBS="$LIBS -lrdf -lcurl -ldl -lz -lidn"
+LDFLAGS="$LDFLAGS -L/usr/lib -L/usr/local/lib"
 
 echo "$as_me:$LINENO: checking whether time.h and sys/time.h may both be included" >&5
 echo $ECHO_N "checking whether time.h and sys/time.h may both be included... $ECHO_C" >&6
@@ -5699,7 +5705,8 @@ _ACEOF
 fi
 
 
-for ac_func in mkfifo
+
+for ac_func in mkfifo snprintf
 do
 as_ac_var=`echo "ac_cv_func_$ac_func" | $as_tr_sh`
 echo "$as_me:$LINENO: checking for $ac_func" >&5
@@ -6456,7 +6463,7 @@ do
   "mapper.lsm" ) CONFIG_FILES="$CONFIG_FILES mapper.lsm" ;;
   "mapper.spec" ) CONFIG_FILES="$CONFIG_FILES mapper.spec" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
-  "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
+  "src/config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS src/config.h" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
    { (exit 1); exit 1; }; };;

@@ -4,7 +4,7 @@
 struct owl_storage;
 typedef struct owl_storage *owl_storage_t;
 
-int owl_storage_create(owl_storage_t *s);
+int owl_storage_create(owl_storage_t *s,char* datadir);
 int owl_storage_destroy(owl_storage_t *s);
 int owl_storage_add(owl_storage_t *s, char* uri, int overwrite);
 int owl_storage_remove(owl_storage_t *s, char* uri);

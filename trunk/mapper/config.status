@@ -272,7 +272,7 @@ _CSEOF
 echo "on `(hostname || uname -n) 2>/dev/null | sed 1q`" >&5
 echo >&5
 config_files=" Makefile src/Makefile mapper.lsm mapper.spec"
-config_headers=" config.h"
+config_headers=" src/config.h"
 config_commands=" depfiles"
 
 ac_cs_usage="\
@@ -310,7 +310,7 @@ Copyright (C) 2003 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 srcdir=.
-INSTALL="/usr/bin/ginstall -c"
+INSTALL="/usr/bin/install -c"
 # If no file are specified by the user, then we need to provide default
 # value.  By we need to know if files were specified by the user.
 ac_need_defaults=:
@@ -402,7 +402,7 @@ do
   "mapper.lsm" ) CONFIG_FILES="$CONFIG_FILES mapper.lsm" ;;
   "mapper.spec" ) CONFIG_FILES="$CONFIG_FILES mapper.spec" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
-  "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
+  "src/config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS src/config.h" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
    { (exit 1); exit 1; }; };;
@@ -484,7 +484,7 @@ s,@DEFS@,-DHAVE_CONFIG_H,;t t
 s,@ECHO_C@,,;t t
 s,@ECHO_N@,-n,;t t
 s,@ECHO_T@,,;t t
-s,@LIBS@,,;t t
+s,@LIBS@, -lrdf -lcurl -ldl -lz -lidn,;t t
 s,@INSTALL_PROGRAM@,${INSTALL},;t t
 s,@INSTALL_SCRIPT@,${INSTALL},;t t
 s,@INSTALL_DATA@,${INSTALL} -m 644,;t t
@@ -507,7 +507,7 @@ s,@am__leading_dot@,.,;t t
 s,@AMTAR@,${SHELL} /home/io/progetti/veggente/trunk/mapper/missing --run tar,;t t
 s,@am__tar@,${AMTAR} chof - "$$tardir",;t t
 s,@am__untar@,${AMTAR} xf -,;t t
-s,@ISODATE@,2006-02-10,;t t
+s,@ISODATE@,2006-02-15,;t t
 s,@build@,i686-pc-linux-gnu,;t t
 s,@build_cpu@,i686,;t t
 s,@build_vendor@,pc,;t t
@@ -517,9 +517,9 @@ s,@host_cpu@,i686,;t t
 s,@host_vendor@,pc,;t t
 s,@host_os@,linux-gnu,;t t
 s,@CC@,gcc,;t t
-s,@CFLAGS@,-g -O2,;t t
-s,@LDFLAGS@,,;t t
-s,@CPPFLAGS@,,;t t
+s,@CFLAGS@,-Wall -pedantic -g -ansi,;t t
+s,@LDFLAGS@, -L/usr/lib -L/usr/local/lib,;t t
+s,@CPPFLAGS@,-DVERBOSE,;t t
 s,@ac_ct_CC@,gcc,;t t
 s,@EXEEXT@,,;t t
 s,@OBJEXT@,o,;t t
@@ -878,15 +878,27 @@ ${ac_dA}HAVE_FCNTL_H${ac_dB}HAVE_FCNTL_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_DIRENT_H${ac_dB}HAVE_DIRENT_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_ALLOCA_H${ac_dB}HAVE_ALLOCA_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_LOCALE_H${ac_dB}HAVE_LOCALE_H${ac_dC}1${ac_dD}
+${ac_dA}HAVE_REDLAND_H${ac_dB}HAVE_REDLAND_H${ac_dC}1${ac_dD}
 ${ac_dA}TIME_WITH_SYS_TIME${ac_dB}TIME_WITH_SYS_TIME${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_UTIME_H${ac_dB}HAVE_UTIME_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_STRUCT_UTIMBUF${ac_dB}HAVE_STRUCT_UTIMBUF${ac_dC}1${ac_dD}
+${ac_dA}MAJOR_IN_SYSMACROS${ac_dB}MAJOR_IN_SYSMACROS${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_ALLOCA_H${ac_dB}HAVE_ALLOCA_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_ALLOCA${ac_dB}HAVE_ALLOCA${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_STRUCT_STAT_ST_BLOCKS${ac_dB}HAVE_STRUCT_STAT_ST_BLOCKS${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_ST_BLOCKS${ac_dB}HAVE_ST_BLOCKS${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_DIRENT_H${ac_dB}HAVE_DIRENT_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_MKFIFO${ac_dB}HAVE_MKFIFO${ac_dC}1${ac_dD}
+CEOF
+  sed -f $tmp/defines.sed $tmp/in >$tmp/out
+  rm -f $tmp/in
+  mv $tmp/out $tmp/in
+
+  cat >$tmp/defines.sed <<CEOF
+/^[	 ]*#[	 ]*define/!b
+t clr
+: clr
+${ac_dA}HAVE_SNPRINTF${ac_dB}HAVE_SNPRINTF${ac_dC}1${ac_dD}
 CEOF
   sed -f $tmp/defines.sed $tmp/in >$tmp/out
   rm -f $tmp/in
@@ -926,15 +938,27 @@ ${ac_uA}HAVE_FCNTL_H${ac_uB}HAVE_FCNTL_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_DIRENT_H${ac_uB}HAVE_DIRENT_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_ALLOCA_H${ac_uB}HAVE_ALLOCA_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_LOCALE_H${ac_uB}HAVE_LOCALE_H${ac_uC}1${ac_uD}
+${ac_uA}HAVE_REDLAND_H${ac_uB}HAVE_REDLAND_H${ac_uC}1${ac_uD}
 ${ac_uA}TIME_WITH_SYS_TIME${ac_uB}TIME_WITH_SYS_TIME${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_UTIME_H${ac_uB}HAVE_UTIME_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_STRUCT_UTIMBUF${ac_uB}HAVE_STRUCT_UTIMBUF${ac_uC}1${ac_uD}
+${ac_uA}MAJOR_IN_SYSMACROS${ac_uB}MAJOR_IN_SYSMACROS${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_ALLOCA_H${ac_uB}HAVE_ALLOCA_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_ALLOCA${ac_uB}HAVE_ALLOCA${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_STRUCT_STAT_ST_BLOCKS${ac_uB}HAVE_STRUCT_STAT_ST_BLOCKS${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_ST_BLOCKS${ac_uB}HAVE_ST_BLOCKS${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_DIRENT_H${ac_uB}HAVE_DIRENT_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_MKFIFO${ac_uB}HAVE_MKFIFO${ac_uC}1${ac_uD}
+CEOF
+  sed -f $tmp/undefs.sed $tmp/in >$tmp/out
+  rm -f $tmp/in
+  mv $tmp/out $tmp/in
+
+  cat >$tmp/undefs.sed <<CEOF
+/^[	 ]*#[	 ]*undef/!b
+t clr
+: clr
+${ac_uA}HAVE_SNPRINTF${ac_uB}HAVE_SNPRINTF${ac_uC}1${ac_uD}
 s,^[	 ]*#[	 ]*undef[	 ][	 ]*[a-zA-Z_][a-zA-Z_0-9]*,/* & */,
 CEOF
   sed -f $tmp/undefs.sed $tmp/in >$tmp/out
