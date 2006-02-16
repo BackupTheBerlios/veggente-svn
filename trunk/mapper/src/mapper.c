@@ -78,12 +78,15 @@ int main (int argc, char *argv[]) {
 				fprintf(stderr,"ERRORE nella creazione del modello!\n");
 				return (-1);
 		}
+		fprintf(stdout,"Storage creato\n");
 		if (owl_storage_add(&a,foaf,1)!=0) {
 				fprintf(stderr,"ERRORE nel parsing\n");
+				owl_storage_destroy(&a);
 				return (-1);
 		}
 		if (owl_storage_add(&a,doap,1)!=0) {
 				fprintf(stderr,"ERRORE nel parsing\n");
+				owl_storage_destroy(&a);
 				return (-1);
 		}
 		fprintf(stdout,"Resulting model\n");
