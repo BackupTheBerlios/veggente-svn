@@ -1,6 +1,6 @@
 /*	
- *	Veggente - generic list
- *	Generic list
+ *	Veggente - engine.h
+ *	Generic multithreaded request processor
  *	
  *	Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
  *	This program is free software; you can redistribute it and/or modify
@@ -17,21 +17,16 @@
  *	along with this program; if not, write to the Free Software
  *	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *	*/
+#ifndef __ENGINE_H
+#define __ENGINE_H
 
-#ifndef __GENERIC_LIST_H
-#define __GENERIC_LIST_H
-
-struct list_data;
-
-typedef struct list_data *list_data_t;
-
-int list_init(list_data_t* s);
-int list_destroy(list_data_t* s);
-int list_add(list_data_t* s, void *data);
-int list_remove_data(list_data_t* s, void* data);
-int list_remove_node(list_data_t* s, list_data_t* node);
-int list_find(list_data_t* s, list_data_t* result,void *data);
-int list_next(list_data_t* s, list_data_t* node, list_data_t* result);
-int list_dump(list_data_t* s);
+struct engine_data;
+typedef struct engine_data *engine_data_t;
+struct op_data;
+typedef struct op_data *op_data;
+int engine_init(engine_data_t *s, int op_limit);
+int engine_start(engine_data_t *s);
+int engine_destroy(engine_data_t *s);
+int engine_post_request(engine_data_t *s,void* request_data,void* response_data);
 
 #endif
