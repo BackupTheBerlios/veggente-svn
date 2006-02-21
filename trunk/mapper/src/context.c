@@ -1,6 +1,6 @@
 /*	
- *	Veggente - engine.h
- *	Generic multithreaded request processor
+ *	Veggente - context.c
+ *	Context dependent data for application engine
  *	
  *	Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
  *	This program is free software; you can redistribute it and/or modify
@@ -17,17 +17,31 @@
  *	along with this program; if not, write to the Free Software
  *	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *	*/
-#ifndef __ENGINE_H
-#define __ENGINE_H
-#include "generic_list.h"
+#include "owl_storage.h"
 
-struct engine_data;
-typedef struct engine_data *engine_data_t;
-struct op_data;
-typedef struct op_data *op_data;
-int engine_init(engine_data_t *s, int op_limit, int (*group_ops)(list_data_t*,list_data_t*), int (*load_function)());
-int engine_start(engine_data_t *s);
-int engine_destroy(engine_data_t *s);
-int engine_post_request(engine_data_t *s,void* request_data,void* response_data);
+struct context{
+		owl_storage_t storage;
+};
 
-#endif
+/*
+ * TODO: fix directory name 
+ * */
+int context_init(context_t* s) {
+		context_t t=NULL;
+		char* dir="/tmp/owldb";
+		if (s==(context_t*)NULL) return (-1);
+		if (owl_storage_create(&(t->storage),dir)!=0) {
+				fprintf(stderr,"[Context] Error initializing owl storage\n");
+				return (-1);
+		}
+		return (0);
+}
+int context_destroy(context_t* s) {
+		context_t t=NULL;
+		if (s==(context_t*)NULL) return (-1);
+		if (owl_storage_destroy(&(t->storage))!=0) {
+				fprintf(stderr,"[Context] Error deallocating owl storage\n");
+				return (-1);
+		}
+		return (0);
+}

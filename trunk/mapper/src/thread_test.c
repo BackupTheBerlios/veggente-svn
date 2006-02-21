@@ -9,7 +9,7 @@ int main (int argc, char* argv[]);
 
 int main (int argc, char* argv[]) {
 		engine_data_t s=NULL;
-		if (engine_init(&s,10)!=0) {
+		if (engine_init(&s,10,NULL,NULL)!=0) {
 				fprintf(stderr,"Engine creation failed\n");
 				return (-1);
 		}

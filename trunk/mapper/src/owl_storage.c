@@ -42,6 +42,8 @@ struct owl_storage {
 		librdf_model* model;
 };
 
+int uri_compare(void* uri1, void* uri2);
+
 int owl_storage_create(owl_storage_t *s, char* datadir){
 		owl_storage_t t=NULL;
 		char* storage_options=NULL;
@@ -213,7 +215,8 @@ int owl_storage_add(owl_storage_t *s, char* uri,  int overwrite) {
 		return (0);
 }
 
-/* Remove all statements associated with the URI context from storage */
+/* Remove all statements associated with the URI context from storage 
+ * TODO: remove URI from list */
 int owl_storage_remove(owl_storage_t *s, char* uri) {
 		owl_storage_t t=NULL;
 		librdf_node* context=NULL;
@@ -250,7 +253,7 @@ int owl_storage_merge(owl_storage_t *s,  char* onto1_uri, char* onto2_uri, char*
 		
 		if (s==(owl_storage_t*)NULL) return(-1);
 		t=*s;
-		if (list_find(&(t->uri_list),&result,(void*)&onto1_uri)) {
+		if (list_find(&(t->uri_list),&result,(void*)&onto1_uri,&uri_compare)) {
 				fprintf (stderr,"Error searching for %s in RDF model\n",onto1_uri);
 				return (-1);
 		}
@@ -260,7 +263,7 @@ int owl_storage_merge(owl_storage_t *s,  char* onto1_uri, char* onto2_uri, char*
 						return (-1);
 				}
 		}
-		if (list_find(&(t->uri_list),&result,(void*)&onto2_uri)) {
+		if (list_find(&(t->uri_list),&result,(void*)&onto2_uri,&uri_compare)) {
 				fprintf (stderr,"Error searching for %s in RDF model\n",onto2_uri);
 				return (-1);
 		}
@@ -278,4 +281,8 @@ int owl_storage_print_model(owl_storage_t *s) {
 		fprintf(stdout,"RDF model output:\n");
 		librdf_model_print((*s)->model, stdout);
 		return (0);
+}
+
+int uri_compare(void* uri1, void* uri2) {
+		return strcmp((char*)uri1,(char*)uri2);
 }

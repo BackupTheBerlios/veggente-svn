@@ -20,20 +20,37 @@
 
 #ifndef __REQUEST_H
 #define __REQUEST_H
+/* Type codes for request */
+#define REQUEST_DOC 1
+#define REQUEST_MAP 0
 
-#define REQUEST_ADD 1
-#define REQUEST_DEL 0
+/* Operation type codes */
+#define REQUEST_DOC_ADD 1
+#define REQUEST_DOC_DEL 0
+
 /* All request structures goes here */
 
+/* Generic request */
 struct request;
 typedef struct request *request_t;
-/* Document-level request on database */
-int request_create(request_t *s, int action, char* uri);
-int request_destroy(request_t *s);
 
+/* Document-level request on database */
+struct doc_request;
+typedef struct doc_request *doc_request_t;
+int doc_request_create(doc_request_t *s, int action, char* uri);
+int doc_request_destroy(doc_request_t *s);
+
+/* Mapping request */
 struct map_request;
 typedef struct map_request *map_request_t;
-/* Mapping request*/
 int map_request_create(map_request_t *s, char* base_onto_uri, char* dest_onto_uri, char* map_uri);
 int map_request_destroy(map_request_t *s);
+
+/* Get request type, useful for correct casting */
+int request_get_type(request_t* s);
+
+/* Functions to execute a request */
+int exec_request(request_t* s);
+int exec_doc_request(doc_request_t* s);
+int exec_map_request(map_request_t* s);
 #endif

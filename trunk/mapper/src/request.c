@@ -21,31 +21,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "request.h"
+#include "owl_storage.h"
+
 struct request {
+		int type;
+		owl_storage_t storage;
+}
+
+struct doc_request {
+		int type;
+		owl_storage_t storage;
 		char* uri;
 		int action;
 };
 
 struct map_request {
-		char* base_onto;
-		char* dest_onto;
+		int type;
+		owl_storage_t storage;
+		char* source_rdf;
+		char* dest_rdf;
 		char* map_uri;
 };
 
-int request_create(request_t *s, int action, char* uri) {
-		request_t t=NULL;
-		if (s==(request_t*)NULL) return(-1);
-		t=(request_t)calloc(1,sizeof(struct request));
+int doc_request_create(doc_request_t *s, int action, char* uri) {
+		doc_request_t t=NULL;
+		if (s==(doc_request_t*)NULL) return(-1);
+		t=(doc_request_t)calloc(1,sizeof(struct doc_request));
 		*s=t;
 		if (t==NULL) return (-1);
+		t->type=REQUEST_DOC;
 		t->action=action;
 		t->uri=uri;
 		return(0);
 }
 
-int request_destroy(request_t *s) {
-		request_t t=NULL;
-		if (s==(request_t*)NULL) return(-1);
+int doc_request_destroy(doc_request_t *s) {
+		doc_request_t t=NULL;
+		if (s==(doc_request_t*)NULL) return(-1);
 		*s=t;
 		free(t->uri);
 		free(t);
@@ -58,6 +70,7 @@ int map_request_create(map_request_t *s, char* base_onto_uri, char* dest_onto_ur
 		t=(map_request_t)calloc(1,sizeof(struct map_request));
 		*s=t;
 		if (t==NULL) return (-1);
+		t->type=REQUEST_MAP;
 		t->base_onto=base_onto_uri;
 		t->dest_onto=dest_onto_uri;
 		t->map_uri=map_uri;
@@ -73,4 +86,45 @@ int map_request_destroy(map_request_t *s) {
 		free(t->map_uri);
 		free(t);
 		return(0);
+}
+
+int request_get_type(request_t* s){
+		request_t t=NULL;
+		if (s==(request_t*)NULL) return(-1);
+		*s=t;
+		return t->type; 
+}
+
+int exec_request(request_t* s) {
+		int op_code=request_get_type(&s);
+		if (op_code==REQUEST_MAP) {
+				return exec_map_request((map_request_t*)s);
+		}
+		if (op_code==REQUEST_DOC) {
+				return exec_doc_request((doc_request_t*)s);
+		}
+		return (-1);
+}
+
+int exec_doc_request(doc_request_t* s) {
+		doc_request_t t=NULL;
+		if (s==(doc_request_t*)NULL) return(-1);
+		if (t->action==REQUEST_DOC_ADD) {
+				return (owl_storage_add( &(t->storage),
+										t->uri,
+										OVERWRITE ));
+		}
+		if (t->action==REQUEST_DOC_DEL) {
+				return (owl_storage_remove( &(t->storage),
+										t->uri ));
+		}
+		return (-1);
+}
+
+/* Execute a map request 
+ * TODO: define function to use */
+int exec_map_request(map_request_t* s) {
+		map_request_t t=NULL;
+		if (s==(map_request_t*)NULL) return(-1);
+		return (0);
 }

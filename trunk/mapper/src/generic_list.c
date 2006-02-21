@@ -95,20 +95,19 @@ int list_remove_node(list_data_t* s, list_data_t* node) {
 		return (-1);
 }
 
-int list_remove_data(list_data_t* s, void* data) {
+int list_remove_data(list_data_t* s, void* data,int (*compare)(void*, void*)) {
 		list_data_t iter1,iter2;
 		if ((s==(list_data_t*)NULL)||(data==NULL)) return (-1);
 		if (*s==NULL) return (-1);
-		if ((*s)->payload==data) {
-				iter1=*s;
+		iter1=*s;
+		if (compare(&(iter1->payload),&data)==0) {
 				*s=(*s)->next;
 				fprintf(stdout,"Rimozione dell'elemento %s\n",(char*)(iter1->payload));
 				free(iter1);
 				return(0);
 		}
-		iter1=*s;
 		while(iter1->next) {
-				if (iter1->next->payload==data) {
+				if (compare(&(iter1->next->payload),&data)==0) {
 						iter2=iter1->next;
 						iter1->next=iter1->next->next;
 						fprintf(stdout,"Rimozione dell'elemento %s\n",(char*)(iter2->payload));
@@ -120,27 +119,40 @@ int list_remove_data(list_data_t* s, void* data) {
 		return (-1);
 }
 
-int list_find(list_data_t* s, list_data_t *result,void *data) {
+int list_find(list_data_t* s, list_data_t *result,void *data,int (*compare)(void*, void*)) {
 		list_data_t iter=NULL;
 		if ((s==(list_data_t*)NULL)||(data==NULL)) return (-1);
 		iter=*s;
 		while(iter->next){
-				if (iter->payload==data) {
+				if (compare(&(iter->payload),&data)==0) {
 						result=&iter;
 						return(0);
 				}
 				iter=iter->next;
 		}
-		if (iter->payload==data) {
+		if (compare(&(iter->payload),&data)==0) {
 				result=&iter;
 				return(0);
 		}
 		return (-1);
 }
 
-int list_next(list_data_t *s, list_data_t* node, list_data_t* result) {
+int list_next(list_data_t *s,list_data_t* result) {
 		list_data_t iter=NULL;
-		if ((s==(list_data_t*)NULL)||(node==(list_data_t*)NULL)) return (-1);
+		if (s==(list_data_t*)NULL) return (-1);
+		iter=*s;
+		result=&(iter->next);
+		return (0);
+}
+
+int list_next_from_node(list_data_t *s, list_data_t* node, list_data_t* result) {
+		list_data_t iter=NULL;
+		if (s==(list_data_t*)NULL) return (-1);
+		iter=*s;
+		if (node==(list_data_t*)NULL) {
+				result=&iter;
+				return (0);
+		}
 		while(iter->next){
 				if (iter==*node) {
 						result=&(iter->next);
@@ -152,10 +164,32 @@ int list_next(list_data_t *s, list_data_t* node, list_data_t* result) {
 				result=&(iter->next);
 				return(0);
 		}
-		iter=*s;
 		return(0);
 }
 
+int list_next_from_data(list_data_t *s, list_data_t* result,void* data,int (*compare)(void*, void*)) {
+		list_data_t iter=NULL;
+		if (s==(list_data_t*)NULL) return (-1);
+		iter=*s;
+		if (data==(void*)NULL) {
+				result=&iter;
+				return (0);
+		}
+		while(iter->next){
+				if (compare(&(iter->payload),&data)==0) {
+						result=&(iter->next);
+						return(0);
+				}
+				iter=iter->next;
+		}
+		if (compare(&(iter->payload),&data)==0) {
+				result=&(iter->next);
+				return(0);
+		}
+		return(0);
+}
+
+/* Don't use, only for debug */
 int list_dump(list_data_t* s) {
 		list_data_t t=*s;
 		if (s==(list_data_t*)NULL) return (-1);
