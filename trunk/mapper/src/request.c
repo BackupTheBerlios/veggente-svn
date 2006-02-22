@@ -26,7 +26,7 @@
 struct request {
 		int type;
 		owl_storage_t storage;
-}
+};
 
 struct doc_request {
 		int type;
@@ -64,15 +64,15 @@ int doc_request_destroy(doc_request_t *s) {
 		return(0);
 }
 
-int map_request_create(map_request_t *s, char* base_onto_uri, char* dest_onto_uri, char* map_uri) {
+int map_request_create(map_request_t *s, char* base_rdf_uri, char* dest_rdf_uri, char* map_uri) {
 		map_request_t t=NULL;
 		if (s==(map_request_t*)NULL) return(-1);
 		t=(map_request_t)calloc(1,sizeof(struct map_request));
 		*s=t;
 		if (t==NULL) return (-1);
 		t->type=REQUEST_MAP;
-		t->base_onto=base_onto_uri;
-		t->dest_onto=dest_onto_uri;
+		t->source_rdf=base_rdf_uri;
+		t->dest_rdf=dest_rdf_uri;
 		t->map_uri=map_uri;
 		return(0);
 }
@@ -81,8 +81,8 @@ int map_request_destroy(map_request_t *s) {
 		map_request_t t=NULL;
 		if (s==(map_request_t*)NULL) return(-1);
 		*s=t;
-		free(t->base_onto);
-		free(t->dest_onto);
+		free(t->source_rdf);
+		free(t->dest_rdf);
 		free(t->map_uri);
 		free(t);
 		return(0);
@@ -96,7 +96,7 @@ int request_get_type(request_t* s){
 }
 
 int exec_request(request_t* s) {
-		int op_code=request_get_type(&s);
+		int op_code=request_get_type(s);
 		if (op_code==REQUEST_MAP) {
 				return exec_map_request((map_request_t*)s);
 		}
@@ -127,4 +127,15 @@ int exec_map_request(map_request_t* s) {
 		map_request_t t=NULL;
 		if (s==(map_request_t*)NULL) return(-1);
 		return (0);
+}
+
+/* SOAP functions */
+int ns__exec_doc_add_request(struct soap *soap_env, char** uri);
+		return SOAP_OK;
+}
+int ns__exec_doc_del_request(struct soap *soap_env, char** uri);
+		return SOAP_OK;
+}
+int ns__exec_map_request(struct soap *soap_env, char* source_rdf, char** map_file, char** dest_rdf);
+		return SOAP_OK;
 }
