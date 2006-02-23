@@ -280,17 +280,6 @@ int owl_storage_print_model(owl_storage_t *s) {
 		return (0);
 }
 
-int owl_storage_clone(owl_storage_t *s,owl_storage_t *dest) {
-		owl_storage_t t=NULL;
-		owl_storage_t target=NULL;
-		if (s=(owl_storage_t*)NULL) return (-1);
-		target=(owl_storage_t)calloc(1,sizeof(struct owl_storage));
-		if (target==NULL) return (-1);
-		target=(owl_storage_t)memcpy((void*)target,(void*)t,sizeof(struct owl_storage));
-		dest=&target;
-		return (0);
-}
-
 int uri_compare(void* uri1, void* uri2) {
 		return strcmp((char*)uri1,(char*)uri2);
 }

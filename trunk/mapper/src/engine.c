@@ -29,7 +29,10 @@
 #include "context.h"
 #include "generic_list.h"
 
+#ifndef THREAD_LIMIT
 #define THREAD_LIMIT 10
+#endif
+
 struct engine_data{
 		pthread_mutex_t queue_mutex;
 		pthread_cond_t queue_signal;
@@ -51,6 +54,7 @@ struct op_data {
 		void* response;
 };
 
+/* Request threads' data*/
 struct serve_data {
 		list_data_t dead_list;
 		pthread_mutex_t dead_list_lock;
@@ -59,10 +63,13 @@ struct serve_data {
 };
 typedef struct serve_data *serve_data_t;
 
+/* Thread specific functions */
 void* engine_queue_daemon(void* manager_data);
 void* engine_request_daemon(void* manager_data);
 void* engine_serve_request(void* serve_thread_data);
+
 int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list);
+int engine_cleanup_threads(list_data_t *s);
 
 /* Engine constructor 
  * op_limit: limit in queue length after which start immediate processing 
@@ -74,7 +81,7 @@ int engine_init(engine_data_t *s,
 				int (*group_ops)(list_data_t*,list_data_t*),
 				int (*load_function)()) {
 		engine_data_t t=NULL;
-		t=(engine_data_t)calloc(1,sizeof(struct  engine_data));
+		t=(engine_data_t)calloc(1,sizeof(struct engine_data));
 		if (t==NULL) return (-1);
 		/* Engine data init */
 		if (list_init(t->op_list)!=0) {
@@ -222,50 +229,76 @@ void* engine_queue_daemon(void* manager_data) {
 
 void* engine_request_daemon(void* manager_data) {
 		int sock=0;
+		int retcode=0;
 		pthread_t th_id;
-		list_data_t dead_threads=NULL;
-		pthread_mutex_t dead_lock;
+		list_data_t req_threads_list=NULL;
+		pthread_mutex_t req_list_lock;
 		soap_t soap_env=NULL;
 		soap_t soap_clone=NULL;
 		serve_data_t thread_data=NULL;
 		engine_data_t t=*((engine_data_t*)manager_data);
 		
 		if (t==(engine_data_t)NULL) pthread_exit((void*)-1);
+		pthread_mutex_init(&req_list_lock,NULL);
+		
 		if (context_get_soap(&(t->context_data),&soap_env)!=0) {
 				fprintf(stderr,"[Requestd] Error getting SOAP environment\n");
 				pthread_exit((void*)-1);
 		}
-		if (list_init(&dead_threads)) {
+		if (list_init(&req_threads_list)) {
 				fprintf(stderr,"[Requestd] Error initializing dead threads list\n");
 				pthread_exit((void*)-1);
 		}
-		pthread_mutex_init(dead_lock,NULL);
 
 		fprintf(stdout,"[Requestd] Thread started\n");
 		while (1) {
 				sock=soap_accept(soap_env);
 				if (!soap_valid_socket(sock)) {
 						fprintf(stderr,"[Requestd] Error accepting SOAP connections\n");
-						soap_done(soap_env);
-						pthread_exit((void*)-1);
+						retcode=-1;
+						break;
 				}
+
 				/* Allocates thread data */
 				thread_data=(serve_data_t)calloc(1,sizeof(struct serve_data));
 				if (thread_data==NULL) {
 						fprintf(stderr,"[Requestd] Error allocating thread data\n");
-						soap_done(soap_env);
-						pthread_exit((void*)-1);
+						retcode=-1;
+						break;
 				}
-				thread_data->dead_list=dead_threads;
+
+				/* Fill thread data*/
+				thread_data->dead_list=req_threads_list;
+				thread_data->dead_list_lock=req_list_lock;
 				thread_data->context_data=t->context_data;
 				thread_data->soap_env=soap_clone;
-				pthread_create(&th_id,NULL,engine_serve_request,(void*)thread_data);
-				cleanup_threads(&dead_threads);
+
+				/* Add thread data to list */
+				pthread_mutex_lock(&req_list_lock);
+				if (list_add(&req_threads_list,(void*)thread_data)) {
+						fprintf(stderr,"[Requestd] Error adding thread data to control list\n");
+						pthread_mutex_unlock(&req_list_lock);
+						retcode=-1;
+						break;
+				}
+				pthread_mutex_unlock(&req_list_lock);
+
+				/* Start the thread */
+				if (pthread_create(&th_id,NULL,engine_serve_request,(void*)thread_data)) {
+						fprintf(stderr,"[Requestd] Error starting request worker thread\n");
+						retcode=-1;
+						break;
+				}
+				/* Cleanup dead threads */
+				if (engine_cleanup_threads(&req_threads_list)!=0) {
+						fprintf(stderr,"[Requestd] Error cleaning up dead threads data\n");
+						retcode=-1;
+						break;
+				}
 		}
-		/*TODO: where do I join threads ???*/
-		list_destroy(&dead_threads);
+		list_destroy(&req_threads_list);
 		soap_done(soap_env);
-		pthread_exit((void*)0);
+		pthread_exit((void*)retcode);
 }
 
 void* engine_serve_request(void* serve_thread_data) {

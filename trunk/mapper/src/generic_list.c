@@ -189,7 +189,11 @@ int list_next_from_data(list_data_t *s, list_data_t* result,void* data,int (*com
 		return(0);
 }
 
-/* Don't use, only for debug */
+int list_get_payload(list_data_t* node, void* payload) {
+		return (0);
+}
+
+/* Don't use, only for debug purpose */
 int list_dump(list_data_t* s) {
 		list_data_t t=*s;
 		if (s==(list_data_t*)NULL) return (-1);

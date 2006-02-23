@@ -32,7 +32,6 @@ int owl_storage_destroy(owl_storage_t *s);
 int owl_storage_add(owl_storage_t *s, char* uri, int overwrite);
 int owl_storage_remove(owl_storage_t *s, char* uri);
 int owl_storage_merge(owl_storage_t *s, char* source_rdf_uri, char* dest_rdf_uri, char* map_file_uri);
-int owl_storage_clone(owl_storage_t *s,owl_storage_t *dest);
 int owl_storage_print_model(owl_storage_t *s);
 
 #endif

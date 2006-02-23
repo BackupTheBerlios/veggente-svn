@@ -35,5 +35,5 @@ int list_next(list_data_t *s,list_data_t* result);
 int list_next_from_node(list_data_t *s, list_data_t* node, list_data_t* result);
 int list_next_from_data(list_data_t *s, list_data_t* result,void* data,int (*compare)(void*, void*));
 int list_dump(list_data_t* s);
-
+int list_get_payload(list_data_t* node, void* payload);
 #endif
