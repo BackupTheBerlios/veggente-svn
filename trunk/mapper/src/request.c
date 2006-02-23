@@ -23,6 +23,12 @@
 #include "request.h"
 #include "owl_storage.h"
 
+#include "soapH.h"
+#ifndef __NSMAP
+#define __NSMAP
+#include "map.nsmap"
+#endif
+
 struct request {
 		int type;
 		owl_storage_t storage;
@@ -124,18 +130,18 @@ int exec_doc_request(doc_request_t* s) {
 /* Execute a map request 
  * TODO: define function to use */
 int exec_map_request(map_request_t* s) {
-		map_request_t t=NULL;
 		if (s==(map_request_t*)NULL) return(-1);
 		return (0);
 }
 
 /* SOAP functions */
-int ns__exec_doc_add_request(struct soap *soap_env, char** uri);
-		return SOAP_OK;
+int ns__exec_doc_add_request(struct soap *soap_env, char* uri, int *result){
+		if (uri==(char*)NULL) return (-1);
+		return 0;
 }
-int ns__exec_doc_del_request(struct soap *soap_env, char** uri);
-		return SOAP_OK;
+int ns__exec_doc_del_request(struct soap *soap_env, char* uri, int *result){
+		return 0;
 }
-int ns__exec_map_request(struct soap *soap_env, char* source_rdf, char** map_file, char** dest_rdf);
-		return SOAP_OK;
+int ns__exec_map_request(struct soap *soap_env, char* source_rdf, char* map_file, char* dest_rdf, int *result){
+		return 0;
 }

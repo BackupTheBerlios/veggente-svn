@@ -23,6 +23,7 @@
 
 struct context{
 		owl_storage_t storage;
+		soap_t soap;
 };
 
 /*
@@ -31,10 +32,16 @@ struct context{
 int context_init(context_t* s) {
 		context_t t=NULL;
 		char* dir="/tmp/owldb";
-		if (s==(context_t*)NULL) return (-1);
+		t=(context_t)calloc(1,sizeof(struct context));
+		if (t==NULL) return (-1);
 		if (owl_storage_create(&(t->storage),dir)!=0) {
 				fprintf(stderr,"[Context] Error initializing owl storage\n");
 				return (-1);
+		}
+		soap_init(t->soap);
+		if (t->soap==NULL){
+				fprintf(stderr,"[Context] Error initializing \n");
+			   	return (-1);
 		}
 		return (0);
 }
@@ -45,5 +52,18 @@ int context_destroy(context_t* s) {
 				fprintf(stderr,"[Context] Error deallocating owl storage\n");
 				return (-1);
 		}
+		soap_destroy(t->soap);
+		soap_end(t->soap);
+		soap_done(t->soap);
+		free(t->soap);
+	   	free(t);
 		return (0);
 }
+
+int context_get_soap(context_t *s, soap_t *soap_env){
+		context_t t=NULL;
+		if (s==(context_t*)NULL) return (-1);
+		soap_env=&(t->soap);
+		return (0);
+}
+

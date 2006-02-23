@@ -27,6 +27,7 @@
 #include "engine.h"
 #include "request.h"
 #include "context.h"
+#include "generic_list.h"
 
 #define THREAD_LIMIT 10
 struct engine_data{
@@ -50,8 +51,17 @@ struct op_data {
 		void* response;
 };
 
+struct serve_data {
+		list_data_t dead_list;
+		pthread_mutex_t dead_list_lock;
+		soap_t soap_env;
+		context_t context_data;
+};
+typedef struct serve_data *serve_data_t;
+
 void* engine_queue_daemon(void* manager_data);
 void* engine_request_daemon(void* manager_data);
+void* engine_serve_request(void* serve_thread_data);
 int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list);
 
 /* Engine constructor 
@@ -65,7 +75,7 @@ int engine_init(engine_data_t *s,
 				int (*load_function)()) {
 		engine_data_t t=NULL;
 		t=(engine_data_t)calloc(1,sizeof(struct  engine_data));
-		if (s==NULL) return (-1);
+		if (t==NULL) return (-1);
 		/* Engine data init */
 		if (list_init(t->op_list)!=0) {
 				fprintf(stderr,"[Engine] Error initializing operations list\n");
@@ -75,7 +85,6 @@ int engine_init(engine_data_t *s,
 				fprintf(stderr,"[Engine] Error initializing processed operations list\n");
 				return (-1);
 		}
-		/* TODO: move this code out of engine creation, must be in config file reading code */
 		if (context_init(&(t->context_data))!=0) {
 				fprintf(stderr,"[Engine] Error initializing context application data\n");
 				return (-1);
@@ -211,11 +220,64 @@ void* engine_queue_daemon(void* manager_data) {
 }
 
 
-/* While testing, requests are created in this thread 
- * TODO: evaluate if this thread/function is really necessary*/
 void* engine_request_daemon(void* manager_data) {
+		int sock=0;
+		pthread_t th_id;
+		list_data_t dead_threads=NULL;
+		pthread_mutex_t dead_lock;
+		soap_t soap_env=NULL;
+		soap_t soap_clone=NULL;
+		serve_data_t thread_data=NULL;
 		engine_data_t t=*((engine_data_t*)manager_data);
+		
+		if (t==(engine_data_t)NULL) pthread_exit((void*)-1);
+		if (context_get_soap(&(t->context_data),&soap_env)!=0) {
+				fprintf(stderr,"[Requestd] Error getting SOAP environment\n");
+				pthread_exit((void*)-1);
+		}
+		if (list_init(&dead_threads)) {
+				fprintf(stderr,"[Requestd] Error initializing dead threads list\n");
+				pthread_exit((void*)-1);
+		}
+		pthread_mutex_init(dead_lock,NULL);
+
 		fprintf(stdout,"[Requestd] Thread started\n");
+		while (1) {
+				sock=soap_accept(soap_env);
+				if (!soap_valid_socket(sock)) {
+						fprintf(stderr,"[Requestd] Error accepting SOAP connections\n");
+						soap_done(soap_env);
+						pthread_exit((void*)-1);
+				}
+				/* Allocates thread data */
+				thread_data=(serve_data_t)calloc(1,sizeof(struct serve_data));
+				if (thread_data==NULL) {
+						fprintf(stderr,"[Requestd] Error allocating thread data\n");
+						soap_done(soap_env);
+						pthread_exit((void*)-1);
+				}
+				thread_data->dead_list=dead_threads;
+				thread_data->context_data=t->context_data;
+				thread_data->soap_env=soap_clone;
+				pthread_create(&th_id,NULL,engine_serve_request,(void*)thread_data);
+				cleanup_threads(&dead_threads);
+		}
+		/*TODO: where do I join threads ???*/
+		list_destroy(&dead_threads);
+		soap_done(soap_env);
+		pthread_exit((void*)0);
+}
+
+void* engine_serve_request(void* serve_thread_data) {
+		serve_data_t t=NULL;
+		t=*((serve_data_t*)serve_thread_data);
+		soap_serve(t->soap_env);
+		soap_destroy(t->soap_env);
+		soap_end(t->soap_env);
+		soap_done(t->soap_env);
+		free(t->soap_env);
+		free(t->context_data);
+		free(t);
 		pthread_exit((void*)0);
 }
 
@@ -231,4 +293,8 @@ int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 				i++;
 		}
 		return (0);
+}
+
+int engine_cleanup_threads(list_data_t *s){
+		return(0);
 }

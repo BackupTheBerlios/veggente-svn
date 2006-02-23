@@ -21,9 +21,6 @@
 #ifndef __REQUEST_H
 #define __REQUEST_H
 
-#include "soapH.h"
-#include "map.nsmap"
-
 /* Type codes for request */
 #define REQUEST_DOC 1
 #define REQUEST_MAP 0
@@ -58,8 +55,4 @@ int exec_request(request_t* s);
 int exec_doc_request(doc_request_t* s);
 int exec_map_request(map_request_t* s);
 
-/* SOAP functions */
-int ns__exec_doc_add_request(struct soap *soap_env, char** uri);
-int ns__exec_doc_del_request(struct soap *soap_env, char** uri);
-int ns__exec_map_request(struct soap *soap_env, char* source_rdf, char** map_file, char** dest_rdf);
 #endif

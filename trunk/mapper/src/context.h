@@ -19,10 +19,11 @@
  *	*/
 #ifndef __CONTEXT_H
 #define __CONTEXT_H
-
+#include "soapH.h"
 struct context;
 typedef struct context *context_t;
-
+typedef struct soap *soap_t;
 int context_init(context_t* s);
 int context_destroy(context_t* s);
+int context_get_soap(context_t *s, soap_t *soap_env);
 #endif

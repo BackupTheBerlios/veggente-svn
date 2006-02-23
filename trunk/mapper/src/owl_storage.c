@@ -24,10 +24,7 @@
 #include "config.h"
 #include "owl_storage.h"
 #include "generic_list.h"
-#ifndef LIBRDF
 #include <redland.h>
-	#define LIBRDF
-#endif
 /* If under WIN32 and VCC compiler, snprintf becomes _snprintf*/
 #ifdef HAVE_SNPRINTF
 	#define SNPRINTF snprintf
@@ -280,6 +277,17 @@ int owl_storage_print_model(owl_storage_t *s) {
 		if (s==(owl_storage_t*)NULL) return(-1);
 		fprintf(stdout,"RDF model output:\n");
 		librdf_model_print((*s)->model, stdout);
+		return (0);
+}
+
+int owl_storage_clone(owl_storage_t *s,owl_storage_t *dest) {
+		owl_storage_t t=NULL;
+		owl_storage_t target=NULL;
+		if (s=(owl_storage_t*)NULL) return (-1);
+		target=(owl_storage_t)calloc(1,sizeof(struct owl_storage));
+		if (target==NULL) return (-1);
+		target=(owl_storage_t)memcpy((void*)target,(void*)t,sizeof(struct owl_storage));
+		dest=&target;
 		return (0);
 }
 

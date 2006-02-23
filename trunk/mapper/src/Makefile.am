@@ -1,5 +1,24 @@
-bin_PROGRAMS=mapper thread_test
-mapper_SOURCES= mapper.c owl_storage.c generic_list.c system.h ../aclocal.m4
-thread_test_SOURCES= thread_test.c engine.c generic_list.c owl_storage.c request.c context.c system.h ../aclocal.m4
+bin_PROGRAMS=mapper
+
+# gSOAP code generation
+SOAP=soapcpp2
+SOAP_C_CLIENT=soapClient.c soapC.c
+SOAP_C_SERVER=soapServer.c soapC.c
+
+SOAPHEADER=soap_request.h
+
+SOAP_NS=map.wsdl
+
+SOAP_C_SRC=$(SOAP_C_CLIENT) soapServer.c $(SOAP_H_FILES) $(SOAP_NS)
+
+$(SOAP_C_SRC) : $(SOAPHEADER)
+	$(SOAP) -c $(SOAP_FLAGS) $< 
+
+BUILT_SOURCES=$(SOAP_C_SRC) 
+CLEANFILES=$(SOAP_C_SRC) soapStub.h soapH.h soapClientLib.c soapServerLib.c *.req.xml *.res.xml *.wsdl *.nsmap *.xsd *Proxy\.h *~
+# end of gSOAP stuff
+
+#mapper_SOURCES= mapper.c owl_storage.c generic_list.c system.h ../aclocal.m4
+mapper_SOURCES= thread_test.c engine.c generic_list.c owl_storage.c context.c request.c $(SOAP_C_SERVER) system.h ../aclocal.m4
 #mapper_LDADD=@LIBS@
-thread_test_LDFLAGS=-lpthread
+mapper_LDFLAGS=-lpthread -lstdsoap2
