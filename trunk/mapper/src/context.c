@@ -23,7 +23,8 @@
 
 struct context{
 		owl_storage_t storage;
-		soap_t soap;
+		soap_t soap_lib;
+		int port;
 };
 
 /*
@@ -31,31 +32,39 @@ struct context{
  * */
 int context_init(context_t* s) {
 		context_t t=NULL;
+		/* Port number and storage dir are to be extracted from conf file */
 		char* dir="/tmp/owldb";
+		int bind_port=7777;
+		/* End of variables to be extracted */
 		t=(context_t)calloc(1,sizeof(struct context));
 		if (t==NULL) return (-1);
+		t->soap_lib=(soap_t)calloc(1,sizeof(struct soap));
+		if ((t->soap_lib)==NULL) return (-1);
+		*s=t;
 		if (owl_storage_create(&(t->storage),dir)!=0) {
 				fprintf(stderr,"[Context] Error initializing owl storage\n");
 				return (-1);
 		}
-		soap_init(t->soap);
-		if (t->soap==NULL){
+		soap_init(t->soap_lib);
+		if ((t->soap_lib)==NULL){
 				fprintf(stderr,"[Context] Error initializing \n");
 			   	return (-1);
 		}
+		t->port=bind_port;
 		return (0);
 }
 int context_destroy(context_t* s) {
 		context_t t=NULL;
 		if (s==(context_t*)NULL) return (-1);
+		t=*s;
 		if (owl_storage_destroy(&(t->storage))!=0) {
 				fprintf(stderr,"[Context] Error deallocating owl storage\n");
 				return (-1);
 		}
-		soap_destroy(t->soap);
-		soap_end(t->soap);
-		soap_done(t->soap);
-		free(t->soap);
+		soap_destroy(t->soap_lib);
+		soap_end(t->soap_lib);
+		soap_done(t->soap_lib);
+		free(t->soap_lib);
 	   	free(t);
 		return (0);
 }
@@ -63,7 +72,16 @@ int context_destroy(context_t* s) {
 int context_get_soap(context_t *s, soap_t *soap_env){
 		context_t t=NULL;
 		if (s==(context_t*)NULL) return (-1);
-		soap_env=&(t->soap);
+		t=*s;
+		if ((t->soap_lib)==NULL) return (-1);
+		*soap_env=t->soap_lib;
 		return (0);
 }
 
+int context_get_port(context_t *s, int *port){
+		context_t t=NULL;
+		if (s==(context_t*)NULL) return (-1);
+		t=*s;
+		*port=t->port;
+		return (0);
+}

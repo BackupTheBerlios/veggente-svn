@@ -1,4 +1,4 @@
-bin_PROGRAMS=mapper
+bin_PROGRAMS=mapper mapper_client
 
 # gSOAP code generation
 SOAP=soapcpp2
@@ -21,4 +21,7 @@ CLEANFILES=$(SOAP_C_SRC) soapStub.h soapH.h soapClientLib.c soapServerLib.c *.re
 #mapper_SOURCES= mapper.c owl_storage.c generic_list.c system.h ../aclocal.m4
 mapper_SOURCES= thread_test.c engine.c generic_list.c owl_storage.c context.c request.c $(SOAP_C_SERVER) system.h ../aclocal.m4
 #mapper_LDADD=@LIBS@
-mapper_LDFLAGS=-lpthread -lstdsoap2
+mapper_LDFLAGS=-lpthread -lstdsoap2 -lrdf -lcurl -ldl -lz -lidn
+
+mapper_client_SOURCES= soap_client.c generic_list.c $(SOAP_C_CLIENT) system.h ../aclocal.m4
+mapper_client_LDFLAGS=-lstdsoap2

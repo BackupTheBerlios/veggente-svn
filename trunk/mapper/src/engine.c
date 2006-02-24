@@ -42,8 +42,8 @@ struct engine_data{
 		int op_count;
 		int timeout_sec; /* Every how many seconds queue processing is forced */
 		context_t context_data;
-		list_data_t* op_list;
-		list_data_t* processed_list;
+		list_data_t op_list;
+		list_data_t processed_list;
 		int (*group_ops)(list_data_t*,list_data_t*);
 		int (*load_function)();
 };
@@ -56,7 +56,8 @@ struct op_data {
 
 /* Request threads' data*/
 struct serve_data {
-		list_data_t dead_list;
+		int status;
+		int self_id;
 		pthread_mutex_t dead_list_lock;
 		soap_t soap_env;
 		context_t context_data;
@@ -84,11 +85,11 @@ int engine_init(engine_data_t *s,
 		t=(engine_data_t)calloc(1,sizeof(struct engine_data));
 		if (t==NULL) return (-1);
 		/* Engine data init */
-		if (list_init(t->op_list)!=0) {
+		if (list_init(&(t->op_list))!=0) {
 				fprintf(stderr,"[Engine] Error initializing operations list\n");
 				return (-1);
 		}
-		if (list_init(t->processed_list)) {
+		if (list_init(&(t->processed_list))!=0) {
 				fprintf(stderr,"[Engine] Error initializing processed operations list\n");
 				return (-1);
 		}
@@ -144,7 +145,7 @@ int engine_destroy(engine_data_t *s) {
 		engine_data_t t=NULL;
 		if (s==(engine_data_t*)NULL) return (-1);
 		t=*s;
-		list_destroy(t->op_list);
+		list_destroy(&(t->op_list));
 		pthread_mutex_destroy(&(t->queue_mutex));
 		pthread_cond_destroy(&(t->queue_signal));
 		pthread_cancel(t->requestd_id);
@@ -184,7 +185,7 @@ void* engine_queue_daemon(void* manager_data) {
 								if ((cond_code==0)||(cond_code==ETIMEDOUT)) {
 										fprintf(stdout,"[Queued] Timeout: Queue processing...\n");
 										/* Group operations */
-										if ( ((t->group_ops)(t->op_list,&group_list))!=0 ) {
+										if ( ((t->group_ops)(&(t->op_list),&group_list))!=0 ) {
 												fprintf(stderr,"[Queued] Error grouping operations\n");
 												pthread_mutex_unlock(&(t->queue_mutex));
 												pthread_exit((void*)-1);
@@ -201,7 +202,7 @@ void* engine_queue_daemon(void* manager_data) {
 						else {
 								/* Group operations */
 								fprintf(stdout,"[Queued] Timeout: Queue processing...\n");
-								if ( ((t->group_ops)(t->op_list,&group_list))!=0 ) {
+								if ( ((t->group_ops)(&(t->op_list),&group_list))!=0 ) {
 										fprintf(stderr,"[Queued] Error grouping operations\n");
 										pthread_mutex_unlock(&(t->queue_mutex));
 										pthread_exit((void*)-1);
@@ -228,7 +229,9 @@ void* engine_queue_daemon(void* manager_data) {
 
 
 void* engine_request_daemon(void* manager_data) {
-		int sock=0;
+		SOAP_SOCKET sock=0;
+		SOAP_SOCKET bind_sock=0;
+		int bind_port=0;
 		int retcode=0;
 		pthread_t th_id;
 		list_data_t req_threads_list=NULL;
@@ -249,7 +252,16 @@ void* engine_request_daemon(void* manager_data) {
 				fprintf(stderr,"[Requestd] Error initializing dead threads list\n");
 				pthread_exit((void*)-1);
 		}
-
+		if (context_get_port(&(t->context_data),&bind_port)!=0) {
+				fprintf(stderr,"[Requestd] Error getting bind port from context\n");
+				pthread_exit((void*)-1);
+		}
+		/* TODO: substitute "100" with config backlog */
+		bind_sock=soap_bind(soap_env,NULL,bind_port,100);
+		if (!soap_valid_socket(bind_sock)) {
+				fprintf(stderr,"[Requestd] Error binding port %d\n",bind_port);
+				pthread_exit((void*)-1);
+		}
 		fprintf(stdout,"[Requestd] Thread started\n");
 		while (1) {
 				sock=soap_accept(soap_env);
@@ -268,7 +280,6 @@ void* engine_request_daemon(void* manager_data) {
 				}
 
 				/* Fill thread data*/
-				thread_data->dead_list=req_threads_list;
 				thread_data->dead_list_lock=req_list_lock;
 				thread_data->context_data=t->context_data;
 				thread_data->soap_env=soap_clone;
@@ -290,11 +301,14 @@ void* engine_request_daemon(void* manager_data) {
 						break;
 				}
 				/* Cleanup dead threads */
+				pthread_mutex_lock(&req_list_lock);
 				if (engine_cleanup_threads(&req_threads_list)!=0) {
 						fprintf(stderr,"[Requestd] Error cleaning up dead threads data\n");
 						retcode=-1;
+						pthread_mutex_unlock(&req_list_lock);
 						break;
 				}
+				pthread_mutex_unlock(&req_list_lock);
 		}
 		list_destroy(&req_threads_list);
 		soap_done(soap_env);
@@ -328,6 +342,31 @@ int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 		return (0);
 }
 
-int engine_cleanup_threads(list_data_t *s){
+int engine_cleanup_threads(list_data_t *s) {
+		list_data_t t=NULL;
+		list_data_t res=NULL;
+		void* load=NULL;
+		serve_data_t data=NULL;
+		int ret_code=0;
+
+		if (s==(list_data_t*)NULL) return (-1);
+		t=*s;
+		
+		list_get_head(&t,&res);
+		while (res!=NULL) {
+				if (list_get_payload(&res,&load)!=0) {
+						fprintf(stderr,"[Requestd] Error getting request thread data payload\n");
+						return (-1);
+				}
+				data=(serve_data_t)load;
+				if (data->status==THREAD_DEAD) {
+						pthread_join(data->self_id,(void**)&ret_code);
+						fprintf(stdout,"[Requestd] Joined thread %d with return code: %d\n",data->self_id,ret_code);
+				}
+				if (list_next_from_node(&t,&res,&res)) {
+						fprintf(stderr,"[Requestd] Error scanning dead threads list\n");
+						return (-1);
+				}
+		}
 		return(0);
 }

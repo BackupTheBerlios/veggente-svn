@@ -25,5 +25,6 @@ typedef struct context *context_t;
 typedef struct soap *soap_t;
 int context_init(context_t* s);
 int context_destroy(context_t* s);
+int context_get_port(context_t *s, int *port);
 int context_get_soap(context_t *s, soap_t *soap_env);
 #endif

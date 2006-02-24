@@ -38,6 +38,7 @@ int list_destroy(list_data_t* s) {
 		list_data_t iter=NULL;
 		if (s==(list_data_t*)NULL) return (-1);
 		iter=*s;
+		if (iter==NULL) return (0);
 		while(iter->next) {
 				if (list_remove_node(s,&iter)!=0) return (-1);
 				iter=*s;
@@ -77,7 +78,6 @@ int list_remove_node(list_data_t* s, list_data_t* node) {
 		if ((*s)==*node) {
 				iter1=*s;
 				*s=(*s)->next;
-				fprintf(stdout,"Rimozione dell'elemento %s\n",(char*)(iter1->payload));
 				free(iter1);
 				return(0);
 		}
@@ -86,7 +86,6 @@ int list_remove_node(list_data_t* s, list_data_t* node) {
 				if (iter1->next==*node) {
 						iter2=iter1->next;
 						iter1->next=iter1->next->next;
-						fprintf(stdout,"Rimozione di %s\n",(char*)(iter2->payload));
 						free(iter2);
 						return (0);
 				}
@@ -102,7 +101,6 @@ int list_remove_data(list_data_t* s, void* data,int (*compare)(void*, void*)) {
 		iter1=*s;
 		if (compare(&(iter1->payload),&data)==0) {
 				*s=(*s)->next;
-				fprintf(stdout,"Rimozione dell'elemento %s\n",(char*)(iter1->payload));
 				free(iter1);
 				return(0);
 		}
@@ -110,7 +108,6 @@ int list_remove_data(list_data_t* s, void* data,int (*compare)(void*, void*)) {
 				if (compare(&(iter1->next->payload),&data)==0) {
 						iter2=iter1->next;
 						iter1->next=iter1->next->next;
-						fprintf(stdout,"Rimozione dell'elemento %s\n",(char*)(iter2->payload));
 						free(iter2);
 						return(0);
 				}
@@ -141,7 +138,7 @@ int list_next(list_data_t *s,list_data_t* result) {
 		list_data_t iter=NULL;
 		if (s==(list_data_t*)NULL) return (-1);
 		iter=*s;
-		result=&(iter->next);
+		*result=iter->next;
 		return (0);
 }
 
@@ -150,18 +147,18 @@ int list_next_from_node(list_data_t *s, list_data_t* node, list_data_t* result) 
 		if (s==(list_data_t*)NULL) return (-1);
 		iter=*s;
 		if (node==(list_data_t*)NULL) {
-				result=&iter;
+				*result=iter;
 				return (0);
 		}
 		while(iter->next){
 				if (iter==*node) {
-						result=&(iter->next);
+						*result=iter->next;
 						return(0);
 				}
 				iter=iter->next;
 		}
 		if (iter==*node) {
-				result=&(iter->next);
+				*result=iter->next;
 				return(0);
 		}
 		return(0);
@@ -189,7 +186,17 @@ int list_next_from_data(list_data_t *s, list_data_t* result,void* data,int (*com
 		return(0);
 }
 
-int list_get_payload(list_data_t* node, void* payload) {
+int list_get_payload(list_data_t* node, void** payload) {
+		list_data_t t=NULL;
+		if (node==(list_data_t*)NULL) return (-1);
+		t=*node;
+		*payload=t->payload;
+		return (0);
+}
+
+int list_get_head(list_data_t *s, list_data_t* node){
+		if (s==(list_data_t*)NULL) return (-1);
+		*node=*s;
 		return (0);
 }
 

@@ -11,6 +11,7 @@ int main (int argc, char** argv) {
 		char* el3="terzo";
 		char* el4="quarto";
 		char* el5="quinto";
+		void* load=NULL;
 		
 		if (list_init(&a)!=0) {
 				fprintf(stderr,"Errore in creazione\n");
@@ -23,8 +24,14 @@ int main (int argc, char** argv) {
 		list_add(&a,(void*)el3);
 		list_add(&a,(void*)el4);
 		list_add(&a,(void*)el5);
-		list_next_from_node(&a,NULL,&res);
-		list_dump(&a);
+		list_get_head(&a,&res);
+		while (res!=NULL) {
+				list_get_payload(&res,&load);
+				fprintf(stdout,"Elemento: %s\n",load);
+				list_next_from_node(&a,&res,&res);
+		}
+/*		list_dump(&a);
+		list_dump(&reres);*/
 		list_destroy(&a);
 		return (0);
 }
