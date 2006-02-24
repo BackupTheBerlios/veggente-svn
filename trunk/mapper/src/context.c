@@ -34,7 +34,7 @@ int context_init(context_t* s) {
 		context_t t=NULL;
 		/* Port number and storage dir are to be extracted from conf file */
 		char* dir="/tmp/owldb";
-		int bind_port=7777;
+		int bind_port=10000;
 		/* End of variables to be extracted */
 		t=(context_t)calloc(1,sizeof(struct context));
 		if (t==NULL) return (-1);

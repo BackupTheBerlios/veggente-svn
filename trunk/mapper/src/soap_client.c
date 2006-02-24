@@ -35,13 +35,14 @@ char *program_name;
 
 /* getopt_long return codes */
 enum {DUMMY_CODE=129
-      ,ADD_URI,DEL_URI
+      ,ADD_URI,DEL_URI,SERVER_URL
 };
 
 /* Option flags and variables */
 
 char *add_uri;	/* --add URI */
 char *del_uri;	/* --del URI */
+char *server_url;	/* --server URL */
 int want_verbose;		/* --verbose */
 
 static struct option const long_options[] =
@@ -49,6 +50,7 @@ static struct option const long_options[] =
   {"verbose", no_argument, 0, 'v'},
   {"add", required_argument, 0, ADD_URI},
   {"del", required_argument, 0, DEL_URI},
+  {"server", required_argument, 0, SERVER_URL},
   {"help", no_argument, 0, 'h'},
   {"version", no_argument, 0, 'V'},
   {NULL, 0, NULL, 0}
@@ -59,14 +61,32 @@ static int decode_switches (int argc, char **argv);
 int main (int argc, char **argv) {
 		int i;
 		struct soap *soap_env;
+		int result=0;
 		
 		program_name = argv[0];
 		if (argc==1) usage(-1);
 		i = decode_switches (argc, argv);
+		soap_env=(struct soap*)calloc(1,sizeof(struct soap));
 		soap_init(soap_env);
 		if (add_uri!=NULL) {
 				fprintf(stdout,"Add URI: %s\n",add_uri);
+				soap_call_ns__exec_doc_add_request(soap_env,server_url,"",add_uri,&result);
+				if (soap_env->error) {
+						fprintf(stderr,"[Veggente client] Error calling SOAP method\n");
+						soap_print_fault(soap_env, stderr);
+						free(add_uri);
+						soap_destroy(soap_env);
+						soap_end(soap_env);
+						soap_done(soap_env);
+						return (-1);
+				}
 				/* Cleanup */
+				if (result==0) {
+						fprintf (stdout,"[Veggente client] Adding %s completed\n",add_uri);
+				} 
+				else {
+						fprintf (stdout,"[Veggente client] Error adding %s\n",add_uri);
+				}
 				free(add_uri);
 		}
 		if (del_uri!=NULL) {
@@ -95,13 +115,17 @@ static int decode_switches (int argc, char **argv) {
 				  case 'v':		/* --verbose */
 						  want_verbose = 1;
 						  break;
+				  case SERVER_URL:
+						  server_url=(char*)calloc(strlen(optarg),sizeof(char));
+						  memcpy(server_url,optarg,sizeof(char)*strlen(optarg));
+						  break;
 				  case ADD_URI:	/* --directory */
-						  add_uri=(char*)malloc(sizeof(char)*strlen(optarg));
+						  add_uri=(char*)calloc(strlen(optarg),sizeof(char));
 						  memcpy(add_uri,optarg,sizeof(char)*strlen(optarg));
 						  break;
 				  case DEL_URI:	/* --directory */
 						  if (add_uri==NULL) {
-								  del_uri=(char*)malloc(sizeof(char)*strlen(optarg));
+								  del_uri=(char*)calloc(strlen(optarg),sizeof(char));
 								  memcpy(del_uri,optarg,sizeof(char)*strlen(optarg));
 								  break;
 						  }
@@ -133,6 +157,7 @@ Options:\n\
   --verbose                  print more information\n\
   --add URI 		         add URI to repository\n\
   --del URI 		         remove URI from repository\n\
+  --server URL 		         \n\
   -h, --help                 display this help and exit\n\
   -V, --version              output version information and exit\n\
 "));

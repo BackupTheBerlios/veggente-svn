@@ -57,7 +57,7 @@ struct op_data {
 /* Request threads' data*/
 struct serve_data {
 		int status;
-		int self_id;
+		pthread_t self_id;
 		pthread_mutex_t dead_list_lock;
 		soap_t soap_env;
 		context_t context_data;
@@ -233,7 +233,6 @@ void* engine_request_daemon(void* manager_data) {
 		SOAP_SOCKET bind_sock=0;
 		int bind_port=0;
 		int retcode=0;
-		pthread_t th_id;
 		list_data_t req_threads_list=NULL;
 		pthread_mutex_t req_list_lock;
 		soap_t soap_env=NULL;
@@ -262,6 +261,12 @@ void* engine_request_daemon(void* manager_data) {
 				fprintf(stderr,"[Requestd] Error binding port %d\n",bind_port);
 				pthread_exit((void*)-1);
 		}
+		soap_clone=(soap_t)calloc(1,sizeof(struct soap));
+		if (soap_clone==NULL) {
+				fprintf(stderr,"[Requestd] Error allocating SOAP copy env\n");
+				pthread_exit((void*)-1);
+		}
+				
 		fprintf(stdout,"[Requestd] Thread started\n");
 		while (1) {
 				sock=soap_accept(soap_env);
@@ -275,6 +280,12 @@ void* engine_request_daemon(void* manager_data) {
 				thread_data=(serve_data_t)calloc(1,sizeof(struct serve_data));
 				if (thread_data==NULL) {
 						fprintf(stderr,"[Requestd] Error allocating thread data\n");
+						retcode=-1;
+						break;
+				}
+				soap_clone=soap_copy(soap_env);
+				if (soap_clone==NULL) {
+						fprintf(stderr,"[Requestd] Error copying SOAP env\n");
 						retcode=-1;
 						break;
 				}
@@ -295,7 +306,7 @@ void* engine_request_daemon(void* manager_data) {
 				pthread_mutex_unlock(&req_list_lock);
 
 				/* Start the thread */
-				if (pthread_create(&th_id,NULL,engine_serve_request,(void*)thread_data)) {
+				if (pthread_create(&(thread_data->self_id),NULL,engine_serve_request,(void*)&thread_data)) {
 						fprintf(stderr,"[Requestd] Error starting request worker thread\n");
 						retcode=-1;
 						break;
@@ -319,12 +330,7 @@ void* engine_serve_request(void* serve_thread_data) {
 		serve_data_t t=NULL;
 		t=*((serve_data_t*)serve_thread_data);
 		soap_serve(t->soap_env);
-		soap_destroy(t->soap_env);
-		soap_end(t->soap_env);
-		soap_done(t->soap_env);
-		free(t->soap_env);
-		free(t->context_data);
-		free(t);
+		t->status=THREAD_DEAD;
 		pthread_exit((void*)0);
 }
 
@@ -360,8 +366,17 @@ int engine_cleanup_threads(list_data_t *s) {
 				}
 				data=(serve_data_t)load;
 				if (data->status==THREAD_DEAD) {
+						fflush(stdout);
 						pthread_join(data->self_id,(void**)&ret_code);
+						soap_destroy(data->soap_env);
+						soap_end(data->soap_env);
+						soap_done(data->soap_env);
+						free(data->soap_env);
+						free(data->context_data);
+						free(data);
+						list_remove_node(&t,&res);
 						fprintf(stdout,"[Requestd] Joined thread %d with return code: %d\n",data->self_id,ret_code);
+						list_get_head(&t,&res);
 				}
 				if (list_next_from_node(&t,&res,&res)) {
 						fprintf(stderr,"[Requestd] Error scanning dead threads list\n");
