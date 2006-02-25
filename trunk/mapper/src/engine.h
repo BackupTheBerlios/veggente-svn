@@ -21,6 +21,7 @@
 #define __ENGINE_H
 #include "request.h"
 #include "generic_list.h"
+#include "context.h"
 
 #define THREAD_RUNNING 	0
 #define THREAD_DEAD		1
@@ -29,7 +30,7 @@ struct engine_data;
 typedef struct engine_data *engine_data_t;
 struct op_data;
 typedef struct op_data *op_data;
-int engine_init(engine_data_t *s, int op_limit, int (*group_ops)(list_data_t*,list_data_t*), int (*load_function)());
+int engine_init(engine_data_t *s, int op_limit, context_t *context, int (*group_ops)(list_data_t*,list_data_t*), int (*load_function)());
 int engine_start(engine_data_t *s);
 int engine_destroy(engine_data_t *s);
 int engine_post_request(engine_data_t *s,void* request_data,void* response_data);

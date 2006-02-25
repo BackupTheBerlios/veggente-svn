@@ -1,5 +1,5 @@
 /* 
-   Veggente - mapper SOAP client
+   Veggente - mapper SOAP server
 
    Copyright (C) 2006 Alessio Carenini
 
@@ -21,12 +21,12 @@
 
 #include <stdio.h>
 
-#include "soapH.h"
-#include "map.nsmap"
-
 #include <sys/types.h>
 #include <getopt.h>
 #include "system.h"
+
+#include "engine.h"
+#include "context.h"
 
 static void usage (int status);
 
@@ -35,22 +35,20 @@ char *program_name;
 
 /* getopt_long return codes */
 enum {DUMMY_CODE=129
-      ,ADD_URI,DEL_URI,SERVER_URL
+      ,PORT,DB_DIR
 };
 
 /* Option flags and variables */
 
-char *add_uri;	/* --add URI */
-char *del_uri;	/* --del URI */
-char *server_url;	/* --server URL */
+int port;	/* Port number */
+char *db_dir;	/* Database dir */
 int want_verbose;		/* --verbose */
 
 static struct option const long_options[] =
 {
   {"verbose", no_argument, 0, 'v'},
-  {"add", required_argument, 0, ADD_URI},
-  {"del", required_argument, 0, DEL_URI},
-  {"server", required_argument, 0, SERVER_URL},
+  {"db_dir", required_argument, 0, DB_DIR},
+  {"port", required_argument, 0, PORT},
   {"help", no_argument, 0, 'h'},
   {"version", no_argument, 0, 'V'},
   {NULL, 0, NULL, 0}
@@ -60,44 +58,33 @@ static int decode_switches (int argc, char **argv);
 
 int main (int argc, char **argv) {
 		int i;
-		struct soap *soap_env;
-		int result=0;
+		context_t config_data=NULL;
+		engine_data_t s=NULL;
 		
 		program_name = argv[0];
-		if (argc==1) usage(-1);
+		if (argc<2) usage(-1);
 		i = decode_switches (argc, argv);
-		soap_env=(struct soap*)calloc(1,sizeof(struct soap));
-		soap_init(soap_env);
-		if (add_uri!=NULL) {
-				fprintf(stdout,"Add URI: %s\n",add_uri);
-				soap_call_ns__exec_doc_add_request(soap_env,server_url,"",add_uri,&result);
-				if (soap_env->error) {
-						fprintf(stderr,"[Veggente client] Error calling SOAP method\n");
-						soap_print_fault(soap_env, stderr);
-						free(add_uri);
-						soap_destroy(soap_env);
-						soap_end(soap_env);
-						soap_done(soap_env);
-						return (-1);
-				}
-				/* Cleanup */
-				if (result==0) {
-						fprintf (stdout,"[Veggente client] Adding %s completed\n",add_uri);
-				} 
-				else {
-						fprintf (stdout,"[Veggente client] Error adding %s\n",add_uri);
-				}
-				free(add_uri);
+		if (context_init(&config_data,port,db_dir)!=0) {
+				fprintf(stderr,"[Engine] Error initializing context application data\n");
+				return (-1);
 		}
-		if (del_uri!=NULL) {
-				fprintf(stdout,"Del URI: %s\n",del_uri);
-				/* Cleanup */
-				free(del_uri);
+		if (engine_init(&s,10,&config_data,NULL,NULL)!=0) {
+				fprintf(stderr,"Engine creation failed\n");
+				return (-1);
 		}
-		soap_destroy(soap_env);
-		soap_end(soap_env);
-		soap_done(soap_env);
-		/* do the work */
+		if (engine_start(&s)!=0) {
+				fprintf(stderr,"Engine error\n");
+				return (-1);
+		}
+		if (engine_destroy(&s)!=0) {
+				fprintf(stderr,"Error destroying engine\n");
+				return(-1);
+		}
+		if (context_destroy(&config_data)!=0) {
+				fprintf(stderr,"Error destroying config data\n");
+				return(-1);
+		}
+		free (db_dir);
 		return (0);
 }
 
@@ -115,26 +102,15 @@ static int decode_switches (int argc, char **argv) {
 				  case 'v':		/* --verbose */
 						  want_verbose = 1;
 						  break;
-				  case SERVER_URL:
-						  server_url=(char*)calloc(strlen(optarg)+1,sizeof(char));
-						  memcpy(server_url,optarg,sizeof(char)*strlen(optarg));
+				  case DB_DIR: /* --db_dir */
+						  db_dir=(char*)calloc(strlen(optarg)+1,sizeof(char));
+						  memcpy(db_dir,optarg,sizeof(char)*strlen(optarg));
 						  break;
-				  case ADD_URI:	/* --directory */
-						  add_uri=(char*)calloc(strlen(optarg)+1,sizeof(char));
-						  memcpy(add_uri,optarg,sizeof(char)*strlen(optarg));
+				  case PORT:	/* --port */
+						  port=atoi(optarg);
 						  break;
-				  case DEL_URI:	/* --directory */
-						  if (add_uri==NULL) {
-								  del_uri=(char*)calloc(strlen(optarg)+1,sizeof(char));
-								  memcpy(del_uri,optarg,sizeof(char)*strlen(optarg));
-								  break;
-						  }
-						  else {
-								  fprintf(stderr,"Error: only one option between add and remove can be present\n");
-								  usage(-1);
-						  }
 				  case 'V':
-						  fprintf (stdout,"Veggente SOAP mapper client %s\n", VERSION);
+						  fprintf (stdout,"Veggente SOAP mapper server %s\n", VERSION);
 						  exit (0);
 				  case 'h':
 						  usage (0);
@@ -150,14 +126,13 @@ static void
 usage (int status)
 {
   printf (_("%s - \
-Veggente SOAP mapper client\n"), program_name);
+Veggente SOAP mapper server\n"), program_name);
   printf (_("Usage: %s [OPTION]... [FILE]...\n"), program_name);
   printf (_("\
 Options:\n\
   --verbose                  print more information\n\
-  --add URI 		         add URI to repository\n\
-  --del URI 		         remove URI from repository\n\
-  --server URL 		         \n\
+  --db_dir DIR 		         storage directory\n\
+  --port PORT 		         port number\n\
   -h, --help                 display this help and exit\n\
   -V, --version              output version information and exit\n\
 "));

@@ -57,7 +57,6 @@ int list_add(list_data_t* s, void *data) {
 		new_element=(list_data_t)calloc(1,sizeof(struct list_data));
 		if (new_element==NULL) return (-1);
 		new_element->payload=data;
-		fprintf(stdout,"Aggiunta dell'elemento %s\n",(char*)(new_element->payload));
 		new_element->next=NULL;
 		
 		if (*s==NULL) {
@@ -190,6 +189,7 @@ int list_get_payload(list_data_t* node, void** payload) {
 		list_data_t t=NULL;
 		if (node==(list_data_t*)NULL) return (-1);
 		t=*node;
+		if (t==(list_data_t)NULL) return (0);
 		*payload=t->payload;
 		return (0);
 }

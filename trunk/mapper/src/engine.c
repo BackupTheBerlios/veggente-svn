@@ -25,14 +25,12 @@
 #include <errno.h>
 
 #include "engine.h"
-#include "request.h"
-#include "context.h"
-#include "generic_list.h"
 
 #ifndef THREAD_LIMIT
 #define THREAD_LIMIT 10
 #endif
 
+/* Engine data structure */
 struct engine_data{
 		pthread_mutex_t queue_mutex;
 		pthread_cond_t queue_signal;
@@ -48,8 +46,11 @@ struct engine_data{
 		int (*load_function)();
 };
 
+/* Operation data structure*/
 struct op_data {
+		int status;
 		pthread_mutex_t op_mutex;
+		pthread_cond_t op_signal;
 		void* request;
 		void* response;
 };
@@ -72,18 +73,25 @@ void* engine_serve_request(void* serve_thread_data);
 int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list);
 int engine_cleanup_threads(list_data_t *s);
 
-/* Engine constructor 
+/* 
+ * -------------------+
+ * Engine constructor |
+ * -------------------+
+ * 
  * op_limit: limit in queue length after which start immediate processing 
  * group_ops: function to group operations which share the same resources
  * load_function: return the optimal number of thread to spawn based on system
- * 		load and queue length*/
+ * load and queue length
+ */
 int engine_init(engine_data_t *s,
 				int op_limit,
+				context_t *context,
 				int (*group_ops)(list_data_t*,list_data_t*),
 				int (*load_function)()) {
 		engine_data_t t=NULL;
 		t=(engine_data_t)calloc(1,sizeof(struct engine_data));
 		if (t==NULL) return (-1);
+		if (context==(context_t*)NULL) return (-1);
 		/* Engine data init */
 		if (list_init(&(t->op_list))!=0) {
 				fprintf(stderr,"[Engine] Error initializing operations list\n");
@@ -93,10 +101,7 @@ int engine_init(engine_data_t *s,
 				fprintf(stderr,"[Engine] Error initializing processed operations list\n");
 				return (-1);
 		}
-		if (context_init(&(t->context_data))!=0) {
-				fprintf(stderr,"[Engine] Error initializing context application data\n");
-				return (-1);
-		}
+		t->context_data=*context;
 		t->op_count=0;
 		t->op_limit=op_limit;
 		pthread_mutex_init(&(t->queue_mutex),NULL);
@@ -105,7 +110,7 @@ int engine_init(engine_data_t *s,
 		return (0);
 }
 
-/* Starts execution of a previously created engine */
+/* [Engine] Starts execution of a previously created engine */
 int engine_start(engine_data_t *s) {
 		int ret_code=0;
 		engine_data_t t=NULL;
@@ -140,7 +145,7 @@ int engine_start(engine_data_t *s) {
 		return (0);
 }
 
-/* Engine data destructor/deallocator */
+/* [Engine] Data destructor/deallocator */
 int engine_destroy(engine_data_t *s) {
 		engine_data_t t=NULL;
 		if (s==(engine_data_t*)NULL) return (-1);
@@ -154,7 +159,17 @@ int engine_destroy(engine_data_t *s) {
 		return (0);
 }
 
-/* Function executed by "queued" thread */
+/*
+ * --------------------+
+ * Queue daemod thread |
+ * --------------------+
+ * 
+ * Executes the operations inside op_list and posts the results in 
+ * processed_list.
+ *  
+ */
+
+/* Function executed by "queued" thread  */
 void* engine_queue_daemon(void* manager_data) {
 		int cond_code=0;
 		engine_data_t t=NULL;
@@ -228,6 +243,17 @@ void* engine_queue_daemon(void* manager_data) {
 }
 
 
+/*
+ * ---------------+
+ * Request daemon |
+ * ---------------+
+ *
+ * Handles incoming SOAP connections, creates requests in op_list and listens 
+ * for results in processed_list.
+ *
+ */ 
+
+/* Function executed by "requestd" thread*/
 void* engine_request_daemon(void* manager_data) {
 		SOAP_SOCKET sock=0;
 		SOAP_SOCKET bind_sock=0;
@@ -294,6 +320,7 @@ void* engine_request_daemon(void* manager_data) {
 				thread_data->dead_list_lock=req_list_lock;
 				thread_data->context_data=t->context_data;
 				thread_data->soap_env=soap_clone;
+				thread_data->status=THREAD_RUNNING;
 
 				/* Add thread data to list */
 				pthread_mutex_lock(&req_list_lock);
@@ -326,6 +353,8 @@ void* engine_request_daemon(void* manager_data) {
 		pthread_exit((void*)retcode);
 }
 
+
+/* [Requestd]: function executed by slave threads  */
 void* engine_serve_request(void* serve_thread_data) {
 		serve_data_t t=NULL;
 		t=*((serve_data_t*)serve_thread_data);
@@ -334,7 +363,8 @@ void* engine_serve_request(void* serve_thread_data) {
 		pthread_exit((void*)0);
 }
 
-/* Process the operation group list */
+
+/* [Queued] Process the operation group list */
 int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 		engine_data_t t=NULL;
 		int i=0;
@@ -348,10 +378,11 @@ int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 		return (0);
 }
 
+
+/* [Requestd]: calls join on dead threads and cleans up their data */
 int engine_cleanup_threads(list_data_t *s) {
 		list_data_t t=NULL;
 		list_data_t res=NULL;
-		void* load=NULL;
 		serve_data_t data=NULL;
 		int ret_code=0;
 
@@ -359,26 +390,28 @@ int engine_cleanup_threads(list_data_t *s) {
 		t=*s;
 		
 		list_get_head(&t,&res);
+		fprintf(stdout,"[Requestd] Cleanup thread routine\n");
 		while (res!=NULL) {
-				if (list_get_payload(&res,&load)!=0) {
+				t=*s;
+				if (list_get_payload(&res,(void*)&data)!=0) {
 						fprintf(stderr,"[Requestd] Error getting request thread data payload\n");
 						return (-1);
 				}
-				data=(serve_data_t)load;
-				if (data->status==THREAD_DEAD) {
-						fflush(stdout);
+				if ((data!=NULL)&&(data->status==THREAD_DEAD)) {
 						pthread_join(data->self_id,(void**)&ret_code);
+						fprintf(stdout,"[Requestd] Joined thread %d with return code: %d\n",data->self_id,ret_code);
+						if (list_remove_node(&t,&res)!=0) {
+								fprintf(stderr,"[Requestd] Error cleaning up thread data\n");
+						}
 						soap_destroy(data->soap_env);
 						soap_end(data->soap_env);
 						soap_done(data->soap_env);
 						free(data->soap_env);
-						free(data->context_data);
 						free(data);
-						list_remove_node(&t,&res);
-						fprintf(stdout,"[Requestd] Joined thread %d with return code: %d\n",data->self_id,ret_code);
-						list_get_head(&t,&res);
+						res=NULL;
+						data=NULL;
 				}
-				if (list_next_from_node(&t,&res,&res)) {
+				if (list_next_from_node(&t,&res,&res)!=0) {
 						fprintf(stderr,"[Requestd] Error scanning dead threads list\n");
 						return (-1);
 				}

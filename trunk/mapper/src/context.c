@@ -30,21 +30,26 @@ struct context{
 /*
  * TODO: fix directory name 
  * */
-int context_init(context_t* s) {
+int context_init(context_t* s,int port_number, char* storage_dir) {
 		context_t t=NULL;
 		/* Port number and storage dir are to be extracted from conf file */
-		char* dir="/tmp/owldb";
-		int bind_port=10000;
-		/* End of variables to be extracted */
+		char* dir=NULL;
+		int bind_port=0;
+		
+		if ((port_number==0)||(storage_dir==(char*)NULL)) return (-1);
+		bind_port=port_number;
+		dir=storage_dir;
 		t=(context_t)calloc(1,sizeof(struct context));
 		if (t==NULL) return (-1);
-		t->soap_lib=(soap_t)calloc(1,sizeof(struct soap));
-		if ((t->soap_lib)==NULL) return (-1);
 		*s=t;
+		/* Init storage */
 		if (owl_storage_create(&(t->storage),dir)!=0) {
 				fprintf(stderr,"[Context] Error initializing owl storage\n");
 				return (-1);
 		}
+		/* Init soap env */
+		t->soap_lib=(soap_t)calloc(1,sizeof(struct soap));
+		if ((t->soap_lib)==NULL) return (-1);
 		soap_init(t->soap_lib);
 		if ((t->soap_lib)==NULL){
 				fprintf(stderr,"[Context] Error initializing \n");

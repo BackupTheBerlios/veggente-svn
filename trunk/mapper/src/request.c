@@ -140,6 +140,7 @@ int ns__exec_doc_add_request(struct soap *soap_env, char* uri, int *result){
 		return 0;
 }
 int ns__exec_doc_del_request(struct soap *soap_env, char* uri, int *result){
+		if (uri==(char*)NULL) return (-1);
 		return 0;
 }
 int ns__exec_map_request(struct soap *soap_env, char* source_rdf, char* map_file, char* dest_rdf, int *result){

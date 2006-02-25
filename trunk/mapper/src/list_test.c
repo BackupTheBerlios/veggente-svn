@@ -28,6 +28,7 @@ int main (int argc, char** argv) {
 		while (res!=NULL) {
 				list_get_payload(&res,&load);
 				fprintf(stdout,"Elemento: %s\n",load);
+				list_remove_node(&a,&res);
 				list_next_from_node(&a,&res,&res);
 		}
 /*		list_dump(&a);
