@@ -26,6 +26,9 @@
 #define THREAD_RUNNING 	0
 #define THREAD_DEAD		1
 
+#define REQUEST_THREAD 	0
+#define QUEUE_THREAD 	1
+
 struct engine_data;
 typedef struct engine_data *engine_data_t;
 struct op_data;
