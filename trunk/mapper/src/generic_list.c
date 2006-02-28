@@ -51,7 +51,7 @@ int list_add(list_data_t* s, void *data) {
 		list_data_t t=NULL;
 		list_data_t new_element=NULL;
 		
-		if (s==(list_data_t*)NULL) return (-1);
+		if ((s==(list_data_t*)NULL)||(data==NULL)) return (-1);
 		
 		/*Allocazione primo elemento*/
 		new_element=(list_data_t)calloc(1,sizeof(struct list_data));
@@ -59,7 +59,7 @@ int list_add(list_data_t* s, void *data) {
 		new_element->payload=data;
 		new_element->next=NULL;
 		
-		if (*s==NULL) {
+		if ((*s)==NULL) {
 				*s=new_element;
 		}
 		else {
@@ -134,33 +134,33 @@ int list_find(list_data_t* s, list_data_t *result,void *data,int (*compare)(void
 }
 
 int list_next(list_data_t *s,list_data_t* result) {
-		list_data_t iter=NULL;
-		if (s==(list_data_t*)NULL) return (-1);
-		iter=*s;
-		*result=iter->next;
+		*result=(*result)->next;
 		return (0);
 }
 
 int list_next_from_node(list_data_t *s, list_data_t* node, list_data_t* result) {
 		list_data_t iter=NULL;
-		if (s==(list_data_t*)NULL) return (-1);
-		iter=*s;
-		if (node==(list_data_t*)NULL) {
-				*result=iter;
+		if ((s==(list_data_t*)NULL)||(*s==(list_data_t)NULL)) return (-1);
+		if (*node==(list_data_t)NULL) {
+				fprintf(stdout,"Testa-> Elemento %s\n",(*s)->payload);
+				*result=*s;
 				return (0);
 		}
-		while(iter->next){
+		iter=*s;
+		if (iter==*node) {
+				fprintf(stdout,"Primo elemento-> Elemento %s\n",iter->payload);
+				*result=iter->next;
+				return (0);
+		}
+		while (iter->next) {
+				fprintf(stdout,"Scansione-> Elemento %s\n",iter->payload);
 				if (iter==*node) {
-						*result=iter->next;
-						return(0);
+						*result=iter;
+						return (0);
 				}
 				iter=iter->next;
 		}
-		if (iter==*node) {
-				*result=iter->next;
-				return(0);
-		}
-		return(0);
+		return(-1);
 }
 
 int list_next_from_data(list_data_t *s, list_data_t* result,void* data,int (*compare)(void*, void*)) {

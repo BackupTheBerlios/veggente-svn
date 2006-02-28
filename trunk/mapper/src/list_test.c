@@ -24,15 +24,16 @@ int main (int argc, char** argv) {
 		list_add(&a,(void*)el3);
 		list_add(&a,(void*)el4);
 		list_add(&a,(void*)el5);
-		list_get_head(&a,&res);
-		while (res!=NULL) {
+		list_dump(&a);
+		fprintf(stdout,"Rimozione passo passo\n");
+		while (list_next_from_node(&a,&res,&res)!=-1) {
 				list_get_payload(&res,&load);
-				fprintf(stdout,"Elemento: %s\n",load);
-				list_remove_node(&a,&res);
-				list_next_from_node(&a,&res,&res);
+				fprintf(stdout,"Vittima-> Elemento %s\n",load);
+				if (list_remove_node(&a,&res)==0) {
+						res=NULL;
+				} else break;
 		}
-/*		list_dump(&a);
-		list_dump(&reres);*/
+		list_dump(&a);
 		list_destroy(&a);
 		return (0);
 }
