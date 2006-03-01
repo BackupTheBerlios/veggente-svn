@@ -42,7 +42,7 @@
 /* #undef HAVE_NDIR_H */
 
 /* Define to 1 if you have the <redland.h> header file. */
-#define HAVE_REDLAND_H 1
+/* #undef HAVE_REDLAND_H */
 
 /* Define to 1 if you have the `snprintf' function. */
 #define HAVE_SNPRINTF 1

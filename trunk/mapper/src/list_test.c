@@ -33,6 +33,16 @@ int main (int argc, char** argv) {
 						res=NULL;
 				} else break;
 		}
+		list_add(&a,(void*)el4);
+		list_add(&a,(void*)el5);
+		list_dump(&a);
+		while (list_next_from_node(&a,&res,&res)!=-1) {
+				list_get_payload(&res,&load);
+				fprintf(stdout,"Vittima-> Elemento %s\n",load);
+				if (list_remove_node(&a,&res)==0) {
+						res=NULL;
+				} else break;
+		}
 		list_dump(&a);
 		list_destroy(&a);
 		return (0);

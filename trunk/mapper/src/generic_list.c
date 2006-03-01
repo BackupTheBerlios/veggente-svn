@@ -73,7 +73,7 @@ int list_add(list_data_t* s, void *data) {
 int list_remove_node(list_data_t* s, list_data_t* node) {
 		list_data_t iter1, iter2;
 		if ((s==(list_data_t*)NULL)||(node==(list_data_t*)NULL)) return (-1);
-		if (*s==NULL) return (-1);
+		if ((*s==NULL)||(*node==NULL)) return (-1);
 		if ((*s)==*node) {
 				iter1=*s;
 				*s=(*s)->next;
@@ -142,18 +142,15 @@ int list_next_from_node(list_data_t *s, list_data_t* node, list_data_t* result) 
 		list_data_t iter=NULL;
 		if ((s==(list_data_t*)NULL)||(*s==(list_data_t)NULL)) return (-1);
 		if (*node==(list_data_t)NULL) {
-				fprintf(stdout,"Testa-> Elemento %s\n",(*s)->payload);
 				*result=*s;
 				return (0);
 		}
 		iter=*s;
 		if (iter==*node) {
-				fprintf(stdout,"Primo elemento-> Elemento %s\n",iter->payload);
 				*result=iter->next;
 				return (0);
 		}
-		while (iter->next) {
-				fprintf(stdout,"Scansione-> Elemento %s\n",iter->payload);
+		while ((iter->next)!=NULL) {
 				if (iter==*node) {
 						*result=iter;
 						return (0);
