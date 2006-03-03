@@ -29,11 +29,21 @@
 #define REQUEST_DOC_ADD 1
 #define REQUEST_DOC_DEL 0
 
+#define OPERATION_PENDING 0
+#define OPERATION_COMPLETED 1
 /* All request structures goes here */
 
 /* Generic request */
 struct request;
 typedef struct request *request_t;
+
+/* Generic response */
+struct response;
+typedef struct response *response_t;
+
+/* Generic operation */
+struct operation;
+typedef struct operation *operation_t;
 
 /* Document-level request on database */
 struct doc_request;
@@ -49,6 +59,14 @@ int map_request_destroy(map_request_t *s);
 
 /* Get request type, useful for correct casting */
 int request_get_type(request_t* s);
+
+/* Operation */
+int operation_create(operation_t *op, request_t *req);
+int operation_destroy(operation_t *op);
+
+/* Response */
+int response_create(response_t *res);
+int response_destroy(response_t *res);
 
 /* Functions to execute a request */
 int exec_request(request_t* s);

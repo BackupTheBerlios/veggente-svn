@@ -20,6 +20,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
 #include "request.h"
 #include "owl_storage.h"
 
@@ -32,6 +33,10 @@
 struct request {
 		int type;
 		owl_storage_t storage;
+};
+
+struct response {
+		int type;
 };
 
 struct doc_request {
@@ -47,6 +52,15 @@ struct map_request {
 		char* source_rdf;
 		char* dest_rdf;
 		char* map_uri;
+};
+
+/* Operation data structure*/
+struct operation{
+		int status;
+		pthread_mutex_t op_mutex;
+		pthread_cond_t op_signal;
+		request_t request;
+		response_t response;
 };
 
 int doc_request_create(doc_request_t *s, int action, char* uri) {
@@ -132,6 +146,54 @@ int exec_doc_request(doc_request_t* s) {
 int exec_map_request(map_request_t* s) {
 		if (s==(map_request_t*)NULL) return(-1);
 		return (0);
+}
+
+/* Operation functions
+ * An operation contains both the request and the response
+ */
+int operation_create(operation_t *op, request_t *req) {
+		operation_t t=NULL;
+		response_t new_response=NULL;
+		if (op==(operation_t*)NULL) return (-1);
+		t=(operation_t)calloc(1,sizeof(struct operation));
+		if (t==NULL) return (-1);
+		*op=t;
+		if (response_create(&new_response)!=0) {
+				fprintf(stderr,"Error creating response object\n");
+				return (-1);
+		}
+		pthread_mutex_init(&(t->op_mutex),NULL);
+		pthread_cond_init(&(t->op_signal),NULL);
+		t->response=new_response;
+		t->request=*req;
+		t->status=OPERATION_PENDING;
+		return (0);
+}
+
+int operation_destroy(operation_t *op) {
+		operation_t t=NULL;
+		if (op==(operation_t*)NULL) return (-1);
+		t=*op;
+		if (t->status==OPERATION_PENDING) {
+				fprintf(stderr,"Attempted to destroy a pending operation\n");
+				return (-1);
+		}
+		free(t->response);
+		free(t->request);
+		pthread_mutex_destroy(&(t->op_mutex));
+		pthread_cond_destroy(&(t->op_signal));
+		free (t);
+		op=NULL;
+		return (0);
+}
+
+/* Response functions */
+int response_create(response_t *res) {
+		return(0);
+}
+
+int response_destroy(response_t *res) {
+		return(0);
 }
 
 /* SOAP functions */

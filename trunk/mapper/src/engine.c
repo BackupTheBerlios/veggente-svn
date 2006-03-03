@@ -49,15 +49,6 @@ struct engine_data{
 		int (*load_function)();
 };
 
-/* Operation data structure*/
-struct op_data {
-		int status;
-		pthread_mutex_t op_mutex;
-		pthread_cond_t op_signal;
-		void* request;
-		void* response;
-};
-
 /*
  * Generic slave thread data (superclass-like)
  */
@@ -75,6 +66,7 @@ struct queue_slave_data {
 		int type;
 		int status;
 		pthread_t self_id;
+		list_data_t op_list;
 		context_t context_data;
 };
 typedef struct queue_slave_data *queue_slave_data_t;
@@ -247,7 +239,7 @@ void* engine_queue_daemon(void* manager_data) {
 								pthread_exit((void*)-1);
 						}
 						/* Process operation groups */
-				/*		if (engine_spawn_executors(&t,&group_list)!=0) {
+						if (engine_spawn_executors(&t,&group_list)!=0) {
 								fprintf(stderr,"[Queued] Error processing operations\n");
 								pthread_mutex_unlock(&(t->queue_mutex));
 								pthread_exit((void*)-1);
@@ -256,7 +248,7 @@ void* engine_queue_daemon(void* manager_data) {
 						if (engine_cleanup_threads(&(t->req_slave_list))!=0) {
 								fprintf(stderr,"[Queued] Error cleaning slave list\n");
 								pthread_exit((void*)-1);
-						}*/
+						}
 				}
 				if (t->op_count<0) {
 						fprintf(stderr,"[Queued] Error in queue length\n");
@@ -348,7 +340,7 @@ void* engine_request_daemon(void* manager_data) {
 
 				/* Add thread data to list */
 				pthread_mutex_lock(&req_list_lock);
-				if (list_add(&(t->req_slave_list),&thread_data)) {
+				if (list_add(&(t->req_slave_list),thread_data)) {
 						fprintf(stderr,"[Requestd] Error adding thread data to control list\n");
 						pthread_mutex_unlock(&req_list_lock);
 						retcode=-1;
@@ -357,7 +349,7 @@ void* engine_request_daemon(void* manager_data) {
 				pthread_mutex_unlock(&req_list_lock);
 
 				/* Start the thread */
-				if (pthread_create(&(thread_data->self_id),NULL,engine_serve_request,(void*)&thread_data)) {
+				if (pthread_create(&(thread_data->self_id),NULL,engine_serve_request,(void*)thread_data)) {
 						fprintf(stderr,"[Requestd] Error starting request worker thread\n");
 						retcode=-1;
 						break;
@@ -380,12 +372,28 @@ void* engine_request_daemon(void* manager_data) {
 /* [Requestd]: function executed by slave threads  */
 void* engine_serve_request(void* serve_thread_data) {
 		req_slave_data_t t=NULL;
-		t=*((req_slave_data_t*)serve_thread_data);
+		t=(req_slave_data_t)serve_thread_data;
 		soap_serve(t->soap_env);
 		t->status=THREAD_DEAD;
 		pthread_exit((void*)0);
 }
 
+
+void* engine_process_request(void* proc_thread_data) {
+		queue_slave_data_t t=NULL;
+		list_data_t current_op=NULL;
+		void* payload=NULL;
+		t=(queue_slave_data_t)proc_thread_data;
+		
+	/*Extract data and call exec request*/
+		while (list_next_from_node(&(t->op_list),&current_op,&current_op)!=-1) {
+			if (list_get_payload(&current_op,&payload)!=0){
+						fprintf(stderr,"[Queued] Error getting request thread data payload\n");
+						pthread_exit((void*)-1);
+			}
+		}
+		pthread_exit((void*)0);
+}
 
 /* [Queued] Process the operation group list */
 int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
@@ -402,11 +410,20 @@ int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 						fprintf(stderr,"[Queued] Failed allocating slave data\n");
 						return (-1);
 				}
+				thread_data->type=QUEUE_THREAD;
+				thread_data->status=THREAD_RUNNING;
+				thread_data->op_list=*grouped_list;
+				thread_data->context_data=t->context_data;
 
 				if (list_add(&(t->queue_slave_list),&thread_data)!=0) {
 						fprintf(stderr,"[Queued] Failed adding slave data to list\n");
 						free(thread_data);
 						return (-1);
+				}
+				if (pthread_create(&(thread_data->self_id),NULL,engine_process_request,(void*)thread_data)) {
+						fprintf(stderr,"[Requestd] Error starting request worker thread\n");
+						return (-1);
+						
 				}
 				i++;
 		}
@@ -416,29 +433,30 @@ int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 
 /* [Engine]: calls join on dead threads and cleans up their data */
 int engine_cleanup_threads(list_data_t *s) {
-		list_data_t t=NULL;
 		list_data_t res=NULL;
-		req_slave_data_t data=NULL;
+		void* current_payload=NULL;
+		slave_data_t data=NULL;
 		req_slave_data_t data_req=NULL;
 		queue_slave_data_t data_queue=NULL;
 		int ret_code=0;
 
 		if (s==(list_data_t*)NULL) return (-1);
-		t=*s;
 		
-		fprintf(stdout,"[Requestd] Cleanup thread routine\n");
-		while (list_next_from_node(&t,&res,&res)!=-1) {
-				if (list_get_payload(&res,(void*)&data)!=0) {
+		fprintf(stdout,"[Engine] Cleanup thread routine\n");
+		while (list_next_from_node(s,&res,&res)!=-1) {
+				if (list_get_payload(&res,(void*)&current_payload)!=0) {
 						fprintf(stderr,"[Requestd] Error getting request thread data payload\n");
 						return (-1);
 				}
-				fprintf(stdout,"[Requestd] Selected thread %ld\n",data->self_id);
+				if (current_payload==NULL) return (0);
+				data=(slave_data_t)current_payload;
+				/* Request thread cleanup */
 				if (data->type==REQUEST_THREAD) {
-						data_req=data;
+						data_req=(req_slave_data_t)current_payload;
 						if ((data_req->status==THREAD_DEAD)) {
 								pthread_join(data_req->self_id,(void**)&ret_code);
 								fprintf(stdout,"[Requestd] Joined thread %ld with return code: %d\n",data_req->self_id,ret_code);
-								if (list_remove_node(&t,&res)!=0) {
+								if (list_remove_node(s,&res)!=0) {
 										fprintf(stderr,"[Requestd] Error cleaning up thread data\n");
 								}
 								soap_destroy(data_req->soap_env);
@@ -451,12 +469,13 @@ int engine_cleanup_threads(list_data_t *s) {
 								data=NULL;
 						}
 				}
+				/* Queue thread cleanup */
 				else if (data->type==QUEUE_THREAD) {
 						data_queue=(queue_slave_data_t)data;
 						if ((data_queue!=NULL)&&(data_req->status==THREAD_DEAD)) {
 								pthread_join(data_queue->self_id,(void**)&ret_code);
 								fprintf(stdout,"[Queued] Joined thread %ld with return code: %d\n",data_queue->self_id,ret_code);
-								if (list_remove_node(&t,&res)!=0) {
+								if (list_remove_node(s,&res)!=0) {
 										fprintf(stderr,"[Requestd] Error cleaning up thread data\n");
 								}
 								/*TODO: clean list specific data*/
