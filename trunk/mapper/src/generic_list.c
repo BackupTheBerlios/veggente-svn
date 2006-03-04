@@ -70,6 +70,21 @@ int list_add(list_data_t* s, void *data) {
 		return (0);
 }
 
+int list_add_node(list_data_t* s, list_data_t *node) {
+		list_data_t iter=NULL;
+		if ((s==(list_data_t*)NULL)||(node==(list_data_t*)NULL)) return (-1);
+		if ((*s==NULL) && (*node!=NULL)) return (-1);
+		if ((*s==NULL) && (*node==NULL)) return (0);
+		/* TODO: check what to do with 'next' pointer*/
+		if ((*s)==NULL) *s=*node;
+		else {
+				iter=*s;
+				while (iter->next) iter=iter->next;
+				iter->next=*node;
+		}
+		return (0);
+}
+
 int list_remove_node(list_data_t* s, list_data_t* node) {
 		list_data_t iter=NULL;
 		list_data_t victim=NULL;
@@ -116,6 +131,31 @@ int list_remove_data(list_data_t* s, void* data,int (*compare)(void*, void*)) {
 						return(0);
 				}
 				iter1=iter1->next;
+		}
+		return (-1);
+}
+
+int list_move_node(list_data_t *source_list, list_data_t *dest_list, list_data_t* node) {
+		list_data_t iter=NULL;
+		list_data_t victim=NULL;
+		if ( (source_list==(list_data_t*)NULL) || (node==(list_data_t*)NULL) ) return (-1);
+		if ((*source_list==NULL) && (*node!=NULL)) return (-1);
+		if ((*source_list==NULL) && (*node==NULL)) return (0);
+		if (*source_list==*node) {
+				victim=*source_list;
+				*source_list=(*source_list)->next;
+				return (list_add_node(dest_list,node));
+		}
+		else {
+				iter=*source_list;
+				while (iter->next) {
+						if (iter->next==*node) {
+								victim=iter;
+								iter->next=iter->next->next;
+								return (list_add_node(dest_list,node));
+						}
+						iter=iter->next;
+				}
 		}
 		return (-1);
 }

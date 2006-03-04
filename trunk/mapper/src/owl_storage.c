@@ -238,6 +238,12 @@ int owl_storage_remove(owl_storage_t *s, char* uri) {
 				librdf_free_uri(document_uri);
 				return (-1);
 		}
+		if (list_remove_data(&(t->uri_list),uri,&uri_compare)!=0) {
+				fprintf(stderr,"Failed to remove %s from URI list\n", uri);
+				librdf_free_node(context);
+				librdf_free_uri(document_uri);
+				return (-1);
+		}
 		librdf_free_node(context);
 		librdf_free_uri(document_uri);
 		return (0);

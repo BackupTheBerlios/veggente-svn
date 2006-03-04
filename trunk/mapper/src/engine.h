@@ -31,11 +31,28 @@
 
 struct engine_data;
 typedef struct engine_data *engine_data_t;
+
+struct slave_data;
+typedef struct slave_data *slave_data_t;
+
+struct queue_slave_data;
+typedef struct queue_slave_data *queue_slave_data_t;
+		
+struct req_slave_data; 
+typedef struct req_slave_data *req_slave_data_t;
+
 struct op_data;
 typedef struct op_data *op_data;
+
 int engine_init(engine_data_t *s, int op_limit, context_t *context, int (*group_ops)(list_data_t*,list_data_t*), int (*load_function)());
 int engine_start(engine_data_t *s);
 int engine_destroy(engine_data_t *s);
 int engine_post_request(engine_data_t *s,void* request_data,void* response_data);
+
+
+int engine_slave_lock_ops_queue(slave_data_t *s);
+int engine_slave_unlock_ops_queue(slave_data_t *s);
+int engine_slave_lock_proc_queue(slave_data_t *s);
+int engine_slave_unlock_proc_queue(slave_data_t *s);
 
 #endif

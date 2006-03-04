@@ -23,6 +23,7 @@
 #include <pthread.h>
 #include "request.h"
 #include "owl_storage.h"
+#include "engine.h"
 
 #include "soapH.h"
 #ifndef __NSMAP
@@ -62,6 +63,9 @@ struct operation{
 		request_t request;
 		response_t response;
 };
+
+int exec_doc_request(doc_request_t* s);
+int exec_map_request(map_request_t* s);
 
 int doc_request_create(doc_request_t *s, int action, char* uri) {
 		doc_request_t t=NULL;
@@ -115,7 +119,7 @@ int request_get_type(request_t* s){
 		return t->type; 
 }
 
-int exec_request(request_t* s) {
+int exec_request(request_t* s,response_t *res) {
 		int op_code=request_get_type(s);
 		if (op_code==REQUEST_MAP) {
 				return exec_map_request((map_request_t*)s);
@@ -187,6 +191,38 @@ int operation_destroy(operation_t *op) {
 		return (0);
 }
 
+int operation_get_request(operation_t *op, request_t *req) {
+		operation_t t=NULL;
+		if (op==(operation_t*)NULL) return (-1);
+		t=*op;
+		*req=t->request;
+		return (0);
+}
+
+int operation_get_response(operation_t *op, response_t *res) {
+		operation_t t=NULL;
+		if (op==(operation_t*)NULL) return (-1);
+		t=*op;
+		*res=t->response;
+		return (0);
+}
+
+int operation_lock(operation_t *op){
+		operation_t t=NULL;
+		if (op==(operation_t*)NULL) return (-1);
+		t=*op;
+		pthread_mutex_lock(&(t->op_mutex));
+		return (0);
+}
+
+int operation_unlock(operation_t *op){
+		operation_t t=NULL;
+		if (op==(operation_t*)NULL) return (-1);
+		t=*op;
+		pthread_mutex_unlock(&(t->op_mutex));
+		return (0);
+}
+
 /* Response functions */
 int response_create(response_t *res) {
 		return(0);
@@ -198,13 +234,38 @@ int response_destroy(response_t *res) {
 
 /* SOAP functions */
 int ns__exec_doc_add_request(struct soap *soap_env, char* uri, int *result){
+		slave_data_t t=NULL;
+		operation_t new_op=NULL;
+		doc_request_t new_request=NULL;
+		
+		if (soap_env->user==NULL) return (-1);
+		t=(slave_data_t)(soap_env->user);
+		if (doc_request_create(&new_request,REQUEST_DOC_ADD,uri)!=0) {
+				fprintf(stderr,"[SOAP] Error creating new operationn\n");
+				return (-1);
+		}
+		/*TODO: check casting */
+		if (operation_create(&new_op, (request_t*)&new_request)!=0) {
+				fprintf(stderr,"[SOAP] Error creating new operationn\n");
+				return (-1);
+		}
+		if (list_add(&(t->list),new_op)!=0) {
+				fprintf(stderr,"[SOAP] Error adding a new operation to pending ops list\n");
+		}
 		if (uri==(char*)NULL) return (-1);
-		return 0;
+		return (0);
 }
+
 int ns__exec_doc_del_request(struct soap *soap_env, char* uri, int *result){
+		slave_data_t t=NULL;
+		if (soap_env->user==NULL) return (-1);
+		t=(slave_data_t)(soap_env->user);
 		if (uri==(char*)NULL) return (-1);
-		return 0;
+		return (0);
 }
 int ns__exec_map_request(struct soap *soap_env, char* source_rdf, char* map_file, char* dest_rdf, int *result){
-		return 0;
+		slave_data_t t=NULL;
+		if (soap_env->user==NULL) return (-1);
+		t=(slave_data_t)(soap_env->user);
+		return (0);
 }

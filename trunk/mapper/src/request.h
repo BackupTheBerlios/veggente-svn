@@ -63,14 +63,16 @@ int request_get_type(request_t* s);
 /* Operation */
 int operation_create(operation_t *op, request_t *req);
 int operation_destroy(operation_t *op);
+int operation_get_request(operation_t *op, request_t *req);
+int operation_get_response(operation_t *op, response_t *res);
+int operation_lock(operation_t *op);
+int operation_unlock(operation_t *op);
 
 /* Response */
 int response_create(response_t *res);
 int response_destroy(response_t *res);
 
 /* Functions to execute a request */
-int exec_request(request_t* s);
-int exec_doc_request(doc_request_t* s);
-int exec_map_request(map_request_t* s);
+int exec_request(request_t* req,response_t* res);
 
 #endif
