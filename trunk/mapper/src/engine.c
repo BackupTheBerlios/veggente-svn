@@ -67,9 +67,9 @@ struct slave_data {
 		int status;
 		pthread_t self_id;
 		context_t context_data;
-		list_data_t list;
-		pthread_mutex_t list_mutex;
-		pthread_cond_t list_cond;
+		list_data_t op_list;
+		pthread_mutex_t op_list_mutex;
+		pthread_cond_t op_list_cond;
 };
 
 /**
@@ -87,7 +87,7 @@ struct queue_slave_data {
 		pthread_cond_t proc_queue_signal;
 		/* End of common variables */
 		/* Thread private list of operations*/
-		list_data_t op_list;
+		list_data_t private_op_list;
 };
 
 /** 
@@ -104,6 +104,9 @@ struct req_slave_data {
 		pthread_cond_t op_queue_signal;
 		/* End of common variables */
 		pthread_mutex_t dead_list_lock;
+		list_data_t proc_list;
+		pthread_mutex_t proc_queue_mutex;
+		pthread_cond_t proc_queue_signal;
 		/* SOAP environment */
 		soap_t soap_env;
 };
@@ -417,7 +420,7 @@ void* engine_process_request(void* proc_thread_data) {
 		t=(queue_slave_data_t)proc_thread_data;
 		
 		/*Extract data and call exec request*/
-		while (list_next_from_node(&(t->op_list),&current_elem,&current_elem)!=-1) {
+		while (list_next_from_node(&(t->private_op_list),&current_elem,&current_elem)!=-1) {
 			if (list_get_payload(&current_elem,&payload)!=0){
 						fprintf(stderr,"[Queued] Error getting request thread data payload\n");
 						pthread_exit((void*)-1);
@@ -438,7 +441,7 @@ void* engine_process_request(void* proc_thread_data) {
 			}
 			/*TODO: lock shared list of processed ops */
 			/* Move operation from list of pending ops to list of processed ops */
-			if (list_move_node(&(t->op_list),&(t->processed_list),&current_elem)) {
+			if (list_move_node(&(t->private_op_list),&(t->processed_list),&current_elem)) {
 					fprintf(stderr,"[Queued] Error moving operation to processed list\n");
 						pthread_exit((void*)-1);
 			}
@@ -468,11 +471,11 @@ int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 						fprintf(stderr,"[Queued] Failed allocating slave data\n");
 						return (-1);
 				}
-				if (list_init(&(thread_data->op_list))!=0) {
+				if (list_init(&(thread_data->private_op_list))!=0) {
 						fprintf(stderr,"[Queued] Failed creating new list of operations\n");
 						return (-1);
 				}
-				if (list_move_node(grouped_list,&(thread_data->op_list),&current)!=0) {
+				if (list_move_node(grouped_list,&(thread_data->private_op_list),&current)!=0) {
 						fprintf(stderr,"[Queued] Failed assigning operations to thread\n");
 						return (-1);
 				}
@@ -585,4 +588,27 @@ int engine_slave_unlock_proc_queue(slave_data_t *s){
 		if (s==(slave_data_t*)NULL) return (-1);
 		t=(queue_slave_data_t)(*s);
 		return(pthread_mutex_unlock(&(t->proc_queue_mutex)));
+}
+
+int engine_slave_get_op_list(slave_data_t *s, list_data_t *list) {
+		req_slave_data_t req_data=NULL;
+		queue_slave_data_t queue_data=NULL;
+		if (s==(slave_data_t*)NULL) return (-1);
+		if ((*s)->type==QUEUE_THREAD) {
+				queue_data=(queue_slave_data_t)(*s);
+				*list=queue_data->private_op_list;
+				return (0);
+		}
+		if ((*s)->type==REQUEST_THREAD) {
+				req_data=(req_slave_data_t)(*s);
+				*list=req_data->op_list;
+				return (0);
+		}
+		return (-1);
+}
+/*TODO: fix slave_data type. slave_data or req_slave_data??? */
+int engine_slave_get_proc_list(req_slave_data_t *s, list_data_t *list) {
+		if ((s==(req_slave_data_t*)NULL)||(list==(list_data_t*)NULL)) return (-1);
+		*list=(*s)->proc_list;
+		return (0);
 }
