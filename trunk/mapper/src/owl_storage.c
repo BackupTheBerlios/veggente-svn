@@ -212,7 +212,7 @@ int owl_storage_add(owl_storage_t *s, char* uri,  int overwrite) {
 		return (0);
 }
 
-/* Remove all statements associated with the URI context from storage 
+/** Remove all statements associated with the URI context from storage 
  * TODO: remove URI from list */
 int owl_storage_remove(owl_storage_t *s, char* uri) {
 		owl_storage_t t=NULL;
@@ -249,7 +249,7 @@ int owl_storage_remove(owl_storage_t *s, char* uri) {
 		return (0);
 }
 		
-/* Merge two owl object with the aid of a map object*/
+/** Merge two owl object with the aid of a map object*/
 int owl_storage_merge(owl_storage_t *s,  char* onto1_uri, char* onto2_uri, char* map_file_uri){
 		owl_storage_t t=NULL;
 		list_data_t result=NULL;

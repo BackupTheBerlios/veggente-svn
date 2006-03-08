@@ -30,13 +30,17 @@
 #define THREAD_LIMIT 10
 #endif
 
-/* Engine data structure */
+/** 
+ * Engine data structure 
+ */
 struct engine_data{
 		pthread_t queued_id;
 		pthread_t requestd_id;
-		int op_limit;  /* Limit of operation after which starts queue processing */
+		/** Limit of operation after which starts queue processing */
+		int op_limit;  
 		int op_count;
-		int timeout_sec; /* Every how many seconds queue processing is forced */
+		/** Every how many seconds queue processing is forced */
+		int timeout_sec; 
 		context_t context_data;
 		/* List of operations and its mutex and condition variable*/
 		list_data_t op_list;
@@ -47,13 +51,15 @@ struct engine_data{
 		pthread_mutex_t proc_queue_mutex;
 		pthread_cond_t proc_queue_signal;
 		/* Slaves lists */
-		list_data_t req_slave_list; /* Threads serving Requestd */
-		list_data_t queue_slave_list; 	/* Threads serving Queued */
+		/** Threads serving Requestd */
+		list_data_t req_slave_list; 
+		/** Threads serving Queued */
+		list_data_t queue_slave_list; 	
 		int (*group_ops)(list_data_t*,list_data_t*);
 		int (*load_function)();
 };
 
-/*
+/**
  * Generic slave thread data (superclass-like)
  */
 struct slave_data {
@@ -66,7 +72,7 @@ struct slave_data {
 		pthread_cond_t list_cond;
 };
 
-/*
+/**
  * Queue slave thread data
  */
 struct queue_slave_data {
@@ -84,7 +90,7 @@ struct queue_slave_data {
 		list_data_t op_list;
 };
 
-/* 
+/** 
  * Request slave thread data
  */
 struct req_slave_data {
@@ -110,10 +116,8 @@ void* engine_serve_request(void* serve_thread_data);
 int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list);
 int engine_cleanup_threads(list_data_t *s);
 
-/* 
- * -------------------+
- * Engine constructor |
- * -------------------+
+/** 
+ * Engine constructor
  * 
  * op_limit: limit in queue length after which start immediate processing 
  * group_ops: function to group operations which share the same resources
@@ -157,7 +161,7 @@ int engine_init(engine_data_t *s,
 		return (0);
 }
 
-/* [Engine] Starts execution of a previously created engine */
+/** [Engine] Starts execution of a previously created engine */
 int engine_start(engine_data_t *s) {
 		int ret_code=0;
 		engine_data_t t=NULL;
@@ -192,7 +196,7 @@ int engine_start(engine_data_t *s) {
 		return (0);
 }
 
-/* [Engine] Data destructor/deallocator */
+/** [Engine] Data destructor/deallocator */
 int engine_destroy(engine_data_t *s) {
 		engine_data_t t=NULL;
 		if (s==(engine_data_t*)NULL) return (-1);
@@ -211,10 +215,8 @@ int engine_destroy(engine_data_t *s) {
 		return (0);
 }
 
-/*
- * --------------------+
- * Queue daemod thread |
- * --------------------+
+/**
+ * Queue daemon thread 
  * 
  * Executes the operations inside op_list and posts the results in 
  * processed_list.
@@ -285,10 +287,8 @@ void* engine_queue_daemon(void* manager_data) {
 }
 
 
-/*
- * ---------------+
- * Request daemon |
- * ---------------+
+/**
+ * Request daemon
  *
  * Handles incoming SOAP connections, creates requests in op_list and listens 
  * for results in processed_list.
@@ -395,7 +395,7 @@ void* engine_request_daemon(void* manager_data) {
 }
 
 
-/* [Requestd]: function executed by slave threads  */
+/** [Requestd]: function executed by slave threads  */
 void* engine_serve_request(void* serve_thread_data) {
 		req_slave_data_t t=NULL;
 		t=(req_slave_data_t)serve_thread_data;
@@ -406,7 +406,7 @@ void* engine_serve_request(void* serve_thread_data) {
 }
 
 
-/* [Queued]: function executed by slave threads  */
+/** [Queued]: function executed by slave threads  */
 void* engine_process_request(void* proc_thread_data) {
 		queue_slave_data_t t=NULL;
 		list_data_t current_elem=NULL;
@@ -450,7 +450,7 @@ void* engine_process_request(void* proc_thread_data) {
 		pthread_exit((void*)0);
 }
 
-/* [Queued] Process the operation group list */
+/** [Queued] Process the operation group list */
 int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 		engine_data_t t=NULL;
 		int i=0;
@@ -500,7 +500,7 @@ int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 }
 
 
-/* [Engine]: calls join on dead threads and cleans up their data */
+/** [Engine]: calls join on dead threads and cleans up their data */
 int engine_cleanup_threads(list_data_t *s) {
 		list_data_t res=NULL;
 		void* current_payload=NULL;

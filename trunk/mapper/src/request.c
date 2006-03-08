@@ -238,6 +238,7 @@ int ns__exec_doc_add_request(struct soap *soap_env, char* uri, int *result){
 		operation_t new_op=NULL;
 		doc_request_t new_request=NULL;
 		
+		if (uri==(char*)NULL) return (-1);
 		if (soap_env->user==NULL) return (-1);
 		t=(slave_data_t)(soap_env->user);
 		if (doc_request_create(&new_request,REQUEST_DOC_ADD,uri)!=0) {
@@ -249,10 +250,11 @@ int ns__exec_doc_add_request(struct soap *soap_env, char* uri, int *result){
 				fprintf(stderr,"[SOAP] Error creating new operationn\n");
 				return (-1);
 		}
+		/* TODO: how to add to list ???*/
 		if (list_add(&(t->list),new_op)!=0) {
 				fprintf(stderr,"[SOAP] Error adding a new operation to pending ops list\n");
+				return (-1);
 		}
-		if (uri==(char*)NULL) return (-1);
 		return (0);
 }
 
