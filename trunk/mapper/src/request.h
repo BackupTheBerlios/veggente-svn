@@ -67,6 +67,7 @@ int operation_get_request(operation_t *op, request_t *req);
 int operation_get_response(operation_t *op, response_t *res);
 int operation_lock(operation_t *op);
 int operation_unlock(operation_t *op);
+int operation_signal(operation_t *op);
 
 /* Response */
 int response_create(response_t *res);

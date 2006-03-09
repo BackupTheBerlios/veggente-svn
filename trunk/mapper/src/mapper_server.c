@@ -68,7 +68,7 @@ int main (int argc, char **argv) {
 				fprintf(stderr,"[Engine] Error initializing context application data\n");
 				return (-1);
 		}
-		if (engine_init(&s,10,&config_data,NULL,NULL)!=0) {
+		if (engine_init(&s,10,&config_data,dummy_group,NULL)!=0) {
 				fprintf(stderr,"Engine creation failed\n");
 				return (-1);
 		}

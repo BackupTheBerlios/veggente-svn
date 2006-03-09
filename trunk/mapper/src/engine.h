@@ -54,6 +54,9 @@ int engine_slave_lock_ops_queue(slave_data_t *s);
 int engine_slave_unlock_ops_queue(slave_data_t *s);
 int engine_slave_lock_proc_queue(slave_data_t *s);
 int engine_slave_unlock_proc_queue(slave_data_t *s);
-int engine_slave_get_op_list(slave_data_t *s, list_data_t *list);
+int engine_enqueue_operation(slave_data_t *s, operation_t *op);
+
+/*TODO: evaluate a better location for this function*/
+int dummy_group(list_data_t *origin, list_data_t *groups);
 
 #endif

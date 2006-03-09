@@ -242,12 +242,12 @@ void* engine_queue_daemon(void* manager_data) {
 		mutex_code=pthread_mutex_lock(&(t->op_queue_mutex));
 
 		while(1) {
-				if (t->op_count==0) {
+				if (t->op_list==NULL) {
 						/* Wait if there are no requests */
 						fprintf(stdout,"[Queued] Empty queue, sleeping\n");
 						pthread_cond_wait(&(t->op_queue_signal),&(t->op_queue_mutex));
 				} 
-				if (t->op_count>0) {
+/*				if (t->op_count>0) {*/
 						if (t->op_count < t->op_limit) {
 								/* Timed wait*/
 								gettimeofday(&now,NULL);
@@ -277,7 +277,7 @@ void* engine_queue_daemon(void* manager_data) {
 								fprintf(stderr,"[Queued] Error cleaning slave list\n");
 								pthread_exit((void*)-1);
 						}
-				}
+/*				}*/
 				if (t->op_count<0) {
 						fprintf(stderr,"[Queued] Error in queue length\n");
 						pthread_mutex_unlock(&(t->op_queue_mutex));
@@ -449,6 +449,10 @@ void* engine_process_request(void* proc_thread_data) {
 						fprintf(stderr,"[Queued] Error unlocking operation\n");
 						pthread_exit((void*)-1);
 			}
+			if (operation_signal(&op)!=0) {
+					fprintf(stderr,"[Queued] Error signaling completed operation\n");
+					pthread_exit((void*)-1);
+			}
 		}
 		pthread_exit((void*)0);
 }
@@ -590,25 +594,38 @@ int engine_slave_unlock_proc_queue(slave_data_t *s){
 		return(pthread_mutex_unlock(&(t->proc_queue_mutex)));
 }
 
-int engine_slave_get_op_list(slave_data_t *s, list_data_t *list) {
-		req_slave_data_t req_data=NULL;
-		queue_slave_data_t queue_data=NULL;
-		if (s==(slave_data_t*)NULL) return (-1);
-		if ((*s)->type==QUEUE_THREAD) {
-				queue_data=(queue_slave_data_t)(*s);
-				*list=queue_data->private_op_list;
-				return (0);
+int engine_enqueue_operation(slave_data_t *s, operation_t *op) {
+		slave_data_t t=NULL;
+		if ((s==(slave_data_t*)NULL)||(op==(operation_t*)NULL)) return (-1);
+		t=*s;
+		if (pthread_mutex_lock(&(t->op_list_mutex))!=0) {
+				fprintf(stderr,"[Queued] Failed locking op_queue\n");
+				return (-1);
 		}
-		if ((*s)->type==REQUEST_THREAD) {
-				req_data=(req_slave_data_t)(*s);
-				*list=req_data->op_list;
-				return (0);
+		if (list_add(&(t->op_list),*op)!=0) {
+				fprintf(stderr,"[Queued] Failed adding operation to op_queue\n");
+				return (-1);
 		}
-		return (-1);
+		if (pthread_mutex_unlock(&(t->op_list_mutex))!=0) {
+				fprintf(stderr,"[Queued] Failed unlocking op_queue\n");
+				return (-1);
+		}
+		if (pthread_cond_signal(&(t->op_list_cond))!=0) {
+				fprintf(stderr,"[Queued] Failed signaling op_queue\n");
+				return (-1);
+		}
+		return (0);
 }
+
 /*TODO: fix slave_data type. slave_data or req_slave_data??? */
 int engine_slave_get_proc_list(req_slave_data_t *s, list_data_t *list) {
 		if ((s==(req_slave_data_t*)NULL)||(list==(list_data_t*)NULL)) return (-1);
 		*list=(*s)->proc_list;
+		return (0);
+}
+
+int dummy_group(list_data_t *origin, list_data_t *groups) {
+		if (origin==(list_data_t*)NULL) return (-1);
+		*groups=*origin;
 		return (0);
 }

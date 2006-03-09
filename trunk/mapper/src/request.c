@@ -126,11 +126,16 @@ int request_get_type(request_t* s){
 
 int exec_request(request_t* s,response_t *res) {
 		int op_code=request_get_type(s);
+		int retcode=0;
 		if (op_code==REQUEST_MAP) {
-				return exec_map_request((map_request_t*)s);
+				retcode=exec_map_request((map_request_t*)s);
+				(*res)->retval=retcode;
+				return (retcode);
 		}
 		if (op_code==REQUEST_DOC) {
-				return exec_doc_request((doc_request_t*)s);
+				retcode=exec_doc_request((doc_request_t*)s);
+				(*res)->retval=retcode;
+				return (retcode);
 		}
 		return (-1);
 }
@@ -216,16 +221,21 @@ int operation_lock(operation_t *op){
 		operation_t t=NULL;
 		if (op==(operation_t*)NULL) return (-1);
 		t=*op;
-		pthread_mutex_lock(&(t->op_mutex));
-		return (0);
+		return (pthread_mutex_lock(&(t->op_mutex)));
 }
 
 int operation_unlock(operation_t *op){
 		operation_t t=NULL;
 		if (op==(operation_t*)NULL) return (-1);
 		t=*op;
-		pthread_mutex_unlock(&(t->op_mutex));
-		return (0);
+		return (pthread_mutex_unlock(&(t->op_mutex)));
+}
+
+int operation_signal(operation_t *op) {
+		operation_t t=NULL;
+		if (op==(operation_t*)NULL) return (-1);
+		t=*op;
+		return (pthread_cond_signal(&(t->op_signal)));
 }
 
 /* Response functions */
@@ -242,7 +252,6 @@ int ns__exec_doc_add_request(struct soap *soap_env, char* uri, int *result){
 		slave_data_t t=NULL;
 		operation_t new_op=NULL;
 		doc_request_t new_request=NULL;
-		list_data_t pending_list=NULL;
 		
 		if (uri==(char*)NULL) return (-1);
 		if (soap_env->user==NULL) return (-1);
@@ -256,21 +265,21 @@ int ns__exec_doc_add_request(struct soap *soap_env, char* uri, int *result){
 				fprintf(stderr,"[SOAP] Error creating new operation\n");
 				return (-1);
 		}
-		if (engine_slave_get_op_list(&t,&pending_list)!=0) {
-				fprintf(stderr,"[SOAP] Error getting pending operations list\n");
-				return (-1);
-		}
-		if (list_add(&pending_list,new_op)!=0) {
+		if (engine_enqueue_operation(&t,&new_op)!=0) {
 				fprintf(stderr,"[SOAP] Error adding a new operation to pending ops list\n");
 				return (-1);
 		}
+		fprintf(stdout,"[SOAP] Operation enqueued\n");
 		pthread_mutex_lock(&(new_op->op_mutex));
 		pthread_cond_wait(&(new_op->op_signal),&(new_op->op_mutex));
 		/* Now the operation SHOULD be completed and the mutex re-acquired */
-		if (new_op->response!=NULL) {
-				*result=new_op->response->retval;
+		if (new_op->response==NULL) {
+				fprintf(stderr,"[SOAP] Error getting response\n");
+				new_op->status=OPERATION_COMPLETED;
+				pthread_mutex_unlock(&(new_op->op_mutex));
+				return (-1);
 		}
-
+		*result=new_op->response->retval;
 		pthread_mutex_unlock(&(new_op->op_mutex));
 		return (0);
 }
