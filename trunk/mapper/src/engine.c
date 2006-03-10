@@ -67,9 +67,9 @@ struct slave_data {
 		int status;
 		pthread_t self_id;
 		context_t context_data;
-		list_data_t op_list;
-		pthread_mutex_t op_list_mutex;
-		pthread_cond_t op_list_cond;
+		list_data_t list;
+		pthread_mutex_t list_mutex;
+		pthread_cond_t list_cond;
 };
 
 /**
@@ -245,8 +245,12 @@ void* engine_queue_daemon(void* manager_data) {
 				if (t->op_list==NULL) {
 						/* Wait if there are no requests */
 						fprintf(stdout,"[Queued] Empty queue, sleeping\n");
-						pthread_cond_wait(&(t->op_queue_signal),&(t->op_queue_mutex));
+						if (pthread_cond_wait(&(t->op_queue_signal),&(t->op_queue_mutex))!=0) {
+										fprintf(stderr,"[Queued] Error waiting for lock\n");
+										pthread_exit((void*)-1);
+						}
 				} 
+				fprintf(stdout,"[Queued] Running...\n");
 /*				if (t->op_count>0) {*/
 						if (t->op_count < t->op_limit) {
 								/* Timed wait*/
@@ -308,8 +312,8 @@ void* engine_request_daemon(void* manager_data) {
 		soap_t soap_env=NULL;
 		soap_t soap_clone=NULL;
 		req_slave_data_t thread_data=NULL;
-		
 		engine_data_t t=*((engine_data_t*)manager_data);
+
 		if (t==(engine_data_t)NULL) pthread_exit((void*)-1);
 		
 		pthread_mutex_init(&req_list_lock,NULL);
@@ -378,7 +382,7 @@ void* engine_request_daemon(void* manager_data) {
 				pthread_mutex_unlock(&req_list_lock);
 
 				/* Start the thread */
-				if (pthread_create(&(thread_data->self_id),NULL,engine_serve_request,(void*)thread_data)) {
+				if (pthread_create(&(thread_data->self_id),NULL,engine_serve_request,thread_data)) {
 						fprintf(stderr,"[Requestd] Error starting request worker thread\n");
 						retcode=-1;
 						break;
@@ -391,6 +395,7 @@ void* engine_request_daemon(void* manager_data) {
 						pthread_mutex_unlock(&req_list_lock);
 						break;
 				}
+
 				pthread_mutex_unlock(&req_list_lock);
 		}
 		soap_done(soap_env);
@@ -418,7 +423,7 @@ void* engine_process_request(void* proc_thread_data) {
 		request_t req=NULL;
 		response_t res=NULL;
 		t=(queue_slave_data_t)proc_thread_data;
-		
+		fprintf(stdout,"[Queued] Processing requests...\n");
 		/*Extract data and call exec request*/
 		while (list_next_from_node(&(t->private_op_list),&current_elem,&current_elem)!=-1) {
 			if (list_get_payload(&current_elem,&payload)!=0){
@@ -464,7 +469,8 @@ int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 		int thread_limit=0;
 		list_data_t current=NULL;
 		queue_slave_data_t thread_data=NULL;
-		
+
+		fprintf(stdout,"[Queued] Spawning executors...\n");
 		if ((s==(engine_data_t*)NULL)||(grouped_list==(list_data_t*)NULL)) return (-1);
 		t=*s;
 		thread_limit=(t->load_function)();
@@ -598,29 +604,23 @@ int engine_enqueue_operation(slave_data_t *s, operation_t *op) {
 		slave_data_t t=NULL;
 		if ((s==(slave_data_t*)NULL)||(op==(operation_t*)NULL)) return (-1);
 		t=*s;
-		if (pthread_mutex_lock(&(t->op_list_mutex))!=0) {
+		if (pthread_mutex_lock(&(t->list_mutex))!=0) {
 				fprintf(stderr,"[Queued] Failed locking op_queue\n");
 				return (-1);
 		}
-		if (list_add(&(t->op_list),*op)!=0) {
+		if (list_add(&(t->list),*op)!=0) {
 				fprintf(stderr,"[Queued] Failed adding operation to op_queue\n");
 				return (-1);
 		}
-		if (pthread_mutex_unlock(&(t->op_list_mutex))!=0) {
+		if (pthread_mutex_unlock(&(t->list_mutex))!=0) {
 				fprintf(stderr,"[Queued] Failed unlocking op_queue\n");
 				return (-1);
 		}
-		if (pthread_cond_signal(&(t->op_list_cond))!=0) {
+		if (pthread_cond_signal(&(t->list_cond))!=0) {;
 				fprintf(stderr,"[Queued] Failed signaling op_queue\n");
 				return (-1);
 		}
-		return (0);
-}
-
-/*TODO: fix slave_data type. slave_data or req_slave_data??? */
-int engine_slave_get_proc_list(req_slave_data_t *s, list_data_t *list) {
-		if ((s==(req_slave_data_t*)NULL)||(list==(list_data_t*)NULL)) return (-1);
-		*list=(*s)->proc_list;
+		fprintf(stdout,"SIGNAL!!!\n");
 		return (0);
 }
 
