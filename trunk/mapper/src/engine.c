@@ -44,12 +44,12 @@ struct engine_data{
 		context_t context_data;
 		/* List of operations and its mutex and condition variable*/
 		list_data_t op_list;
-		pthread_mutex_t op_queue_mutex;
-		pthread_cond_t op_queue_signal;
+		pthread_mutex_t *op_queue_mutex;
+		pthread_cond_t *op_queue_signal;
 		/* List of completed ops and its mutex and condition variable*/
 		list_data_t processed_list;
-		pthread_mutex_t proc_queue_mutex;
-		pthread_cond_t proc_queue_signal;
+		pthread_mutex_t *proc_queue_mutex;
+		pthread_cond_t *proc_queue_signal;
 		/* Slaves lists */
 		/** Threads serving Requestd */
 		list_data_t req_slave_list; 
@@ -66,10 +66,10 @@ struct slave_data {
 		int type;
 		int status;
 		pthread_t self_id;
-		context_t context_data;
+		context_t *context_data;
 		list_data_t list;
-		pthread_mutex_t list_mutex;
-		pthread_cond_t list_cond;
+		pthread_mutex_t *list_mutex;
+		pthread_cond_t *list_cond;
 };
 
 /**
@@ -83,8 +83,8 @@ struct queue_slave_data {
 		context_t context_data;
 		/* Shared list of processed items*/
 		list_data_t processed_list;
-		pthread_mutex_t proc_queue_mutex;
-		pthread_cond_t proc_queue_signal;
+		pthread_mutex_t *proc_queue_mutex;
+		pthread_cond_t *proc_queue_signal;
 		/* End of common variables */
 		/* Thread private list of operations*/
 		list_data_t private_op_list;
@@ -100,13 +100,13 @@ struct req_slave_data {
 		pthread_t self_id;
 		context_t context_data;
 		list_data_t op_list;
-		pthread_mutex_t op_queue_mutex;
-		pthread_cond_t op_queue_signal;
+		pthread_mutex_t *op_queue_mutex;
+		pthread_cond_t *op_queue_signal;
 		/* End of common variables */
 		pthread_mutex_t dead_list_lock;
 		list_data_t proc_list;
-		pthread_mutex_t proc_queue_mutex;
-		pthread_cond_t proc_queue_signal;
+		pthread_mutex_t *proc_queue_mutex;
+		pthread_cond_t *proc_queue_signal;
 		/* SOAP environment */
 		soap_t soap_env;
 };
@@ -135,6 +135,11 @@ int engine_init(engine_data_t *s,
 		engine_data_t t=NULL;
 		t=(engine_data_t)calloc(1,sizeof(struct engine_data));
 		if (t==NULL) return (-1);
+		t->op_queue_mutex=(pthread_mutex_t*)calloc(1,sizeof(pthread_mutex_t));
+		t->op_queue_signal=(pthread_cond_t*)calloc(1,sizeof(pthread_cond_t));
+		t->proc_queue_mutex=(pthread_mutex_t*)calloc(1,sizeof(pthread_mutex_t));
+		t->proc_queue_signal=(pthread_cond_t*)calloc(1,sizeof(pthread_cond_t));
+		
 		if (context==(context_t*)NULL) return (-1);
 		/* Engine data init */
 		if (list_init(&(t->op_list))!=0) {
@@ -156,10 +161,10 @@ int engine_init(engine_data_t *s,
 		t->context_data=*context;
 		t->op_count=0;
 		t->op_limit=op_limit;
-		pthread_mutex_init(&(t->op_queue_mutex),NULL);
-		pthread_cond_init(&(t->op_queue_signal),NULL);
-		pthread_mutex_init(&(t->proc_queue_mutex),NULL);
-		pthread_cond_init(&(t->proc_queue_signal),NULL);
+		pthread_mutex_init(t->op_queue_mutex,NULL);
+		pthread_cond_init(t->op_queue_signal,NULL);
+		pthread_mutex_init(t->proc_queue_mutex,NULL);
+		pthread_cond_init(t->proc_queue_signal,NULL);
 		*s=t;
 		return (0);
 }
@@ -208,10 +213,14 @@ int engine_destroy(engine_data_t *s) {
 		list_destroy(&(t->processed_list));
 		list_destroy(&(t->req_slave_list));
 		list_destroy(&(t->queue_slave_list));
-		pthread_mutex_destroy(&(t->op_queue_mutex));
-		pthread_cond_destroy(&(t->op_queue_signal));
-		pthread_mutex_destroy(&(t->proc_queue_mutex));
-		pthread_cond_destroy(&(t->proc_queue_signal));
+		pthread_mutex_destroy(t->op_queue_mutex);
+		pthread_cond_destroy(t->op_queue_signal);
+		pthread_mutex_destroy(t->proc_queue_mutex);
+		pthread_cond_destroy(t->proc_queue_signal);
+		free (t->op_queue_mutex);
+		free (t->op_queue_signal);
+		free (t->proc_queue_mutex);
+		free (t->proc_queue_signal);
 		pthread_cancel(t->requestd_id);
 		pthread_cancel(t->queued_id);
 		free(t);
@@ -239,13 +248,13 @@ void* engine_queue_daemon(void* manager_data) {
 			   	pthread_exit((void*)-1);
 		}
 		t=*((engine_data_t*)manager_data);
-		mutex_code=pthread_mutex_lock(&(t->op_queue_mutex));
+		mutex_code=pthread_mutex_lock(t->op_queue_mutex);
 
 		while(1) {
 				if (t->op_list==NULL) {
 						/* Wait if there are no requests */
 						fprintf(stdout,"[Queued] Empty queue, sleeping\n");
-						if (pthread_cond_wait(&(t->op_queue_signal),&(t->op_queue_mutex))!=0) {
+						if (pthread_cond_wait(t->op_queue_signal,t->op_queue_mutex)!=0) {
 										fprintf(stderr,"[Queued] Error waiting for lock\n");
 										pthread_exit((void*)-1);
 						}
@@ -257,7 +266,7 @@ void* engine_queue_daemon(void* manager_data) {
 								gettimeofday(&now,NULL);
 								timeout.tv_sec=now.tv_sec+t->timeout_sec;
 								timeout.tv_nsec=now.tv_usec*1000;
-								cond_code=pthread_cond_timedwait(&(t->op_queue_signal),&(t->op_queue_mutex),&timeout);
+								cond_code=pthread_cond_timedwait(t->op_queue_signal,t->op_queue_mutex,&timeout);
 								if ((cond_code!=0)&&(cond_code!=ETIMEDOUT)) {
 										fprintf(stderr,"[Queued] Error waiting for data\n");
 										pthread_exit((void*)-1);
@@ -266,16 +275,16 @@ void* engine_queue_daemon(void* manager_data) {
 						/* Group operations */
 						if ( ((t->group_ops)(&(t->op_list),&group_list))!=0 ) {
 								fprintf(stderr,"[Queued] Error grouping operations\n");
-								pthread_mutex_unlock(&(t->op_queue_mutex));
+								pthread_mutex_unlock(t->op_queue_mutex);
 								pthread_exit((void*)-1);
 						}
 						/* Process operation groups */
 						if (engine_spawn_executors(&t,&group_list)!=0) {
 								fprintf(stderr,"[Queued] Error processing operations\n");
-								pthread_mutex_unlock(&(t->op_queue_mutex));
+								pthread_mutex_unlock(t->op_queue_mutex);
 								pthread_exit((void*)-1);
 						}
-						pthread_mutex_unlock(&(t->op_queue_mutex));
+						pthread_mutex_unlock(t->op_queue_mutex);
 						/* Cleanup dead threads data */
 						if (engine_cleanup_threads(&(t->req_slave_list))!=0) {
 								fprintf(stderr,"[Queued] Error cleaning slave list\n");
@@ -284,12 +293,12 @@ void* engine_queue_daemon(void* manager_data) {
 /*				}*/
 				if (t->op_count<0) {
 						fprintf(stderr,"[Queued] Error in queue length\n");
-						pthread_mutex_unlock(&(t->op_queue_mutex));
+						pthread_mutex_unlock(t->op_queue_mutex);
 						pthread_exit((void*)-1);
 				}
 		}
 
-		pthread_mutex_unlock(&(t->op_queue_mutex));
+		pthread_mutex_unlock(t->op_queue_mutex);
 		pthread_exit((void*)0);
 }
 
@@ -576,35 +585,35 @@ int engine_slave_lock_ops_queue(slave_data_t *s){
 		req_slave_data_t t=NULL;
 		if (s==(slave_data_t*)NULL) return (-1);
 		t=(req_slave_data_t)(*s);
-		return(pthread_mutex_lock(&(t->op_queue_mutex)));
+		return(pthread_mutex_lock(t->op_queue_mutex));
 }
 
 int engine_slave_unlock_ops_queue(slave_data_t *s){
 		req_slave_data_t t=NULL;
 		if (s==(slave_data_t*)NULL) return (-1);
 		t=(req_slave_data_t)(*s);
-		return(pthread_mutex_unlock(&(t->op_queue_mutex)));
+		return(pthread_mutex_unlock(t->op_queue_mutex));
 }
 
 int engine_slave_lock_proc_queue(slave_data_t *s){
 		queue_slave_data_t t=NULL;
 		if (s==(slave_data_t*)NULL) return (-1);
 		t=(queue_slave_data_t)(*s);
-		return(pthread_mutex_lock(&(t->proc_queue_mutex)));
+		return(pthread_mutex_lock(t->proc_queue_mutex));
 }
 
 int engine_slave_unlock_proc_queue(slave_data_t *s){
 		queue_slave_data_t t=NULL;
 		if (s==(slave_data_t*)NULL) return (-1);
 		t=(queue_slave_data_t)(*s);
-		return(pthread_mutex_unlock(&(t->proc_queue_mutex)));
+		return(pthread_mutex_unlock(t->proc_queue_mutex));
 }
 
 int engine_enqueue_operation(slave_data_t *s, operation_t *op) {
 		slave_data_t t=NULL;
 		if ((s==(slave_data_t*)NULL)||(op==(operation_t*)NULL)) return (-1);
 		t=*s;
-		if (pthread_mutex_lock(&(t->list_mutex))!=0) {
+		if (pthread_mutex_lock(t->list_mutex)!=0) {
 				fprintf(stderr,"[Queued] Failed locking op_queue\n");
 				return (-1);
 		}
@@ -612,11 +621,11 @@ int engine_enqueue_operation(slave_data_t *s, operation_t *op) {
 				fprintf(stderr,"[Queued] Failed adding operation to op_queue\n");
 				return (-1);
 		}
-		if (pthread_mutex_unlock(&(t->list_mutex))!=0) {
+		if (pthread_mutex_unlock(t->list_mutex)!=0) {
 				fprintf(stderr,"[Queued] Failed unlocking op_queue\n");
 				return (-1);
 		}
-		if (pthread_cond_signal(&(t->list_cond))!=0) {;
+		if (pthread_cond_signal(t->list_cond)!=0) {;
 				fprintf(stderr,"[Queued] Failed signaling op_queue\n");
 				return (-1);
 		}
