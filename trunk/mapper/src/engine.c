@@ -161,6 +161,7 @@ int engine_init(engine_data_t *s,
 		t->context_data=*context;
 		t->op_count=0;
 		t->op_limit=op_limit;
+		t->group_ops=group_ops;
 		pthread_mutex_init(t->op_queue_mutex,NULL);
 		pthread_cond_init(t->op_queue_signal,NULL);
 		pthread_mutex_init(t->proc_queue_mutex,NULL);
@@ -482,8 +483,12 @@ int engine_spawn_executors (engine_data_t *s, list_data_t* grouped_list){
 		fprintf(stdout,"[Queued] Spawning executors...\n");
 		if ((s==(engine_data_t*)NULL)||(grouped_list==(list_data_t*)NULL)) return (-1);
 		t=*s;
-		thread_limit=(t->load_function)();
+		if (t->load_function!=NULL) {
+				thread_limit=(t->load_function)();
+		}
+		else thread_limit=THREAD_LIMIT;
 		while ((i<thread_limit)&&(list_next_from_node(grouped_list,&current,&current)!=-1)) {
+				fprintf(stdout,"Nuova operazione\n");
 				if (current==(list_data_t)NULL) break;
 				thread_data=(queue_slave_data_t)calloc(1,sizeof(struct queue_slave_data));
 				if (thread_data==NULL) {
@@ -617,7 +622,7 @@ int engine_enqueue_operation(slave_data_t *s, operation_t *op) {
 				fprintf(stderr,"[Queued] Failed locking op_queue\n");
 				return (-1);
 		}
-		if (list_add(&(t->list),*op)!=0) {
+		if (list_add(&(t->list),op)!=0) {
 				fprintf(stderr,"[Queued] Failed adding operation to op_queue\n");
 				return (-1);
 		}
@@ -629,7 +634,6 @@ int engine_enqueue_operation(slave_data_t *s, operation_t *op) {
 				fprintf(stderr,"[Queued] Failed signaling op_queue\n");
 				return (-1);
 		}
-		fprintf(stdout,"SIGNAL!!!\n");
 		return (0);
 }
 
