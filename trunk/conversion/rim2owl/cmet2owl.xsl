@@ -33,7 +33,7 @@
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
-	xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype">
+	xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype#">
 	
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	
@@ -177,6 +177,7 @@
 			</owl:Class>
 			<xsl:apply-templates select="hl7:attribute" mode="property"/>
 			<xsl:apply-templates select="hl7:association"/>
+			<xsl:apply-templates select="hl7:attribute" mode="fixed_value"/>
 	</xsl:template>
 
 	<!-- CMET includes-->
@@ -210,7 +211,14 @@
 
 	<!-- TODO: ObjectProperties are associations between CLASSES! -->
 	<xsl:template match="hl7:attribute" mode="fixed_value">
-		
+			<xsl:if test="@fixedValue">
+					<xsl:text disable-output-escaping="yes">&lt;rim_dt:</xsl:text>
+					<xsl:value-of select="hl7:type/@name"/>
+					<xsl:text> rdf:ID="</xsl:text>
+					<xsl:value-of select="@fixedValue"/>
+					<xsl:text disable-output-escaping="yes">"/&gt;
+					</xsl:text>
+			</xsl:if>
 	</xsl:template>
 	
 	<xsl:template match="hl7:attribute" mode="class">
@@ -224,6 +232,10 @@
 											<xsl:attribute name="rdf:resource" select="$parent_ns"/>
 									</owl:onProperty>
 									<owl:hasValue>
+											<xsl:attribute name="rdf:resource">
+													<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>#<xsl:value-of select="@fixedValue"/>
+											</xsl:attribute>
+											<!--
 											<xsl:variable name="type">
 													<xsl:choose>
 															<xsl:when test="hl7:type/hl7:supplierBindingArgumentDatatype">
@@ -249,7 +261,7 @@
 															</xsl:attribute>
 															<xsl:value-of select="@fixedValue"/>																	
 													</rim_dt:fixedValue>
-											</rdf:Description>
+											</rdf:Description>-->
 											<!--											<xsl:element name="{concat('rim_dt:',$type)}">
 													<xsl:attribute name="rdf:about">
 															<xsl:value-of select="$parent_ns"/><xsl:value-of select="'.fixedValue'"/>

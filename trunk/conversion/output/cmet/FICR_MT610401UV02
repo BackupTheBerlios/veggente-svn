@@ -25,7 +25,7 @@
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
-         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype#"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02">
       <rdfs:label>PaymentIntent</rdfs:label>
@@ -45,12 +45,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntent.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.PaymentIntent.d1e40">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">XACT</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#XACT"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -188,12 +183,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatorBillingTaxAccount.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicatorBillingTaxAccount.d1e134">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ACCT</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#ACCT"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -211,12 +201,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatorBillingTaxAccount.moodCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicatorBillingTaxAccount.d1e141">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#EVN"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -271,8 +256,9 @@
    <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.AdjudicatorBillingTaxAccount.code">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.AdjudicatorBillingTaxAccount.code"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.credit">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="ACCT"/>
+					<rim_dt:CS rdf:ID="EVN"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.credit">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntentPayee"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntent"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -284,12 +270,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntentPayee.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.PaymentIntentPayee.d1e182">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CREDIT</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#CREDIT"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -313,8 +294,8 @@
       <rdfs:range rdf:resource=""/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntentPayee"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.debit">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="CREDIT"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.debit">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntentPayor"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntent"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -326,12 +307,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntentPayor.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.PaymentIntentPayor.d1e225">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DEBIT</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#DEBIT"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -355,8 +331,8 @@
       <rdfs:range rdf:resource=""/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntentPayor"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.reasonOf">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="DEBIT"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.reasonOf">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntentReason"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PaymentIntent"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundRelationship"/>
@@ -394,12 +370,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementGroup.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicatedInvoiceElementGroup.d1e287">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INVE</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#INVE"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -417,12 +388,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementGroup.moodCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicatedInvoiceElementGroup.d1e294">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#EVN"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -534,12 +500,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceAuthor.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicatedInvoiceAuthor.d1e358">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AUT</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#AUT"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -633,12 +594,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatorPerson.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicatorPerson.d1e424">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PSN</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#PSN"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -656,12 +612,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatorPerson.determinerCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicatorPerson.d1e431">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INSTANCE</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#INSTANCE"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -716,8 +667,9 @@
    <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.AdjudicatorPerson.name">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#name"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.AdjudicatorPerson.name"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.directAuthority">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="PSN"/>
+					<rim_dt:CS rdf:ID="INSTANCE"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.directAuthority">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.DirectAuthorityOver"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatorRole"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundLink"/>
@@ -729,12 +681,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.DirectAuthorityOver.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.DirectAuthorityOver.d1e464">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DIRAUTH</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#DIRAUTH"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -795,8 +742,9 @@
    <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.InsuranceCarrierRole.id">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.InsuranceCarrierRole.id"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.predecessor">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="DIRAUTH"/>
+					<rim_dt:CS rdf:ID="AUT"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.predecessor">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoicePredecessor"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementGroup"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -808,12 +756,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoicePredecessor.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicatedInvoicePredecessor.d1e529">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SUCC</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#SUCC"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -837,8 +780,8 @@
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementGroup"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoicePredecessor"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.reference1">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="SUCC"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.reference1">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Reference"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementGroup"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -850,12 +793,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Reference.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.Reference.d1e568">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REFR</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#REFR"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -879,8 +817,8 @@
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementGroup"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Reference"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.reference2">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="REFR"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.reference2">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Reference2"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementGroup"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -892,12 +830,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Reference2.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.Reference2.d1e607">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REFR</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#REFR"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -926,8 +859,8 @@
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.InvoiceCoordinationChoice"/>
       <rdfs:comment/>
-   </owl:Class>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.coverage">
+   </owl:Class><rim_dt:CS rdf:ID="REFR"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.coverage">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceCoverage"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementGroup"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -939,12 +872,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceCoverage.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicatedInvoiceCoverage.d1e658">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COVBY</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#COVBY"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -992,12 +920,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PolicyOrAccount.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.PolicyOrAccount.d1e695">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COV</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#COV"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1015,12 +938,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PolicyOrAccount.moodCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.PolicyOrAccount.d1e702">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#EVN"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1088,12 +1006,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PolicyBeneficiary.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.PolicyBeneficiary.d1e734">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BEN</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#BEN"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1125,12 +1038,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.CoveredPartyAsPatient.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.CoveredPartyAsPatient.d1e761">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COVPTY</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#COVPTY"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1194,12 +1102,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.IndirectAuthorithyOver.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.IndirectAuthorithyOver.d1e809">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INDAUTH</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#INDAUTH"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1231,12 +1134,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PersonalRelationship.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.PersonalRelationship.d1e828">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRS</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#PRS"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1254,12 +1152,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PersonalRelationship.code"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.PersonalRelationship.d1e835">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FAMMEMB</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FAMMEMB"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1282,8 +1175,12 @@
    <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.PersonalRelationship.code">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.PersonalRelationship.code"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.holder">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="PRS"/>
+					<rim_dt:CS rdf:ID="FAMMEMB"/>
+					<rim_dt:CS rdf:ID="INDAUTH"/>
+					<rim_dt:CS rdf:ID="COVPTY"/>
+					<rim_dt:CS rdf:ID="BEN"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.holder">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Holder"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PolicyOrAccount"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
@@ -1295,12 +1192,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Holder.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.Holder.d1e866">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HLD</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#HLD"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1332,12 +1224,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PolicyHolder.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.PolicyHolder.d1e893">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POLHOLD</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#POLHOLD"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1382,8 +1269,9 @@
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Entity"/>
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.PolicyHolderChoice"/>
       <rdfs:comment/>
-   </owl:Class>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.author">
+   </owl:Class><rim_dt:CS rdf:ID="POLHOLD"/>
+					<rim_dt:CS rdf:ID="HLD"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.author">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PolicyUnderwriter"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PolicyOrAccount"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
@@ -1395,12 +1283,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.PolicyUnderwriter.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.PolicyUnderwriter.d1e1008">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AUT</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#AUT"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1432,12 +1315,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.CarrierRole.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.CarrierRole.d1e1027">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UNDWRT</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#UNDWRT"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1472,8 +1350,12 @@
    <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.CarrierRole.id">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.CarrierRole.id"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.component">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="UNDWRT"/>
+					<rim_dt:CS rdf:ID="AUT"/>
+					<rim_dt:CS rdf:ID="COV"/>
+					<rim_dt:CS rdf:ID="EVN"/>
+					<rim_dt:CS rdf:ID="COVBY"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.component">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementComponent"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementGroup"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -1521,12 +1403,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Reference4.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.Reference4.d1e1196">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REFR</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#REFR"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1558,12 +1435,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Allowable.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.Allowable.d1e1215">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INVE</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#INVE"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1581,12 +1453,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Allowable.moodCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.Allowable.d1e1222">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DEF</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#DEF"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1625,8 +1492,10 @@
    <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.Allowable.netAmt">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#netAmt"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.Allowable.netAmt"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.outcomeOf">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="INVE"/>
+					<rim_dt:CS rdf:ID="DEF"/>
+					<rim_dt:CS rdf:ID="REFR"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.outcomeOf">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedResultOutcome"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementChoice"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundRelationship"/>
@@ -1664,12 +1533,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResult.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicationResult.d1e1274">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ADJUD</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#ADJUD"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1687,12 +1551,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResult.moodCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicationResult.d1e1281">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#EVN"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1744,12 +1603,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResultTrigger.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicationResultTrigger.d1e1319">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TRIG</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#TRIG"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1789,8 +1643,8 @@
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResultRequiredAct"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResultTrigger"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.pertinentInformation">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="TRIG"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.pertinentInformation">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdditionalPertinentInformation"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResult"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -1838,12 +1692,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Trigger.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.Trigger.d1e1463">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TRIG</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#TRIG"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -1903,12 +1752,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResultRequiredAct.moodCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicationResultRequiredAct.d1e1503">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RQO</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#RQO"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -2056,12 +1900,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.Form.determinerCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.Form.d1e1602">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INSTANCE</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#INSTANCE"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -2116,8 +1955,10 @@
    <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.Form.telecom">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#telecom"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.Form.telecom"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.reference">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="INSTANCE"/>
+					<rim_dt:CS rdf:ID="RQO"/>
+					<rim_dt:CS rdf:ID="TRIG"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.reference">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResultReference"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResult"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -2129,12 +1970,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResultReference.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudicationResultReference.d1e1660">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REFR</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#REFR"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -2163,8 +1999,8 @@
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.InvoiceElementChoice"/>
       <rdfs:comment>MoodCode: PRP - auth, pre-det, cov ext RQO - invoice</rdfs:comment>
-   </owl:Class>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.reasonOf">
+   </owl:Class><rim_dt:CS rdf:ID="REFR"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.reasonOf">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationObservationReason"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationResult"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundRelationship"/>
@@ -2194,8 +2030,9 @@
       <rdfs:range rdf:resource=""/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicationObservationReason"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#source"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.referencedBy">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="ADJUD"/>
+					<rim_dt:CS rdf:ID="EVN"/>
+					<owl:ObjectProperty rdf:ID="FICR_MT610401UV02.referencedBy">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudResultsRef"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudicatedInvoiceElementGroup"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundRelationship"/>
@@ -2207,12 +2044,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudResultsRef.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudResultsRef.d1e1855">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REFR</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#REFR"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -2244,12 +2076,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudResultsGroup.classCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudResultsGroup.d1e1874">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INVE</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#INVE"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -2267,12 +2094,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudResultsGroup.moodCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudResultsGroup.d1e1881">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#EVN"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -2372,12 +2194,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudResultsGroupSummary.typeCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudResultsGroupSummary.d1e1950">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SUMM</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#SUMM"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -2421,12 +2238,7 @@
       <rdfs:subClassOf>
          <owl:Restriction>
             <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#FICR_MT610401UV02.AdjudResultsGroupSummaryData.moodCode"/>
-            <owl:hasValue>
-               <rdf:Description rdf:ID="FICR_MT610401UV02.AdjudResultsGroupSummaryData.d1e1992">
-                  <rdf:type rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
-                  <rim_dt:fixedValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:fixedValue>
-               </rdf:Description>
-            </owl:hasValue>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_MT610401UV02#EVN"/>
          </owl:Restriction>
       </rdfs:subClassOf>
       <rdfs:subClassOf>
@@ -2481,8 +2293,15 @@
    <owl:ObjectProperty rdf:ID="FICR_MT610401UV02.AdjudResultsGroupSummaryData.value">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#value"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/FICR_HD610400UV02#FICR_HD610400UV02.AdjudResultsGroupSummaryData.value"/>
-   </owl:ObjectProperty>
-   <owl:Class rdf:ID="FICR_MT610401UV02.A_AccountPayeeUniversal">
+   </owl:ObjectProperty><rim_dt:CS rdf:ID="EVN"/>
+					<rim_dt:CS rdf:ID="SUMM"/>
+					<rim_dt:CS rdf:ID="INVE"/>
+					<rim_dt:CS rdf:ID="EVN"/>
+					<rim_dt:CS rdf:ID="REFR"/>
+					<rim_dt:CS rdf:ID="INVE"/>
+					<rim_dt:CS rdf:ID="EVN"/>
+					<rim_dt:CS rdf:ID="XACT"/>
+					<owl:Class rdf:ID="FICR_MT610401UV02.A_AccountPayeeUniversal">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT110200UV04#COCT_MT110200UV04.Account"/>
    </owl:Class>
    <owl:Class rdf:ID="FICR_MT610401UV02.A_AccountPayorUniversal">
