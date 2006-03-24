@@ -141,8 +141,8 @@
 		-->
 	<xsl:template match="hl7:class">
 			<owl:Class>
-					<xsl:attribute name="rdf:ID">
-							<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="@name"/>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',$cmet_name)"/>.<xsl:value-of select="@name"/>
 					</xsl:attribute>
 					<xsl:for-each select="hl7:derivationSupplier">
 							<xsl:variable name="derivation_id" select="@staticModelDerivationId"/>
@@ -194,8 +194,8 @@
 					<xsl:copy-of select="document($target_path)//hl7:serializedStaticModel/hl7:ownedEntryPoint/hl7:specializedClass/hl7:class"/>
 			</xsl:variable>
 			<owl:Class>
-					<xsl:attribute name="rdf:ID">
-							<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="@name"/>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',$cmet_name)"/>.<xsl:value-of select="@name"/>
 					</xsl:attribute>
 					<owl:equivalentClass>
 							<xsl:attribute name="rdf:resource">
@@ -210,12 +210,13 @@
 	</xsl:template>
 
 	<!-- TODO: ObjectProperties are associations between CLASSES! -->
+	<!-- Create an instance for every 'fixedValue' value -->
 	<xsl:template match="hl7:attribute" mode="fixed_value">
 			<xsl:if test="@fixedValue">
 					<xsl:text disable-output-escaping="yes">&lt;rim_dt:</xsl:text>
 					<xsl:value-of select="hl7:type/@name"/>
-					<xsl:text> rdf:ID="</xsl:text>
-					<xsl:value-of select="@fixedValue"/>
+					<xsl:text> rdf:about="</xsl:text>
+					<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',@fixedValue)"/>
 					<xsl:text disable-output-escaping="yes">"/&gt;
 					</xsl:text>
 			</xsl:if>
@@ -297,8 +298,8 @@
 	<!-- Attribute=ObjectProperty -->
 	<xsl:template match="hl7:attribute" mode="property">
 			<owl:ObjectProperty>
-					<xsl:attribute name="rdf:ID">
-							<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
+					<xsl:attribute name="rdf:about">
+						<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',$cmet_name)"/>.<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
 					</xsl:attribute>
 					<xsl:for-each select="hl7:derivationSupplier">
 							<xsl:variable name="derivation_id" select="@staticModelDerivationId"/>
@@ -334,8 +335,8 @@
 	<!-- Association=ObjectProperty -->
 	<xsl:template match="hl7:association">
 			<owl:ObjectProperty>
-					<xsl:attribute name="rdf:ID">
-							<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="hl7:targetConnection/@name"/>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',$cmet_name)"/>.<xsl:value-of select="hl7:targetConnection/@name"/>
 					</xsl:attribute>
 					<rdfs:range>
 							<xsl:attribute name="rdf:resource">

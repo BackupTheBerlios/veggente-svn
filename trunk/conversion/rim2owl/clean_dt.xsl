@@ -72,7 +72,9 @@
 	</xsl:template>
 	<xsl:template match="hl7_dt:alias">
 			<owl:Class>
-					<xsl:attribute name="rdf:ID" select="translate(.,'&lt;&gt;','__')"/>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_dt,'#')"/><xsl:value-of select="translate(.,'&lt;&gt;','__')"/>
+					</xsl:attribute>
 					<owl:equivalentClass>
 							<xsl:attribute name="rdf:resource" select="concat($rim_dt,../@rdf:about)"/>
 					</owl:equivalentClass>
@@ -88,7 +90,9 @@
 	</xsl:template>
 	<xsl:template match="hl7_dt:HL7_Data_Value">
 			<owl:Class>
-					<xsl:attribute name="rdf:ID" select="substring-after(translate(@rdf:about,'&lt;&gt;','__'),'#')"/>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_dt,'#')"/><xsl:value-of select="substring-after(translate(@rdf:about,'&lt;&gt;','__'),'#')"/>
+					</xsl:attribute>
 					<rdfs:subClassOf>
 							<xsl:attribute name="rdf:resource" select="concat($rim_dt,'#HL7_Data_Value')"/>
 					</rdfs:subClassOf>
@@ -104,7 +108,9 @@
 	</xsl:template>
 	<xsl:template match="hl7_dt:HL7_Data_Type">
 			<owl:Class>
-					<xsl:attribute name="rdf:ID" select="substring-after(translate(@rdf:about,'&lt;&gt;','__'),'#')"/>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_dt,'#')"/><xsl:value-of select="substring-after(translate(@rdf:about,'&lt;&gt;','__'),'#')"/>
+					</xsl:attribute>
 					<rdfs:subClassOf>
 							<xsl:attribute name="rdf:resource" select="concat($rim_dt,'#HL7_Data_Type')"/>
 					</rdfs:subClassOf>

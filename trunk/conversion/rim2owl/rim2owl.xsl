@@ -74,7 +74,11 @@
 					</owl:imports>
 			</owl:Ontology>
 			<owl:AnnotationProperty rdf:about="&rdfs;comment"/>
-			<owl:Class rdf:ID="RIM_HL7"/>
+			<owl:Class>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_ns,'#')"/><xsl:value-of select="'RIM_HL7'"/>
+					</xsl:attribute>
+			</owl:Class>
 			<xsl:apply-templates select="hl7:ownedSubjectAreaPackage"/>
 			<xsl:apply-templates select="hl7:ownedAssociation"/>
 	</xsl:template>
@@ -86,7 +90,9 @@
 	<xsl:template match="hl7:ownedSubjectAreaPackage">
 			<xsl:variable name="package" select="@name"/>
 			<owl:Class>
-					<xsl:attribute name="rdf:ID" select="@name"/>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_ns,'#')"/><xsl:value-of select="@name"/>
+					</xsl:attribute>
 					<rdfs:subClassOf>
 							<xsl:attribute name="rdf:resource"><xsl:value-of select="$rim_ns"/><xsl:text>#RIM_HL7</xsl:text></xsl:attribute>
 					</rdfs:subClassOf>
@@ -114,8 +120,8 @@
 	<!-- RIM Association -->
 	<xsl:template match="hl7:ownedAssociation">
 			<owl:ObjectProperty>
-					<xsl:attribute name="rdf:ID">
-							<!--		<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>_--><xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_ns,'#')"/><!--		<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>_--><xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
 					</xsl:attribute>
 					<xsl:call-template name="add_info"/>
 					<rdfs:range>
@@ -145,7 +151,9 @@
 			<xsl:param name="parent"/>
 			<xsl:variable name="class_name" select="@name"/>
 			<owl:Class>
-					<xsl:attribute name="rdf:ID"><xsl:value-of select="@name"/></xsl:attribute>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_ns,'#')"/><xsl:value-of select="@name"/>
+					</xsl:attribute>
 					<xsl:call-template name="add_info"/>
 					<xsl:for-each select="/hl7:staticModel/hl7:ownedClass/hl7:class">
 							<xsl:variable name="temp_name" select="@name"/>
@@ -174,8 +182,8 @@
 <!-- Class attribute-->
 	<xsl:template match="hl7:attribute" mode="class">
 			<owl:ObjectProperty>
-					<xsl:attribute name="rdf:ID">
-							<xsl:value-of select="@name"/>
+					<xsl:attribute name="rdf:about">
+							<xsl:value-of select="concat($rim_ns,'#')"/><xsl:value-of select="@name"/>
 					</xsl:attribute>
 					<xsl:call-template name="add_info"/>
 					<rdfs:range>
