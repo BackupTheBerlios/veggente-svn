@@ -3,6 +3,8 @@ WWW_DIR="www"
 main: svn_commit rss copy_rss
 svn_commit: 
 	svn commit
+update:
+	svn co svn+ssh://carenini@svn.berlios.de/svnroot/repos/veggente/trunk/
 rss: 
 	svn --xml log svn+ssh://carenini@svn.berlios.de/svnroot/repos/veggente/trunk > svn_log.xml
 	xsltproc $(WWW_DIR)/svnlog.xslt svn_log.xml > $(WWW_DIR)/devel.rss

@@ -1,6 +1,4 @@
 //gsoap ns service name:	map
-//gsoap ns service style:	rpc
-//gsoap ns service encoding: encoded
 //gsoap ns service namespace:	http://veggente.berlios.de/ns/map.wsdl
 //gsoap ns service location:	http://localhost:15000
 //gsoap ns schema namespace:	urn:veggente_map

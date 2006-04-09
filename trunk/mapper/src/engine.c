@@ -252,7 +252,7 @@ void* engine_queue_daemon(void* manager_data) {
 		mutex_code=pthread_mutex_lock(t->op_queue_mutex);
 
 		while(1) {
-				if (t->op_list==NULL) {
+				if (list_count(t->op_list)==0) {
 						/* Wait if there are no requests */
 						fprintf(stdout,"[Queued] Empty queue, sleeping\n");
 						if (pthread_cond_wait(t->op_queue_signal,t->op_queue_mutex)!=0) {
@@ -262,6 +262,7 @@ void* engine_queue_daemon(void* manager_data) {
 				} 
 				fprintf(stdout,"[Queued] Running...\n");
 /*				if (t->op_count>0) {*/
+				fprintf(stdout,"[Queued] Processing queue...\n");
 						if (t->op_count < t->op_limit) {
 								/* Timed wait*/
 								gettimeofday(&now,NULL);
@@ -380,6 +381,9 @@ void* engine_request_daemon(void* manager_data) {
 				thread_data->soap_env=soap_clone;
 				thread_data->type=REQUEST_THREAD;
 				thread_data->status=THREAD_RUNNING;
+
+				list_add(&(t->op_list),"lista");
+				list_add(&(thread_data->op_list),"thread_data");
 
 				/* Add thread data to list */
 				pthread_mutex_lock(&req_list_lock);
