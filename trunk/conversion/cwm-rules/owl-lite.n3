@@ -1,0 +1,27 @@
+<> <#rcsid> "$Id: owl-rules.n3,v 1.21 2005/09/22 20:41:07 josd Exp $".
+
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix : <http://eulersharp.sourceforge.net/2003/03swap/owl-rules#>.
+
+
+
+### inference rules for Web Ontology Language OWL
+
+### Expansion rules
+
+### Properties
+{?A a ?P.
+	?P rdfs:subClassOf rdf:Property. 
+	?A rdfs:domain ?Q.
+	?R rdfs:subClassOf ?Q} => { ?A rdfs:domain ?R}.
+
+{?P @has owl:inverseOf ?Q. ?S ?P ?O} => {?O ?Q ?S}.
+{?P @has rdf:type owl:SymmetricProperty. ?S ?P ?O} => {?O ?P ?S}.
+
+{?P @has rdf:type owl:TransitiveProperty. ?X ?P ?O. ?S ?P ?X} => {?S ?P ?O}.
+

@@ -1,0 +1,53 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix : <http://eulersharp.sourceforge.net/2003/03swap/owl-rules#>.
+
+### Web Ontology Language OWL
+
+owl:AnnotationProperty rdfs:subClassOf rdf:Property.
+owl:Class @is rdfs:subClassOf @of rdfs:Class; rdfs:subClassOf rdfs:Class.
+owl:DataRange rdfs:subClassOf rdfs:Literal.
+owl:DatatypeProperty rdfs:subClassOf rdf:Property.
+owl:DeprecatedClass rdfs:subClassOf rdfs:Class.
+owl:DeprecatedProperty rdfs:subClassOf rdf:Property.
+owl:FunctionalProperty rdfs:subClassOf rdf:Property.
+owl:InverseFunctionalProperty rdfs:subClassOf owl:ObjectProperty.
+owl:Nothing owl:oneOf rdf:nil.
+owl:ObjectProperty rdfs:subClassOf rdf:Property.
+owl:OntologyProperty rdfs:subClassOf rdf:Property.
+owl:Restriction rdfs:subClassOf owl:Class.
+owl:SymmetricProperty rdfs:subClassOf owl:ObjectProperty.
+owl:Thing @is rdfs:subClassOf @of rdfs:Resource; rdfs:subClassOf rdfs:Resource.
+owl:TransitiveProperty rdfs:subClassOf owl:ObjectProperty.
+
+owl:allValuesFrom rdfs:domain owl:Restriction; rdfs:range rdfs:Class.
+owl:cardinality rdfs:domain owl:Restriction; rdfs:range xsd:nonNegativeInteger; rdfs:subPropertyOf owl:maxCardinality, owl:minCardinality.
+owl:complementOf rdfs:domain owl:Class; rdfs:range owl:Class; rdfs:subPropertyOf owl:disjointWith; a owl:SymmetricProperty.
+owl:differentFrom rdfs:domain owl:Thing; rdfs:range owl:Thing; a owl:SymmetricProperty.
+owl:disjointWith rdfs:domain owl:Class; rdfs:range owl:Class; a owl:SymmetricProperty.
+owl:distinctMembers rdfs:domain owl:AllDifferent; rdfs:range rdf:List.
+owl:hasValue rdfs:domain owl:Restriction; rdfs:range rdfs:Resource.
+owl:intersectionOf rdfs:domain owl:Class; rdfs:range rdf:List.
+owl:inverseOf rdfs:domain owl:ObjectProperty; rdfs:range owl:ObjectProperty; a owl:SymmetricProperty.
+owl:maxCardinality rdfs:domain owl:Restriction; rdfs:range xsd:nonNegativeInteger.
+owl:minCardinality rdfs:domain owl:Restriction; rdfs:range xsd:nonNegativeInteger.
+owl:onProperty rdfs:domain owl:Restriction; rdfs:range rdf:Property.
+owl:oneOf rdfs:domain rdfs:Class; rdfs:range rdf:List.
+owl:someValuesFrom rdfs:domain owl:Restriction; rdfs:range rdfs:Class.
+owl:unionOf rdfs:domain owl:Class; rdfs:range rdf:List.
+
+owl:backwardCompatibleWith rdfs:domain owl:Ontology; rdfs:range owl:Ontology; a owl:OntologyProperty.
+owl:imports rdfs:domain owl:Ontology; rdfs:range owl:Ontology; a owl:OntologyProperty.
+owl:incompatibleWith rdfs:domain owl:Ontology; rdfs:range owl:Ontology; a owl:OntologyProperty.
+owl:priorVersion rdfs:domain owl:Ontology; rdfs:range owl:Ontology; a owl:OntologyProperty.
+owl:versionInfo rdfs:domain rdfs:Resource; rdfs:range rdfs:Resource; a owl:AnnotationProperty.
+
+rdfs:comment a owl:AnnotationProperty.
+rdfs:isDefinedBy a owl:AnnotationProperty.
+rdfs:label a owl:AnnotationProperty.
+rdfs:seeAlso a owl:AnnotationProperty.
+
