@@ -14,12 +14,29 @@
 
 ### Expansion rules
 
-### Properties
+### subClassOf - Domain
 {?A a ?P.
 	?P rdfs:subClassOf rdf:Property. 
 	?A rdfs:domain ?Q.
 	?R rdfs:subClassOf ?Q} => { ?A rdfs:domain ?R}.
 
+### subClassOf - Range
+{?A a ?P.
+	?P rdfs:subClassOf rdf:Property. 
+	?A rdfs:range ?Q.
+	?R rdfs:subClassOf ?Q} => { ?A rdfs:range ?R}.
+
+### subPropertyOf - Domain
+{ 	?A rdfs:subPropertyOf ?B.
+	?X @has rdf:type owl:Class.
+	?A rdfs:domain ?X } => { ?B rdfs:domain ?X }.
+
+### subPropertyOf - Range
+{ 	?A rdfs:subPropertyOf ?B.
+	?Y @has rdf:type owl:Class.
+	?A rdfs:range ?Y } => { ?B rdfs:range ?Y}.
+
+{?A rdfs:subPropertyOf ?B. ?B rdfs:subPropertyOf ?A} => {?A owl:equivalentProperty ?B}.
 {?P @has owl:inverseOf ?Q. ?S ?P ?O} => {?O ?Q ?S}.
 {?P @has rdf:type owl:SymmetricProperty. ?S ?P ?O} => {?O ?P ?S}.
 
