@@ -45,25 +45,27 @@ int list_init(list_data_t* s) {
 
 int list_destroy(list_data_t* s) {
 		list_data_t iter=NULL;
+		list_data_t head=NULL;
 		if (s==(list_data_t*)NULL) return (-1);
 		iter=*s;
+		head=*s;
 		if (iter==NULL) return (0);
 		while(iter->next) {
-				if (list_remove_node(s,&iter)!=0) return (-1);
+				if (list_remove_node(head,&iter)!=0) return (-1);
 				iter=*s;
 		}
-		if (list_remove_node(s,&iter)!=0) return (-1);
+		if (list_remove_node(head,&iter)!=0) return (-1);
 		return (0);
 }
 
-int list_add(list_data_t* s, void *data) {
+int list_add(list_data_t s, void *data) {
 		list_data_t t=NULL;
 		list_data_t head=NULL;
 		list_data_t new_element=NULL;
 		
-		if ((s==(list_data_t*)NULL)||(data==NULL)) return (-1);
-		t=*s;
-		head=*s;
+		if ((s==(list_data_t)NULL)||(data==NULL)) return (-1);
+		t=s;
+		head=s;
 		pthread_mutex_lock(&(head->mutex));
 		t->count=t->count+1;
 		new_element=(list_data_t)calloc(1,sizeof(struct list_data));
@@ -77,16 +79,16 @@ int list_add(list_data_t* s, void *data) {
 		return (0);
 }
 
-int list_add_node(list_data_t* s, list_data_t *node) {
+int list_add_node(list_data_t s, list_data_t *node) {
 		list_data_t iter=NULL;
 		list_data_t head=NULL;
 
-		if ((s==(list_data_t*)NULL)||(node==(list_data_t*)NULL)) return (-1);
-		if ((*s==NULL) && (*node!=NULL)) return (-1);
-		if ((*s==NULL) && (*node==NULL)) return (0);
+		if ((s==(list_data_t)NULL)||(node==(list_data_t*)NULL)) return (-1);
+		if ((s==NULL) && (*node!=NULL)) return (-1);
+		if ((s==NULL) && (*node==NULL)) return (0);
 		
-		iter=*s;
-		head=*s;
+		iter=s;
+		head=s;
 		pthread_mutex_lock(&(head->mutex));
 		iter->count=iter->count+1;
 		while (iter->next) iter=iter->next;
@@ -95,17 +97,17 @@ int list_add_node(list_data_t* s, list_data_t *node) {
 		return (0);
 }
 
-int list_remove_node(list_data_t* s, list_data_t* node) {
+int list_remove_node(list_data_t s, list_data_t* node) {
 		list_data_t iter=NULL;
 		list_data_t head=NULL;
 		list_data_t victim=NULL;
 		
-		if ((s==(list_data_t*)NULL)||(node==(list_data_t*)NULL)) return (-1);
-		if ((*s==NULL) && (*node!=NULL)) return (-1);
-		if ((*s==NULL) && (*node==NULL)) return (0);
+		if ((s==(list_data_t)NULL)||(node==(list_data_t*)NULL)) return (-1);
+		if ((s==NULL) && (*node!=NULL)) return (-1);
+		if ((s==NULL) && (*node==NULL)) return (0);
 		
-		iter=*s;
-		head=*s;
+		iter=s;
+		head=s;
 		pthread_mutex_lock(&(head->mutex));
 		while (iter->next) {
 				if (iter->next==*node) {
@@ -123,18 +125,18 @@ int list_remove_node(list_data_t* s, list_data_t* node) {
 		
 }
 
-int list_remove_data(list_data_t* s, void* data,int (*compare)(void*, void*)) {
+int list_remove_data(list_data_t s, void* data,int (*compare)(void*, void*)) {
 		list_data_t iter1,iter2;
 		list_data_t head=NULL;
 
-		if ((s==(list_data_t*)NULL)||(data==NULL)) return (-1);
-		if (*s==NULL) return (-1);
+		if ((s==(list_data_t)NULL)||(data==NULL)) return (-1);
+		if (s==NULL) return (-1);
 
-		iter1=*s;
-		head=*s;
+		iter1=s;
+		head=s;
 		pthread_mutex_lock(&(head->mutex));
 		if (compare(&(iter1->payload),&data)==0) {
-				*s=(*s)->next;
+				head=head->next;
 				free(iter1);
 				return(0);
 		}
@@ -153,17 +155,18 @@ int list_remove_data(list_data_t* s, void* data,int (*compare)(void*, void*)) {
 		return (-1);
 }
 
-int list_move_node(list_data_t *source_list, list_data_t *dest_list, list_data_t* node) {
+/*TODO: ci vanno anche i controlli sulla lista di destinazione? */
+int list_move_node(list_data_t source_list, list_data_t dest_list, list_data_t* node) {
 		list_data_t iter=NULL;
 		list_data_t head=NULL;
 		list_data_t victim=NULL;
 		
-		if ( (source_list==(list_data_t*)NULL) || (node==(list_data_t*)NULL) ) return (-1);
-		if ((*source_list==NULL) && (*node!=NULL)) return (-1);
-		if ((*source_list==NULL) && (*node==NULL)) return (0);
+		if ((source_list==(list_data_t)NULL) || (node==(list_data_t*)NULL) || (dest_list==(list_data_t)NULL) ) return (-1);
+		if ((source_list==NULL) && (*node!=NULL)) return (-1);
+		if ((source_list==NULL) && (*node==NULL)) return (0);
 	
-		iter=*source_list;
-		head=*source_list;
+		iter=source_list;
+		head=source_list;
 		pthread_mutex_lock(&(head->mutex));
 		while (iter->next) {
 				if (iter->next==*node) {
@@ -205,23 +208,23 @@ int list_find(list_data_t* s, list_data_t *result,void *data,int (*compare)(void
 		return (-1);
 }
 
-int list_next(list_data_t *s,list_data_t* result) {
+int list_next(list_data_t s,list_data_t* result) {
 		*result=(*result)->next;
 		return (0);
 }
 
-int list_next_from_node(list_data_t *s, list_data_t* node, list_data_t* result) {
+int list_next_from_node(list_data_t s, list_data_t* node, list_data_t* result) {
 		list_data_t iter=NULL;
 		list_data_t head=NULL;
 	
-		if ((s==(list_data_t*)NULL)||(*s==(list_data_t)NULL)) return (-1);
+		if (s==(list_data_t)NULL) return (-1);
 	
 		if (*node==(list_data_t)NULL) {
-				*result=*s;
+				*result=s;
 				return (0);
 		}
-		iter=*s;
-		head=*s;
+		iter=s;
+		head=s;
 		pthread_mutex_lock(&(head->mutex));
 		if (iter==*node) {
 				*result=iter->next;
@@ -271,10 +274,10 @@ int list_next_from_data(list_data_t *s, list_data_t* result,void* data,int (*com
 		return(0);
 }
 
-int list_get_payload(list_data_t* node, void** payload) {
+int list_get_payload(list_data_t node, void** payload) {
 		list_data_t t=NULL;
-		if (node==(list_data_t*)NULL) return (-1);
-		t=*node;
+		if (node==(list_data_t)NULL) return (-1);
+		t=node;
 		if (t==(list_data_t)NULL) {
 				*payload=NULL;
 				return (0);
@@ -295,9 +298,9 @@ int  list_count(list_data_t s) {
 }
 
 /* Don't use, only for debug purpose */
-int list_dump(list_data_t* s) {
-		list_data_t t=*s;
-		if (s==(list_data_t*)NULL) return (-1);
+int list_dump(list_data_t s) {
+		list_data_t t=s;
+		if (s==(list_data_t)NULL) return (-1);
 		if (t==NULL) {
 				fprintf(stdout,"Lista vuota\n");
 				return (0);

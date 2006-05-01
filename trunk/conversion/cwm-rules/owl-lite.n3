@@ -36,9 +36,44 @@
 	?Y @has rdf:type owl:Class.
 	?A rdfs:range ?Y } => { ?B rdfs:range ?Y}.
 
-{?A rdfs:subPropertyOf ?B. ?B rdfs:subPropertyOf ?A} => {?A owl:equivalentProperty ?B}.
-{?P @has owl:inverseOf ?Q. ?S ?P ?O} => {?O ?Q ?S}.
-{?P @has rdf:type owl:SymmetricProperty. ?S ?P ?O} => {?O ?P ?S}.
+{?A rdfs:subPropertyOf ?B. 
+	?B rdfs:subPropertyOf ?A} => {?A owl:equivalentProperty ?B}.
+	
+{?P @has owl:inverseOf ?Q.
+	 ?S ?P ?O} => {?O ?Q ?S}.
+	
+{?P @has rdf:type owl:SymmetricProperty.
+	 ?S ?P ?O} => {?O ?P ?S}.
+	
 
-{?P @has rdf:type owl:TransitiveProperty. ?X ?P ?O. ?S ?P ?X} => {?S ?P ?O}.
+{?P @has rdf:type owl:TransitiveProperty.
+	 ?X ?P ?O.
+	 ?S ?P ?X} => {?S ?P ?O}.
+	
+{?P @has rdf:type owl:FunctionalProperty.
+	 ?S ?P ?X.
+	 ?S ?P ?Y} => {?X owl:sameAs ?Y}.
+	
+{?A owl:onProperty ?P, ?Q; owl:hasValue ?V.
+	 ?P @has rdfs:domain ?A; a owl:FunctionalProperty.
+	 ?Q rdfs:domain ?D; a owl:FunctionalProperty} => {?P rdfs:subPropertyOf ?Q}.
+	
+{?A owl:onProperty ?P; owl:hasValue ?V.
+	 ?D owl:equivalentClass ?A.
+	 ?P @has rdfs:domain ?D; a owl:FunctionalProperty.
+	 ?B owl:onProperty ?Q; owl:hasValue ?V.
+	 ?D owl:equivalentClass ?B.
+	 ?Q @has rdfs:domain ?D; a owl:FunctionalProperty} => {?P rdfs:subPropertyOf ?Q}.
+	
+{?B @has owl:unionOf ?Y.
+	 ?A @has owl:unionOf ?X.
+	 ?Y :includes ?X} => {?A rdfs:subClassOf ?B}.
+	
+{?P owl:inverseOf ?Q.
+	 ?Q a owl:FunctionalProperty} => {?P a owl:InverseFunctionalProperty}.
+	
+{?P owl:inverseOf ?Q.
+	 ?Q a owl:InverseFunctionalProperty} => {?P a owl:FunctionalProperty}.
+	
+{?P rdfs:subPropertyOf ?Q; owl:inverseOf ?Q} => {?P a owl:SymmetricProperty}.
 
