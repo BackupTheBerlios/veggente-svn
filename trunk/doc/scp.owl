@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY openecg_scp "http://veggente.berlios.de/ns/openecg_scp">
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="&openecg_scp;"
+         xmlns:owl="&owl;"
+         xmlns:rdf="&rdf;"
+         xmlns:rdfs="&rdfs;">
+
+<!-- Ontology Information -->
+  <owl:Ontology rdf:about=""
+                rdfs:label="OpenECG SCP"/>
+
+<!-- Classes -->
+  <owl:Class rdf:about="#Beat"/>
+  <owl:Class rdf:about="#Device"/>
+  <owl:Class rdf:about="#Diagnosis"/>
+  <owl:Class rdf:about="#DrugReferral"/>
+  <owl:Class rdf:about="#ECG">
+    <owl:unionOf rdf:parseType="Collection">
+      <rdf:Description rdf:about="#ECGData"/>
+      <rdf:Description rdf:about="#Header"/>
+      <rdf:Description rdf:about="#TOC"/>
+    </owl:unionOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="#ECGData">
+    <owl:unionOf rdf:parseType="Collection">
+      <rdf:Description rdf:about="#Diagnosis"/>
+      <rdf:Description rdf:about="#EncodedBeat"/>
+      <rdf:Description rdf:about="#GlobalMeasurements"/>
+      <rdf:Description rdf:about="#Lead"/>
+      <rdf:Description rdf:about="#LeadMeasurements"/>
+      <rdf:Description rdf:about="#ManufacturerDiagnostic"/>
+      <rdf:Description rdf:about="#QRSLocation"/>
+      <rdf:Description rdf:about="#RRData"/>
+    </owl:unionOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="#EncodedBeat"
+             rdfs:label="Encoded reference beat data"/>
+  <owl:Class rdf:about="#GlobalMeasurements"/>
+  <owl:Class rdf:about="#Header"/>
+  <owl:Class rdf:about="#Lead"
+             rdfs:label="ECG lead definition"/>
+  <owl:Class rdf:about="#LeadMeasurements"/>
+  <owl:Class rdf:about="#ManufacturerDiagnostic"/>
+  <owl:Class rdf:about="#Patient"/>
+  <owl:Class rdf:about="#PatientHistory"/>
+  <owl:Class rdf:about="#QRSLocation">
+    <rdfs:label>QRS locations and beat annotation information</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#RRData"
+             rdfs:label="Rhytm and Residual Data"/>
+  <owl:Class rdf:about="#TOC"/>
+
+<!-- Datatypes -->
+  <rdfs:Datatype rdf:about="&xsd;NMTOKEN"/>
+  <rdfs:Datatype rdf:about="&xsd;boolean"/>
+  <rdfs:Datatype rdf:about="&xsd;dateTime"/>
+  <rdfs:Datatype rdf:about="&xsd;float"/>
+  <rdfs:Datatype rdf:about="&xsd;int"/>
+  <rdfs:Datatype rdf:about="&xsd;integer"/>
+  <rdfs:Datatype rdf:about="&xsd;positiveInteger"/>
+  <rdfs:Datatype rdf:about="&xsd;short"/>
+  <rdfs:Datatype rdf:about="&xsd;string"/>
+  <rdfs:Datatype rdf:about="&xsd;time"/>
+  <rdfs:Datatype rdf:about="&xsd;unsignedLong"/>
+
+<!-- Annotation Properties -->
+  <owl:AnnotationProperty rdf:about="&rdfs;label"/>
+
+<!-- Datatype Properties -->
+  <owl:DatatypeProperty rdf:about="#Beat.offset">
+    <rdfs:domain rdf:resource="#Beat"/>
+    <rdfs:range rdf:resource="&xsd;float"/>
+    <rdfs:subPropertyOf rdf:resource="#offset"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Beat.onset">
+    <rdfs:domain rdf:resource="#Beat"/>
+    <rdfs:range rdf:resource="&xsd;float"/>
+    <rdfs:subPropertyOf rdf:resource="#onset"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Beat.type">
+    <rdfs:domain rdf:resource="#Beat"/>
+    <rdfs:range rdf:resource="&xsd;short"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Diagnosis.diagnosisContent">
+    <rdfs:domain rdf:resource="#Diagnosis"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#ECG.checksum">
+    <rdfs:domain rdf:resource="#ECG"/>
+    <rdfs:range rdf:resource="&xsd;integer"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#ECG.size">
+    <rdfs:domain rdf:resource="#ECG"/>
+    <rdfs:range rdf:resource="&xsd;unsignedLong"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#ECGData.encoding">
+    <rdfs:domain rdf:resource="#ECGData"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#ECGData.lead">
+    <rdfs:domain rdf:resource="#ECGData"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#EncodedBeat.avm">
+    <rdfs:domain rdf:resource="#EncodedBeat"/>
+    <rdfs:subPropertyOf rdf:resource="#avm"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#EncodedBeat.encodingInfo">
+    <rdfs:domain rdf:resource="#EncodedBeat"/>
+    <rdfs:subPropertyOf rdf:resource="#info"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#EncodedBeat.sampleTimeInterval">
+    <rdfs:domain rdf:resource="#EncodedBeat"/>
+    <rdfs:range rdf:resource="&xsd;float"/>
+    <rdfs:subPropertyOf rdf:resource="#sampleTime"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.additionalMeasurements">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#info"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.angular_P">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#angular"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.angular_QRS">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#angular"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.angular_T">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#angular"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.averagePP">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:range rdf:resource="&xsd;float"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.averageRR">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:range rdf:resource="&xsd;float"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.beatTypeInfo">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#info"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.flag">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:range rdf:resource="&xsd;boolean"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.pacemakerSpikes">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.ptrP_offset">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#offset"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.ptrP_onset">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#onset"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.ptrQRS_offset">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#offset"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.ptrQRS_onset">
+    <rdfs:domain rdf:resource="#GlobalMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#onset"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#GlobalMeasurements.ptrT_offset">
+    <rdfs:subPropertyOf rdf:resource="#offset"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Lead.code">
+    <rdfs:domain rdf:resource="#Lead"/>
+    <rdfs:range rdf:resource="&xsd;NMTOKEN"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Lead.intervalEnd">
+    <rdfs:domain rdf:resource="#Lead"/>
+    <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Lead.intervalStart">
+    <rdfs:domain rdf:resource="#Lead"/>
+    <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#LeadMeasurement.Pmorphology">
+    <rdfs:subPropertyOf rdf:resource="#morphology"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#LeadMeasurement.QRSduration">
+    <rdfs:domain rdf:resource="#LeadMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#duration"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#LeadMeasurement.Qamplitude">
+    <rdfs:domain rdf:resource="#LeadMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#amplitude"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#LeadMeasurement.Ramplitude">
+    <rdfs:domain rdf:resource="#LeadMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#amplitude"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#LeadMeasurement.Rduration">
+    <rdfs:domain rdf:resource="#LeadMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#duration"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#LeadMeasurement.Tmorphology">
+    <rdfs:subPropertyOf rdf:resource="#morphology"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#LeadMeasurement.manufacturerMeasure"/>
+  <owl:DatatypeProperty rdf:about="#LeadMeasurement.otherMeasurements">
+    <rdfs:domain rdf:resource="#LeadMeasurements"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#LeadMeasurements.Pduration">
+    <rdfs:domain rdf:resource="#LeadMeasurements"/>
+    <rdfs:subPropertyOf rdf:resource="#duration"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#ManufacturerDiagnostic.manufacturerInfo">
+    <rdfs:domain rdf:resource="#ManufacturerDiagnostic"/>
+    <rdfs:subPropertyOf rdf:resource="#info"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Patient.age">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Patient.birthdate">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="&xsd;dateTime"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Patient.height">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Patient.id_number">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Patient.name">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Patient.sex">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="&xsd;NMTOKEN"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#Patient.weight">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="&xsd;positiveInteger"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#RRData.avm">
+    <rdfs:domain rdf:resource="#RRData"/>
+    <rdfs:subPropertyOf rdf:resource="#avm"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#RRData.compressionOpts">
+    <rdfs:domain rdf:resource="#RRData"/>
+    <rdfs:range rdf:resource="&xsd;int"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#RRData.enconding">
+    <rdfs:domain rdf:resource="#RRData"/>
+    <rdfs:subPropertyOf rdf:resource="#info"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#RRData.sampleTime">
+    <rdfs:domain rdf:resource="#RRData"/>
+    <rdfs:subPropertyOf rdf:resource="#sampleTime"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#amplitude">
+    <rdfs:range rdf:resource="&xsd;float"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#angular">
+    <rdfs:range rdf:resource="&xsd;float"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#avm">
+    <rdfs:range rdf:resource="&xsd;integer"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#deviceInfo">
+    <rdfs:domain rdf:resource="#Device"/>
+    <rdfs:subPropertyOf rdf:resource="#info"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#drugInfo">
+    <rdfs:domain rdf:resource="#DrugReferral"/>
+    <rdfs:subPropertyOf rdf:resource="#info"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#duration">
+    <rdfs:range rdf:resource="&xsd;time"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#ecgSeqNumber">
+    <rdfs:domain rdf:resource="#Header"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#info">
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#medicalHistory">
+    <rdfs:domain rdf:resource="#PatientHistory"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#morphology">
+    <rdfs:range rdf:resource="&xsd;string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#offset">
+    <rdfs:range rdf:resource="&xsd;float"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#onset">
+    <rdfs:range rdf:resource="&xsd;float"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#referralInfo">
+    <rdfs:domain rdf:resource="#DrugReferral"/>
+    <rdfs:subPropertyOf rdf:resource="#info"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#sampleTime">
+    <rdfs:range rdf:resource="&xsd;float"/>
+  </owl:DatatypeProperty>
+
+<!-- Object Properties -->
+  <owl:ObjectProperty rdf:about="#ECG.diagnosis">
+    <rdfs:domain rdf:resource="#ECGData"/>
+    <rdfs:range rdf:resource="#Diagnosis"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#ECGData.encodedReferenceBeat">
+    <rdfs:domain rdf:resource="#ECGData"/>
+    <rdfs:range rdf:resource="#EncodedBeat"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#Header.deviceInfo">
+    <rdfs:domain rdf:resource="#Header"/>
+    <rdfs:range rdf:resource="#Device"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#Header.drugsSection">
+    <rdfs:domain rdf:resource="#Header"/>
+    <rdfs:range rdf:resource="#DrugReferral"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#Header.patientID">
+    <rdfs:domain rdf:resource="#Header"/>
+    <rdfs:range rdf:resource="#Patient"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#Patient.history">
+    <rdfs:domain rdf:resource="#Patient"/>
+    <rdfs:range rdf:resource="#PatientHistory"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#QRSLocations.beat">
+    <rdfs:domain rdf:resource="#QRSLocation"/>
+    <rdfs:range rdf:resource="#Beat"/>
+  </owl:ObjectProperty>
+</rdf:RDF>
