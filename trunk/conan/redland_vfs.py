@@ -41,13 +41,13 @@ class VFS(object):
         
         if (uri==None) or (uri==''): 
             return cwm_model
-        context_stream=self.model.as_stream_context()
+        context_stream=self.model.as_stream_context(RDF.Node(RDF.Uri(uri)))
+#        context_stream=self.model.as_stream_context()
         if context_stream is None:
             print "URI"+uri+"Not found"
         else:
             for (st,con) in context_stream:
-                if str(con)==('['+uri+']'):
-                    self.formula.add(self.convert(st.subject),self.convert(st.predicate),self.convert(st.object))
+                self.formula.add(self.convert(st.subject),self.convert(st.predicate),self.convert(st.object))
         return self.formula
 
     def convert(self, s):
@@ -58,12 +58,11 @@ class VFS(object):
         if s.is_literal():
             what =  str(s._get_literal_value()['string'])
             lang = str(s._get_literal_value()['language'])
-            datatype=str(s._get_literal_value()['datatype'])
+            datatype=s._get_literal_value()['datatype']
+            if (datatype!=None)and(datatype!=''):
+                dt = self.store.newSymbol(str(datatype))
             if (lang == '') or (lang==None):
                 lang=None
-            if not (datatype is None):
-                dt = self.store.newSymbol(datatype)
-            #if (datatype != '') and (datatype!=None):
         elif s.is_blank():
             b_uri=s._get_blank_identifier()
             try:
