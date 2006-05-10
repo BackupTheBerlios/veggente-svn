@@ -2,6 +2,7 @@
 
 from os import sys
 import RDF
+import SOAPpy
 
 # Standard RDF repository
 class Repository(object):
@@ -32,7 +33,7 @@ class Repository(object):
         self.model.sync()
 
     #public:
-    def add_document(self, uri,  context=None):
+    def add_document(self, uri,  context=None, overwrite=False):
         """
         @uri:char*
         @context:char*
@@ -46,6 +47,8 @@ class Repository(object):
                 context_node=RDF.Node(RDF.Uri(string=uri))
         else:
                 context_node=RDF.Node(RDF.Uri(context))
+        if overwrite and self.remove_statements_with_context(uri)!=0:
+                return -1
         for s in self.parser.parse_as_stream(current_uri,current_uri):
                 self.model.add_statement(s,context_node)
         self.model.sync()
@@ -58,8 +61,7 @@ class Repository(object):
         @context:char*
         """
         if (context!=''):
-                if (self.model.remove_statements_with_context(RDF.Uri(context))!=0):
-                        print "Error removing URI "+context
+            return self.model.remove_statements_with_context(RDF.Uri(context))
         return None
     
     def query_model(self, query_str):
@@ -108,6 +110,9 @@ class Repository(object):
 if __name__=="__main__":
         print "Veggente project: Conan RDF repository"
         repository=Repository('conan','.')
-        #repository.add_document('http://veggente.berlios.de/ns/RIMOntology')
-#        repository.add_document('file:///tmp/foaf.rdf')
+        soap_port=10000
+        SOAPpy.Config.simplify_objects=1
+        soap_server=SOAPpy.SOAPServer(('localhost',soap_port))
+        soap_server.registerObject(repository)
         repository.check_documents()
+        soap_server.serve_forever()
