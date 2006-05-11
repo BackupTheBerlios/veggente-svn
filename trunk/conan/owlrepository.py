@@ -23,7 +23,7 @@ class OWLRepository(Repository):
 
     def add_ontology(self, uri, think=True, overwrite=True):
         """
-        @uri:string : ontology uri
+        uri:string : ontology uri
         @overwrite:boolean   : if True overwrite previously stored ontology
         Returns:
             0 on success
@@ -46,7 +46,7 @@ class OWLRepository(Repository):
     def remove_document(self,uri,recursive=False):
         """
         Removes an ontology and its inferred triples
-        @uri:string : ontology uri
+        uri:string : ontology uri
         Returns:
             0 on success
             -1 on failure
@@ -67,8 +67,8 @@ class OWLRepository(Repository):
         
     def add_instance_document(self, uri, think=True, overwrite=True):
         """
-        @uri:string : document uri
-        @overwrite:boolean   : if True overwrite previously stored ontology
+        uri:string : document uri
+        overwrite:boolean   : if True overwrite previously stored ontology
         Returns:
             0 on success
             -1 on failure
@@ -81,8 +81,8 @@ class OWLRepository(Repository):
     
     def exec_ontology_inference(self, original_uri, uri_list=[], overwrite=False):
         """
-        @uri:string : ontology uri
-        @uri_list[]:string[] : list of import uri
+        uri:string : ontology uri
+        uri_list[]:string[] : list of import uri
         @overwrite:boolean   : if True overwrite previously inferred data
         Returns:
             list of statements
@@ -145,8 +145,12 @@ class OWLRepository(Repository):
 
 def usage():
     print "Veggente project: Conan OWL repository"
-    # TODO: write cli help
-
+    print "owlrepository [-h] [-d] [-v] [-p n]"
+    print "-h: print this help"
+    print "-v: show version"
+    print "-d: debug flag"
+    print "-p port: start the server on a specified port"
+    
 def version():
     print "Veggente project: Conan OWL repository v. "+__version__
 
