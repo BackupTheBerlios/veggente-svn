@@ -74,27 +74,12 @@ class Repository(object):
             return q.execute(self.model)
         return None
     
-    def check_documents(self):
+    def list_documents(self):
         """
         Lists documents in store
         """
-        print "Stored URI list:"
-        for i in self.model.get_contexts():
-            print i.uri
-        return None
+        return self.model.get_contexts()
 
-    def check_class(self, uri):
-        """
-        @uri:char*
-        """
-        return None
-    
-    def check_property(self, uri): 
-        """
-        @uri:char*
-        """
-        return None
-    
     def __init_db(self):
         storage_options="hash-type='bdb',contexts='yes',dir='"+self.db_dir+"'"
         self.storage=RDF.Storage(storage_name="hashes",
