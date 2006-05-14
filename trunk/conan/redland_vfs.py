@@ -39,9 +39,9 @@ class VFS(object):
         self.db_dir=db
         self.db_name=dbname
         print "dir: "+self.db_dir+" dbname: "+self.db_name
-        self.storage=RDF.Storage(storage_name="hashes",
+        self.storage=RDF.Storage(storage_name="sqlite",
                 name=self.db_name,
-                options_string="write='false',hash-type='bdb',contexts='yes',dir='"+self.db_dir+"'")
+                options_string="write='false',contexts='yes',dir='"+self.db_dir+"'")
         if self.storage==None:
             raise "Failed opening storage"
         self.model=RDF.Model(self.storage)
@@ -60,7 +60,6 @@ class VFS(object):
         if (uri==None) or (uri==''): 
             return cwm_model
         context_stream=self.model.as_stream_context(RDF.Node(RDF.Uri(uri)))
-#        context_stream=self.model.as_stream_context()
         if context_stream is None:
             print "URI"+uri+"Not found"
         else:

@@ -17,13 +17,14 @@ class OWLRepository(Repository):
     """
     
     debug_flag=True
+    inf_prefix='think_'
     
     # These two variables have to be defined in some config file!!!
     owl_classes='http://veggente.berlios.de/think/owl.n3'
     owl_rules='http://veggente.berlios.de/think/owl_rules.n3'
     instance_rules='http://veggente.berlios.de/think/instance_rules.n3'
 
-    def add_ontology(self, uri, overwrite=True):
+    def add_ontology(self, uri, overwrite=False):
         """
         uri:string : ontology uri
         @overwrite:boolean   : if True overwrite previously stored ontology
@@ -34,11 +35,18 @@ class OWLRepository(Repository):
         if (uri is None) or (uri==''):
             return -1
         if self.isPresent(uri):
-            if overwrite==True:
+            print "Document %s is in store"%uri
+            inf_onto=self.isPresent(inf_prefix+uri)
+            if (overwrite==True) and (inf_onto==True):
                 self.remove_ontology(uri,recursive=False)
+            if (overwrite==True) and (inf_onto==False):
+                self.remove_document(uri)
+            if (overwrite==False) and (inf_onto==False):
+
             else:
                 return 0
-        Repository.add_document(uri)
+        print "Document %s is NOT in store, downloading..."%uri
+        self.add_document(uri)
         import_list=self.find_imports(uri)
         for doc in import_list:
             self.add_ontology(doc,False)
@@ -46,7 +54,7 @@ class OWLRepository(Repository):
         if inferred_statements is None:
             return -1
         for s in inferred_statements:
-            self.model.add_statement(s,RDF.Node(RDF.Uri('think_'+uri)))
+            self.model.add_statement(s,RDF.Node(RDF.Uri(inf_prefix+uri)))
         return 0
 
     def remove_ontology(self,uri,recursive=False):
@@ -59,7 +67,7 @@ class OWLRepository(Repository):
         """
         if (uri is None) or (uri==''):
             return -1
-        if (Repository.remove_document(uri)==0 and Repository.remove_document('think_'+uri)==0):
+        if (self.remove_document(uri)==0 and self.remove_document(inf_prefix+uri)==0):
             if debug:
                 print 'After remove'
                 print self.list_documents()
@@ -84,14 +92,14 @@ class OWLRepository(Repository):
         if (uri is None) or (uri==''):
             return -1
         if ontologies==[]:
-            return Repository.add_document(uri)
+            return self.add_document(uri)
         for o in ontologies:
            self.add_ontology(o,False)
         inferred_statements=self.exec_instance_inference(uri, ontologies, overwrite)
         if inferred_statements is None:
             return -1
         for s in inferred_statements:
-            self.model.add_statement(s,RDF.Node(RDF.Uri('think_'+uri)))
+            self.model.add_statement(s,RDF.Node(RDF.Uri(inf_prefix+uri)))
         return 0
 
     def remove_instance_document(self,uri):
@@ -104,7 +112,7 @@ class OWLRepository(Repository):
         """
         if (uri is None) or (uri==''):
             return -1
-        if (Repository.remove_document(uri)==0 and Repository.remove_document('think_'+uri)==0):
+        if (self.remove_document(uri)==0 and self.remove_document(inf_prefix+uri)==0):
             return 0
         else:
             return -1
@@ -118,30 +126,31 @@ class OWLRepository(Repository):
         Returns:
             list of statements
         """
-        if (uri is None) or (uri==''):
+        if (original_uri is None) or (original_uri==''):
             return None
         cmd=[]
         output=StringWriter()
         # I know it this UGLY, but if it works...
         cmd.append('cwm')
         cmd.append('--rdf')
-        cmd.append(self.__find_location(uri))
+        cmd.append(self.__find_location(original_uri))
         for i in uri_list:
             cmd.append(self.__find_location(i))
-            if self.isPresent('think_'+i):
-                cmd.append(self.__find_location('think_'+i))
-        cmd.append(' --n3 ')
+            if self.isPresent(inf_prefix+i):
+                cmd.append(self.__find_location(inf_prefix+i))
+        cmd.append('--n3')
         cmd.append(self.owl_classes)
         cmd.append('--filter='+self.owl_rules)
         cmd.append('--think')
         cmd.append('--ugly')
         cmd.append('--purge') 
         cmd.append('--rdf')
-        cwm.doCommand(cmd,output)
+        print "Executing inference on document %s, params:"%original_uri
+        swap.cwm.doCommand(cmd,output)
         cwm_out=output.getContent()
         if (cwm_out is None) or (cwm_out==[]):
             return None
-        return self.parser.parse_string_as_stream(cwm_out,uri)
+        return self.parser.parse_string_as_stream(cwm_out,original_uri)
 
     # TODO: move as an inner class method?
     def exec_instance_inference(self, original_uri, uri_list=[], overwrite=False):
@@ -152,30 +161,31 @@ class OWLRepository(Repository):
         Returns:
             list of statements
         """
-        if (uri is None) or (uri==''):
+        if (original_uri is None) or (original_uri==''):
             return None
         cmd=[]
         output=StringWriter()
         # I know it this UGLY, but if it works...
         cmd.append('cwm')
         cmd.append('--rdf')
-        cmd.append(self.__find_location(uri))
+        cmd.append(self.__find_location(original_uri))
         for i in uri_list:
             cmd.append(self.__find_location(i))
-            if self.isPresent('think_'+i):
-                cmd.append(self.__find_location('think_'+i))
-        cmd.append(' --n3 ')
+            if self.isPresent(inf_prefix+i):
+                cmd.append(self.__find_location(inf_prefix+i))
+        cmd.append('--n3')
         cmd.append(self.owl_classes)
         cmd.append('--filter='+self.instance_rules)
         cmd.append('--think')
         cmd.append('--ugly')
         cmd.append('--purge') 
         cmd.append('--rdf')
-        cwm.doCommand(cmd,output)
+        print "Executing inference on document %s, params:"%original_uri
+        swap.cwm.doCommand(cmd,output)
         cwm_out=output.getContent()
         if (cwm_out is None) or (cwm_out==[]):
             return None
-        return self.parser.parse_string_as_stream(cwm_out,uri)
+        return self.parser.parse_string_as_stream(cwm_out,original_uri)
     
     def __find_location(self,uri):
         """
@@ -194,12 +204,12 @@ class OWLRepository(Repository):
         st=RDF.Statement(subject=RDF.Node(uri_string=uri),
                 predicate=RDF.Node(uri_string='http://www.w3.org/2002/07/owl#imports'),
                 object=None)
-        global_imports=self.find_statements(st,uri)
+        global_imports=self.model.find_statements(st,RDF.Node(RDF.Uri(uri)))
         if global_imports is None:
             return None
         doc_imports=[]
-        for i in global_imports:
-            doc_imports.append(str(m.uri))
+        for m in global_imports:
+            doc_imports.append(str((m.object).uri))
         return doc_imports
     
 def usage():
@@ -237,10 +247,11 @@ if __name__=="__main__":
     print "Starting repository"
     repository=OWLRepository('conan')
     repository.debug_flag=debug
+    for i in  repository.list_documents():
+        print i
+    repository.add_ontology('http://veggente.berlios.de/ns/cmet/PORT_MT020001UV01',False)
     print "Starting SOAP interface on port "+str(soap_port)
     SOAPpy.Config.simplify_objects=1
     soap_server=SOAPpy.SOAPServer(('localhost',soap_port))
     soap_server.registerObject(repository)
-    for i in  repository.list_documents():
-        print i
     soap_server.serve_forever()

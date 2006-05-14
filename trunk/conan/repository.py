@@ -22,7 +22,7 @@ class Repository(object):
         self.db_dir=db
         if (dbname!=None) and (dbname!=''):
             self.db_name=dbname
-        self.parser=RDF.Parser('raptor')
+        self.parser=RDF.Parser(name='rdfxml')
         if self.parser is None:
                 raise "Failed initializing RDF parser"
         if (self.__init_db()==0):
@@ -47,7 +47,10 @@ class Repository(object):
                 context_node=RDF.Node(RDF.Uri(string=uri))
         else:
                 context_node=RDF.Node(RDF.Uri(context))
-        if overwrite and self.remove_statements_with_context(uri)!=0:
+        if (overwrite==False) and (self.isPresent(uri)):
+            return 0
+        if overwrite:
+            if self.remove_statements_with_context(uri)!=0:
                 return -1
         for s in self.parser.parse_as_stream(current_uri,current_uri):
                 self.model.add_statement(s,context_node)
@@ -80,9 +83,20 @@ class Repository(object):
         """
         return self.model.get_contexts()
 
+    def isPresent(self,uri):
+        """
+        Returns True if uri is present in context list
+        """
+        if (uri is None) or (uri==''):
+            return False
+        for i in self.model.get_contexts():
+            if str(i.uri)==uri:
+                return True
+        return False
+
     def __init_db(self):
-        storage_options="hash-type='bdb',contexts='yes',dir='"+self.db_dir+"'"
-        self.storage=RDF.Storage(storage_name="hashes",
+        storage_options="contexts='yes',dir='"+self.db_dir+"'"
+        self.storage=RDF.Storage(storage_name="sqlite",
                         name=self.db_name,
                         options_string=storage_options)
         if self.storage is None:

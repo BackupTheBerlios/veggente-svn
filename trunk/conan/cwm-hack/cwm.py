@@ -165,6 +165,7 @@ rdf/xml files. Note that this requires rdflib.
         from swap import  myStore
 
         # These would just be attributes if this were an object
+        print fargs
         global _store
         global workingContext
         option_need_rdf_sometime = 0  # If we don't need it, don't import it
