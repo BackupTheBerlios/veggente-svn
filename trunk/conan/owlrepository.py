@@ -36,13 +36,11 @@ class OWLRepository(Repository):
             return -1
         if self.isPresent(uri):
             print "Document %s is in store"%uri
-            inf_onto=self.isPresent(inf_prefix+uri)
-            if (overwrite==True) and (inf_onto==True):
-                self.remove_ontology(uri,recursive=False)
-            if (overwrite==True) and (inf_onto==False):
+            inf_onto=self.isPresent(self.inf_prefix+uri)
+            if (overwrite==True):
                 self.remove_document(uri)
-            if (overwrite==False) and (inf_onto==False):
-
+                if (inf_onto==True):
+                    self.remove_document(inf_onto)
             else:
                 return 0
         print "Document %s is NOT in store, downloading..."%uri
@@ -54,7 +52,7 @@ class OWLRepository(Repository):
         if inferred_statements is None:
             return -1
         for s in inferred_statements:
-            self.model.add_statement(s,RDF.Node(RDF.Uri(inf_prefix+uri)))
+            self.model.add_statement(s,RDF.Node(RDF.Uri(self.inf_prefix+uri)))
         return 0
 
     def remove_ontology(self,uri,recursive=False):
@@ -67,7 +65,7 @@ class OWLRepository(Repository):
         """
         if (uri is None) or (uri==''):
             return -1
-        if (self.remove_document(uri)==0 and self.remove_document(inf_prefix+uri)==0):
+        if (self.remove_document(uri)==0 and self.remove_document(self.inf_prefix+uri)==0):
             if debug:
                 print 'After remove'
                 print self.list_documents()
@@ -80,7 +78,7 @@ class OWLRepository(Repository):
             return 0
             
         
-    def add_instance_document(self, uri, ontologies=[], think=True, overwrite=True):
+    def add_instance_document(self, uri, ontologies=[], longterm=False, overwrite=True):
         """
         uri:string : document uri
         ontologies: [string]: list of ontologies referred by the document
@@ -91,18 +89,22 @@ class OWLRepository(Repository):
         """
         if (uri is None) or (uri==''):
             return -1
-        if ontologies==[]:
-            return self.add_document(uri)
+        if (longterm==True):
+            working_model=self.model
+            self.add_document(uri)
+        else:
+            working_model=self.mem_model
+            self.add_inmem_document(uri)
         for o in ontologies:
            self.add_ontology(o,False)
         inferred_statements=self.exec_instance_inference(uri, ontologies, overwrite)
         if inferred_statements is None:
             return -1
         for s in inferred_statements:
-            self.model.add_statement(s,RDF.Node(RDF.Uri(inf_prefix+uri)))
+            working_model.add_statement(s,RDF.Node(RDF.Uri(self.inf_prefix+uri)))
         return 0
 
-    def remove_instance_document(self,uri):
+    def remove_instance_document(self,uri,longterm=False):
         """
         Removes an instance document and its inferred triples
         uri:string : document uri
@@ -112,19 +114,25 @@ class OWLRepository(Repository):
         """
         if (uri is None) or (uri==''):
             return -1
-        if (self.remove_document(uri)==0 and self.remove_document(inf_prefix+uri)==0):
-            return 0
+        if (longterm==True):
+            if (self.remove_document(uri)==0 and self.remove_document(self.inf_prefix+uri)==0):
+                return 0
+            else:
+                return -1
         else:
-            return -1
+            if (self.remove_inmem_document(uri)==0 and self.remove_inmem_document(self.inf_prefix+uri)==0):
+                return 0
+            else:
+                return -1
 
-    # TODO: move as an inner class method?
     def exec_ontology_inference(self, original_uri, uri_list=[], overwrite=False):
         """
+        Explode an ontology 
         uri:string : ontology uri
         uri_list[]:string[] : list of import uri
         @overwrite:boolean   : if True overwrite previously inferred data
         Returns:
-            list of statements
+            list of inferred statements about selected ontology
         """
         if (original_uri is None) or (original_uri==''):
             return None
@@ -136,8 +144,8 @@ class OWLRepository(Repository):
         cmd.append(self.__find_location(original_uri))
         for i in uri_list:
             cmd.append(self.__find_location(i))
-            if self.isPresent(inf_prefix+i):
-                cmd.append(self.__find_location(inf_prefix+i))
+            if self.isPresent(self.inf_prefix+i):
+                cmd.append(self.__find_location(self.inf_prefix+i))
         cmd.append('--n3')
         cmd.append(self.owl_classes)
         cmd.append('--filter='+self.owl_rules)
@@ -152,14 +160,13 @@ class OWLRepository(Repository):
             return None
         return self.parser.parse_string_as_stream(cwm_out,original_uri)
 
-    # TODO: move as an inner class method?
     def exec_instance_inference(self, original_uri, uri_list=[], overwrite=False):
         """
         uri:string : ontology uri
         uri_list[]:string[] : list of import uri
         @overwrite:boolean   : if True overwrite previously inferred data
         Returns:
-            list of statements
+            list of inferred statements about selected instance document
         """
         if (original_uri is None) or (original_uri==''):
             return None
@@ -171,8 +178,8 @@ class OWLRepository(Repository):
         cmd.append(self.__find_location(original_uri))
         for i in uri_list:
             cmd.append(self.__find_location(i))
-            if self.isPresent(inf_prefix+i):
-                cmd.append(self.__find_location(inf_prefix+i))
+            if self.isPresent(self.inf_prefix+i):
+                cmd.append(self.__find_location(self.inf_prefix+i))
         cmd.append('--n3')
         cmd.append(self.owl_classes)
         cmd.append('--filter='+self.instance_rules)
@@ -249,7 +256,7 @@ if __name__=="__main__":
     repository.debug_flag=debug
     for i in  repository.list_documents():
         print i
-    repository.add_ontology('http://veggente.berlios.de/ns/cmet/PORT_MT020001UV01',False)
+    #repository.add_ontology('http://veggente.berlios.de/ns/cmet/PORT_MT020001UV01',False)
     print "Starting SOAP interface on port "+str(soap_port)
     SOAPpy.Config.simplify_objects=1
     soap_server=SOAPpy.SOAPServer(('localhost',soap_port))

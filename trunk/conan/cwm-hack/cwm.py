@@ -165,7 +165,6 @@ rdf/xml files. Note that this requires rdflib.
         from swap import  myStore
 
         # These would just be attributes if this were an object
-        print fargs
         global _store
         global workingContext
         option_need_rdf_sometime = 0  # If we don't need it, don't import it
@@ -715,5 +714,7 @@ if __name__ == '__main__':
     import os
     outString=StringWriter()
     doCommand(sys.argv,outString)
-    print outString.getContent()
+    out_string=outString.getContent()
+    if not (out_string is None):
+        print out_string
 
