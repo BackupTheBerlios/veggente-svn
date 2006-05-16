@@ -2,6 +2,7 @@
 # Client for Veggente Conan OWL repository
 
 import getopt
+import SOAPpy
 from os import sys
 
 __version__='0.0.1'
@@ -17,24 +18,36 @@ def usage():
 def version():
     print "Veggente project: Conan OWL repository client v. "+__version__
 
-def soap_exec(server,action,arguments[]):
-    if action=='onto_add': 
+def soap_exec(server,action,arguments):
+    SOAPpy.Config.simplify_objects=1
+    remote=SOAPpy.SOAPProxy(server)
+    if action=='list':
+        print "Server documents:"
+        for i in remote.list_documents():
+            print i
+        return 0
+    if action=='onto_add':
+        return remote.add_ontology(arguments[0],False)
     if action=='onto_del': 
+        return remote.remove_ontology(arguments[0],False)
     if action=='instance_add': 
+        return remote.add_instance_document(arguments[0],False)
     if action=='instance_del': 
+        return remote.remove_instance_document(arguments[0],False)
     if action=='rdf_add': 
+        return remote.add_document(arguments[0],False)
     if action=='rdf_del': 
-    if action=='': 
+        return remote.remove_document(arguments[0])
 
 if __name__=='__main__':
     server='http://localhost:10000'
     num_actions=0
-    target=''
+    target=[]
     if len(sys.argv)<2:
         usage()
         sys.exit(0)
     try:
-        opts, args=getopt.getopt(sys.argv[1:],'hdv',['help','debug','version','onto_add=','onto_del=','instance_add=','instance_del=','rdf_add=','rdf_del='])
+        opts, args=getopt.getopt(sys.argv[1:],'hdv',['help','debug','version','list','server=','onto_add=','onto_del=','instance_add=','instance_del=','rdf_add=','rdf_del='])
     except getopt.GetoptError:
         usage()
         sys.exit(-1)
@@ -49,23 +62,34 @@ if __name__=='__main__':
             server=val
         if opt in ('--onto_add'):
             num_actions=num_actions+1
-            target=val
+            action='onto_add'
+            target.append(val)
+        if opt in ('--list'):
+            num_actions=num_actions+1
+            action='list'
+            target.append(val)
         if opt in ('--onto_del'):
             num_actions=num_actions+1
-            target=val
+            action='onto_del'
+            target.append(val)
         if opt in ('--instance_add'):
             num_actions=num_actions+1
-            target=val
+            action='instance_add'
+            target.append(val)
         if opt in ('--instance_del'):
             num_actions=num_actions+1
-            target=val
+            action='instance_del'
+            target.append(val)
         if opt in ('--rdf_add'):
             num_actions=num_actions+1
-            target=val
+            action='rdf_add'
+            target.append(val)
         if opt in ('--rdf_del'):
             num_actions=num_actions+1
-            target=val
+            action='rdf_del'
+            target.append(val)
     
     if num_actions>1:
         print 'Error: only one action is allowed'
-    soap_exec()
+    if soap_exec(server,action,target)==0:
+        print 'Operation '+action+' on server '+server+' completed'

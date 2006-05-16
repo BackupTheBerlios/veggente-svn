@@ -118,7 +118,10 @@ class Repository(object):
         """
         Lists documents in store
         """
-        return self.model.get_contexts()
+        doc_list=[]
+        for i in self.model.get_contexts():
+            doc_list.append(str(i))
+        return doc_list
 
     def isPresent(self,uri):
         """

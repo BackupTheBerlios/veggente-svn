@@ -101,8 +101,9 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
     if ((uri!=None) and (':' in uri)) and not (uri.startswith('http:/') or uri.startswith('file:/') or uri.startswith('ftp:/')):
         db_path=uri.split('+')[0]
         res_path=uri.split('+')[1]
-        print "Using Redland pseudo vfs on "+db_path
-        print "Selected resource: "+res_path
+        if diag.chatty_flag>40:
+            print "Using Redland pseudo vfs on "+db_path
+            print "Selected resource: "+res_path
         from redland_vfs import VFS
         vfs=VFS(db_path.split('://')[0],db_path.split('://')[1])
         if openFormula != None:

@@ -38,7 +38,7 @@ class VFS(object):
     def __init__(self,dbname,db='.'):
         self.db_dir=db
         self.db_name=dbname
-        print "dir: "+self.db_dir+" dbname: "+self.db_name
+        #print "dir: "+self.db_dir+" dbname: "+self.db_name
         self.storage=RDF.Storage(storage_name="sqlite",
                 name=self.db_name,
                 options_string="write='false',contexts='yes',dir='"+self.db_dir+"'")

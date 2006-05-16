@@ -259,6 +259,6 @@ if __name__=="__main__":
     #repository.add_ontology('http://veggente.berlios.de/ns/cmet/PORT_MT020001UV01',False)
     print "Starting SOAP interface on port "+str(soap_port)
     SOAPpy.Config.simplify_objects=1
-    soap_server=SOAPpy.SOAPServer(('localhost',soap_port))
+    soap_server=SOAPpy.ThreadingSOAPServer(('localhost',soap_port))
     soap_server.registerObject(repository)
     soap_server.serve_forever()
