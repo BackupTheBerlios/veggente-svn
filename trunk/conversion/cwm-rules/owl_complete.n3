@@ -1,0 +1,125 @@
+<> <#rcsid> "$Id: owl-rules.n3,v 1.21 2005/09/22 20:41:07 josd Exp $".
+
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix e: <http://eulersharp.sourceforge.net/2003/03swap/log-rules#>.
+@prefix : <http://eulersharp.sourceforge.net/2003/03swap/owl-rules#>.
+
+
+
+### inference rules for Web Ontology Language OWL
+
+### Expansion rules
+
+### subClassOf - Domain
+{?A a ?P.
+	?P rdfs:subClassOf rdf:Property. 
+	?A rdfs:domain ?Q.
+	?R rdfs:subClassOf ?Q} => { ?A rdfs:domain ?R}.
+
+### subClassOf - Range
+{?A a ?P.
+	?P rdfs:subClassOf rdf:Property. 
+	?A rdfs:range ?Q.
+	?R rdfs:subClassOf ?Q} => { ?A rdfs:range ?R}.
+
+### subPropertyOf - Domain
+{ 	?A rdfs:subPropertyOf ?B.
+	?X @has rdf:type owl:Class.
+	?A rdfs:domain ?X } => { ?B rdfs:domain ?X }.
+
+### subPropertyOf - Range
+{ 	?A rdfs:subPropertyOf ?B.
+	?Y @has rdf:type owl:Class.
+	?A rdfs:range ?Y } => { ?B rdfs:range ?Y}.
+
+{?A rdfs:subPropertyOf ?B. 
+	?B rdfs:subPropertyOf ?A} => {?A owl:equivalentProperty ?B}.
+
+{?P owl:inverseOf ?Q.
+	 ?Q a owl:FunctionalProperty} => {?P a owl:InverseFunctionalProperty}.
+	
+{?P owl:inverseOf ?Q.
+	 ?Q a owl:InverseFunctionalProperty} => {?P a owl:FunctionalProperty}.
+	
+{?P rdfs:subPropertyOf ?Q; owl:inverseOf ?Q} => {?P a owl:SymmetricProperty}.
+
+	
+{?P @has owl:inverseOf ?Q.
+	 ?S ?P ?O} => {?O ?Q ?S}.
+	
+{?P @has rdf:type owl:SymmetricProperty.
+	 ?S ?P ?O} => {?O ?P ?S}.
+	
+
+{?P @has rdf:type owl:TransitiveProperty.
+	 ?X ?P ?O.
+	 ?S ?P ?X} => {?S ?P ?O}.
+	
+{?P @has rdf:type owl:FunctionalProperty.
+	 ?S ?P ?X.
+	 ?S ?P ?Y} => {?X owl:sameAs ?Y}.
+	
+{?A owl:onProperty ?P, ?Q; owl:hasValue ?V.
+	 ?P @has rdfs:domain ?A; a owl:FunctionalProperty.
+	 ?Q rdfs:domain ?D; a owl:FunctionalProperty} => {?P rdfs:subPropertyOf ?Q}.
+	
+{?A owl:onProperty ?P; owl:hasValue ?V.
+	 ?D owl:equivalentClass ?A.
+	 ?P @has rdfs:domain ?D; a owl:FunctionalProperty.
+	 ?B owl:onProperty ?Q; owl:hasValue ?V.
+	 ?D owl:equivalentClass ?B.
+	 ?Q @has rdfs:domain ?D; a owl:FunctionalProperty} => {?P rdfs:subPropertyOf ?Q}.
+	
+{?B @has owl:unionOf ?Y.
+	 ?A @has owl:unionOf ?X.
+	 ?Y :includes ?X} => {?A rdfs:subClassOf ?B}.
+
+### inference rules for RDFS
+
+{?S ?P ?O} => {?P a rdf:Property}.
+
+{?P @has rdfs:domain ?C. ?S ?P ?O} => {?S a ?C}.
+
+{?P @has rdfs:range ?C. ?S ?P ?O} => {?O a ?C}.
+
+{?S ?P ?O} => {?S a rdfs:Resource}.
+{?S ?P ?O} => {?O a rdfs:Resource}.
+
+{?Q rdfs:subPropertyOf ?R. ?P rdfs:subPropertyOf ?Q} => {?P rdfs:subPropertyOf ?R}.
+
+{?P @has rdfs:subPropertyOf ?R. ?S ?P ?O} => {?S ?R ?O}.
+
+{?C a rdfs:Class} => {?C rdfs:subClassOf rdfs:Resource}.
+
+{?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.
+
+{?B rdfs:subClassOf ?C. ?A rdfs:subClassOf ?B} => {?A rdfs:subClassOf ?C}.
+
+{?X a rdfs:ContainerMembershipProperty} => {?X rdfs:subPropertyOf rdfs:member}.
+
+{?X a rdfs:Datatype} => {?X rdfs:subClassOf rdfs:Literal}.
+
+### inference rules for XML Schema Datatypes XSD
+
+{?S a xsd:int, xsd:nonNegativeInteger} => {?S a xsd:unsignedLong}.
+{?S a xsd:short, xsd:nonNegativeInteger} => {?S a xsd:unsignedInt}.
+{?S a xsd:byte, xsd:nonNegativeInteger} => {?S a xsd:unsignedShort}.
+
+{?P rdfs:range xsd:int, xsd:unsignedLong} => {?P rdfs:range xsd:unsignedInt}.
+{?P rdfs:range xsd:short, xsd:unsignedInt} => {?P rdfs:range xsd:unsignedShort}.
+{?P rdfs:range xsd:byte, xsd:unsignedShort} => {?P rdfs:range xsd:unsignedByte}.
+
+{?P rdfs:range xsd:nonNegativeInteger, xsd:nonPositiveInteger} => {?P rdfs:range xsd:short}.
+
+{?P rdfs:range xsd:byte} => {?P rdfs:range xsd:short}.
+
+{?P rdfs:range xsd:integer, xsd:string} => {?P rdfs:subPropertyOf ?Q}.
+
+{?R @has owl:onProperty ?P; owl:cardinality ?M. ?P rdfs:range xsd:byte, xsd:unsignedInt. ?M math:notLessThan 128. ?N math:lessThan ?M. ?S a ?R} => {?S ?P ?N}.
+{?R @has owl:onProperty ?P; owl:someValuesFrom xsd:nonPositiveInteger. ?P rdfs:range xsd:nonNegativeInteger. ?N math:equalTo 0. ?S a ?R} => {?S ?P ?N}.
+

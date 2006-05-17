@@ -1,5 +1,22 @@
 #!/usr/bin/python
-# OWL-enabled RDF repository
+
+#	Veggente - owlrepository
+#	Conan OWL repository
+#	
+#	Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
+#	This program is free software; you can redistribute it and/or modify
+#	it under the terms of the GNU General Public License as published by
+#	the Free Software Foundation; either version 2 of the License, or
+#	(at your option) any later version.
+#
+#	This program is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	GNU General Public License for more details.
+#
+#	You should have received a copy of the GNU General Public License
+#	along with this program; if not, write to the Free Software
+#	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 from os import sys
 from repository import Repository
@@ -21,7 +38,9 @@ class OWLRepository(Repository):
     
     # These two variables have to be defined in some config file!!!
     owl_classes='http://veggente.berlios.de/think/owl.n3'
-    owl_rules='http://veggente.berlios.de/think/owl_rules.n3'
+    rdfs_classes='http://veggente.berlios.de/think/rdfs.n3'
+    xsd_classes='http://veggente.berlios.de/think/xsd.n3'
+    owl_rules='http://veggente.berlios.de/think/owl_complete.n3'
     instance_rules='http://veggente.berlios.de/think/instance_rules.n3'
 
     def add_ontology(self, uri, overwrite=False):
@@ -148,12 +167,14 @@ class OWLRepository(Repository):
                 cmd.append(self.__find_location(self.inf_prefix+i))
         cmd.append('--n3')
         cmd.append(self.owl_classes)
+        cmd.append(self.xsd_classes)
+        cmd.append(self.rdfs_classes)
         cmd.append('--filter='+self.owl_rules)
         cmd.append('--think')
         cmd.append('--ugly')
         cmd.append('--purge') 
         cmd.append('--rdf')
-        print "Executing inference on document %s, params:"%original_uri
+        print "Executing inference on document %s"%original_uri
         swap.cwm.doCommand(cmd,output)
         cwm_out=output.getContent()
         if (cwm_out is None) or (cwm_out==[]):
@@ -182,12 +203,14 @@ class OWLRepository(Repository):
                 cmd.append(self.__find_location(self.inf_prefix+i))
         cmd.append('--n3')
         cmd.append(self.owl_classes)
+        cmd.append(self.xsd_classes)
+        cmd.append(self.rdfs_classes)
         cmd.append('--filter='+self.instance_rules)
         cmd.append('--think')
         cmd.append('--ugly')
         cmd.append('--purge') 
         cmd.append('--rdf')
-        print "Executing inference on document %s, params:"%original_uri
+        print "Executing inference on document %s"%original_uri
         swap.cwm.doCommand(cmd,output)
         cwm_out=output.getContent()
         if (cwm_out is None) or (cwm_out==[]):
@@ -218,21 +241,33 @@ class OWLRepository(Repository):
         for m in global_imports:
             doc_imports.append(str((m.object).uri))
         return doc_imports
-    
+
+    # --- Query functions ---
+    def isClass(self,name):
+        return True
+
+    def isProperty(self,name):
+        return True
+
+    def is_allowed(self,class_name,property_name):
+        return True
+
 def usage():
     print "Veggente project: Conan OWL repository"
     print "owlrepository [-h] [-d] [-v] [-p n]"
     print "-h: print this help"
     print "-v: show version"
     print "-d: debug flag"
-    print "-p port: start the server on a specified port"
+    print "--port n: start the server on a specified port"
+    print "--db dir: use the specified dir for db backend"
     
 def version():
     print "Veggente project: Conan OWL repository v. "+__version__
 
 if __name__=="__main__":
+    db_dir='.'
     try:
-        opts, args=getopt.getopt(sys.argv[1:],"hp:vd",['help','port=','version','debug'])
+        opts, args=getopt.getopt(sys.argv[1:],"hp:vd",['help','port=','db=','version','debug'])
     except getopt.GetoptError:
         usage()
         sys.exit(-1)
@@ -247,16 +282,15 @@ if __name__=="__main__":
             sys.exit(0)
         if opt in ('-d','--debug'):
             debug=True
+        if opt in ('--db'):
+            db_dir=val
         if opt in ('-p','--port'):
             soap_port=val
         
     print "Veggente project: Conan OWL repository"
     print "Starting repository"
-    repository=OWLRepository('conan')
+    repository=OWLRepository('conan',db_dir)
     repository.debug_flag=debug
-    for i in  repository.list_documents():
-        print i
-    #repository.add_ontology('http://veggente.berlios.de/ns/cmet/PORT_MT020001UV01',False)
     print "Starting SOAP interface on port "+str(soap_port)
     SOAPpy.Config.simplify_objects=1
     soap_server=SOAPpy.ThreadingSOAPServer(('localhost',soap_port))

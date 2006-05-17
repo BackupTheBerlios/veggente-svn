@@ -97,7 +97,6 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
 
     # Begin of Redland pseudo-vfs code
     # Alessio Carenini
-    print uri
     if ((uri!=None) and (':' in uri)) and not (uri.startswith('http:/') or uri.startswith('file:/') or uri.startswith('ftp:/')):
         db_path=uri.split('+')[0]
         res_path=uri.split('+')[1]

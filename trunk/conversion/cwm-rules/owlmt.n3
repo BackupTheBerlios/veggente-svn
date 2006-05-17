@@ -1,0 +1,195 @@
+     @prefix : <http://www.srdc.metu.edu.tr/~veli/Mapping_Schema.owl#> .
+    @prefix XML: <http://www.w3.org/2001/XMLSchema#> .
+    @prefix owl: <http://www.w3.org/2002/07/owl#> .
+    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+    
+    <http://www.srdc.metu.edu.tr/~veli/Mapping_Schema.owl>     a owl:Ontology .
+    
+    :Attribute     a owl:Class;
+         rdfs:subClassOf :Entity .
+    
+    :AttributeTransform     a owl:Class;
+         rdfs:subClassOf :ElementLevelOperation .
+    
+    :Concept     a owl:Class;
+         rdfs:subClassOf :Entity .
+    
+    :ConceptLevelOperation     a owl:Class;
+         rdfs:subClassOf :Operation .
+    
+    :Condition     a owl:Class .
+    
+    :ElementLevelOperation     a owl:Class;
+         rdfs:subClassOf :Operation .
+    
+    :Entity     a owl:Class .
+    
+    :Intersection     a owl:Class;
+         rdfs:subClassOf :ConceptLevelOperation,
+                 [
+             a owl:Restriction;
+             owl:cardinality "1"^^XML:int;
+             owl:onProperty :intersectionOutput ] .
+    
+    :Mapping     a owl:Class .
+    
+    :Mapping_Schema_ObjectProperty_8     a owl:ObjectProperty .
+    
+    :Operation     a owl:Class .
+    
+    :RelationTransform     a owl:Class;
+         rdfs:subClassOf :ElementLevelOperation .
+    
+    :Similarity     a owl:Class;
+         rdfs:subClassOf :ConceptLevelOperation,
+                 [
+             a owl:Restriction;
+             owl:cardinality "1"^^XML:int;
+             owl:onProperty :operationName ],
+                 [
+             a owl:Restriction;
+             owl:cardinality "1"^^XML:int;
+             owl:onProperty :similarityInput ],
+                 [
+             a owl:Restriction;
+             owl:cardinality "1"^^XML:int;
+             owl:onProperty :similarityOutput ] .
+    
+    :Union     a owl:Class;
+         rdfs:subClassOf :ConceptLevelOperation,
+                 [
+             a owl:Restriction;
+             owl:cardinality "1"^^XML:int;
+             owl:onProperty :unionOutput ] .
+    
+    :attributeInput     a owl:ObjectProperty;
+         rdfs:domain :AttributeTransform;
+         rdfs:range :Attribute .
+    
+    :attributeOutput     a owl:ObjectProperty;
+         rdfs:domain :AttributeTransform;
+         rdfs:range :Attribute .
+    
+    :complementInput     a owl:ObjectProperty;
+         rdfs:range :Concept .
+    
+    :complementOutput     a owl:ObjectProperty;
+         rdfs:range :Concept .
+    
+    :conceptOperation     a owl:DatatypeProperty;
+         rdfs:domain :RelationTransform;
+         rdfs:range XML:string .
+    
+    :conceptOperationLocalName     a owl:DatatypeProperty;
+         rdfs:domain :RelationTransform;
+         rdfs:range XML:string .
+    
+    :condition     a owl:DatatypeProperty;
+         rdfs:domain :Condition;
+         rdfs:range XML:string .
+    
+    :conditionType     a owl:DatatypeProperty;
+         rdfs:domain :Condition;
+         rdfs:range XML:string .
+    
+    :entityName     a owl:DatatypeProperty;
+         rdfs:domain :Entity;
+         rdfs:range XML:string .
+    
+    :functionInputList     a owl:DatatypeProperty;
+         rdfs:domain :AttributeTransform;
+         rdfs:range XML:string .
+    
+    :functionName     a owl:DatatypeProperty;
+         rdfs:domain :AttributeTransform;
+         rdfs:range XML:string .
+    
+    :functionPath     a owl:DatatypeProperty;
+         rdfs:domain :AttributeTransform;
+         rdfs:range XML:string .
+    
+    :hasCondition     a owl:ObjectProperty;
+         rdfs:domain :ConceptLevelOperation;
+         rdfs:range :Condition .
+    
+    :includedIn     a owl:ObjectProperty;
+         rdfs:domain  [
+             a owl:Class;
+             owl:unionOf  (
+            :AttributeTransform
+            :RelationTransform ) ];
+         rdfs:range :Operation .
+    
+    :inputPath     a owl:DatatypeProperty;
+         rdfs:domain  [
+             a owl:Class;
+             owl:unionOf  (
+            :RelationTransform
+            :AttributeTransform ) ];
+         rdfs:range XML:string .
+    
+    :inputQueryString     a owl:DatatypeProperty;
+         rdfs:domain :RelationTransform;
+         rdfs:range XML:string .
+    
+    :intersectionInput     a owl:ObjectProperty;
+         rdfs:domain :Intersection;
+         rdfs:range :Concept .
+    
+    :intersectionOutput     a owl:ObjectProperty;
+         rdfs:domain :Intersection;
+         rdfs:range :Concept .
+    
+    :multipleValues     a owl:DatatypeProperty;
+         rdfs:domain :AttributeTransform;
+         rdfs:range XML:string .
+    
+    :operationName     a owl:DatatypeProperty;
+         rdfs:domain :Operation;
+         rdfs:range XML:string .
+    
+    :operationType     a owl:DatatypeProperty;
+         rdfs:domain :AttributeTransform;
+         rdfs:range XML:string .
+    
+    :outputPath     a owl:DatatypeProperty;
+         rdfs:domain :RelationTransform;
+         rdfs:range XML:string .
+    
+    :outputQueryString     a owl:DatatypeProperty;
+         rdfs:domain :RelationTransform;
+         rdfs:range XML:string .
+    
+    :relatedTo     a owl:ObjectProperty;
+         rdfs:domain :Entity;
+         rdfs:range owl:Class .
+    
+    :similarityInput     a owl:ObjectProperty;
+         rdfs:domain :Similarity;
+         rdfs:range :Concept .
+    
+    :similarityOutput     a owl:ObjectProperty;
+         rdfs:domain :Similarity;
+         rdfs:range :Concept .
+    
+    :source     a owl:DatatypeProperty;
+         rdfs:range XML:string .
+    
+    :sourceOntology     a owl:DatatypeProperty,
+                owl:FunctionalProperty;
+         rdfs:domain :Mapping;
+         rdfs:range XML:string .
+    
+    :targetOntology     a owl:DatatypeProperty,
+                owl:FunctionalProperty;
+         rdfs:domain :Mapping;
+         rdfs:range XML:string .
+    
+    :unionInput     a owl:ObjectProperty;
+         rdfs:domain :Union;
+         rdfs:range :Concept .
+    
+    :unionOutput     a owl:ObjectProperty;
+         rdfs:domain :Union;
+         rdfs:range :Concept .
+    

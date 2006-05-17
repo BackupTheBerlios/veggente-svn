@@ -1,16 +1,37 @@
 #!/usr/bin/python
+ 
+#	Veggente - repository
+#	Conan RDF repository
+#	
+#	Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
+#	This program is free software; you can redistribute it and/or modify
+#	it under the terms of the GNU General Public License as published by
+#	the Free Software Foundation; either version 2 of the License, or
+#	(at your option) any later version.
+#
+#	This program is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	GNU General Public License for more details.
+#
+#	You should have received a copy of the GNU General Public License
+#	along with this program; if not, write to the Free Software
+#	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 from os import sys
 import RDF
 import SOAPpy
 
-# Standard RDF repository
+"""
+	Veggente - repository
+	Conan RDF repository
+"""
 class Repository(object):
     """
     Standard RDF repository
     """
     #public:
-    db_dir='' # char*
+    db_dir=''
     db_name='conan'
     parser=None
     model=None
@@ -27,7 +48,7 @@ class Repository(object):
         if self.parser is None:
                 raise "Failed initializing RDF parser"
         if (self.__init_db()==0):
-                print 'RDF repository initialized'
+                print 'RDF repository initialized in '+db
         if (self.__init_memstore()==0):
                 print 'RDF in-memory storage initialized'
         self.db_uri=self.db_name+'://'+self.db_dir+'+'

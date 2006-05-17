@@ -38,6 +38,15 @@
 
 {?A rdfs:subPropertyOf ?B. 
 	?B rdfs:subPropertyOf ?A} => {?A owl:equivalentProperty ?B}.
+
+{?P owl:inverseOf ?Q.
+	 ?Q a owl:FunctionalProperty} => {?P a owl:InverseFunctionalProperty}.
+	
+{?P owl:inverseOf ?Q.
+	 ?Q a owl:InverseFunctionalProperty} => {?P a owl:FunctionalProperty}.
+	
+{?P rdfs:subPropertyOf ?Q; owl:inverseOf ?Q} => {?P a owl:SymmetricProperty}.
+
 	
 {?P @has owl:inverseOf ?Q.
 	 ?S ?P ?O} => {?O ?Q ?S}.
@@ -69,11 +78,3 @@
 	 ?A @has owl:unionOf ?X.
 	 ?Y :includes ?X} => {?A rdfs:subClassOf ?B}.
 	
-{?P owl:inverseOf ?Q.
-	 ?Q a owl:FunctionalProperty} => {?P a owl:InverseFunctionalProperty}.
-	
-{?P owl:inverseOf ?Q.
-	 ?Q a owl:InverseFunctionalProperty} => {?P a owl:FunctionalProperty}.
-	
-{?P rdfs:subPropertyOf ?Q; owl:inverseOf ?Q} => {?P a owl:SymmetricProperty}.
-
