@@ -38,8 +38,8 @@ class OWLRepository(Repository):
     
     # These two variables have to be defined in some config file!!!
     owl_classes='http://veggente.berlios.de/think/owl.n3'
-    rdfs_classes='http://veggente.berlios.de/think/rdfs.n3'
-    xsd_classes='http://veggente.berlios.de/think/xsd.n3'
+#    rdfs_classes='http://veggente.berlios.de/think/rdfs.n3'
+#    xsd_classes='http://veggente.berlios.de/think/xsd.n3'
     owl_rules='http://veggente.berlios.de/think/owl_complete.n3'
     instance_rules='http://veggente.berlios.de/think/instance_rules.n3'
 
@@ -167,8 +167,8 @@ class OWLRepository(Repository):
                 cmd.append(self.__find_location(self.inf_prefix+i))
         cmd.append('--n3')
         cmd.append(self.owl_classes)
-        cmd.append(self.xsd_classes)
-        cmd.append(self.rdfs_classes)
+#        cmd.append(self.xsd_classes)
+#        cmd.append(self.rdfs_classes)
         cmd.append('--filter='+self.owl_rules)
         cmd.append('--think')
         cmd.append('--ugly')

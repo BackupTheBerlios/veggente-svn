@@ -170,7 +170,7 @@ class Repository(object):
     def __init_memstore(self):
         self.mem_storage=RDF.Storage(storage_name="hashes",name="memstore",options_string="contexts='yes',hash-type='memory'")
         if self.mem_storage is None:
-            raise "Failend creating in memory storage"
+            raise "Failed creating in memory storage"
         self.mem_model=RDF.Model(self.mem_storage)
         if self.mem_model is None:
             raise "Failed creating in memory RDF model"

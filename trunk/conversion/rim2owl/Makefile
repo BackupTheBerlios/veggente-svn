@@ -90,7 +90,7 @@ explode_cmet:
 test_explode:
 	DOCNAME=PORT_MT020001UV01; \
 	echo "Applying rules on $$DOCNAME"; \
-	time cwm --rdf $(VEGGENTE)/cmet/$$DOCNAME `cat $(OUTPUT_DIR)/deps/$$DOCNAME.dep`  --n3 $(CWM_RULES)/owl.n3 --filter=$(CWM_RULES)/owl-lite.n3 --purge --ugly --rdf >$(EXPLODE_DIR)/$$DOCNAME.tmp && \
+	time cwm --rdf $(VEGGENTE)/cmet/$$DOCNAME `cat $(OUTPUT_DIR)/deps/$$DOCNAME.dep`  --n3 $(CWM_RULES)/owl.n3 --filter=$(CWM_RULES)/owl_complete.n3 --purge --ugly --rdf >$(EXPLODE_DIR)/$$DOCNAME.tmp && \
 	echo "Merging results into original data..." && \
 	time cwm --rdf $(VEGGENTE)/cmet/$$DOCNAME $(EXPLODE_DIR)/$$DOCNAME.tmp `cat $(OUTPUT_DIR)/deps/$$DOCNAME.dep` --bySubject > $(EXPLODE_DIR)/$$DOCNAME;
 

@@ -44,7 +44,7 @@ setup(
         author_email = "carenini@gmail.com",
         license="GPL v.2",
         url = "http://veggente/berlios.de",
-        packages= ['conan'],
+        packages= [''],
         scripts = use_scripts,
         )
 
