@@ -27,15 +27,13 @@ from xml.dom.minidom import Node
 
 class Lifter:
     server=''
-    doc_uri=None
     root_node=None
     repository=None
-    doc_store=None
     rdf_model=None
+    st_list=[]
     rdf_ns='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
     rdfs_ns='http://www.w3.org/2000/01/rdf-schema#'
     owl_ns='http://www.w3.org/2002/07/owl#'
-    current_statement=None
     counter=0
 
     def __init__(self,server_url='http://localhost:10000'):
@@ -44,44 +42,63 @@ class Lifter:
         self.server=server_url
         SOAPpy.Config.simplify_objects=1
         self.repository=SOAPpy.SOAPProxy(self.server)
-        self.doc_store=RDF.Storage(storage_name="hashes",name="memstore",options_string="hash-type='memory'")
+        doc_store=RDF.Storage(storage_name="hashes",name="memstore",options_string="hash-type='memory'")
         if self.doc_store is None:
             raise "Failend creating in memory storage"
-        self.rdf_model=RDF.Model(self.doc_store)
+        self.rdf_model=RDF.Model(doc_store)
         if self.rdf_model is None:
             raise "Failed creating in memory RDF model"
  
     def lift(self,document):
         doc = xml.dom.minidom.parse(document)
         self.doc_context=RDF.Node(document)
-        self.root_node=doc.documentElement
-        self.current_statement=Statement(subject=document)
-        self.walk(self.root_node,document)
+        self.root_node=RDF.Node(doc.documentElement)
+        self.walk(self.root_node,RDF.Node(document))
         doc.unlink()
     
-    # TODO: stabilire i valori ritornati dalla check. Dovrebbe essere una coppia qualified name+type
     def walk(self,node,active_res):
+        """
+        node: xml Node
+        active_res: RDF.Node
+        """
         # Extract node info
         node_name=node.namespaceURI+node.nodeName
         node_value=node.nodeValue
         node_type=repository.check_type(node_name)
-        # Check node type
+        # Properties
         if (node_type==owl_ns+'ObjectProperty') or (node_type==owl_ns+'DatatypeProperty'):
-            pass
+            if self.unfinished_statements is None:
+                self.unfinished_statements.append(RDF.Statement(active_res,RDF.Node(node_name)))
+            else:
+                for m in self.unfinished_statements:
+                    if (m.object is None) and (m.predicate!=None) and (m.subject==active_res):
+                        m.object=RDF.Node(blank='pr'+self.counter)
+                        self.rdf_model.add_statement(m)
+                        self.unfinished_statements.append(RDF.Statement(m.object,RDF.Node(node_name)))
+                        self.counter=self.counter+1
+                        active_res=m.object
+                        del self.unfinished_statements[m]
+                        break
+        # Class
         else if node_type==owl_ns+'Class':
             # Document is the active resource
-            if node==self.root_node:
-                rdf_model.add_statement(RDF.Statement(RDF.Uri(document),
-                                                        RDF.Uri(rdf_ns+'type'),
-                                                        RDF.Uri(self.node_name),
-                                                        self.doc_context)
-                                                        ))
-                for child in node.childNodes:
-                    self.walk(node,document)
+            if active_res==self.root_node:
+                self.rdf_model.add_statement(RDF.Statement(active_res,RDF.Node(rdf_ns+'type'),RDF.Node(node_name)))
             else:
-                unfinished_statements=self.rdf_model.find_statements(RDF.Statement(RDF.Node(active_res)))
-                if unfinished_statements is None:
+                if self.unfinished_statements is None:
+                    self.rdf_model.add_statement(RDF.Statement(active_res,RDF.Node(rdf_ns+'type'),RDF.Node(node_name)))
                 else:
+                    for m in self.unfinished_statements:
+                        if m.object is None:
+                            m.object=RDF.Node(blank='cls'+self.counter)
+                            self.rdf_model.add_statement(m)
+                            self.rdf_model.add_statement(RDF.Statement(m.object,RDF.Node(rdf_ns+'type'),RDF.Node(node_name)))
+                            self.counter=self.counter+1
+                            active_res=m.object
+                            del self.unfinished_statements[m]
+                            break
+        for child in node.childNodes:
+            self.walk(node,active_res)
 
 if __name__=='__main__':
     lift_inst=Lifter()
