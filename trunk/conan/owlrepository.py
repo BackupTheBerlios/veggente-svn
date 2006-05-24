@@ -43,6 +43,11 @@ class OWLRepository(Repository):
     owl_rules='http://veggente.berlios.de/think/owl_complete.n3'
     instance_rules='http://veggente.berlios.de/think/instance_rules.n3'
 
+    # Namespaces
+    rdf_ns='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    rdfs_ns='http://www.w3.org/2000/01/rdf-schema#'
+    owl_ns='http://www.w3.org/2002/07/owl#'
+
     def add_ontology(self, uri, overwrite=False):
         """
         uri:string : ontology uri
@@ -251,6 +256,15 @@ class OWLRepository(Repository):
 
     def is_allowed(self,class_name,property_name):
         return True
+
+    def get_type(self,uri):
+        
+
+    def check_type(self,xml_node_name):
+        for c in self.model.get_sources(RDF.Node(uri_string=self.rdf_ns+'type'),RDF.Node(uri_string=self.owl_ns+'Class')):
+            
+
+    def check_onto_name(self,xml_node_name):
 
 def usage():
     print "Veggente project: Conan OWL repository"

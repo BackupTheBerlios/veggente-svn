@@ -53,7 +53,7 @@ class Lifter:
         doc = xml.dom.minidom.parse(document)
         self.doc_context=RDF.Node(document)
         self.root_node=RDF.Node(doc.documentElement)
-        self.walk(self.root_node,RDF.Node(document))
+        self.walk(self.root_node,RDF.Node(RDF.Uri(document)))
         doc.unlink()
     
     def walk(self,node,active_res):
@@ -64,39 +64,64 @@ class Lifter:
         # Extract node info
         node_name=node.namespaceURI+node.nodeName
         node_value=node.nodeValue
-        node_type=repository.check_type(node_name)
-        # Properties
-        if (node_type==owl_ns+'ObjectProperty') or (node_type==owl_ns+'DatatypeProperty'):
+        node_onto_type=repository.check_type(node_name)
+        node_onto_name=repository.check_onto_name(node_name)
+        if node.type==node.TEXT_NODE:
             if self.unfinished_statements is None:
-                self.unfinished_statements.append(RDF.Statement(active_res,RDF.Node(node_name)))
+                print "No unfinished statements: PANIC!!!!"
+                self.rdf_model.add_statement(RDF.Statement(active_res,
+                                                            RDF.Node(RDF.Uri()),
+                                                            RDF.Node(node_value)
+                                                            ))
             else:
                 for m in self.unfinished_statements:
                     if (m.object is None) and (m.predicate!=None) and (m.subject==active_res):
-                        m.object=RDF.Node(blank='pr'+self.counter)
+                        m.object=RDF.Node(node_value)
                         self.rdf_model.add_statement(m)
-                        self.unfinished_statements.append(RDF.Statement(m.object,RDF.Node(node_name)))
-                        self.counter=self.counter+1
-                        active_res=m.object
                         del self.unfinished_statements[m]
                         break
-        # Class
-        else if node_type==owl_ns+'Class':
-            # Document is the active resource
-            if active_res==self.root_node:
-                self.rdf_model.add_statement(RDF.Statement(active_res,RDF.Node(rdf_ns+'type'),RDF.Node(node_name)))
-            else:
+        elif (node.type==node.ELEMENT_NODE) or (node.type==node.ATTRIBUTE_NODE):
+            # Properties
+            if (node_onto_type==self.owl_ns+'ObjectProperty') or (node_type==self.owl_ns+'DatatypeProperty'):
                 if self.unfinished_statements is None:
-                    self.rdf_model.add_statement(RDF.Statement(active_res,RDF.Node(rdf_ns+'type'),RDF.Node(node_name)))
+                    self.unfinished_statements.append(RDF.Statement(active_res,RDF.Node(RDF.Uri(node_onto_name))))
                 else:
                     for m in self.unfinished_statements:
-                        if m.object is None:
-                            m.object=RDF.Node(blank='cls'+self.counter)
+                        if (m.object is None) and (m.predicate!=None) and (m.subject==active_res):
+                            m.object=RDF.Node(blank='pr'+self.counter)
                             self.rdf_model.add_statement(m)
-                            self.rdf_model.add_statement(RDF.Statement(m.object,RDF.Node(rdf_ns+'type'),RDF.Node(node_name)))
+                            self.unfinished_statements.append(RDF.Statement(m.object,RDF.Node(RDF.Uri(node_onto_name))))
                             self.counter=self.counter+1
                             active_res=m.object
                             del self.unfinished_statements[m]
                             break
+            # Class
+            else if node_onto_type==self.owl_ns+'Class':
+                # Document is the active resource
+                if active_res==self.root_node:
+                    self.rdf_model.add_statement(RDF.Statement(active_res,
+                                                                RDF.Node(RDF.Uri(self.rdf_ns+'type')),
+                                                                RDF.Node(RDF.Uri(node_onto_name))
+                                                                ))
+                else:
+                    if self.unfinished_statements is None:
+                        self.rdf_model.add_statement(RDF.Statement(active_res,
+                                                                    RDF.Node(RDF.Uri(self.rdf_ns+'type')),
+                                                                    RDF.Node(RDF.Uri(node_onto_name))
+                                                                    ))
+                    else:
+                        for m in self.unfinished_statements:
+                            if (m.object is None) and (m.predicate!=None) and (m.subject==active_res):
+                                m.object=RDF.Node(blank='cls'+self.counter)
+                                self.rdf_model.add_statement(m)
+                                self.rdf_model.add_statement(RDF.Statement(m.object,
+                                                                            RDF.Node(RDF.Uri(self.rdf_ns+'type')),
+                                                                            RDF.Node(RDF.Uri(node_onto_name))
+                                                                            ))
+                                self.counter=self.counter+1
+                                active_res=m.object
+                                del self.unfinished_statements[m]
+                                break
         for child in node.childNodes:
             self.walk(node,active_res)
 
