@@ -30,7 +30,6 @@ class Lifter:
     root_node=None
     repository=None
     rdf_model=None
-    st_list=[]
     rdf_ns='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
     rdfs_ns='http://www.w3.org/2000/01/rdf-schema#'
     owl_ns='http://www.w3.org/2002/07/owl#'
@@ -49,7 +48,12 @@ class Lifter:
         if self.rdf_model is None:
             raise "Failed creating in memory RDF model"
  
-    def lift(self,document):
+    def lift(self,document,onto_list):
+        """
+        Convert the content of an XML document into corresponding RDF triples
+        document: uri of the document to convert
+        onto_list: list of ontologies intantiated by the document
+        """
         doc = xml.dom.minidom.parse(document)
         self.doc_context=RDF.Node(document)
         self.root_node=RDF.Node(doc.documentElement)
@@ -58,6 +62,7 @@ class Lifter:
     
     def walk(self,node,active_res):
         """
+        Traverse XML node and build RDF triple
         node: xml Node
         active_res: RDF.Node
         """
@@ -96,7 +101,7 @@ class Lifter:
                             del self.unfinished_statements[m]
                             break
             # Class
-            else if node_onto_type==self.owl_ns+'Class':
+            elif node_onto_type==self.owl_ns+'Class':
                 # Document is the active resource
                 if active_res==self.root_node:
                     self.rdf_model.add_statement(RDF.Statement(active_res,

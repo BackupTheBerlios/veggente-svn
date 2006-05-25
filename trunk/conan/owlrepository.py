@@ -249,6 +249,7 @@ class OWLRepository(Repository):
 
     # --- Query functions ---
     def isClass(self,name):
+
         return True
 
     def isProperty(self,name):
@@ -257,14 +258,44 @@ class OWLRepository(Repository):
     def is_allowed(self,class_name,property_name):
         return True
 
-    def get_type(self,uri):
-        
-
-    def check_type(self,xml_node_name):
-        for c in self.model.get_sources(RDF.Node(uri_string=self.rdf_ns+'type'),RDF.Node(uri_string=self.owl_ns+'Class')):
+    def get_onto_name(self,resource,ontology):
+        """
+        Find a class or a property with a given name in an ontology or in its imports
+        resource: string to search
+        ontology: string uri of an ontology entry point
+        returns: 
+            string uri of the resource
+        """
+        if (resource is None) or (ontology is None):
+            return None
+        results=self.model.find_statement(RDF.Statement(predicate=self.rdf_ns+'type'),RDF.Node(RDF.Uri(ontology)))
+        for i in results:
+            if (str(i.subject.uri)).split('#')[1]==resource:
+                return str(i.subject.uri)
+        for imp in self.find_imports()
             
 
+    def get_type(self,uri):
+        """
+        Return a list of types associated with a resource URI
+        uri: string of the resource 
+        """
+        res_list=[]
+        ns=uri.split('#')[0]
+        res=uri.split('#')[1]
+        results=self.model.get_targets_context(RDF.Uri(uri),RDF.Uri(self.rdf_ns+'type'))
+        if results!=[]:
+            # First pass, control in main ontology
+            for r,c in results:
+                # get context uri string
+                if 'think_' in context:
+                    context=context.split('think_')[1]
+                if context==ns:
+                    res_list.append(str(r.uri))
+        return res_list
+
     def check_onto_name(self,xml_node_name):
+        pass
 
 def usage():
     print "Veggente project: Conan OWL repository"
@@ -278,35 +309,45 @@ def usage():
 def version():
     print "Veggente project: Conan OWL repository v. "+__version__
 
-if __name__=="__main__":
-    db_dir='.'
-    try:
-        opts, args=getopt.getopt(sys.argv[1:],"hp:vd",['help','port=','db=','version','debug'])
-    except getopt.GetoptError:
-        usage()
-        sys.exit(-1)
-    soap_port=10000
-    debug=False
-    for opt, val in opts:
-        if opt in ('-h','--help'):
+soap_server=None
+repository=None
+try:
+    if __name__=="__main__":
+        db_dir='.'
+        try:
+            opts, args=getopt.getopt(sys.argv[1:],"hp:vd",['help','port=','db=','version','debug'])
+        except getopt.GetoptError:
             usage()
-            sys.exit(0)
-        if opt in ('-v','--version'):
-            version()
-            sys.exit(0)
-        if opt in ('-d','--debug'):
-            debug=True
-        if opt in ('--db'):
-            db_dir=val
-        if opt in ('-p','--port'):
-            soap_port=val
-        
-    print "Veggente project: Conan OWL repository"
-    print "Starting repository"
-    repository=OWLRepository('conan',db_dir)
-    repository.debug_flag=debug
-    print "Starting SOAP interface on port "+str(soap_port)
-    SOAPpy.Config.simplify_objects=1
-    soap_server=SOAPpy.ThreadingSOAPServer(('localhost',soap_port))
-    soap_server.registerObject(repository)
-    soap_server.serve_forever()
+            sys.exit(-1)
+        soap_port=10000
+        debug=False
+        for opt, val in opts:
+            if opt in ('-h','--help'):
+                usage()
+                sys.exit(0)
+            if opt in ('-v','--version'):
+                version()
+                sys.exit(0)
+            if opt in ('-d','--debug'):
+                debug=True
+            if opt in ('--db'):
+                db_dir=val
+            if opt in ('-p','--port'):
+                soap_port=val
+            
+        print "Veggente project: Conan OWL repository"
+        print "Starting repository"
+        repository=OWLRepository('conan',db_dir)
+        repository.debug_flag=debug
+        print repository.get_type('http://veggente.berlios.de/ns/cmet/COCT_HD070000UV01#COCT_HD070000UV01.LocatedEntity.classCode')
+        print "Starting SOAP interface on port "+str(soap_port)
+        SOAPpy.Config.simplify_objects=1
+        soap_server=SOAPpy.ThreadingSOAPServer(('localhost',soap_port))
+        soap_server.registerObject(repository)
+        soap_server.serve_forever()
+except KeyboardInterrupt:
+    print "OWL server shutdown"
+    soap_server.server_close()
+    del repository
+    print "Data saved"
+    sys.exit(0)

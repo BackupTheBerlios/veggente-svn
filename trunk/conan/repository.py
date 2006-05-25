@@ -176,12 +176,21 @@ class Repository(object):
             raise "Failed creating in memory RDF model"
         return 0
 
-if __name__=="__main__":
-        print "Veggente project: Conan RDF repository"
-        repository=Repository('conan','.')
-        soap_port=10000
-        SOAPpy.Config.simplify_objects=1
-        soap_server=SOAPpy.SOAPServer(('localhost',soap_port))
-        soap_server.registerObject(repository)
-        repository.check_documents()
-        soap_server.serve_forever()
+soap_server=None
+repository=None
+try:
+    if __name__=="__main__":
+            print "Veggente project: Conan RDF repository"
+            repository=Repository('conan','.')
+            soap_port=10000
+            SOAPpy.Config.simplify_objects=1
+            soap_server=SOAPpy.SOAPServer(('localhost',soap_port))
+            soap_server.registerObject(repository)
+            repository.check_documents()
+            soap_server.serve_forever()
+except KeyboardInterrupt:
+    print "RDF server shutdown"
+    soap_server.server_close()
+    del repository
+    print "Data saved"
+    sys.exit(0)
