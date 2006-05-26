@@ -248,11 +248,14 @@ class OWLRepository(Repository):
         return doc_imports
 
     # --- Query functions ---
-    def isClass(self,name):
-
+    def isClass(self,resource):
+        if (resource is None) or (resource==''):
+            return False
         return True
 
-    def isProperty(self,name):
+    def isProperty(self,resource):
+        if (resource is None) or (resource==''):
+            return False
         return True
 
     def is_allowed(self,class_name,property_name):
@@ -266,13 +269,21 @@ class OWLRepository(Repository):
         returns: 
             string uri of the resource
         """
-        if (resource is None) or (ontology is None):
+        if (resource is None) or (ontology is None) or (resource=='') or (ontology==''):
             return None
-        results=self.model.find_statement(RDF.Statement(predicate=self.rdf_ns+'type'),RDF.Node(RDF.Uri(ontology)))
-        for i in results:
-            if (str(i.subject.uri)).split('#')[1]==resource:
-                return str(i.subject.uri)
-        for imp in self.find_imports()
+        if ontology.endswith('#'):
+            ontology=ontology.split('#')[0]
+        results=self.model.find_statements(RDF.Statement(predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
+        if results!=[]:
+            for i in results:
+                if i.subject.is_resource():
+                    if str(i.subject.uri).find('#')!=-1:
+                        # TODO: revert partial matching into complete matching
+#                        if (str(i.subject.uri)).split('#')[1]==resource:
+                        if ((str(i.subject.uri)).split('#')[1]).find(resource)!=-1:
+                            return str(i.subject.uri)
+        for imp in self.find_imports(ontology):
+            return self.get_onto_name(resource,imp)
             
 
     def get_type(self,uri):
@@ -288,7 +299,8 @@ class OWLRepository(Repository):
             # First pass, control in main ontology
             for r,c in results:
                 # get context uri string
-                if 'think_' in context:
+                context=str(c.uri)
+                if context.find('think_')!=-1:
                     context=context.split('think_')[1]
                 if context==ns:
                     res_list.append(str(r.uri))
@@ -339,7 +351,8 @@ try:
         print "Starting repository"
         repository=OWLRepository('conan',db_dir)
         repository.debug_flag=debug
-        print repository.get_type('http://veggente.berlios.de/ns/cmet/COCT_HD070000UV01#COCT_HD070000UV01.LocatedEntity.classCode')
+#        print repository.get_type('http://veggente.berlios.de/ns/cmet/COCT_HD070000UV01#COCT_HD070000UV01.LocatedEntity.classCode')
+#        print repository.get_onto_name('Organization','http://veggente.berlios.de/ns/cmet/COCT_HD150000UV02')
         print "Starting SOAP interface on port "+str(soap_port)
         SOAPpy.Config.simplify_objects=1
         soap_server=SOAPpy.ThreadingSOAPServer(('localhost',soap_port))

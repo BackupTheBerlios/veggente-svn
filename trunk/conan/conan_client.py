@@ -28,9 +28,16 @@ def usage():
     print "Veggente project: Conan OWL repository client"
     print "owlrepository [-h] [-d] [-v] [-p n]"
     print "--help: print this help"
-    print "--version: show version"
-    print "--debug: debug flag"
-    print "--server : start the server on a specified port"
+    print "--version:           show version"
+    print "--debug:             debug flag"
+    print "--server uri:        start the server on a specified port"
+    print "--list:              List documents in store"
+    print "--onto_add uri:      Adds an ontology"
+    print "--onto_del uri:      Removes an ontology"
+    print "--instance_add uri:  Adds an instance document"
+    print "--instance_del uri:  Removes an instance document"
+    print "--rdf_add uri:       Adds an RDF document"
+    print "--rdf_del uri:       Removes an RDF document"
  
 def version():
     print "Veggente project: Conan OWL repository client v. "+__version__

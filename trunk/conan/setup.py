@@ -20,7 +20,7 @@ else:
 os.rmdir('FOO')
 # done detecting case-insensitive filesystem
 
-symlinks=["owlrepository","conan_client"]
+symlinks=["owlrepository","conan_client","lifter"]
 scripts=[]
 
 for s in symlinks:
