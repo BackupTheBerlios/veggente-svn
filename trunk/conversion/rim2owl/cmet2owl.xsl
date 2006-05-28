@@ -142,7 +142,7 @@
 	<xsl:template match="hl7:class">
 			<owl:Class>
 					<xsl:attribute name="rdf:about">
-							<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',$cmet_name)"/>.<xsl:value-of select="@name"/>
+							<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',@name)"/>
 					</xsl:attribute>
 					<xsl:for-each select="hl7:derivationSupplier">
 							<xsl:variable name="derivation_id" select="@staticModelDerivationId"/>
@@ -164,9 +164,7 @@
 															<xsl:value-of select="$rim_cm"/>
 															<xsl:call-template name="get_derivation_name">
 																	<xsl:with-param name="id" select="$derivation_id"/>
-															</xsl:call-template>#<xsl:call-template name="get_derivation_name">
-																	<xsl:with-param name="id" select="$derivation_id"/>
-															</xsl:call-template>.<xsl:value-of select="@className"/>
+															</xsl:call-template>#<xsl:value-of select="@className"/>
 													</xsl:attribute>
 											</rdfs:subClassOf>
 									</xsl:otherwise>
@@ -195,11 +193,11 @@
 			</xsl:variable>
 			<owl:Class>
 					<xsl:attribute name="rdf:about">
-							<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',$cmet_name)"/>.<xsl:value-of select="@name"/>
+							<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',@name)"/>
 					</xsl:attribute>
 					<owl:equivalentClass>
 							<xsl:attribute name="rdf:resource">
-									<xsl:value-of select="$rim_cm"/><xsl:value-of select="$model_id"/>#<xsl:value-of select="$model_id"/>.<xsl:value-of select="$target_element//@name"/>
+									<xsl:value-of select="$rim_cm"/><xsl:value-of select="$model_id"/>#<xsl:value-of select="$target_element//@name"/>
 							</xsl:attribute>
 					</owl:equivalentClass>
 			</owl:Class>
@@ -224,7 +222,7 @@
 	
 	<xsl:template match="hl7:attribute" mode="class">
 			<xsl:variable name="parent_ns">
-					<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
+					<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>#<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
 			</xsl:variable>
 			<xsl:if test="@fixedValue">
 					<rdfs:subClassOf>
@@ -299,7 +297,7 @@
 	<xsl:template match="hl7:attribute" mode="property">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:about">
-						<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',$cmet_name)"/>.<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
+						<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',../@name)"/>.<xsl:value-of select="@name"/>
 					</xsl:attribute>
 					<xsl:for-each select="hl7:derivationSupplier">
 							<xsl:variable name="derivation_id" select="@staticModelDerivationId"/>
@@ -321,9 +319,7 @@
 															<xsl:value-of select="$rim_cm"/>
 															<xsl:call-template name="get_derivation_name">
 																	<xsl:with-param name="id" select="$derivation_id"/>
-															</xsl:call-template>#<xsl:call-template name="get_derivation_name">
-																	<xsl:with-param name="id" select="$derivation_id"/>
-															</xsl:call-template>.<xsl:value-of select="@className"/>.<xsl:value-of select="@attributeName"/>
+															</xsl:call-template>#<xsl:value-of select="@className"/>.<xsl:value-of select="@attributeName"/>
 													</xsl:attribute>
 											</rdfs:subPropertyOf>
 									</xsl:otherwise>
@@ -336,16 +332,16 @@
 	<xsl:template match="hl7:association">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:about">
-							<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',$cmet_name)"/>.<xsl:value-of select="hl7:targetConnection/@name"/>
+							<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',hl7:targetConnection/@name)"/>
 					</xsl:attribute>
 					<rdfs:range>
 							<xsl:attribute name="rdf:resource">
 									<xsl:choose>
 											<xsl:when test="hl7:targetConnection/hl7:participantClass/hl7:class">
-													<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="hl7:targetConnection/hl7:participantClass/hl7:class/@name"/>
+                                                <xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="hl7:targetConnection/hl7:participantClass/hl7:class/@name"/>
 											</xsl:when>
 											<xsl:when test="hl7:targetConnection/hl7:participantClass/hl7:reference">
-													<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="hl7:targetConnection/hl7:participantClass/hl7:reference/@name"/>
+													<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="hl7:targetConnection/hl7:participantClass/hl7:reference/@name"/>
 											</xsl:when>
 											<xsl:otherwise/>
 									</xsl:choose>
@@ -353,7 +349,7 @@
 					</rdfs:range>
 					<rdfs:domain>
 							<xsl:attribute name="rdf:resource">
-									<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="$cmet_name"/>.<xsl:value-of select="hl7:sourceConnection/hl7:nonTraversableConnection/@participantClassName"/>
+									<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="hl7:sourceConnection/hl7:nonTraversableConnection/@participantClassName"/>
 							</xsl:attribute>
 					</rdfs:domain>
 					<rdfs:subPropertyOf>
