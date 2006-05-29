@@ -279,8 +279,8 @@ class OWLRepository(Repository):
                 if i.subject.is_resource():
                     if str(i.subject.uri).find('#')!=-1:
                         # TODO: revert partial matching into complete matching
-#                        if (str(i.subject.uri)).split('#')[1]==resource:
-                        if ((str(i.subject.uri)).split('#')[1]).find(resource)!=-1:
+                        if (str(i.subject.uri)).split('#')[1]==resource:
+#                        if ((str(i.subject.uri)).split('#')[1]).find(resource)!=-1:
                             return str(i.subject.uri)
         for imp in self.find_imports(ontology):
             return self.get_onto_name(resource,imp)

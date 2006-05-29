@@ -60,11 +60,12 @@ class Lifter:
         doc = xml.dom.minidom.parse(document)
         self.doc_context=RDF.Node(document)
         self.root_node=doc.documentElement
+        print self.root_node.nodeName
         self.removeWhitespaceNodes(self.root_node)
         self.walk(self.root_node,RDF.Node(RDF.Uri(document)))
         doc.unlink()
     
-    def walk(self,node,active_res):
+    def walk(self,node,active_class,active_res):
         """
         Traverse XML node and build RDF triple
         node: xml Node
@@ -79,20 +80,20 @@ class Lifter:
             if tmp_res!=None:
                 active_res=tmp_res
         elif (node.nodeType==Node.ELEMENT_NODE):
-            tmp_res=self.handle_node(active_res,node_name)
+            tmp_class,tmp_res=self.handle_node(active_class,active_res,node_name)
             if tmp_res!=None:
                 active_res=tmp_res
+            if tmp_class!=None:
+                active_class=tmp_class
         for child in node.childNodes:
-            tmp_res=self.walk(child,active_res)
-            if tmp_res!=None:
-                active_res=tmp_res
+            self.walk(child,active_res)
             attrs = node.attributes
             for attrName in attrs.keys():
                 if not attrName.startswith('xmlns:'):
                     attrNode = attrs.get(attrName)
                     node_name=attrNode.localName
                     attrValue = attrNode.nodeValue
-                    tmp_res=self.handle_node(active_res,node_name)
+                    tmp_res=self.handle_node(active_class,active_res,node_name)
                     if tmp_res!=None:
                         active_res=tmp_res
                         tmp_res=self.handle_text(active_res,attrValue)
@@ -116,8 +117,10 @@ class Lifter:
                     break
         return active_res
 
-    def handle_node(self,active_res,node_name):
-        node_onto_name=self.repository.get_onto_name(node_name,self.base_onto)
+    def handle_node(self,active_class,active_res,node_name):
+        print active_res
+        print node_name
+        node_onto_name=self.repository.get_onto_name(active_class+'.'+node_name,self.base_onto)
         if (node_onto_name=='') or (node_onto_name is None):
             print "Error: resource "+node_name+" not found"
             return None
@@ -125,12 +128,10 @@ class Lifter:
         print "Found resource: "+node_onto_name+' with type '+node_onto_type[0]
         
         # Properties
-        if (node_onto_type[0]==self.owl_ns+'ObjectProperty') or (node_type[0]==self.owl_ns+'DatatypeProperty'):
+        if (node_onto_type[0]==self.owl_ns+'ObjectProperty') or (node_onto_type[0]==self.owl_ns+'DatatypeProperty'):
             if (self.unfinished_statements is None) or (len(self.unfinished_statements)==0):
                 self.unfinished_statements.append(RDF.Statement(active_res,RDF.Node(RDF.Uri(node_onto_name))))
-#                print "in Handle property node: "+str(len(self.unfinished_statements))+"\n"
             else:
-#               print "Active: "+str(active_res)+" found "+str(len(self.unfinished_statements))+" statements"
                 for m in self.unfinished_statements:
                     if (m.object is None) and (m.predicate!=None) and (m.subject!=None):
                         m.object=RDF.Node(blank='pr'+str(self.counter))
@@ -144,36 +145,35 @@ class Lifter:
         
         # Class
         elif node_onto_type[0]==self.owl_ns+'Class':
-#            print "Active resource: "+active_res
+            active_class=node_onto_name
             # Document is the active resource
-            if active_res==self.root_node:
+#            if active_res==self.root_node:
 #                print "in Handle class: added root statement"
+#                self.rdf_model.add_statement(RDF.Statement(active_res,
+#                                                            RDF.Node(RDF.Uri(self.rdf_ns+'type')),
+#                                                            RDF.Node(RDF.Uri(node_onto_name))
+#                                                            ))
+#            else:
+            if (self.unfinished_statements is None) or (len(self.unfinished_statements)==0):
                 self.rdf_model.add_statement(RDF.Statement(active_res,
                                                             RDF.Node(RDF.Uri(self.rdf_ns+'type')),
                                                             RDF.Node(RDF.Uri(node_onto_name))
                                                             ))
             else:
-                if (self.unfinished_statements is None) or (len(self.unfinished_statements)==0):
-                    self.rdf_model.add_statement(RDF.Statement(active_res,
-                                                                RDF.Node(RDF.Uri(self.rdf_ns+'type')),
-                                                                RDF.Node(RDF.Uri(node_onto_name))
-                                                                ))
-                else:
-                    for m in self.unfinished_statements:
-                        print m
-                        if (m.object is None) and (m.predicate!=None) and (m.subject.uri!=None):
-                            m.object=RDF.Node(blank='cls'+str(self.counter))
-                            self.rdf_model.add_statement(m)
-                            self.rdf_model.add_statement(RDF.Statement(m.object,
-                                                                        RDF.Node(RDF.Uri(self.rdf_ns+'type')),
-                                                                        RDF.Node(RDF.Uri(node_onto_name))
-                                                                        ))
-                            self.counter=self.counter+1
-                            active_res=m.object
-#                            print "Removed unfinished statement "+m
-                            self.unfinished_statements.remove(m)
-                            break
-        return active_res
+                for m in self.unfinished_statements:
+                    print m
+                    if (m.object is None) and (m.predicate!=None) and (m.subject.uri!=None):
+                        m.object=RDF.Node(blank='cls'+str(self.counter))
+                        self.rdf_model.add_statement(m)
+                        self.rdf_model.add_statement(RDF.Statement(m.object,
+                                                                    RDF.Node(RDF.Uri(self.rdf_ns+'type')),
+                                                                    RDF.Node(RDF.Uri(node_onto_name))
+                                                                    ))
+                        self.counter=self.counter+1
+                        active_res=m.object
+                        self.unfinished_statements.remove(m)
+                        break
+        return active_class,active_res
 
     def xml_to_internal(self,xmltag):
         """
