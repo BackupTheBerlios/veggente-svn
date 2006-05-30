@@ -33,6 +33,7 @@ class Repository(object):
     #public:
     db_dir=''
     db_name='conan'
+    db_type='sqlite'
     parser=None
     model=None
     storage=None
@@ -51,7 +52,7 @@ class Repository(object):
                 print 'RDF repository initialized in '+db
         if (self.__init_memstore()==0):
                 print 'RDF in-memory storage initialized'
-        self.db_uri=self.db_name+'://'+self.db_dir+'+'
+        self.db_uri=self.db_type+':'+self.db_name+'://'+self.db_dir+'+'
                     
     def __del__(self):
         self.model.sync()
@@ -113,8 +114,9 @@ class Repository(object):
         """
         @context:char*
         """
+        print "Removing document "+context
         if (context!=''):
-            return self.model.remove_statements_with_context(RDF.Uri(context))
+            return self.model.remove_statements_with_context(RDF.Node(RDF.Uri(context)))
         return None
 
     def remove_inmem_document(self, context): 
@@ -122,7 +124,7 @@ class Repository(object):
         @context:char*
         """
         if (context!=''):
-            return self.mem_model.remove_statements_with_context(RDF.Uri(context))
+            return self.mem_model.remove_statements_with_context(RDF.Node(RDF.Uri(context)))
         return None
     
     def query_model(self, query_str):

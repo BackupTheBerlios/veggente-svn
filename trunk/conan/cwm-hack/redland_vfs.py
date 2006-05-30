@@ -26,7 +26,7 @@ class VFS(object):
     """
     Redland pseudo vfs for CWM
     """
-    db_dir=''
+    db_uri=''
     db_name=''
     model=None
     storage=None
@@ -35,13 +35,40 @@ class VFS(object):
     anonymousNodes={}
     asIfFrom=None
     
-    def __init__(self,dbname,db='.'):
-        self.db_dir=db
-        self.db_name=dbname
-        #print "dir: "+self.db_dir+" dbname: "+self.db_name
-        self.storage=RDF.Storage(storage_name="sqlite",
-                name=self.db_name,
-                options_string="write='false',contexts='yes',dir='"+self.db_dir+"'")
+    def __init__(self,db_uri):
+        """
+        Constructor
+        db_uri: string
+            A MySQL db uri is in the form
+                mysql:username:password@host:port/db_name
+            While a SQLite db uri is in the form
+                sqlite:db_name://db_dir
+        """
+        db_type=db_uri.split(':')[0]
+        self.db_uri=db_uri[db_uri.find(':')+1:]
+        # Database name   
+        #print "dir: "+self.db_uri+" dbname: "+self.db_name
+        if db_type=='sqlite':
+            self.db_name=self.db_uri.split(':')[0]
+            self.storage=RDF.Storage(storage_name="sqlite",
+                    name=self.db_name,
+                    options_string="write='false',contexts='yes',dir='"+self.db_uri+"'")
+        elif db_type=='mysql':
+            # Host / port
+            host=(db_uri.split('@')[1]).split(':')[0]
+            port=(db_uri.split('@')[1]).split(':')[1]
+            # Username / password
+            userpass=self.db_uri.split('@')[0]
+            username=userpass.split(':')[0]
+            passwd=userpass.split(':')[1]
+            self.db_name=db_uri.split('/')[-1]
+            self.storage=RDF.Storage(storage_name="mysql",
+                    database=self.db_name,
+                    host=db_host,
+                    port=db_port,
+                    user=username,
+                    password=passwd,
+                    options_string="write='false',contexts='yes'")
         if self.storage==None:
             raise "Failed opening storage"
         self.model=RDF.Model(self.storage)

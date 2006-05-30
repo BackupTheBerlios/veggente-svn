@@ -104,7 +104,7 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
             print "Using Redland pseudo vfs on "+db_path
             print "Selected resource: "+res_path
         from redland_vfs import VFS
-        vfs=VFS(db_path.split('://')[0],db_path.split('://')[1])
+        vfs=VFS(db_path)
         if openFormula != None:
             F = openFormula
         else:
