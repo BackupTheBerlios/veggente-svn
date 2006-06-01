@@ -55,20 +55,17 @@ class VFS(object):
                     options_string="write='false',contexts='yes',dir='"+self.db_uri+"'")
         elif db_type=='mysql':
             # Host / port
-            host=(db_uri.split('@')[1]).split(':')[0]
-            port=(db_uri.split('@')[1]).split(':')[1]
+            db_host=(db_uri.split('@')[1]).split(':')[0]
+            db_port=(db_uri.split('@')[1]).split(':')[1]
             # Username / password
             userpass=self.db_uri.split('@')[0]
             username=userpass.split(':')[0]
             passwd=userpass.split(':')[1]
             self.db_name=db_uri.split('/')[-1]
+            storage_options="contexts='yes',write='false',database='"+self.db_name+"',host='"+db_host+"',port='"+db_port+"',user='"+username+"',password='"+passwd+"'"
             self.storage=RDF.Storage(storage_name="mysql",
-                    database=self.db_name,
-                    host=db_host,
-                    port=db_port,
-                    user=username,
-                    password=passwd,
-                    options_string="write='false',contexts='yes'")
+                    name=self.db_name,
+                    options_string=storage_options)
         if self.storage==None:
             raise "Failed opening storage"
         self.model=RDF.Model(self.storage)

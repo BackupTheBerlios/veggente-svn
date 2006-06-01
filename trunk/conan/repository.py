@@ -34,6 +34,10 @@ class Repository(object):
     db_dir=''
     db_name='conan'
     db_type='sqlite'
+    host=None
+    port=None
+    username=None
+    password=None
     parser=None
     model=None
     storage=None
@@ -41,19 +45,27 @@ class Repository(object):
     db_uri=''
     
     #constructor
-    def __init__(self,dbname,db='.'):
+    def __init__(self,dbname,db='.',database_type='sqlite',host='localhost',port='3306',username=None,password=None):
         self.db_dir=db
-        if (dbname!=None) and (dbname!=''):
+        self.db_type=database_type
+        self.host=host
+        self.port=port
+        self.username=username
+        self.password=password
+        if (dbname!=None) or (dbname!=''):
             self.db_name=dbname
         self.parser=RDF.Parser(name='rdfxml')
         if self.parser is None:
-                raise "Failed initializing RDF parser"
+            raise "Failed initializing RDF parser"
+        if database_type=='sqlite':
+            self.db_uri=database_type+':'+self.db_name+'://'+self.db_dir+'+'
+        elif self.db_type=='mysql':
+            self.db_uri=self.db_type+':'+self.username+':'+self.password+'@'+self.host+':'+self.port+'/'+self.db_name+'+'
         if (self.__init_db()==0):
-                print 'RDF repository initialized in '+db
+            print 'RDF repository initialized in '+db
         if (self.__init_memstore()==0):
-                print 'RDF in-memory storage initialized'
-        self.db_uri=self.db_type+':'+self.db_name+'://'+self.db_dir+'+'
-                    
+            print 'RDF in-memory storage initialized'
+
     def __del__(self):
         self.model.sync()
 
@@ -66,19 +78,19 @@ class Repository(object):
         current_uri=None
         context_node=None
         if uri is None:
-                return -1
+            return -1
         current_uri=RDF.Uri(uri)
         if context is None:
-                context_node=RDF.Node(RDF.Uri(string=uri))
+            context_node=RDF.Node(RDF.Uri(string=uri))
         else:
-                context_node=RDF.Node(RDF.Uri(context))
+            context_node=RDF.Node(RDF.Uri(context))
         if (overwrite==False) and (self.isPresent(uri)):
             return 0
         if overwrite:
             if self.remove_statements_with_context(uri)!=0:
                 return -1
         for s in self.parser.parse_as_stream(current_uri,current_uri):
-                self.model.add_statement(s,context_node)
+            self.model.add_statement(s,context_node)
         self.model.sync()
         print "Adding URI "+uri
         
@@ -92,19 +104,19 @@ class Repository(object):
         current_uri=None
         context_node=None
         if uri is None:
-                return -1
+            return -1
         current_uri=RDF.Uri(uri)
         if context is None:
-                context_node=RDF.Node(RDF.Uri(string=uri))
+            context_node=RDF.Node(RDF.Uri(string=uri))
         else:
-                context_node=RDF.Node(RDF.Uri(context))
+            context_node=RDF.Node(RDF.Uri(context))
         if (overwrite==False) and (self.isPresent(uri)):
             return 0
         if overwrite:
             if self.mem_model.remove_statements_with_context(uri)!=0:
                 return -1
         for s in self.parser.parse_as_stream(current_uri,current_uri):
-                self.mem_model.add_statement(s,context_node)
+            self.mem_model.add_statement(s,context_node)
         self.model.sync()
         print "Adding URI "+uri
         
@@ -158,15 +170,18 @@ class Repository(object):
         return False
 
     def __init_db(self):
-        storage_options="contexts='yes',dir='"+self.db_dir+"'"
-        self.storage=RDF.Storage(storage_name="sqlite",
+        if self.db_type=='sqlite':
+            storage_options="contexts='yes',dir='"+self.db_dir+"'"
+        elif self.db_type=='mysql':
+            storage_options="contexts='yes',database='"+self.db_name+"',host='"+self.host+"',port='"+self.port+"',user='"+self.username+"',password='"+self.password+"',contexts='yes'"
+        self.storage=RDF.Storage(storage_name=self.db_type,
                         name=self.db_name,
                         options_string=storage_options)
         if self.storage is None:
-                raise "Failed creating storage"
+            raise "Failed creating storage"
         self.model=RDF.Model(self.storage)
         if self.model is None:
-                raise "Failed creating RDF model"
+            raise "Failed creating RDF model"
         return 0
 
     def __init_memstore(self):
@@ -182,14 +197,14 @@ soap_server=None
 repository=None
 try:
     if __name__=="__main__":
-            print "Veggente project: Conan RDF repository"
-            repository=Repository('conan','.')
-            soap_port=10000
-            SOAPpy.Config.simplify_objects=1
-            soap_server=SOAPpy.SOAPServer(('localhost',soap_port))
-            soap_server.registerObject(repository)
-            repository.check_documents()
-            soap_server.serve_forever()
+        print "Veggente project: Conan RDF repository"
+        repository=Repository('conan','.')
+        soap_port=10000
+        SOAPpy.Config.simplify_objects=1
+        soap_server=SOAPpy.SOAPServer(('localhost',soap_port))
+        soap_server.registerObject(repository)
+        repository.check_documents()
+        soap_server.serve_forever()
 except KeyboardInterrupt:
     print "RDF server shutdown"
     soap_server.server_close()

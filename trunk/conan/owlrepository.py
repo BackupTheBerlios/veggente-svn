@@ -326,8 +326,14 @@ repository=None
 try:
     if __name__=="__main__":
         db_dir='.'
+        db_type='sqlite'
+        db_host='localhost'
+        db_port='3306'
+        db_user=None
+        db_pass=None
+
         try:
-            opts, args=getopt.getopt(sys.argv[1:],"hp:vd",['help','port=','db=','version','debug'])
+            opts, args=getopt.getopt(sys.argv[1:],"hp:vd",['help','port=','db=','db_type=','version','debug','db_user=','db_pass=','db_host=','db_port='])
         except getopt.GetoptError:
             usage()
             sys.exit(-1)
@@ -344,12 +350,25 @@ try:
                 debug=True
             if opt in ('--db'):
                 db_dir=val
+            if opt in ('--db_port'):
+                db_port=val
+            if opt in ('--db_host'):
+                db_host=val
+            if opt in ('--db_pass'):
+                db_pass=val
+            if opt in ('--db_user'):
+                db_user=val
+            if opt in ('--db_type'):
+                db_type=val
             if opt in ('-p','--port'):
                 soap_port=val
             
         print "Veggente project: Conan OWL repository"
         print "Starting repository"
-        repository=OWLRepository('conan',db_dir)
+        if db_type=='sqlite':
+            repository=OWLRepository(dbname='conan',db=db_dir,database_type='sqlite')
+        elif db_type=='mysql':
+            repository=OWLRepository(dbname='conan',database_type='mysql',host=db_host,port=db_port,username=db_user,password=db_pass)
         repository.debug_flag=debug
 #        print repository.get_type('http://veggente.berlios.de/ns/cmet/COCT_HD070000UV01#COCT_HD070000UV01.LocatedEntity.classCode')
 #        print repository.get_onto_name('Organization','http://veggente.berlios.de/ns/cmet/COCT_HD150000UV02')
