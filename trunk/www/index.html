@@ -26,19 +26,31 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 						</tr>
 						<tr class="maincontent">
 								<td>
-										&nbsp;<h1>Progetto Veggente: una tesi, un delirio</h1>
+										&nbsp;<h1>Progetto Veggente</h1>
 										<hr/>
 										Il progetto Veggente nasce come tesi di laurea (tuttora in corso) del Politecnico di Milano nel settore dell'informatica medica.<br/>
 										<h2>Obiettivi</h2>
-										L'obiettivo del progetto è di creare un "ponte ontologico" tra protocolli diversi, sfruttando le ontologie a cui fanno riferimento.<br/>
-										In particolare verrà curata la conversione di messaggi dal protocollo HL7 versione 2 al protocollo versione 3 (e viceversa).
+										Gli obiettivi del progetto sono due:
+										<li>Permettere l'istanziamento di nuovi documenti HL7 v3 partendo dai dati di altri documenti HL7 v3.</li>
+										<li>Estendere la capacità in input permettendo l'import di documenti provenienti da altri standard attraverso mapping semantici e sintattici</li>
 										<h3>Status</h3>
-										E' al momento in corso la costruzione dell'ontologia di riferimento. 
-										Il processo di conversione dal formalismo di HL7 ad OWL si sta rivelando decisamente lungo, sembra che solo chi ha SCRITTO lo standard sia in grado di capirlo...<br/>
-										Le ontologie derivanti dalla conversione dei dati HL7 sono <b><a href="http://veggente.berlios.de/ns">qui</a></b>.<br/>
-										I file di partenza HL7 sono nel <b><a href="http://developer.berlios.de/svn/?group_id=5446">repository SubVersion</a></b>.
+											<h4>Ontologie</h4>
+											Sono state convertite in ontologie le informazioni contenute nei CMET e negli HMD, oltre al RIM e ai Datatype.
+											Rimangono ancora scoperte alcune associazioni UML, ma a breve dovrebbero essere incluse.<br/>
+											Le ontologie derivanti dalla conversione dei dati HL7 sono <b><a href="http://veggente.berlios.de/ns">qui</a></b>.<br/>
+											I file di partenza HL7 sono nel <b><a href="http://developer.berlios.de/svn/?group_id=5446">repository SubVersion</a></b>.<br/>
+											<h4>Repository</h4>
+											Il repository RDF/OWL è basato su <a href="http://librdf.org/">Redland</a> ed espone le sue funzioni via SOAP. 
+											Sostanzialmente fa da collante tra gli strati di storage e parsing offerti da Redland ed il motore di inferenza.<br/>
+											<h4>Inferenza</h4>
+											E' stato scelto <a href="http://www.w3.org/2000/10/swap/doc/cwm.html">CWM</a> come motore di inferenza a regole, 
+											modificandolo per permettergli di accedere alle triple contenute in SQLite o MySQL, usati come backend da <a href="http://librdf.org/">Redland</a>. 
+											Non è particolarmente veloce, ma si può estendere progettando nuove funzioni builtin da usare all'interno delle regole in formato N3.<br/>
 										<h3>Licenza</h3>
-										Il software e i vari file distribuiti sono rilasciati sotto licenza GPL v.2
+										Il software e i vari file distribuiti sono rilasciati sotto licenza GPL v.2<br/>
+										Le librerie <a href="http://librdf.org/">Redland</a> sono rilasciate in un misto di licenze LGPL 2.1, GPL 2 e Apache 2. <br/>
+										<a href="http://www.w3.org/2000/10/swap/doc/cwm.html">CWM</a> è rilasciato sotto licenza <a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">W3C</a><br/>
+										<br/>
 
 								</td>
 								<td class="right">

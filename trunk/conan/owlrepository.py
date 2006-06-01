@@ -58,7 +58,10 @@ class OWLRepository(Repository):
         """
         if (uri is None) or (uri==''):
             return -1
-        if self.isPresent(uri):
+        if (not self.isPresent(uri)):          
+            print "Document %s is NOT in store, downloading..."%uri
+            self.add_document(uri)
+        else:
             print "Document %s is in store"%uri
             inf_onto=self.isPresent(self.inf_prefix+uri)
             if (overwrite==True):
@@ -66,12 +69,12 @@ class OWLRepository(Repository):
                 if (inf_onto==True):
                     self.remove_document(inf_onto)
             else:
-                return 0
-        print "Document %s is NOT in store, downloading..."%uri
-        self.add_document(uri)
+                if inf_onto==True:
+                    print "Inference over %s is in store"%uri
+                    return 0
         import_list=self.find_imports(uri)
         for doc in import_list:
-            self.add_ontology(doc,False)
+            self.add_ontology(doc,overwrite)
         inferred_statements=self.exec_ontology_inference(uri,import_list,overwrite)
         if inferred_statements is None:
             return -1

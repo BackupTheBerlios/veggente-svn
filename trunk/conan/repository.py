@@ -173,7 +173,18 @@ class Repository(object):
         if self.db_type=='sqlite':
             storage_options="contexts='yes',dir='"+self.db_dir+"'"
         elif self.db_type=='mysql':
-            storage_options="contexts='yes',database='"+self.db_name+"',host='"+self.host+"',port='"+self.port+"',user='"+self.username+"',password='"+self.password+"',contexts='yes'"
+            try:
+                storage_options="contexts='yes',database='"+self.db_name+"',host='"+self.host+"',port='"+self.port+"',user='"+self.username+"',password='"+self.password+"',contexts='yes'"
+                self.storage=RDF.Storage(storage_name=self.db_type,
+                        name=self.db_name,
+                        options_string=storage_options)
+            except RDF.RedlandError:
+                print "MySQL database has not been configured, creating tables"
+                storage_options=storage_options+",new='yes'"
+                self.storage=RDF.Storage(storage_name=self.db_type,
+                        name=self.db_name,
+                        options_string=storage_options)
+
         self.storage=RDF.Storage(storage_name=self.db_type,
                         name=self.db_name,
                         options_string=storage_options)
