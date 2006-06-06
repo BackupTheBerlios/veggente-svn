@@ -311,6 +311,20 @@ class OWLRepository(Repository):
                 res_list.append(str(i.object.uri))
         return res_list
 
+    def onto_identify(self,resource,ontology):
+        res_name=None
+        res_type=[]
+        ontology=ontology.split('#')[0]
+        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
+        for i in results:
+            res_name=ontology+'#'+resource
+            res_type.append(str(i.object.uri))
+        if res_name!=None:
+            return res_name, res_type
+        for imp in self.find_imports(ontology):
+            return self.onto_identify(resource,ontology)
+
+
     def check_onto_name(self,xml_node_name):
         pass
 
