@@ -164,7 +164,7 @@ class Lifter:
             else:
                 for m in self.unfinished_statements:
                     print m
-                    if (m.object is None) and (m.predicate!=None) and (m.subject.uri!=None):
+                    if (m.object is None) and (m.predicate!=None) and (m.subject!=None):
                         m.object=RDF.Node(blank='cls'+str(self.counter))
                         self.rdf_model.add_statement(m)
                         self.rdf_model.add_statement(RDF.Statement(m.object,

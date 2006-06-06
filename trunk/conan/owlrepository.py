@@ -276,15 +276,11 @@ class OWLRepository(Repository):
             return None
         if ontology.endswith('#'):
             ontology=ontology.split('#')[0]
-        results=self.model.find_statements(RDF.Statement(predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
+        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
         if results!=[]:
             for i in results:
                 if i.subject.is_resource():
-                    if str(i.subject.uri).find('#')!=-1:
-                        # TODO: revert partial matching into complete matching
-                        if (str(i.subject.uri)).split('#')[1]==resource:
-#                        if ((str(i.subject.uri)).split('#')[1]).find(resource)!=-1:
-                            return str(i.subject.uri)
+                    return str(i.subject.uri)
         for imp in self.find_imports(ontology):
             return self.get_onto_name(resource,imp)
             
@@ -297,16 +293,22 @@ class OWLRepository(Repository):
         res_list=[]
         ns=uri.split('#')[0]
         res=uri.split('#')[1]
-        results=self.model.get_targets_context(RDF.Uri(uri),RDF.Uri(self.rdf_ns+'type'))
-        if results!=[]:
-            # First pass, control in main ontology
-            for r,c in results:
-                # get context uri string
-                context=str(c.uri)
-                if context.find('think_')!=-1:
-                    context=context.split('think_')[1]
-                if context==ns:
-                    res_list.append(str(r.uri))
+        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(uri),
+                                                        predicate=RDF.Uri(self.rdf_ns+'type')),
+                                                        RDF.Node(RDF.Uri(ns))
+                                                        )
+        for i in results:
+            if i.object.is_resource():
+                res_list.append(str(i.object.uri))
+        if res_list!=[]:
+            return res_list
+        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(uri),
+                                                        predicate=RDF.Uri(self.rdf_ns+'type')),
+                                                        RDF.Node(RDF.Uri('think_'+ns))
+                                                        )
+        for i in results:
+            if i.object.is_resource():
+                res_list.append(str(i.object.uri))
         return res_list
 
     def check_onto_name(self,xml_node_name):
