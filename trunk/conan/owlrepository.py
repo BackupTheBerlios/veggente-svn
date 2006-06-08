@@ -322,7 +322,8 @@ class OWLRepository(Repository):
         if res_name!=None:
             return res_name, res_type
         for imp in self.find_imports(ontology):
-            return self.onto_identify(resource,ontology)
+            return self.onto_identify(resource,imp)
+        return None, None
 
 
     def check_onto_name(self,xml_node_name):

@@ -185,9 +185,6 @@ class Repository(object):
                         name=self.db_name,
                         options_string=storage_options)
 
-        self.storage=RDF.Storage(storage_name=self.db_type,
-                        name=self.db_name,
-                        options_string=storage_options)
         if self.storage is None:
             raise "Failed creating storage"
         self.model=RDF.Model(self.storage)
