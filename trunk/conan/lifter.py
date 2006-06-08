@@ -120,7 +120,7 @@ class Lifter:
 
     def handle_node(self,active_class,active_res,node_name):
         print 'Resource '+self.xml_to_internal(node_name,active_class)
-        node_onto_name,node_onto_type=self.repository.onto_identify(self.xml_to_internal(node_name,active_class),self.base_onto)
+        node_onto_name,node_onto_type=self.repository.new_onto_identify(self.xml_to_internal(node_name,active_class),self.base_onto)
         if (node_onto_name=='') or (node_onto_name is None):
             print "Warning: UML-style resource not found, retrying"
             node_onto_name,node_onto_type=self.repository.onto_identify(self.xml_to_internal(node_name,None),self.base_onto)

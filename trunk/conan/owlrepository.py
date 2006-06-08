@@ -251,6 +251,17 @@ class OWLRepository(Repository):
             doc_imports.append(str((m.object).uri))
         return doc_imports
 
+    def find_imports_cluster(self,ontology):
+        cluster=[]
+        for i in self.find_imports(ontology):
+            if not (i in cluster):
+                cluster.append(i)
+        if cluster!=None:
+            for imp in cluster:
+                for new_imp in self.find_imports_cluster(imp):
+                    cluster.append(new_imp)
+        return cluster
+
     # --- Query functions ---
     def isClass(self,resource):
         if (resource is None) or (resource==''):
@@ -312,12 +323,40 @@ class OWLRepository(Repository):
                 res_list.append(str(i.object.uri))
         return res_list
 
+    def new_onto_identify(self, resource, ontology):
+        cluster=[]
+        res_name=None
+        res_type=None
+        print "Searching "+resource
+        type_query=RDF.SPARQLQuery(" PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \
+                                    select ?s ?o \
+                                    where { \
+                                        ?s rdf:type ?o . \
+                                        FILTER REGEX(?s,'#"+resource+"') }")
+        cluster.append(ontology)
+        for i in self.find_imports_cluster(ontology):
+            cluster.append(i)
+        print cluster
+        type_results=self.model.execute(type_query)
+        for triple in type_results:
+            print str(triple['s'])+' '+str(triple['o'])
+            st=RDF.Statement(subject=triple['s'],
+                            predicate=self.rdf_ns+'type',
+                            object=triple['o'])
+            if st!=None:
+                for verified_st,context in self.model.find_statements_context(st):
+                    if str(context.uri) in cluster:
+                        return str(verified_st.subject.uri),str(verified_st.predicate.uri)
+        return None,None
+
+
     def onto_identify(self,resource,ontology):
         res_name=None
         res_type=None
         ontology=ontology.split('#')[0]
         
-        before=datetime.datetime.now()
+#        before=datetime.datetime.now()
+#        print 'Got request for '+resource+' in '+ontology+' - '+str(before)
         results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
 #        after=datetime.datetime.now()
 #        print 'Searching '+resource+' - Search time: '+str(after-before)
@@ -326,13 +365,13 @@ class OWLRepository(Repository):
             res_type=str(i.object.uri)
             break
         if res_name!=None:
-            after=datetime.datetime.now()
-            print 'Found '+resource+' - Search time: '+str(after-before)
+#            after=datetime.datetime.now()
+#            print 'Found '+resource+' - Search time: '+str(after-before)
             return res_name, res_type
         for imp in self.find_imports(ontology):
             return self.onto_identify(resource,imp)
-        after=datetime.datetime.now()
-        print 'NOT Found '+resource+' - Search time: '+str(after-before)
+#        after=datetime.datetime.now()
+#        print 'NOT Found '+resource+' - Search time: '+str(after-before)
         return None, None
 
 
