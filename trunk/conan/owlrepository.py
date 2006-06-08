@@ -25,6 +25,7 @@ import swap.cwm
 import RDF
 import SOAPpy
 import getopt,sys
+import datetime
 
 __version__='0.0.1'
 
@@ -313,21 +314,27 @@ class OWLRepository(Repository):
 
     def onto_identify(self,resource,ontology):
         res_name=None
-        res_type=[]
+        res_type=None
         ontology=ontology.split('#')[0]
+        
+        before=datetime.datetime.now()
         results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
+#        after=datetime.datetime.now()
+#        print 'Searching '+resource+' - Search time: '+str(after-before)
         for i in results:
             res_name=ontology+'#'+resource
-            res_type.append(str(i.object.uri))
+            res_type=str(i.object.uri)
+            break
         if res_name!=None:
+            after=datetime.datetime.now()
+            print 'Found '+resource+' - Search time: '+str(after-before)
             return res_name, res_type
         for imp in self.find_imports(ontology):
             return self.onto_identify(resource,imp)
+        after=datetime.datetime.now()
+        print 'NOT Found '+resource+' - Search time: '+str(after-before)
         return None, None
 
-
-    def check_onto_name(self,xml_node_name):
-        pass
 
 def usage():
     print "Veggente project: Conan OWL repository"

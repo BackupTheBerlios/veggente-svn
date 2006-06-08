@@ -128,10 +128,10 @@ class Lifter:
                 print "Error: resource "+node_name+" not found"
                 return active_class,None
 #        node_onto_type=self.repository.get_type(node_onto_name)
-        print "Found resource: "+node_onto_name+' with type '+node_onto_type[0]
+        print "Found resource: "+node_onto_name+' with type '+node_onto_type
         
         # Properties
-        if (node_onto_type[0]==self.owl_ns+'ObjectProperty') or (node_onto_type[0]==self.owl_ns+'DatatypeProperty'):
+        if (node_onto_type==self.owl_ns+'ObjectProperty') or (node_onto_type==self.owl_ns+'DatatypeProperty'):
             if (self.unfinished_statements is None) or (len(self.unfinished_statements)==0):
                 self.unfinished_statements.append(RDF.Statement(active_res,RDF.Node(uri_string=node_onto_name)))
             else:
@@ -146,7 +146,7 @@ class Lifter:
                         break
         
         # Class
-        elif node_onto_type[0]==self.owl_ns+'Class':
+        elif node_onto_type==self.owl_ns+'Class':
             active_class=node_onto_name.split('#')[1]
             # Document is the active resource
 #            if active_res==self.root_node:
