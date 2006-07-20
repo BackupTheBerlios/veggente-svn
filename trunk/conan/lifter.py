@@ -75,7 +75,7 @@ class Lifter:
         """
         # Extract node info
         node_value=node.nodeValue
-#        print "Searching "+node_name+' using base ontology '+self.base_onto
+#        print "Searching "+node+' using base ontology '+self.base_onto
         if node.nodeType==Node.TEXT_NODE:
             tmp_res=self.handle_text(active_res,node_value)
             if tmp_res!=None:
@@ -120,17 +120,16 @@ class Lifter:
 
     def handle_node(self,active_class,active_res,node_name):
         print 'Resource '+self.xml_to_internal(node_name,active_class)
-        node_onto_name,node_onto_type=self.repository.new_onto_identify(self.xml_to_internal(node_name,active_class),self.base_onto)
+        node_onto_name,node_onto_type=self.repository.onto_identify(self.xml_to_internal(node_name,active_class),self.base_onto)
         if (node_onto_name=='') or (node_onto_name is None):
             print "Warning: UML-style resource not found, retrying"
             node_onto_name,node_onto_type=self.repository.onto_identify(self.xml_to_internal(node_name,None),self.base_onto)
             if (node_onto_name=='') or (node_onto_name is None):
                 print "Error: resource "+node_name+" not found"
                 return active_class,None
-#        node_onto_type=self.repository.get_type(node_onto_name)
         print "Found resource: "+node_onto_name+' with type '+node_onto_type
         
-        # Properties
+        # Property
         if (node_onto_type==self.owl_ns+'ObjectProperty') or (node_onto_type==self.owl_ns+'DatatypeProperty'):
             if (self.unfinished_statements is None) or (len(self.unfinished_statements)==0):
                 self.unfinished_statements.append(RDF.Statement(active_res,RDF.Node(uri_string=node_onto_name)))
@@ -149,13 +148,6 @@ class Lifter:
         elif node_onto_type==self.owl_ns+'Class':
             active_class=node_onto_name.split('#')[1]
             # Document is the active resource
-#            if active_res==self.root_node:
-#                print "in Handle class: added root statement"
-#                self.rdf_model.add_statement(RDF.Statement(active_res,
-#                                                            RDF.Node(RDF.Uri(self.rdf_ns+'type')),
-#                                                            RDF.Node(RDF.Uri(node_onto_name))
-#                                                            ))
-#            else:
             if (self.unfinished_statements is None) or (len(self.unfinished_statements)==0):
                 self.rdf_model.add_statement(RDF.Statement(active_res,
                                                             RDF.Node(RDF.Uri(self.rdf_ns+'type')),

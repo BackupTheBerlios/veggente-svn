@@ -185,11 +185,12 @@ class Repository(object):
                         name=self.db_name,
                         options_string=storage_options)
 
-        if self.storage is None:
-            raise "Failed creating storage"
+            if self.storage is None:
+                raise "Failed creating storage"
         self.model=RDF.Model(self.storage)
         if self.model is None:
             raise "Failed creating RDF model"
+        print str(self.model.size())+" statements in storage"
         return 0
 
     def __init_memstore(self):

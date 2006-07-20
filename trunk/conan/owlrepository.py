@@ -323,41 +323,14 @@ class OWLRepository(Repository):
                 res_list.append(str(i.object.uri))
         return res_list
 
-    def new_onto_identify(self, resource, ontology):
-        cluster=[]
-        res_name=None
-        res_type=None
-        print "Searching "+resource
-        type_query=RDF.SPARQLQuery(" PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \
-                                    select ?s ?o \
-                                    where { \
-                                        ?s rdf:type ?o . \
-                                        FILTER REGEX(?s,'#"+resource+"') }")
-        cluster.append(ontology)
-        for i in self.find_imports_cluster(ontology):
-            cluster.append(i)
-        print cluster
-        type_results=self.model.execute(type_query)
-        for triple in type_results:
-            print str(triple['s'])+' '+str(triple['o'])
-            st=RDF.Statement(subject=triple['s'],
-                            predicate=self.rdf_ns+'type',
-                            object=triple['o'])
-            if st!=None:
-                for verified_st,context in self.model.find_statements_context(st):
-                    if str(context.uri) in cluster:
-                        return str(verified_st.subject.uri),str(verified_st.predicate.uri)
-        return None,None
-
-
     def onto_identify(self,resource,ontology):
         res_name=None
         res_type=None
         ontology=ontology.split('#')[0]
-        
 #        before=datetime.datetime.now()
-#        print 'Got request for '+resource+' in '+ontology+' - '+str(before)
-        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
+#        print 'Got request for '+ontology+'#'+resource+' - '+str(before)
+        target_st=RDF.Statement(RDF.Uri(ontology+'#'+resource),RDF.Uri(self.rdf_ns+'type'),None)
+        results=self.model.find_statements(target_st,RDF.Node(RDF.Uri(ontology)))
 #        after=datetime.datetime.now()
 #        print 'Searching '+resource+' - Search time: '+str(after-before)
         for i in results:
@@ -436,8 +409,7 @@ try:
         elif db_type=='mysql':
             repository=OWLRepository(dbname='conan',database_type='mysql',host=db_host,port=db_port,username=db_user,password=db_pass)
         repository.debug_flag=debug
-#        print repository.get_type('http://veggente.berlios.de/ns/cmet/COCT_HD070000UV01#COCT_HD070000UV01.LocatedEntity.classCode')
-#        print repository.get_onto_name('Organization','http://veggente.berlios.de/ns/cmet/COCT_HD150000UV02')
+        print ""
         print "Starting SOAP interface on port "+str(soap_port)
         SOAPpy.Config.simplify_objects=1
         soap_server=SOAPpy.ThreadingSOAPServer(('localhost',soap_port))

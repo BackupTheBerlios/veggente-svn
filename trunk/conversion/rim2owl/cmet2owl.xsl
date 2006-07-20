@@ -352,6 +352,33 @@
 									<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="hl7:sourceConnection/hl7:nonTraversableConnection/@participantClassName"/>
 							</xsl:attribute>
 					</rdfs:domain>
+					<xsl:for-each select="hl7:targetConnection/hl7:derivationSupplier">
+							<xsl:variable name="derivation_id" select="@staticModelDerivationId"/>
+							<xsl:variable name="derivator">
+									<xsl:copy-of select="/hl7:serializedStaticModel/hl7:derivationSupplier[@staticModelDerivationId=$derivation_id]"/>
+							</xsl:variable>
+							<xsl:choose>
+									<xsl:when test="$derivation_id=$rim_id">
+											<rdfs:subPropertyOf>
+													<xsl:attribute name="rdf:resource">
+															<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@associationEndName"/>
+													</xsl:attribute>
+											</rdfs:subPropertyOf>
+									</xsl:when>
+									<xsl:when test="contains($derivator//hl7:targetStaticModel/@artifact,'RM')"/>
+									<xsl:otherwise>
+											<rdfs:subPropertyOf>
+													<xsl:attribute name="rdf:resource">
+															<xsl:value-of select="$rim_cm"/>
+															<xsl:call-template name="get_derivation_name">
+																	<xsl:with-param name="id" select="$derivation_id"/>
+															</xsl:call-template>#<xsl:value-of select="@className"/>.<xsl:value-of select="@associationEndName"/>
+													</xsl:attribute>
+											</rdfs:subPropertyOf>
+									</xsl:otherwise>
+							</xsl:choose>
+					</xsl:for-each>
+	
 					<rdfs:subPropertyOf>
 							<xsl:attribute name="rdf:resource">
 									<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:targetConnection/hl7:derivationSupplier[@staticModelDerivationId=$rim_id]/@associationEndName"/>
