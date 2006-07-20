@@ -62,7 +62,7 @@ class Repository(object):
         elif self.db_type=='mysql':
             self.db_uri=self.db_type+':'+self.username+':'+self.password+'@'+self.host+':'+self.port+'/'+self.db_name+'+'
         if (self.__init_db()==0):
-            print 'RDF repository initialized in '+db
+            print 'RDF repository initialized'
         if (self.__init_memstore()==0):
             print 'RDF in-memory storage initialized'
 
@@ -121,7 +121,7 @@ class Repository(object):
         print "Adding URI "+uri
         
         return 0
-    
+
     def remove_document(self, context): 
         """
         @context:char*
@@ -172,9 +172,12 @@ class Repository(object):
     def __init_db(self):
         if self.db_type=='sqlite':
             storage_options="contexts='yes',dir='"+self.db_dir+"'"
+            self.storage=RDF.Storage(storage_name=self.db_type,
+                        name=self.db_name,
+                        options_string=storage_options)
         elif self.db_type=='mysql':
             try:
-                storage_options="contexts='yes',database='"+self.db_name+"',host='"+self.host+"',port='"+self.port+"',user='"+self.username+"',password='"+self.password+"',contexts='yes'"
+                storage_options="contexts='yes',bulk='yes',database='"+self.db_name+"',host='"+self.host+"',port='"+self.port+"',user='"+self.username+"',password='"+self.password+"',contexts='yes'"
                 self.storage=RDF.Storage(storage_name=self.db_type,
                         name=self.db_name,
                         options_string=storage_options)
@@ -185,12 +188,12 @@ class Repository(object):
                         name=self.db_name,
                         options_string=storage_options)
 
-            if self.storage is None:
-                raise "Failed creating storage"
+        if self.storage is None:
+            raise "Failed creating storage"
         self.model=RDF.Model(self.storage)
         if self.model is None:
             raise "Failed creating RDF model"
-        print str(self.model.size())+" statements in storage"
+        print 'Current storage size: '+str(self.model.size())+' statements'
         return 0
 
     def __init_memstore(self):

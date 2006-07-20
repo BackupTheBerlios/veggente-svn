@@ -226,6 +226,8 @@ class OWLRepository(Repository):
             return None
         return self.parser.parse_string_as_stream(cwm_out,original_uri)
     
+
+    # Query functions
     def __find_location(self,uri):
         """
         Returns the original uri if the document is not in store, 
@@ -262,19 +264,17 @@ class OWLRepository(Repository):
                     cluster.append(new_imp)
         return cluster
 
-    # --- Query functions ---
-    def isClass(self,resource):
-        if (resource is None) or (resource==''):
-            return False
-        return True
-
-    def isProperty(self,resource):
-        if (resource is None) or (resource==''):
-            return False
-        return True
-
-    def is_allowed(self,class_name,property_name):
-        return True
+    def get_ontology(self, uri):
+        if (uri is None) or (uri==''):
+            return -1
+        temp_model=RDF.Model()
+        print 'copying uri '+uri
+        for st in self.model.find_statements(RDF.Statement(subject=None,predicate=None,object=None),RDF.Node(RDF.Uri(uri))):
+            temp_model.add_statement(st)
+        for ist in self.model.find_statements(RDF.Statement(subject=None,predicate=None,object=None),RDF.Node(RDF.Uri('think_'+uri))):
+            temp_model.add_statement(ist)
+        print "Copied "+str(temp_model.size())+' statements'
+        return temp_model.to_string(base_uri=uri)
 
     def get_onto_name(self,resource,ontology):
         """
@@ -323,28 +323,47 @@ class OWLRepository(Repository):
                 res_list.append(str(i.object.uri))
         return res_list
 
+    def new_onto_identify(self, resource, ontology):
+        cluster=[]
+        res_name=None
+        res_type=None
+        print "Searching "+resource
+        type_query=RDF.SPARQLQuery(" PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \
+                                    select ?s ?o \
+                                    where { \
+                                        ?s rdf:type ?o . \
+                                        FILTER REGEX(?s,'#"+resource+"') }")
+        cluster.append(ontology)
+        for i in self.find_imports_cluster(ontology):
+            cluster.append(i)
+        print cluster
+        type_results=self.model.execute(type_query)
+        for triple in type_results:
+            print str(triple['s'])+' '+str(triple['o'])
+            st=RDF.Statement(subject=triple['s'],
+                            predicate=self.rdf_ns+'type',
+                            object=triple['o'])
+            if st!=None:
+                for verified_st,context in self.model.find_statements_context(st):
+                    if str(context.uri) in cluster:
+                        return str(verified_st.subject.uri),str(verified_st.predicate.uri)
+        return None,None
+
+
     def onto_identify(self,resource,ontology):
         res_name=None
         res_type=None
         ontology=ontology.split('#')[0]
-#        before=datetime.datetime.now()
-#        print 'Got request for '+ontology+'#'+resource+' - '+str(before)
-        target_st=RDF.Statement(RDF.Uri(ontology+'#'+resource),RDF.Uri(self.rdf_ns+'type'),None)
-        results=self.model.find_statements(target_st,RDF.Node(RDF.Uri(ontology)))
-#        after=datetime.datetime.now()
-#        print 'Searching '+resource+' - Search time: '+str(after-before)
+        
+        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
         for i in results:
             res_name=ontology+'#'+resource
             res_type=str(i.object.uri)
             break
         if res_name!=None:
-#            after=datetime.datetime.now()
-#            print 'Found '+resource+' - Search time: '+str(after-before)
             return res_name, res_type
         for imp in self.find_imports(ontology):
             return self.onto_identify(resource,imp)
-#        after=datetime.datetime.now()
-#        print 'NOT Found '+resource+' - Search time: '+str(after-before)
         return None, None
 
 
@@ -409,8 +428,7 @@ try:
         elif db_type=='mysql':
             repository=OWLRepository(dbname='conan',database_type='mysql',host=db_host,port=db_port,username=db_user,password=db_pass)
         repository.debug_flag=debug
-        print ""
-        print "Starting SOAP interface on port "+str(soap_port)
+        print "SOAP interface on port "+str(soap_port)
         SOAPpy.Config.simplify_objects=1
         soap_server=SOAPpy.ThreadingSOAPServer(('localhost',soap_port))
         soap_server.registerObject(repository)

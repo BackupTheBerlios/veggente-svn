@@ -26,10 +26,16 @@ import xml.dom.minidom
 from xml.dom.minidom import Node
 
 class Lifter:
+    """
+    Lifter class' rdf graph contains two contexts:
+        instance: identify triples coming from the lifting process
+        ontology: identify triples coming from the ontology cluster
+    """
     server=''
     root_node=None
     repository=None
     rdf_model=None
+    parser=None
     rdf_ns='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
     rdfs_ns='http://www.w3.org/2000/01/rdf-schema#'
     owl_ns='http://www.w3.org/2002/07/owl#'
@@ -44,10 +50,19 @@ class Lifter:
         self.server=server_url
         SOAPpy.Config.simplify_objects=1
         self.repository=SOAPpy.SOAPProxy(self.server)
+        self.parser=RDF.Parser(name='rdfxml')
+        if self.parser is None:
+            raise "Failed initializing RDF parser"
         doc_store=RDF.Storage(storage_name="hashes",name="memstore",options_string="hash-type='memory'")
         if doc_store is None:
             raise "Failend creating in memory storage"
         self.rdf_model=RDF.Model(doc_store)
+        if self.rdf_model is None:
+            raise "Failed creating in memory RDF model"
+        onto_store=RDF.Storage(storage_name="hashes",name="onto_store",options_string="hash-type='memory'")
+        if onto_store is None:
+            raise "Failend creating in memory storage"
+        self.onto_model=RDF.Model(onto_store)
         if self.rdf_model is None:
             raise "Failed creating in memory RDF model"
  
@@ -57,12 +72,17 @@ class Lifter:
         document: uri of the document to convert
         onto_list: list of ontologies intantiated by the document
         """
+        if (onto_list is None) or (document is None):
+            return None
         self.uml_style=uml_mode
         self.base_onto=onto_list
+#        if (self.get_onto_cluster(onto_list)!=0):
+#            print "Error: cannot retrieve ontologies from repository"
+#            return -1
+        # Parse XML Document
         doc = xml.dom.minidom.parse(document)
         self.doc_context=RDF.Node(document)
         self.root_node=doc.documentElement
-        print self.root_node.nodeName
         self.removeWhitespaceNodes(self.root_node)
         self.walk(self.root_node,None,RDF.Node(RDF.Uri(document)))
         doc.unlink()
@@ -75,13 +95,12 @@ class Lifter:
         """
         # Extract node info
         node_value=node.nodeValue
-#        print "Searching "+node+' using base ontology '+self.base_onto
+#        print "Searching "+node_name+' using base ontology '+self.base_onto
         if node.nodeType==Node.TEXT_NODE:
             tmp_res=self.handle_text(active_res,node_value)
             if tmp_res!=None:
                 active_res=tmp_res
         elif (node.nodeType==Node.ELEMENT_NODE):
-#            node_name=self.xml_to_internal(node,active_class)
             tmp_class,tmp_res=self.handle_node(active_class,active_res,str(node.nodeName))
             if tmp_res!=None:
                 active_res=tmp_res
@@ -127,9 +146,10 @@ class Lifter:
             if (node_onto_name=='') or (node_onto_name is None):
                 print "Error: resource "+node_name+" not found"
                 return active_class,None
+#        node_onto_type=self.repository.get_type(node_onto_name)
         print "Found resource: "+node_onto_name+' with type '+node_onto_type
         
-        # Property
+        # Properties
         if (node_onto_type==self.owl_ns+'ObjectProperty') or (node_onto_type==self.owl_ns+'DatatypeProperty'):
             if (self.unfinished_statements is None) or (len(self.unfinished_statements)==0):
                 self.unfinished_statements.append(RDF.Statement(active_res,RDF.Node(uri_string=node_onto_name)))
@@ -148,6 +168,13 @@ class Lifter:
         elif node_onto_type==self.owl_ns+'Class':
             active_class=node_onto_name.split('#')[1]
             # Document is the active resource
+#            if active_res==self.root_node:
+#                print "in Handle class: added root statement"
+#                self.rdf_model.add_statement(RDF.Statement(active_res,
+#                                                            RDF.Node(RDF.Uri(self.rdf_ns+'type')),
+#                                                            RDF.Node(RDF.Uri(node_onto_name))
+#                                                            ))
+#            else:
             if (self.unfinished_statements is None) or (len(self.unfinished_statements)==0):
                 self.rdf_model.add_statement(RDF.Statement(active_res,
                                                             RDF.Node(RDF.Uri(self.rdf_ns+'type')),
@@ -188,7 +215,40 @@ class Lifter:
             else:
                 self.removeWhitespaceNodes(child)
 
-
+    def onto_identify(self,resource,ontology):
+        res_name=None
+        res_type=None
+        ontology=ontology.split('#')[0]
+        
+        results=self.onto_model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')))
+        for i in results:
+            res_name=ontology+'#'+resource
+            res_type=str(i.object.uri)
+            break
+        if res_name!=None:
+            return res_name, res_type
+        for imp in self.repository.find_imports(ontology):
+            return self.onto_identify(resource,imp)
+        return None, None
+    
+    def get_onto_cluster(self, ontology_list):
+        print ontology_list
+        onto_list=[]
+        if isinstance(ontology_list,list):
+            onto_list=ontology_list
+        elif isinstance(ontology_list,str):
+            onto_list.append(ontology_list)
+        print onto_list
+        for i in onto_list:
+            onto=self.repository.get_ontology(i)
+            for st in self.parser.parse_string_as_stream(onto,onto):
+                self.onto_model.add_statement(st)
+            imports=self.repository.find_imports(i)
+            if imports!=[]:
+                self.get_onto_cluster(imports)
+        return 0
+    
+    
 lift_inst=Lifter()
 try:
     if __name__=='__main__':
@@ -199,6 +259,7 @@ except KeyboardInterrupt:
     print "------- "+str(len(lift_inst.unfinished_statements))+" Unfinished Statements ---------"
     for st in lift_inst.unfinished_statements:
         print st
+# Testing. Remove when completed
 serializer=RDF.Serializer()
 serializer.set_namespace("doc", RDF.Uri(sys.argv[2]+"#"))
 serializer.set_namespace("rim", RDF.Uri('http://veggente.berlios.de/ns/RIMOntology#'))
