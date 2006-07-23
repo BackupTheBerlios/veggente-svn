@@ -49,6 +49,8 @@ class OWLRepository(Repository):
     rdfs_ns='http://www.w3.org/2000/01/rdf-schema#'
     owl_ns='http://www.w3.org/2002/07/owl#'
 
+    accepted_types=[owl_ns+'Class',owl_ns+'ObjectProperty',owl_ns+'DatatypeProperty']
+
     def add_ontology(self, uri, overwrite=False):
         """
         uri:string : ontology uri
@@ -357,9 +359,10 @@ class OWLRepository(Repository):
         
         results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
         for i in results:
-            res_name=ontology+'#'+resource
-            res_type=str(i.object.uri)
-            break
+            if str(i.object.uri) in self.accepted_types:
+                res_name=ontology+'#'+resource
+                res_type=str(i.object.uri)
+                break
         if res_name!=None:
             return res_name, res_type
         for imp in self.find_imports(ontology):

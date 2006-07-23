@@ -95,7 +95,6 @@ class Lifter:
         """
         # Extract node info
         node_value=node.nodeValue
-#        print "Searching "+node_name+' using base ontology '+self.base_onto
         if node.nodeType==Node.TEXT_NODE:
             tmp_res=self.handle_text(active_res,node_value)
             if tmp_res!=None:
@@ -110,7 +109,8 @@ class Lifter:
             self.walk(child,active_class,active_res)
             attrs = node.attributes
             for attrName in attrs.keys():
-                if not attrName.startswith('xmlns'):
+                # Dirty hack: filter out xsi:schemaLocation attributes
+                if (not attrName.startswith('xmlns'))and(not attrName=='xsi:schemaLocation'):
                     attrNode = attrs.get(attrName)
                     node_name=attrNode.localName
                     attrValue = attrNode.nodeValue
@@ -123,7 +123,7 @@ class Lifter:
 
     def handle_text(self,active_res,node_value):
         if (self.unfinished_statements is None) or (self.unfinished_statements==[]):
-            print "No unfinished statements: PANIC!!!!"
+            print "<Error>No unfinished statements: PANIC!!!!</Error>"
             self.rdf_model.add_statement(RDF.Statement(active_res,
                                                         RDF.Node(RDF.Uri('http://error.it#PanicError')),
                                                         RDF.Node(node_value)
@@ -138,16 +138,19 @@ class Lifter:
         return active_res
 
     def handle_node(self,active_class,active_res,node_name):
-        print 'Resource '+self.xml_to_internal(node_name,active_class)
-        node_onto_name,node_onto_type=self.repository.onto_identify(self.xml_to_internal(node_name,active_class),self.base_onto)
+        xml_res_name=self.xml_to_internal(node_name,active_class)
+        node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
         if (node_onto_name=='') or (node_onto_name is None):
-            print "Warning: UML-style resource not found, retrying"
-            node_onto_name,node_onto_type=self.repository.onto_identify(self.xml_to_internal(node_name,None),self.base_onto)
+            xml_res_name=self.xml_to_internal(node_name,None)
+            node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
             if (node_onto_name=='') or (node_onto_name is None):
-                print "Error: resource "+node_name+" not found"
+                print '<Resource>\n  <name>'+xml_res_name+'</name>'
+                print "  <Error/>\n</Resource>"
                 return active_class,None
-#        node_onto_type=self.repository.get_type(node_onto_name)
-        print "Found resource: "+node_onto_name+' with type '+node_onto_type
+
+        print '<Resource>\n  <name>'+xml_res_name+'</name>'
+        print '  <onto_res>'+node_onto_name+'</onto_res>\n  <type>'+node_onto_type+'</type>'
+        print '</Resource>'
         
         # Properties
         if (node_onto_type==self.owl_ns+'ObjectProperty') or (node_onto_type==self.owl_ns+'DatatypeProperty'):
@@ -252,9 +255,11 @@ class Lifter:
 lift_inst=Lifter()
 try:
     if __name__=='__main__':
-        print "XML file: "+sys.argv[1]
-        print "Ontology: "+sys.argv[2]
+        print '<?xml version="1.0"?>'
+        print '<source_file name="'+sys.argv[1]+'"'
+        print 'ontology_name="'+sys.argv[2]+'">'
         lift_inst.lift(sys.argv[1],sys.argv[2])
+        print '</source_file>'
 except KeyboardInterrupt:
     print "------- "+str(len(lift_inst.unfinished_statements))+" Unfinished Statements ---------"
     for st in lift_inst.unfinished_statements:
