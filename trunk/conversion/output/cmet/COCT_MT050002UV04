@@ -81,8 +81,8 @@
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Patient.addr">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#addr"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#Patient.addr"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#patientChoice">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#PAT"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#patientChoice">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Choice"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Patient"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
@@ -93,15 +93,216 @@
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Entity"/>
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#Choice"/>
       <rdfs:comment/>
+      <owl:unionOf rdf:parseType="Collection">
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person"/>
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject"/>
+      </owl:unionOf>
    </owl:Class>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#providerOrganization">
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Person"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#Person"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.classCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#PSN"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.determinerCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#INSTANCE"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.name"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.administrativeGenderCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.administrativeGenderCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.birthTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.birthTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#Person.classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.determinerCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#determinerCode"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#Person.determinerCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#Person.id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.name">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#name"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#Person.name"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.administrativeGenderCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#administrativeGenderCode"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#Person.administrativeGenderCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Person.birthTime">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#birthTime"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#Person.birthTime"/>
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#PSN"/>
+					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#INSTANCE"/>
+					<owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#NonPersonLivingSubject"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#NonPersonLivingSubject"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.determinerCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#INSTANCE"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.name"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.administrativeGenderCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.administrativeGenderCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.birthTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.birthTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#NonPersonLivingSubject.classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.determinerCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#determinerCode"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#NonPersonLivingSubject.determinerCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.id">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#NonPersonLivingSubject.id"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.name">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#name"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#NonPersonLivingSubject.name"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.administrativeGenderCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#administrativeGenderCode"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#NonPersonLivingSubject.administrativeGenderCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#NonPersonLivingSubject.birthTime">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#birthTime"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#NonPersonLivingSubject.birthTime"/>
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#INSTANCE"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#providerOrganization">
       <rdfs:range rdf:resource=""/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#Patient"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scoper"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD050002UV04#Role.providerOrganization"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scoper"/>
-   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#PAT"/>
-					<owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#E_OrganizationContact">
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT050002UV04#E_OrganizationContact">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT150003UV03#Organization"/>
    </owl:Class>
 </rdf:RDF>

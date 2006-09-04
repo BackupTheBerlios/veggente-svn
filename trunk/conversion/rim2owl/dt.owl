@@ -1,0 +1,2619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+	<!ENTITY sch 'http://www.ascc.net/xml/schematron#'>
+	<!ENTITY xs 'http://www.w3.org/2001/XMLSchema#'>
+	<!ENTITY xml 'http://www.w3.org/XML/1998/namespace#'>
+]>
+<rdf:RDF xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:sch="&sch;" xmlns:xs="&xs;">
+		<owl:Ontology rdf:about="http://veggente.berlios.de/ns/RIMDatatype"/>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#ANY">
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#nullFlavor"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#NullFlavor"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#BL">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#ANYNonNull">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#nullFlavor"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#NullFlavor"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#BN">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANYNonNull"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#BIN">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#representation"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#ED">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BIN"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#reference"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TEL"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#reference"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#thumbnail"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#Thumbnail"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#thumbnail"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#mediaType"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#language"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#compression"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CompressionAlgorithm"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#integrityCheck"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#integrityCheckAlgorithm"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IntegrityCheckAlgorithm"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#Thumbnail">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ED"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#reference"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TEL"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#reference"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#thumbnail"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#Thumbnail"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#thumbnail"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#ST">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ED"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#reference"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TEL"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#reference"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#thumbnail"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ED"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#thumbnail"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#representation"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#mediaType"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#language"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#compression"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CompressionAlgorithm"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#integrityCheck"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#integrityCheckAlgorithm"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IntegrityCheckAlgorithm"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#CD">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#originalText"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ED"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#originalText"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#qualifier"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CR"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#translation"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#code"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystem"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemVersion"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#displayName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#CE">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#originalText"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ED"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#originalText"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#qualifier"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CR"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#qualifier"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#translation"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#code"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystem"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemVersion"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#displayName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#CV">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#originalText"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ED"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#originalText"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#translation"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#translation"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#code"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystem"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemVersion"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#displayName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#CS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CV"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#code"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystem"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemVersion"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#displayName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#CO">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CV"/>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#CR">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#name"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CV"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#name"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#inverted"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SC">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ST"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#code"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystem"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemVersion"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#displayName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#II">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#root"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#extension"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#assigningAuthorityName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#displayable"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#URL">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#QTY"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#TEL">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#URL"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#useablePeriod"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_TS"/>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#use"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#ADXP">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ST"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.delimiter">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.country">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.state">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.county">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.city">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.postalCode">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.streetAddressLine">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.houseNumber">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.houseNumberNumeric">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.direction">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.streetName">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.streetNameBase">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.streetNameType">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.additionalLocator">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.unitID">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.unitType">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.careOf">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.censusTract">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryAddressLine">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryInstallationType">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryInstallationArea">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryInstallationQualifier">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryMode">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryModeIdentifier">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.buildingNumberSuffix">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.postBox">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#adxp.precinct">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ADXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AddressPartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#AD">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Class>
+						  <owl:unionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#delimiter"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.delimiter"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#country"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.country"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#state"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.state"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#county"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.county"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#city"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.city"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#postalCode"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.postalCode"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#streetAddressLine"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.streetAddressLine"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#houseNumber"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.houseNumber"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#houseNumberNumeric"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.houseNumberNumeric"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#direction"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.direction"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#streetName"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.streetName"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#streetNameBase"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.streetNameBase"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#streetNameType"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.streetNameType"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#additionalLocator"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.additionalLocator"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#unitID"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.unitID"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#unitType"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.unitType"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#careOf"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.careOf"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#censusTract"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.censusTract"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#deliveryAddressLine"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryAddressLine"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#deliveryInstallationType"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryInstallationType"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#deliveryInstallationArea"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryInstallationArea"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#deliveryInstallationQualifier"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryInstallationQualifier"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#deliveryMode"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryMode"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#deliveryModeIdentifier"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.deliveryModeIdentifier"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#buildingNumberSuffix"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.buildingNumberSuffix"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#postBox"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.postBox"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#precinct"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#adxp.precinct"/>
+							 </owl:Restriction>
+						  </owl:unionOf>
+					   </owl:Class>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#useablePeriod"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_TS"/>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#use"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#isNotOrdered"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#ENXP">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ST"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EntityNamePartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#qualifier"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#en.delimiter">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ENXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EntityNamePartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#en.family">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ENXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EntityNamePartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#en.given">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ENXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EntityNamePartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#en.prefix">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ENXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EntityNamePartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#en.suffix">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ENXP"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EntityNamePartType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#EN">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Class>
+						  <owl:unionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#delimiter"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#en.delimiter"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#family"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#en.family"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#given"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#en.given"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#prefix"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#en.prefix"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#suffix"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#en.suffix"/>
+							 </owl:Restriction>
+						  </owl:unionOf>
+					   </owl:Class>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#use"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#PN">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EN"/>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#ON">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EN"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Class>
+						  <owl:unionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#delimiter"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#en.delimiter"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#prefix"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#en.prefix"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#suffix"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#en.suffix"/>
+							 </owl:Restriction>
+						  </owl:unionOf>
+					   </owl:Class>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#use"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#TN">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EN"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#QTY">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#INT">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#QTY"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#REAL">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#QTY"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#PQR">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CV"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#QTY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#translation"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQR"/>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#unit"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#MO">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#QTY"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#currency"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#RTO">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#RTO_QTY_QTY"/>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#EIVL.event">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#code"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TimingEvent"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystem"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#codeSystemName"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SXCM_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#operator"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOperator"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:unionOf rdf:parseType="Collection">
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_TS"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_TS"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								</owl:unionOf>
+							 </owl:Class>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_TS"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TS"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					</owl:unionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVXB_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#inclusive"/>
+					<owl:allValuesFrom rdf:resource="&xsd;string"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#RTO_QTY_QTY">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#QTY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#numerator"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#QTY"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#denominator"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#QTY"/>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+			 <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#PIVL_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#phase"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#phase"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#period"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#period"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#alignment"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CalendarCycle"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#institutionSpecified"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#bl"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#EIVL_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#event"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EIVL.event"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#event"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#offset"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#offset"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVL_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_PQ"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:unionOf rdf:parseType="Collection">
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PQ"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								</owl:unionOf>
+							 </owl:Class>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					</owl:unionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SXCM_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#operator"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOperator"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#inclusive"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#bl"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#PPD_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#standardDeviation"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#standardDeviation"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#distributionType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ProbabilityDistributionType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#standardDeviation"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#standardDeviation"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#distributionType"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ProbabilityDistributionType"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#PIVL_PPD_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_PPD_TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#phase"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_PPD_TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#phase"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#period"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#period"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#alignment"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CalendarCycle"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#institutionSpecified"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#bl"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SXCM_PPD_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#operator"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOperator"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVL_PPD_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_PPD_TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:unionOf rdf:parseType="Collection">
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PPD_TS"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PPD_TS"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								</owl:unionOf>
+							 </owl:Class>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PPD_TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PPD_TS"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_TS"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					</owl:unionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PPD_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#inclusive"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#bl"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#EIVL_PPD_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_PPD_TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#event"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#EIVL.event"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#event"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#offset"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_PPD_PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#offset"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVL_PPD_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_PPD_PQ"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:unionOf rdf:parseType="Collection">
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PPD_PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PPD_PQ"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								</owl:unionOf>
+							 </owl:Class>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PPD_PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PPD_PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					</owl:unionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SXCM_PPD_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#operator"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOperator"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVXB_PPD_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PPD_PQ"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#inclusive"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#bl"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SXPR_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#comp"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#comp"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SXCM_CD">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#operator"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOperator"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SXCM_MO">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#MO"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#operator"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOperator"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SXCM_INT">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#INT"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#operator"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOperator"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SXCM_REAL">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#REAL"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#operator"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SetOperator"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVL_INT">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_INT"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:unionOf rdf:parseType="Collection">
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_INT"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#INT"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_INT"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								</owl:unionOf>
+							 </owl:Class>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_INT"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#INT"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_INT"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#INT"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#INT"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					</owl:unionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVXB_INT">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#INT"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#inclusive"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#bl"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVL_REAL">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_REAL"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:unionOf rdf:parseType="Collection">
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_REAL"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#REAL"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_REAL"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								</owl:unionOf>
+							 </owl:Class>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_REAL"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#REAL"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_REAL"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#REAL"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#REAL"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					</owl:unionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVXB_REAL">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#REAL"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#inclusive"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#bl"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVL_MO">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SXCM_MO"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:unionOf rdf:parseType="Collection">
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_MO"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#MO"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_MO"/>
+								   </owl:Restriction>
+								   <owl:Restriction>
+									  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+									  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+								   </owl:Restriction>
+								</owl:unionOf>
+							 </owl:Class>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_MO"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#MO"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVXB_MO"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					   <owl:Class>
+						  <owl:intersectionOf rdf:parseType="Collection">
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#MO"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#MO"/>
+							 </owl:Restriction>
+							 <owl:Restriction>
+								<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+								<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+							 </owl:Restriction>
+						  </owl:intersectionOf>
+					   </owl:Class>
+					</owl:unionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#IVXB_MO">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#MO"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#inclusive"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#bl"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#HXIT_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#HXIT_CE">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#BXIT_CD">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#qty"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#int"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#BXIT_IVL_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_PQ"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#qty"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#int"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SLIST_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#origin"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#origin"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#origin"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#scale"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#scale"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#scale"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#digits"/>
+						  <owl:allValuesFrom rdf:resource="&xsd;string"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#digits"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#digits"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#SLIST_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#origin"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#origin"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#origin"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#scale"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#scale"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#scale"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#digits"/>
+						  <owl:allValuesFrom rdf:resource="&xsd;string"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#digits"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#digits"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#GLIST_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#head"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TS"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#head"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#head"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#increment"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#increment"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#increment"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#period"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#int"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#denominator"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#int"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#GLIST_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#head"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#head"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#head"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#increment"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#increment"/>
+						  <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#increment"/>
+						  <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#period"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#int"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#denominator"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#int"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#RTO_PQ_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#QTY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#numerator"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#denominator"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#RTO_MO_PQ">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#QTY"/>
+			  <rdfs:subClassOf>
+				 <owl:Class>
+					<owl:intersectionOf rdf:parseType="Collection">
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#numerator"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#MO"/>
+					   </owl:Restriction>
+					   <owl:Restriction>
+						  <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#denominator"/>
+						  <owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PQ"/>
+					   </owl:Restriction>
+					</owl:intersectionOf>
+				 </owl:Class>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		   <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMDatatype#UVP_TS">
+			  <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TS"/>
+			  <rdfs:subClassOf>
+				 <owl:Restriction>
+					<owl:onProperty rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#probability"/>
+					<owl:allValuesFrom rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#probability"/>
+				 </owl:Restriction>
+			  </rdfs:subClassOf>
+		   </owl:Class>
+		 
+		   
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#any"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#additionalLocator"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#assigningAuthorityName"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#buildingNumberSuffix"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#careOf"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#censusTract"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#center"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#city"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#code"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#codeSystem"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#codeSystemName"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#codeSystemVersion"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#compression"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#country"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#county"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#currency"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#delimiter"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#deliveryAddressLine"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#deliveryInstallationArea"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#deliveryInstallationQualifier"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#deliveryInstallationType"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#deliveryMode"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#deliveryModeIdentifier"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#denominator"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#direction"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#displayable"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#displayName"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#extension"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#family"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#given"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#high"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#houseNumber"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#houseNumberNumeric"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#inclusive"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#integrityCheck"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#integrityCheckAlgorithm"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#inverted"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#isNotOrdered"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#language"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#low"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#mediaType"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#name"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#nullFlavor"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#numerator"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#operator"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#originalText"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#partType"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#postalCode"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#postBox"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#precinct"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#prefix"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#qualifier"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#reference"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#representation"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#root"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#state"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#streetAddressLine"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#streetName"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#streetNameBase"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#streetNameType"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#suffix"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#thumbnail"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#translation"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#unit"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#unitID"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#unitType"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#use"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#useablePeriod"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#validTime"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#value"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#width"/>
+
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#alignment"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#comp"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#digits"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#distributionType"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#event"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#head"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#increment"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#institutionSpecified"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#offset"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#origin"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#period"/>
+		   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#phase"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#probability"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#qty"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#scale"/>
+		   <owl:DatatypeProperty rdf:about="http://veggente.berlios.de/ns/RIMDatatype#standardDeviation"/>
+ 
+
+
+</rdf:RDF>

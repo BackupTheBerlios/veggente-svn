@@ -137,6 +137,46 @@ class Lifter:
                     break
         return active_res
 
+    def resolve_node(self,node,active_class):
+        # Begin searching with UML style notation 
+        xml_res_name=self.xml_to_internal(str(node.nodeName),active_class)
+        node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
+        if (node_onto_name=='') or (node_onto_name is None) or (node_onto_type=="") or (node_onto_type is None):
+            if (active_class!=None):
+                #Retry with non UML notation 
+                return self.resolve_node(node,None)
+            else:
+                return None,None
+        else:
+            return node_onto_name,node_onto_type
+
+    def new_handle_element(self,subject_class,subject_node,xml_node):
+        
+
+        # Check if there is an explicit instantiation
+#        attrs=node.attributes
+#        for attrName in attrs.keys():
+#            if "xsi:type" in attrName:
+#                
+#
+#            if (not attrName.startswith('xmlns'))and(not attrName=='xsi:schemaLocation'):
+#                attrNode = attrs.get(attrName)
+#                node_name=attrNode.localName
+#                attrValue = attrNode.nodeValue
+#                if (attrName=="xsi:type"):
+#                    # Explicit instantiation via xsi:type
+#
+#                else:
+#
+#
+#
+#        rdf_name,rdf_type=self.resolve_node(node,active_class)
+#        if (rdf_name is None) or (rdf_type is None):
+#            print '<Resource>\n  <name>'+node.nodeName+'</name>'
+#            print "  <Error/>\n</Resource>"
+    
+
+
     def handle_node(self,active_class,active_res,node_name):
         xml_res_name=self.xml_to_internal(node_name,active_class)
         node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
@@ -250,8 +290,61 @@ class Lifter:
             if imports!=[]:
                 self.get_onto_cluster(imports)
         return 0
+   
+    def add_class_instance(self,subject,class_res):
+        """
+        Add a class instance to the store
+        Parameters:
+            subject (RDF.Node): current RDF subject
+            class_res (string): Class resource
+        Returns:
+            RDF.Node
+        """
+        if (subject is None) or (class_res is None):
+            return None
+        self.rdf_model.add_statement(RDF.Statement(subject,
+                                                    RDF.Node(RDF.Uri(self.rdf_ns+'type')),
+                                                    RDF.Node(RDF.Uri(class_res))
+                                                    ))
+        return subject
     
-    
+    def add_obj_property_instance(self,subject,property_res,dest_class):
+        """
+        Add an ObjectProperty instance to the store
+        Parameters:
+            subject (RDF.Node): current RDF subject
+            property_res (string): ObjectProperty resource
+            dest_class (string): destination class of the ObjectProperty
+        Returns:
+            RDF.Node
+        """
+        if (subject is None) or (property_res is None) or (dest_class is None):
+            return None
+        new_subject=RDF.Node(blank='cls'+str(self.counter))
+        self.rdf_model.add_statement(RDF.Statement(subject,
+                                                    RDF.Node(RDF.Uri(property_res)),
+                                                    new_subject
+                                                    ))
+        return self.add_class_instance(new_subject,dest_class)
+
+    def add_data_property_instance(self,subject,property_res,textual_content):
+        """
+        Add a DatatypeProperty instance to the store
+        Parameters:
+            subject (RDF.Node): current RDF subject
+            property_res (string): DatatypeProperty resource
+            textual_content (string): value of the DatatypeProperty
+        Returns:
+            RDF.Node
+        """
+        if (subject is None) or (property_res is None) or (textual_content is None):
+            return None
+        self.rdf_model.add_statement(RDF.Statement(subject,
+                                                    RDF.Node(RDF.Uri(property_res)),
+                                                    RDF.Node(literal=textual_content)
+                                                    ))
+        return subject
+  
 lift_inst=Lifter()
 try:
     if __name__=='__main__':

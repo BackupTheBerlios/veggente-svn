@@ -171,11 +171,40 @@
 							</xsl:choose>
 					</xsl:for-each>
 					<xsl:apply-templates select="hl7:annotations"/>
-					<xsl:apply-templates select="hl7:attribute" mode="class"/>
+					<xsl:choose>
+							<xsl:when test="hl7:specializationChild">
+									<owl:unionOf rdf:parseType="Collection">
+											<xsl:for-each select="hl7:specializationChild/hl7:specializedClass">
+													<owl:Class>
+															<xsl:attribute name="rdf:about">
+																	<xsl:choose>
+																			<xsl:when test="hl7:class">
+																					<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="hl7:class/@name"/>
+																			</xsl:when>
+																			<xsl:otherwise>
+																					<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="hl7:reference/@name"/>
+																			</xsl:otherwise>
+																	</xsl:choose>
+															</xsl:attribute>
+													</owl:Class>
+											</xsl:for-each>
+									</owl:unionOf>
+							</xsl:when>
+							<xsl:otherwise>
+									<xsl:apply-templates select="hl7:attribute" mode="class"/>
+							</xsl:otherwise>
+					</xsl:choose>
 			</owl:Class>
-			<xsl:apply-templates select="hl7:attribute" mode="property"/>
+			<xsl:choose>
+					<xsl:when test="hl7:specializationChild">
+							<xsl:apply-templates select="hl7:specializationChild/hl7:specializedClass/hl7:class"/>
+					</xsl:when>
+					<xsl:otherwise>
+							<xsl:apply-templates select="hl7:attribute" mode="property"/>
+							<xsl:apply-templates select="hl7:attribute" mode="fixed_value"/>
+					</xsl:otherwise>
+			</xsl:choose>
 			<xsl:apply-templates select="hl7:association"/>
-			<xsl:apply-templates select="hl7:attribute" mode="fixed_value"/>
 	</xsl:template>
 
 	<!-- CMET includes-->
@@ -388,6 +417,7 @@
 			</owl:ObjectProperty>
 			<xsl:apply-templates select="hl7:targetConnection/hl7:participantClass/hl7:class"/>
 	</xsl:template>
+
 
 	<xsl:template name="get_derivation_name">
 			<xsl:param name="id"/>

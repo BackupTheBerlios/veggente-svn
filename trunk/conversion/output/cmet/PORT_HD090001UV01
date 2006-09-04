@@ -132,8 +132,8 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StabilityStudy.reasonCode">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#reasonCode"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#subject">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#subject">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Subject2"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StabilityStudy"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
@@ -188,8 +188,8 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ResearchSubject.classCode">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#subjectSpecifiedSubstanceOrProduct">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#RESBJ"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#subjectSpecifiedSubstanceOrProduct">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedSubstanceOrProduct"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ResearchSubject"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
@@ -198,7 +198,215 @@
    <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedSubstanceOrProduct">
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Entity"/>
       <rdfs:comment/>
+      <owl:unionOf rdf:parseType="Collection">
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product"/>
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance"/>
+      </owl:unionOf>
    </owl:Class>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ManufacturedMaterial"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.desc"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.desc"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.formCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.formCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.expirationTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.expirationTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.determinerCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#determinerCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.desc">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#desc"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.formCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#formCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product.expirationTime">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#expirationTime"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#specifiedIngredient">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedIngredient"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Product"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scopedRole"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scopedRole"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedIngredient">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedIngredient.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedIngredient.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedIngredient.quantity"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedIngredient.quantity"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedIngredient.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedIngredient.quantity">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#quantity"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ingredient">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#SpecifiedIngredient"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Material"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.desc"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.desc"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.determinerCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#determinerCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Substance.desc">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#desc"/>
+   </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#researchSponsor">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Organization"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ResearchSubject"/>
@@ -390,8 +598,8 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Specification.text">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#text"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#component">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#DEF"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#component">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Component5"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Specification"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -521,8 +729,8 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#TestDefinition.methodCode">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#methodCode"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#referenceRange">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#DEF"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#referenceRange">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ReferenceRange"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#TestDefinition"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -552,8 +760,8 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ReferenceRange.typeCode">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#acceptanceCriterion">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#REFV"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#acceptanceCriterion">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#AcceptanceCriterion"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ReferenceRange"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
@@ -659,7 +867,6 @@
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#AcceptanceCriterion.interpretationCode">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#interpretationCode"/>
    </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN.CRT"/>
-					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#REFV"/>
 					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#component">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Component6"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#TestDefinition"/>
@@ -690,10 +897,8 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Component6"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
-   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#DEF"/>
-					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#DEF"/>
-					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#RESBJ"/>
-					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#component">
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#component">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Component1"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StabilityStudy"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -793,8 +998,8 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StudyOnBatch.code">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#subject">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#subject">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Subject1"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StudyOnBatch"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
@@ -849,8 +1054,8 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Instance.classCode">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#manufacturedMaterialInstance">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#INST"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#manufacturedMaterialInstance">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ManufacturedMaterial"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Instance"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
@@ -970,8 +1175,8 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ManufacturedMaterial.expirationTime">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#expirationTime"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#asManufacturedProduct">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#INSTANCE"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#asManufacturedProduct">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ManufacturedProduct"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ManufacturedMaterial"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#playedRole"/>
@@ -1086,8 +1291,8 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Manufacturer.addr">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#addr"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#assignedEntity">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#INSTANCE"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#assignedEntity">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#AssignedEntity2"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Manufacturer"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#playedRole"/>
@@ -1117,8 +1322,8 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#AssignedEntity2"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scoper"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scoper"/>
-   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#INSTANCE"/>
-					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#asContent">
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#asContent">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Content"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ManufacturedMaterial"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#playedRole"/>
@@ -1163,8 +1368,8 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Content.quantity">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#quantity"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#container">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#CONT"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#container">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Container"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Content"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scoper"/>
@@ -1278,8 +1483,8 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Container.capTypeCode">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#capTypeCode"/>
-   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#CONT"/>
-					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#batchIngredient">
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#batchIngredient">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#BatchIngredient"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ManufacturedMaterial"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#scopedRole"/>
@@ -1324,9 +1529,8 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#BatchIngredient"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#player"/>
-   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#INSTANCE"/>
-					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#INST"/>
-					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#component">
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#component">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Component2"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StudyOnBatch"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -1375,8 +1579,319 @@
    <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#TimePoint">
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
       <rdfs:comment/>
+      <owl:unionOf rdf:parseType="Collection">
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage"/>
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing"/>
+      </owl:unionOf>
    </owl:Class>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#component">
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
+      <rdfs:comment>A single storage instance is created. It specifies the storage conditions for all testing instances.</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.moodCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.text"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.text"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.effectiveTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.effectiveTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.moodCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#moodCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.text">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#text"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage.effectiveTime">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#effectiveTime"/>
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#controlVariable">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ControlVariable"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Storage"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ControlVariable">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ControlVariable.typeCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#CTRLV"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ControlVariable.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ControlVariable.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ControlVariable.typeCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#CTRLV"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#storageCondition">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#ControlVariable"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.moodCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN.CRT"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.text"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.text"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.value"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.value"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.moodCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#moodCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.text">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#text"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#StorageCondition.value">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#value"/>
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN.CRT"/>
+					<owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.moodCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.title"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.title"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.text"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.text"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.effectiveTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.effectiveTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.classCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#classCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.moodCode">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#moodCode"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.code">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#code"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.title">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#title"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.text">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#text"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Testing.effectiveTime">
+      <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#effectiveTime"/>
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#component">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Component3"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#TimePoint"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -1491,8 +2006,8 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Test.value">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#value"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#performer">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#performer">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Performer"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Test"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
@@ -1663,8 +2178,8 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Definition.typeCode">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#typeCode"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#definitionStub">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#INST"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#definitionStub">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#DefinitionStub"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Definition"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
@@ -1725,7 +2240,6 @@
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#DefinitionStub.id">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#id"/>
    </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#DEF"/>
-					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#INST"/>
 					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#component">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Component4"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Test"/>
@@ -1786,7 +2300,5 @@
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#Component4"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
-   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN"/>
-					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN"/>
-					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORT_HD090001UV01#EVN"/>
-					</rdf:RDF>
+   </owl:ObjectProperty>
+</rdf:RDF>

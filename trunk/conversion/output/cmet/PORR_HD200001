@@ -170,8 +170,9 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#InvestigationNotification.effectiveTime">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#effectiveTime"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#author">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#INVSTG"/>
+					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#EVN"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#author">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#Author"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#InvestigationNotification"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
@@ -231,8 +232,8 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#Author.time">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#time"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#responsibleParty">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#AUT"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#responsibleParty">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#ResponsibleParty"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#Author"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#role"/>
@@ -241,8 +242,12 @@
    <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#ResponsibleParty">
       <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Role"/>
       <rdfs:comment/>
-   </owl:Class><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#AUT"/>
-					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#primaryInformationRecipient">
+      <owl:unionOf rdf:parseType="Collection">
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#"/>
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#"/>
+      </owl:unionOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#primaryInformationRecipient">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#PrimaryInformationRecipient"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#InvestigationNotification"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#participation"/>
@@ -302,14 +307,14 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#PrimaryInformationRecipient.time">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#time"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#responsibleParty">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#PRCP"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#responsibleParty">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#ResponsibleParty"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#PrimaryInformationRecipient"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#role"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#role"/>
-   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#PRCP"/>
-					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#documentationOf">
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#documentationOf">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#DocumentationOf1"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#InvestigationNotification"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#outboundRelationship"/>
@@ -369,14 +374,14 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#DocumentationOf1.contextConductionInd">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#contextConductionInd"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#investigationNotification">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#DOC"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#investigationNotification">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#InvestigationNotification"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#DocumentationOf1"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#target"/>
-   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#DOC"/>
-					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#documentation">
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#documentation">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#DocumentationOf2"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#InvestigationNotification"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#inboundRelationship"/>
@@ -436,16 +441,14 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#DocumentationOf2.contextConductionInd">
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#contextConductionInd"/>
-   </owl:ObjectProperty>
-   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#investigationNotification">
+   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#DOC"/>
+					<owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#investigationNotification">
       <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#InvestigationNotification"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/PORR_HD200001#DocumentationOf2"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#source"/>
       <rdfs:subPropertyOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#source"/>
-   </owl:ObjectProperty><rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#DOC"/>
-					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#INVSTG"/>
-					<rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#EVN"/>
-					<owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#R_AssignedOrganizationUniversal">
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#R_AssignedOrganizationUniversal">
       <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT090200UV01#AssignedOrganization"/>
    </owl:Class>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/PORR_HD200001#R_AssignedPersonUniversal">
