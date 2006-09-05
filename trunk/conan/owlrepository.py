@@ -369,6 +369,14 @@ class OWLRepository(Repository):
             return self.onto_identify(resource,imp)
         return None, None
 
+    def get_class_properties(self,class_name,ontology):
+        prop_list=[]
+        imports=self.find_imports(ontology)
+        for (st,context) in self.model.find_statements_context(RDF.Statement(predicate=RDF.Uri(self.rdfs_ns+'domain'),object=RDF.Uri(class_name))):
+            if (context.uri in imports) or (context.uri==ontology):
+                prop_list.add(st.uri)
+        return prop_list
+
 
 def usage():
     print "Veggente project: Conan OWL repository"

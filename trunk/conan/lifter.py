@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #	Veggente - lifter
-#   Implementation of a XML to RDF algorithm
+#   Implementation of an XML to RDF algorithm
 #	
 #	Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
 #	This program is free software; you can redistribute it and/or modify
@@ -24,6 +24,26 @@ import RDF
 from os import sys
 import xml.dom.minidom
 from xml.dom.minidom import Node
+
+class OWL_Resource:
+    name=''
+    resource=''
+    def __init__(self,resource):
+        self.name=resource.split('#')[1]
+        self.resource=resource
+    def __str__(self):
+        return self.name
+
+class OWL_Class(OWL_Resource):
+    subclasses=[]
+    superclasses=[]
+    properties=[]
+
+
+
+class OWL_Property(OWL_Resource):
+    domains=[]
+    ranges=[]
 
 class Lifter:
     """
@@ -121,22 +141,39 @@ class Lifter:
                         if tmp_res!=None:
                             active_res=tmp_res
 
-    def handle_text(self,active_res,node_value):
-        if (self.unfinished_statements is None) or (self.unfinished_statements==[]):
-            print "<Error>No unfinished statements: PANIC!!!!</Error>"
-            self.rdf_model.add_statement(RDF.Statement(active_res,
-                                                        RDF.Node(RDF.Uri('http://error.it#PanicError')),
-                                                        RDF.Node(node_value)
-                                                        ))
-        else:
-            for m in self.unfinished_statements:
-                if (m.object is None) and (m.predicate!=None) and (m.subject!=None):
-                    m.object=RDF.Node(node_value)
-                    self.rdf_model.add_statement(m)
-                    self.unfinished_statements.remove(m)
+    def handle_element(self,subject_class,subject_node,xml_node):
+        """
+        Resolve an XML element against the base ontology
+        subject_class (string): name of the active class
+        subject_node (RDF.Node): active RDF subject node
+        """
+        rdf_name,rdf_type=self.resolve_node(xml_node,subject_class)
+        new_subject_node=subject_node
+        if (rdf_name is None) or (rdf_type is None):
+            print '<Resource>\n  <name>'+xml_res_name+'</name>'
+            print "  <Error/>\n</Resource>"
+            return subject_class,subject_node
+        # Handle possible resource types
+        if (rdf_type==self.owl_ns+'Class'):
+            new_subject_node, new_subject_name=self.add_class_instance(subject_node, rdf_name)
+        elif (rdf_type==self.owl_ns+'ObjectProperty'):
+            pass
+        elif (rdf_type==self.owl_ns+'DatatypeProperty'):
+            # Search for a suitable text child node
+            for n in xml_node.childNodes:
+                if n.nodeType==Node.TEXT_MODE:
+                    new_subject=self.add_data_property_instance(subject,property_res,textual_content)
                     break
-        return active_res
+        # Attributes
+        if (node.attributes!=None):
+            for attr in (node.attributes).keys():
+                new_subject=self.handle_attribute()
+        # Child elements
+        for elem in xml_node.childNodes:
+            new_subject=self.handle_element()
 
+    def handle_attribute(self,attribute,current_subject):
+                
     def resolve_node(self,node,active_class):
         # Begin searching with UML style notation 
         xml_res_name=self.xml_to_internal(str(node.nodeName),active_class)
@@ -150,32 +187,22 @@ class Lifter:
         else:
             return node_onto_name,node_onto_type
 
-    def new_handle_element(self,subject_class,subject_node,xml_node):
+    def onto_identify(self,resource,ontology):
+        res_name=None
+        res_type=None
+        ontology=ontology.split('#')[0]
         
-
-        # Check if there is an explicit instantiation
-#        attrs=node.attributes
-#        for attrName in attrs.keys():
-#            if "xsi:type" in attrName:
-#                
-#
-#            if (not attrName.startswith('xmlns'))and(not attrName=='xsi:schemaLocation'):
-#                attrNode = attrs.get(attrName)
-#                node_name=attrNode.localName
-#                attrValue = attrNode.nodeValue
-#                if (attrName=="xsi:type"):
-#                    # Explicit instantiation via xsi:type
-#
-#                else:
-#
-#
-#
-#        rdf_name,rdf_type=self.resolve_node(node,active_class)
-#        if (rdf_name is None) or (rdf_type is None):
-#            print '<Resource>\n  <name>'+node.nodeName+'</name>'
-#            print "  <Error/>\n</Resource>"
-    
-
+        results=self.onto_model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')))
+        for i in results:
+            res_name=ontology+'#'+resource
+            res_type=str(i.object.uri)
+            break
+        if res_name!=None:
+            return res_name, res_type
+        for imp in self.repository.find_imports(ontology):
+            return self.onto_identify(resource,imp)
+        return None, None
+ 
 
     def handle_node(self,active_class,active_res,node_name):
         xml_res_name=self.xml_to_internal(node_name,active_class)
@@ -258,22 +285,7 @@ class Lifter:
             else:
                 self.removeWhitespaceNodes(child)
 
-    def onto_identify(self,resource,ontology):
-        res_name=None
-        res_type=None
-        ontology=ontology.split('#')[0]
-        
-        results=self.onto_model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')))
-        for i in results:
-            res_name=ontology+'#'+resource
-            res_type=str(i.object.uri)
-            break
-        if res_name!=None:
-            return res_name, res_type
-        for imp in self.repository.find_imports(ontology):
-            return self.onto_identify(resource,imp)
-        return None, None
-    
+   
     def get_onto_cluster(self, ontology_list):
         print ontology_list
         onto_list=[]
@@ -344,7 +356,7 @@ class Lifter:
                                                     RDF.Node(literal=textual_content)
                                                     ))
         return subject
-  
+
 lift_inst=Lifter()
 try:
     if __name__=='__main__':
