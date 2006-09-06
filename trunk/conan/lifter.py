@@ -28,9 +28,11 @@ from xml.dom.minidom import Node
 class OWL_Resource:
     name=''
     resource=''
-    def __init__(self,resource):
+    rdf_node=None
+    def __init__(self,resource,rdf_node):
         self.name=resource.split('#')[1]
         self.resource=resource
+        self.rdf_node=rdf_node
     def __str__(self):
         return self.name
 
@@ -141,14 +143,16 @@ class Lifter:
                         if tmp_res!=None:
                             active_res=tmp_res
 
-    def handle_element(self,subject_class,subject_node,xml_node):
+    def handle_element(self,main_class,secondary_class,xml_node):
         """
         Resolve an XML element against the base ontology
-        subject_class (string): name of the active class
-        subject_node (RDF.Node): active RDF subject node
+        hl7_class (OWL_Resource): active HL7 class
+        dt_class (OWL_Resource): active HL7 Datatype class
         """
         rdf_name,rdf_type=self.resolve_node(xml_node,subject_class)
-        new_subject_node=subject_node
+        new_main_class=main_class
+        new_secondary_class=secondary_class
+        object_found=False
         if (rdf_name is None) or (rdf_type is None):
             print '<Resource>\n  <name>'+xml_res_name+'</name>'
             print "  <Error/>\n</Resource>"
@@ -157,7 +161,8 @@ class Lifter:
         if (rdf_type==self.owl_ns+'Class'):
             new_subject_node, new_subject_name=self.add_class_instance(subject_node, rdf_name)
         elif (rdf_type==self.owl_ns+'ObjectProperty'):
-            pass
+# Controlla il range della proprietà e istanzia quella classe se non trovata
+# Se l'oggetto è una classe Datatype affianca alla classe HL7 la classe DT
         elif (rdf_type==self.owl_ns+'DatatypeProperty'):
             # Search for a suitable text child node
             for n in xml_node.childNodes:
@@ -203,69 +208,6 @@ class Lifter:
             return self.onto_identify(resource,imp)
         return None, None
  
-
-    def handle_node(self,active_class,active_res,node_name):
-        xml_res_name=self.xml_to_internal(node_name,active_class)
-        node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
-        if (node_onto_name=='') or (node_onto_name is None):
-            xml_res_name=self.xml_to_internal(node_name,None)
-            node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
-            if (node_onto_name=='') or (node_onto_name is None):
-                print '<Resource>\n  <name>'+xml_res_name+'</name>'
-                print "  <Error/>\n</Resource>"
-                return active_class,None
-
-        print '<Resource>\n  <name>'+xml_res_name+'</name>'
-        print '  <onto_res>'+node_onto_name+'</onto_res>\n  <type>'+node_onto_type+'</type>'
-        print '</Resource>'
-        
-        # Properties
-        if (node_onto_type==self.owl_ns+'ObjectProperty') or (node_onto_type==self.owl_ns+'DatatypeProperty'):
-            if (self.unfinished_statements is None) or (len(self.unfinished_statements)==0):
-                self.unfinished_statements.append(RDF.Statement(active_res,RDF.Node(uri_string=node_onto_name)))
-            else:
-                for m in self.unfinished_statements:
-                    if (m.object is None) and (m.predicate!=None) and (m.subject!=None):
-                        m.object=RDF.Node(blank='pr'+str(self.counter))
-                        self.rdf_model.add_statement(m)
-                        self.unfinished_statements.append(RDF.Statement(m.object,RDF.Node(RDF.Uri(node_onto_name))))
-                        self.counter=self.counter+1
-                        active_res=m.object
-                        self.unfinished_statements.remove(m)
-                        break
-        
-        # Class
-        elif node_onto_type==self.owl_ns+'Class':
-            active_class=node_onto_name.split('#')[1]
-            # Document is the active resource
-#            if active_res==self.root_node:
-#                print "in Handle class: added root statement"
-#                self.rdf_model.add_statement(RDF.Statement(active_res,
-#                                                            RDF.Node(RDF.Uri(self.rdf_ns+'type')),
-#                                                            RDF.Node(RDF.Uri(node_onto_name))
-#                                                            ))
-#            else:
-            if (self.unfinished_statements is None) or (len(self.unfinished_statements)==0):
-                self.rdf_model.add_statement(RDF.Statement(active_res,
-                                                            RDF.Node(RDF.Uri(self.rdf_ns+'type')),
-                                                            RDF.Node(RDF.Uri(node_onto_name))
-                                                            ))
-            else:
-                for m in self.unfinished_statements:
-                    print m
-                    if (m.object is None) and (m.predicate!=None) and (m.subject!=None):
-                        m.object=RDF.Node(blank='cls'+str(self.counter))
-                        self.rdf_model.add_statement(m)
-                        self.rdf_model.add_statement(RDF.Statement(m.object,
-                                                                    RDF.Node(RDF.Uri(self.rdf_ns+'type')),
-                                                                    RDF.Node(RDF.Uri(node_onto_name))
-                                                                    ))
-                        self.counter=self.counter+1
-                        active_res=m.object
-                        self.unfinished_statements.remove(m)
-                        break
-        return active_class,active_res
-
     def xml_to_internal(self,xmltag,base_class):
         """
         Returns the name to use while searching into ontology resources
