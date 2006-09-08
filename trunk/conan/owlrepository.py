@@ -297,7 +297,16 @@ class OWLRepository(Repository):
                     return str(i.subject.uri)
         for imp in self.find_imports(ontology):
             return self.get_onto_name(resource,imp)
-            
+        
+    def get_property_range(self,resource,ontology):
+        """
+        Return a list of a property's range
+        """
+        res_list=[]
+        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(resource),predicate=RDF.Uri(self.rdfs_ns+'range')),RDF.Node(RDF.Uri(ontology)))
+        for i in results:
+            res_list.add(str(i.object.uri))
+        return res_list
 
     def get_type(self,uri):
         """
@@ -324,33 +333,6 @@ class OWLRepository(Repository):
             if i.object.is_resource():
                 res_list.append(str(i.object.uri))
         return res_list
-
-    def new_onto_identify(self, resource, ontology):
-        cluster=[]
-        res_name=None
-        res_type=None
-        print "Searching "+resource
-        type_query=RDF.SPARQLQuery(" PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \
-                                    select ?s ?o \
-                                    where { \
-                                        ?s rdf:type ?o . \
-                                        FILTER REGEX(?s,'#"+resource+"') }")
-        cluster.append(ontology)
-        for i in self.find_imports_cluster(ontology):
-            cluster.append(i)
-        print cluster
-        type_results=self.model.execute(type_query)
-        for triple in type_results:
-            print str(triple['s'])+' '+str(triple['o'])
-            st=RDF.Statement(subject=triple['s'],
-                            predicate=self.rdf_ns+'type',
-                            object=triple['o'])
-            if st!=None:
-                for verified_st,context in self.model.find_statements_context(st):
-                    if str(context.uri) in cluster:
-                        return str(verified_st.subject.uri),str(verified_st.predicate.uri)
-        return None,None
-
 
     def onto_identify(self,resource,ontology):
         res_name=None
