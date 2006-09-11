@@ -23,40 +23,11 @@
 import getopt
 import SOAPpy
 import RDF
+import OWL
 from os import sys
 import xml.dom.minidom
 from xml.dom.minidom import Node
 
-class OWL_Resource:
-    name=''
-    resource=''
-    rdf_type=''
-    rdf_node=None
-    xml_node=None
-    def __init__(self,resource,node):
-        self.name=resource.split('#')[1]
-        self.resource=resource
-        if (type(node)==RDF.Node):
-            self.rdf_node=node
-        elif (type(node)==Node):
-            self.xml_node=node
-    def __init__(self,resource,type,node):
-        self.rdf_type=type
-        self.__init__(resource,node)
-    def __str__(self):
-        return self.name
-
-class OWL_Class(OWL_Resource):
-    def __init__(self,resource,node):
-        rdf_type='http://www.w3.org/2002/07/owl#Class'
-        OWL_Resource.__init__(self,resource,node)
-    subclasses=[]
-    superclasses=[]
-    properties=[]
-
-class OWL_Property(OWL_Resource):
-    domains=[]
-    ranges=[]
 
 class Lifter:
     """

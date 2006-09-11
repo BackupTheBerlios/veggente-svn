@@ -1,26 +1,12 @@
 <?xml version="1.0"?>
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns="http://veggente.berlios.de/ns/RIMDatatype#"
-    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:p1="http://www.owl-ontologies.com/assert.owl#"
   xml:base="http://veggente.berlios.de/ns/RIMDatatype">
   <owl:Ontology rdf:about=""/>
-  <owl:Class rdf:ID="TS">
-    <rdfs:subClassOf>
-      <owl:Class rdf:ID="QTY"/>
-    </rdfs:subClassOf>
-    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >
-                                    A quantity specifying a point on the axis of natural time.
-                                    A point in time is most often represented as a calendar
-                                    expression.
-                                    
-                                 </rdfs:comment>
-  </owl:Class>
   <owl:Class rdf:ID="CV">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
@@ -30,7 +16,9 @@
           </rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#translation"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="translation"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:maxCardinality>
       </owl:Restriction>
@@ -39,59 +27,36 @@
       <owl:Class rdf:ID="CE"/>
     </rdfs:subClassOf>
   </owl:Class>
+  <owl:Class rdf:ID="TS">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="QTY"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ANY"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >
+                                    A quantity specifying a point on the axis of natural time.
+                                    A point in time is most often represented as a calendar
+                                    expression.
+                                    
+                                 </rdfs:comment>
+  </owl:Class>
   <owl:Class rdf:ID="CD">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#originalText"/>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="code"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#displayName"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#displayName"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#codeSystemName"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#codeSystem"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#codeSystemVersion"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#code"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#code"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="codeSystemVersion"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
       </owl:Restriction>
@@ -100,42 +65,93 @@
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#originalText"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="originalText"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="codeSystemName"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#code"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#codeSystemVersion"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:minCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#codeSystem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="codeSystem"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#codeSystemVersion"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#codeSystem"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#codeSystemName"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="displayName"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#originalText"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#translation"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="CD.qualifier"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#qualifier"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#translation"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -154,15 +170,23 @@
                                     
 
 		</rdfs:comment>
-  </owl:Class>
-  <owl:Class rdf:ID="ON">
-    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >
-                                    A name for an organization. A sequence of name parts.
-                                    
-                                 </rdfs:comment>
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="EN"/>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#displayName"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#codeSystemName"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:minCardinality>
+      </owl:Restriction>
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="PIVL">
@@ -178,6 +202,16 @@
       <owl:Class rdf:ID="SXCM"/>
     </rdfs:subClassOf>
   </owl:Class>
+  <owl:Class rdf:ID="ON">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >
+                                    A name for an organization. A sequence of name parts.
+                                    
+                                 </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="EN"/>
+    </rdfs:subClassOf>
+  </owl:Class>
   <owl:Class rdf:ID="BAG">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
@@ -186,19 +220,15 @@
                                     
                                  </rdfs:comment>
   </owl:Class>
+  <owl:Class rdf:ID="IVL_TS"/>
   <owl:Class rdf:ID="ED">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#integrityCheck"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="integrityCheckAlgorithm"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#reference"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
@@ -206,14 +236,27 @@
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="integrityCheck"/>
+        </owl:onProperty>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#thumbnail"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#compression"/>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="charset"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="reference"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
       </owl:Restriction>
@@ -222,12 +265,25 @@
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#integrityCheck"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#reference"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#mediaType"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="language"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#integrityCheck"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
       </owl:Restriction>
@@ -236,56 +292,57 @@
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#mediaType"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="mediaType"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#integrityCheckAlgorithm"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#mediaType"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#integrityCheckAlgorithm"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#thumbnail"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#charset"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#charset"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
+      <owl:Class rdf:about="#ANY"/>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#compression"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#charset"/>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="compression"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#language"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="thumbnail"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#language"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -303,16 +360,29 @@
 			</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#reference"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#compression"/>
+        </owl:onProperty>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#language"/>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#thumbnail"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#integrityCheckAlgorithm"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:minCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
   </owl:Class>
@@ -329,6 +399,27 @@
                                     delimiter elements (e.g., DEL).
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="partType"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="data"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="AD">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -338,6 +429,9 @@
                                     postal code, country, etc.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="SXPR">
     <rdfs:subClassOf>
@@ -351,6 +445,45 @@
                                  </rdfs:comment>
   </owl:Class>
   <owl:Class rdf:ID="TEL">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="useablePeriod"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="TEL.value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="use"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="URL"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#TEL.value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
                                     A telephone number (voice or fax), e-mail address, or
@@ -362,8 +495,14 @@
                                     purpose.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="SLIST">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
                                     A sequence of sampled values scaled and translated from a
@@ -372,6 +511,18 @@
                                  </rdfs:comment>
   </owl:Class>
   <owl:Class rdf:ID="ENXP">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="ENXP.qualifier"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
                                     A character string token representing a part of a name.
@@ -381,6 +532,33 @@
                                     names are given names, and family names, titles, etc.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#partType"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#data"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#language"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:about="#QTY">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -414,6 +592,9 @@
   </owl:Class>
   <owl:Class rdf:ID="INT">
     <rdfs:subClassOf rdf:resource="#QTY"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
                                     Integer numbers (-1,0,1,2, 100, 3398129, etc.) are precise
@@ -444,6 +625,9 @@
                                     is (was) valid.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="CO">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -466,30 +650,38 @@
 		  </rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#data"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#data"/>
+        </owl:onProperty>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:minCardinality>
-        <owl:onProperty rdf:resource="#data"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#representation"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#data"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="representation"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#representation"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#representation"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
   </owl:Class>
@@ -507,6 +699,9 @@
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="UVP">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
                                     A generic data type extension used to specify a
@@ -515,7 +710,7 @@
                                     
                                  </rdfs:comment>
   </owl:Class>
-  <owl:Class rdf:ID="URL">
+  <owl:Class rdf:about="#URL">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
                                     A telecommunications address  specified according to
@@ -540,6 +735,9 @@
                                     data type.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="TN">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -560,9 +758,14 @@
                                     items in a bag.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="RTO">
-    <rdfs:subClassOf rdf:resource="#QTY"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
                                     A quantity constructed as the quotient of a numerator
@@ -577,6 +780,7 @@
                                     of RTO.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#QTY"/>
   </owl:Class>
   <owl:Class rdf:ID="REAL">
     <rdfs:subClassOf rdf:resource="#QTY"/>
@@ -594,6 +798,9 @@
                                     implying the full set of the mathematical real numbers.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="SET">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -601,32 +808,6 @@
                                     A value that contains other distinct values in no particular order.
                                     
                                  </rdfs:comment>
-  </owl:Class>
-  <owl:Class rdf:ID="BN">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#value"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Class rdf:ID="ANY"/>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#value"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >
-                                    The BooleanNonNull type is used where a Boolean cannot
-                                    have a null value. A Boolean value can be either
-                                    true or false.
-                                    
-			</rdfs:comment>
   </owl:Class>
   <owl:Class rdf:ID="PN">
     <rdfs:subClassOf>
@@ -641,7 +822,73 @@
                                     
                                  </rdfs:comment>
   </owl:Class>
+  <owl:Class rdf:ID="BN">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >
+                                    The BooleanNonNull type is used where a Boolean cannot
+                                    have a null value. A Boolean value can be either
+                                    true or false.
+                                    
+			</rdfs:comment>
+  </owl:Class>
   <owl:Class rdf:ID="II">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="extension"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="assigningAuthorityName"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="displayable"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="root"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#assigningAuthorityName"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#root"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
                                     An identifier that uniquely identifies a thing or object.
@@ -651,6 +898,24 @@
                                     identifiers are defined based on ISO object identifiers.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#extension"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#displayable"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="PPD">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -664,6 +929,9 @@
                                     with a certain probability distribution.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="MO">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -678,83 +946,55 @@
                                     reason why currency units are not physical units.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="#QTY"/>
   </owl:Class>
+  <owl:Class rdf:ID="SET_CS"/>
   <owl:Class rdf:ID="CS">
     <rdfs:subClassOf rdf:resource="#CV"/>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#codeSystem"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#originalText"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#displayName"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#codeSystemName"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#originalText"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#code"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#code"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#originalText"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#codeSystemName"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#codeSystemName"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#codeSystemVersion"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#codeSystem"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#displayName"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#displayName"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#codeSystemVersion"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#codeSystem"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:maxCardinality>
       </owl:Restriction>
@@ -768,13 +1008,6 @@
                                     value set.
           
 			</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#codeSystemVersion"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="IVL">
     <rdfs:subClassOf rdf:resource="#SXCM"/>
@@ -787,16 +1020,11 @@
   <owl:Class rdf:ID="CR">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#inverted"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#name"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="name"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -812,30 +1040,50 @@
 							</rdfs:comment>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#value"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="inverted"/>
+        </owl:onProperty>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#value"/>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="CR.value"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#inverted"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#inverted"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#name"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
         >1</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#name"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#CR.value"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
   </owl:Class>
@@ -852,6 +1100,36 @@
                                     Level Seven" and "Inc.", "Lake" and "Tahoe".
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="validTime"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#use"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#validTime"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="PQR">
     <rdfs:subClassOf rdf:resource="#CV"/>
@@ -864,6 +1142,9 @@
                                  </rdfs:comment>
   </owl:Class>
   <owl:Class rdf:ID="PQ">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="#QTY"/>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
@@ -889,16 +1170,21 @@
                                     codes may exist.
                                     
                                  </rdfs:comment>
-    <rdfs:subClassOf rdf:resource="#CD"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#qualifier"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#CD.qualifier"/>
+        </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#CD"/>
   </owl:Class>
   <owl:Class rdf:ID="GLIST">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ANY"/>
+    </rdfs:subClassOf>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
                                     A periodic or monotone sequence of values generated
@@ -907,61 +1193,81 @@
                                     
                                  </rdfs:comment>
   </owl:Class>
-  <owl:Class rdf:ID="ST">
+  <owl:Class rdf:ID="LIST_CR"/>
+  <owl:Class rdf:ID="SET_CD"/>
+  <owl:Class rdf:about="#ANY">
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="nullFlavor"/>
+        </owl:onProperty>
         <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#integrityCheck"/>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:onProperty rdf:resource="#compression"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#integrityCheck"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#compression"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#reference"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#integrityCheckAlgorithm"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#language"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#nullFlavor"/>
+        </owl:onProperty>
         <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >
+                    Defines the basic properties of every data value. This
+                    is an abstract type, meaning that no value can be just
+                    a data value without belonging to any concrete type.
+                    Every concrete type is a specialization of this
+                    general abstract DataValue type.
+			</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="ST">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#integrityCheckAlgorithm"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#compression"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#reference"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#integrityCheck"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#integrityCheckAlgorithm"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#thumbnail"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >0</owl:maxCardinality>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf rdf:resource="#ED"/>
@@ -973,62 +1279,6 @@
                                     symbols, and formal expressions.
                                     
 			</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:maxCardinality>
-        <owl:onProperty rdf:resource="#thumbnail"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#charset"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#mediaType"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#reference"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-        <owl:onProperty rdf:resource="#thumbnail"/>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#mediaType"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#charset"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#language"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="IVXB">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1037,6 +1287,7 @@
                                     boundary value for an interval.
                                     
                                  </rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#ANY"/>
   </owl:Class>
   <owl:Class rdf:ID="GTS">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1050,30 +1301,6 @@
                                     hours.
                                     
                                  </rdfs:comment>
-  </owl:Class>
-  <owl:Class rdf:about="#ANY">
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#nullFlavor"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >
-                    Defines the basic properties of every data value. This
-                    is an abstract type, meaning that no value can be just
-                    a data value without belonging to any concrete type.
-                    Every concrete type is a specialization of this
-                    general abstract DataValue type.
-			</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#nullFlavor"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="NPPD">
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
@@ -1092,22 +1319,9 @@
                                     
           </rdfs:comment>
     <rdfs:subClassOf rdf:resource="#ANY"/>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#value"/>
-        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >0</owl:minCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onProperty rdf:resource="#value"/>
-        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:maxCardinality>
-      </owl:Restriction>
-    </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="SC">
+    <rdfs:subClassOf rdf:resource="#ST"/>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >
                                     An ST that optionally may have a code attached.
@@ -1115,8 +1329,222 @@
                                     code is often a local code.
                                     
                                  </rdfs:comment>
-    <rdfs:subClassOf rdf:resource="#ST"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#code"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#code"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >0</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
   </owl:Class>
+  <owl:ObjectProperty rdf:about="#thumbnail">
+    <rdfs:range rdf:resource="#ED"/>
+    <rdfs:domain rdf:resource="#ST"/>
+    <rdfs:domain rdf:resource="#ED"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#codeSystemVersion">
+    <rdfs:domain rdf:resource="#CS"/>
+    <rdfs:domain rdf:resource="#CD"/>
+    <rdfs:range rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#validTime">
+    <rdfs:domain rdf:resource="#EN"/>
+    <rdfs:range rdf:resource="#IVL_TS"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#reference">
+    <rdfs:domain rdf:resource="#ST"/>
+    <rdfs:domain rdf:resource="#ED"/>
+    <rdfs:range rdf:resource="#TEL"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#use">
+    <rdfs:range rdf:resource="#SET_CS"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#TEL"/>
+          <owl:Class rdf:about="#AD"/>
+          <owl:Class rdf:about="#EN"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#TEL.value">
+    <rdfs:domain rdf:resource="#TEL"/>
+    <rdfs:range rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#CD.qualifier">
+    <rdfs:domain rdf:resource="#CD"/>
+    <rdfs:range rdf:resource="#LIST_CR"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#extension">
+    <rdfs:domain rdf:resource="#II"/>
+    <rdfs:range rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#integrityCheckAlgorithm">
+    <rdfs:domain rdf:resource="#ST"/>
+    <rdfs:range rdf:resource="#CS"/>
+    <rdfs:domain rdf:resource="#ED"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#integrityCheck">
+    <rdfs:range rdf:resource="#BIN"/>
+    <rdfs:domain rdf:resource="#ST"/>
+    <rdfs:domain rdf:resource="#ED"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#codeSystem">
+    <rdfs:range rdf:resource="#UID"/>
+    <rdfs:domain rdf:resource="#CS"/>
+    <rdfs:domain rdf:resource="#CD"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#language">
+    <rdfs:range rdf:resource="#CS"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#ST"/>
+          <owl:Class rdf:about="#ENXP"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#mediaType">
+    <rdfs:range rdf:resource="#CS"/>
+    <rdfs:domain rdf:resource="#ED"/>
+    <rdfs:domain rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#translation">
+    <rdfs:domain rdf:resource="#CD"/>
+    <rdfs:domain rdf:resource="#CV"/>
+    <rdfs:range rdf:resource="#SET_CD"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#useablePeriod">
+    <rdfs:range rdf:resource="#GTS"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#TEL"/>
+          <owl:Class rdf:about="#AD"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#codeSystemName">
+    <rdfs:domain rdf:resource="#CD"/>
+    <rdfs:domain rdf:resource="#CS"/>
+    <rdfs:range rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#name">
+    <rdfs:domain rdf:resource="#CR"/>
+    <rdfs:range rdf:resource="#CV"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#inverted">
+    <rdfs:range rdf:resource="#BN"/>
+    <rdfs:domain rdf:resource="#CR"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#displayable">
+    <rdfs:domain rdf:resource="#II"/>
+    <rdfs:range rdf:resource="#BL"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#charset">
+    <rdfs:domain rdf:resource="#ED"/>
+    <rdfs:range rdf:resource="#CS"/>
+    <rdfs:domain rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isNotOrdered">
+    <rdfs:domain rdf:resource="#AD"/>
+    <rdfs:range rdf:resource="#BL"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#code">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#CD"/>
+          <owl:Class rdf:about="#SC"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#CR.value">
+    <rdfs:range rdf:resource="#CD"/>
+    <rdfs:domain rdf:resource="#CR"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#root">
+    <rdfs:range rdf:resource="#UID"/>
+    <rdfs:domain rdf:resource="#II"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#representation">
+    <rdfs:range rdf:resource="#CS"/>
+    <rdfs:domain rdf:resource="#BIN"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#ENXP.qualifier">
+    <rdfs:range rdf:resource="#SET_CS"/>
+    <rdfs:domain rdf:resource="#ENXP"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#originalText">
+    <rdfs:domain rdf:resource="#CD"/>
+    <rdfs:domain rdf:resource="#CS"/>
+    <rdfs:range rdf:resource="#ED"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#compression">
+    <rdfs:range rdf:resource="#CS"/>
+    <rdfs:domain rdf:resource="#ED"/>
+    <rdfs:domain rdf:resource="#ST"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#partType">
+    <rdfs:range rdf:resource="#CS"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#ADXP"/>
+          <owl:Class rdf:about="#ENXP"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#assigningAuthorityName">
+    <rdfs:range rdf:resource="#ST"/>
+    <rdfs:domain rdf:resource="#II"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#displayName">
+    <rdfs:range rdf:resource="#ST"/>
+    <rdfs:domain rdf:resource="#CS"/>
+    <rdfs:domain rdf:resource="#CD"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="#nullFlavor">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#ANY"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="BN.value">
+    <rdfs:domain rdf:resource="#BN"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="BL.value">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="#BL"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#data">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#BIN"/>
+          <owl:Class rdf:about="#ADXP"/>
+          <owl:Class rdf:about="#ENXP"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
 </rdf:RDF>
 
 <!-- Created with Protege (with OWL Plugin 2.2, Build 331)  http://protege.stanford.edu -->
