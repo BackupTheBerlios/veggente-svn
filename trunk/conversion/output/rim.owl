@@ -17,12 +17,11 @@
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-			--><rdf:RDF xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-         xmlns:owl="http://www.w3.org/2002/07/owl#"
+			--><rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#"
          xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
          xmlns:hl7="urn:hl7-org:v3/mif"
-         xmlns:dc="http://purl.org/dc/elements/1.1/"
-         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
    <owl:Ontology rdf:about="http://veggente.berlios.de/ns/RIMOntology">
       <rdfs:label>HL7 RIM ontology</rdfs:label>
       <rdfs:comment>This version of the RIM reflects changes approved in harmonization through July 14, 2005. This version is the eleventh of the RIMs that contain content that will be part of Release 2 of the normative RIM.Questions should be addressed to the co-chairs of the Methodology and Modeling Committee and/or sent to the M&amp;M e-mail list at mnm@lists.hl7.org</rdfs:comment>
@@ -102,12 +101,12 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#interestRateQuantity">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A ratio that indicates the rate of interest that the account balance is subject to, and the term over which the interest rate compounds.Discussion: This may represent interest charged (e.g. for loans, overdue accounts, etc.) or credited (investments, etc.) depending on the type of account.Examples: 0.10/1a (10%/year); 0.0005895/1d (.05895%/day)Constraints: Unit of the denominator PQ data type must be comparable to seconds. (I.e. the denominator must be measured in time.)</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#RTO"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#RTO_MO"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Account"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#allowedBalanceQuantity">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An interval describing the minimum and maximum allowed balances for an account.Discussion: These are not necessarily 'hard' limits (i.e. the account may go above or below the specified amounts), however, they represent the 'target' range for the account, and there may be consequences for going outside the specified boundaries. It is not necessary to specify both upper and lower limits (or either) for an account.Examples: 'stop loss' limits; credit limits</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_MO"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Account"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#Act">
@@ -372,7 +371,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#id">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unique identifier for the Act.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_II"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#code">
@@ -422,17 +421,17 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#priorityCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A code or set of codes (e.g., for routine, emergency), specifying the urgency under which the Act happened, can happen, is happening, is intended to happen, or is requested/demanded to happen. Discussion: This attribute is used in orders to indicate the ordered priority, and in event documentation it indicates the actual priority used to perform the act. In definition mood it indicates the available priorities.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#confidentialityCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A code that controls the disclosure of information about this Act, regardless of mood.Discussion: It is important to note that the necessary confidentiality of the medical record cannot be achieved solely through confidentiality codes to mask individual record items from certain types of users. There are two important problems with per-item confidentiality: one is inference and the other is the danger of holding back information that may be critical in a certain care situation. Inference means that filtered sensitive information can still be assumed given the other information that was not filtered. The simplest form of inference is that even the existence of a test order for an HIV Western Blot test or a T4/T8 lymphocyte count is a strong indication for an existing HIV infection, even if the results are not known. Very often, diagnoses can be inferred from medication, such as Zidovudin for treatment of HIV infections. The problem of hiding individual items becomes especially difficult with current medications, since the continuing administration of the medication must be assured.To mitigate some of the inference-risk, aggregations of data should assume the confidentiality level of the most confidential action in the aggregation.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#repeatNumber">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An interval of integer numbers stating the minimal and maximal number of repetitions of the Act.Examples: An oral surgeon's advice to a patient after tooth extraction might be: "replace the gauze every hour for 1 to 3 times until bleeding has stopped completely." This translates to repeatNumber with low boundary 1 and high boundary 3.Discussion: This attribute is a member of the workflow control suite of attributes. The number of repeats is additionally constrained by time. The act will repeat at least the minimal number of times and at most, the maximal number of times. Repetitions will also terminate when the time exceeds the maximal Act.effectiveTime, whichever comes first.Usage: On an Act in Event mood, the repeatNumber is usally 1. If greater than 1, the Act is representing a summary of several event occurrences occurring over the time interval described by effectiveTimeTo distinguish occurrences of acts within a sequence of repetitions, use ActRelationship.sequenceNumber</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_INT"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#interruptibleInd">
@@ -457,7 +456,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#reasonCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A code specifying the motivation, cause, or rationale of an Act, when such rationale is not reasonably represented as an ActRelationship of type "has reason" linking to another Act.Examples: Example reasons that might qualify for being coded in this field might be: "routine requirement", "infectious disease reporting requirement", "on patient request", "required by law".Discussion Most reasons for acts can be clearly expressed by linking the new Act to another prior Act using an ActRelationship of type "has reason". This simply states that the prior Act is a reason for the new Act (see ActRelationship). The prior act can then be a specific existing act or a textual explanation. This works for most cases, and the more specific the reason data is, the more should this reason ActRelationship be used instead of the reasonCode. The reasonCode remains as a place for common reasons that are not related to a prior Act or any other condition expressed in Acts. Indicators that something was required by law or was on the request of a patient etc. may qualify. However, if that piece of legislation, regulation, or the contract or the patient request can be represented as an Act (and they usually can), the reasonCode should not be used.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#languageCode">
@@ -807,7 +806,7 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#parameterValue">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The parameters of the task submitted to the device upon the issuance of a command (or configuring the schedule of spontaneously executed tasks).Rationale: Some parameters for tasks are uniquely defined by a specific model of equipment. Most critical arguments of a task (e.g., container to operate on, positioning, timing, etc.) are specified in an HL7 standardized structure, and the parameter list would not be used for those. The parameter list is used only for those parameters that cannot be standardized because they are uniquely defined for a specific model of equipment. NOTE: This means that the semantics and interpretation of a parameterValue can only be made with an understanding of the specifications or documentation for the specific device being addressed. This information is not conveyed as part of the message.Constraints: Parameters are only specified here if they are not included in a separate HL7 defined structure. The parameters are a list of any data values interpreted by the device. The parameters should be typed with an appropriate HL7 data type (e.g., codes for nominal settings, such as flags, REAL and INT for numbers, TS for points in time, PQ for dimensioned quantities, etc.). However, besides this HL7 data typing, the functioning of the parameters is opaque to the HL7 standardization.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#LIST"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#LIST_ANY"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#DeviceTask"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#DiagnosticImage">
@@ -1022,17 +1021,17 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#modifierCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Designates a modifier to the code attribute to provide additional information about the invoice element.Examples: Isolation allowance; After-hours serviceRationale: This is not pre-coordinated into the CD attribute because the modifier code set may not be specifically designed for use with the Act.code code set. This violates the constraint for using the 'modifier' property that the modifier code set must be defined as part of, or specifically for the base code set.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#InvoiceElement"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#unitQuantity">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A description of the number of instances of a product or service that is being billed or charged for.Examples: 4 hours, 4 mg, 4 boxes, and 15 each of a container of 1000 each, etc.Discussion: Each InvoiceElement that is being charged or billed is identified by a charge or bill code (InvoiceElement.code). In some situations, this code is a pre-coordinated code set and represents a container (e.g. UPC code for a container of 1000 pills and another UPC code for a container of the same pills but in a container of 100). The UPC code is used in invoicing, but ratios are required to specify that only a portion of the container (e.g. bottle) is being billed or charged. If the InvoiceElement does not reference a container, then the denominator is not specified.For example, 15 pills in a container size of 1000 pills. In this case, the numerator can be expressed as "15 {pill}" or simply "15" and the denominator can be expressed as "1000 {bottle}" or simply "1000" (see discussion following for rationale of using descriptive text for countable units).Constraints:The unit of measure is restricted to a measurable unit such as liters, milligrams and hours. Non-measurable, but countable units such as boxes, packages, visits, pills and containers must not be specified using the unit component of the PQ data type, except as an annotation, marked by {xxx}. Refer to Data Types Part II Unabridged Specification, Appendix A :Unified Code for Units of Measure.Specification of countable units can be handled with the following techniques:(1) specify the countable unit in the InvoiceElement.code. That is, a specific InvoiceElement.code would indicate that the item referenced by the act represents a box of 20 items. There would be a different InvoiceElement.code for a box of 40 items, and so on.For example, if the InvoiceElement.code represents a box of 20 items, and the InvoiceElement.unitQuantity = 2 (no units), then this represents 2 boxes of 20 items for a total of 40 items.(2) If more detail is required (e.g. to describe the composition, packaging, manufacturer of a product), then use a participation (typeCode = "PRD"), and a combination of role and entity classes to describe the details of the packaging.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#RTO"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#RTO_PQ"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#InvoiceElement"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#unitPriceAmt">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The monetary cost per unit being accounted.Constraints: In constructing the ratio, the numerator must be of data type MO, and the denominator must be a PQ, specified in the same manner as the unitQuantity attribute.Examples: $0.20/mg; $250/day; $50</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#RTO"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#RTO_MO"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#InvoiceElement"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#netAmt">
@@ -1075,7 +1074,7 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#id">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unique identifier used to refer to a specific instance of a Participation that may have the same Act and the same Role. (See ManagedParticipation.)</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_II"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ManagedParticipation"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#statusCode">
@@ -1119,17 +1118,17 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#interpretationCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">One or more codes specifying a rough qualitative interpretation of the observation, such as "normal", "abnormal", "below normal", "change up", "resistant", "susceptible", etc.Discussion: These interpretation codes are sometimes called "abnormal flags", however, the judgment of normalcy is just one of the common rough interpretations, and is often not relevant. For example, the susceptibility interpretations are not about "normalcy", and for any observation of a pathologic condition, it does not make sense to state the normalcy, since pathologic conditions are never considered "normal."</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#methodCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A code that provides additional detail about the means or technique used to ascertain the observation.Examples: Blood pressure measurement method: arterial puncture vs. sphygmomanometer (Riva-Rocci), sitting vs. supine position, etc. Constraints: In all observations the method is already partially specified by the Act.code. In this case, the methodCode need not be used at all. The methodCode may still be used to identify this method more clearly in addition to what is implied from the Act.code. However, an information consumer system or process should not depend on this methodCode information for method detail that is implied by the Act.code. If the methodCode is used to express method detail that is also implied by the Act.code, the methodCode must not be in conflict with the implied method of the Act.code.Discussion: In all observations the method is already partially specified by simply knowing the kind of observation (observation definition, Act.code) and this implicit information about the method does not need to be specified in Observation.methodCode. For example, many LOINC codes are defined for specific methods as long as the method makes a practical difference in interpretation. Thus, using LOINC, the difference between susceptibility studies using the "minimal inhibitory concentration" (MIC) or the "agar diffusion method" (Kirby-Baur) are specifically assigned different codes. The methodCode therefore is only an additional qualifier to specify what may not be known already from the Act.code.Also, some variances in methods may be tied to the particular device used. The methodCode should not be used to identify the specific device or test-kit material used in the observation. Such information about devices or test-kits should be associated with the observation as "device" participations.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#targetSiteCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A code specifying detail about the anatomical site or system that is the focus of the observation if this information is not already implied by the observation definition or Act.code.Constraints: The targetSiteCode value, if specified, must not conflict with what is implied about the target site or system from the observation definition and the Act.code.Discussion: Most observation target sites are implied by the observation definition and Act.code, or Observation.value. For example, "heart murmur" always has the heart as target. This attribute is used only when the observation target site needs to be refined, to distinguish right and left etc. If the subject of the Observation is something other than a human patient or animal, the attribute is used analogously to specify a structural landmark of the thing where the act focuses. For example, if the subject is a lake, the site could be inflow and outflow, etc. If the subject is a lymphatic node, "hilus," "periphery," etc. would still be valid target sites.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CD"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#Participation">
@@ -1360,7 +1359,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#time">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An interval of time specifying the time during which the participant is involved in the act through this Participation.Rationale: Participation time is needed when the participant's involvement in the act spans only part of the Act's time. Participation time is also used to indicate the time at which certain very common sub-activities happen that are not worth mentioning in full acts.Examples: 1) The time data was entered into the originating system is the Participation.time of the "data entry" participation.2) The end of the participation time of an author is the time associated with the signature.3) The Participation.time of a co-signing participation is also the time of that co-signature.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#modeCode">
@@ -1485,12 +1484,12 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#specialCourtesiesCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A code identifying special courtesies extended to the patient. For example, no courtesies, extended courtesies, professional courtesy, VIP courtesies.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#PatientEncounter"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#specialArrangementCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A code indicating the type of special arrangements provided for a patient encounter (e.g., wheelchair, stretcher, interpreter, attendant, seeing eye dog). For encounters in intention moods, this information can be used to identify special arrangements that will need to be made for the incoming patient. This is not related to the AccommodationEvent.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#PatientEncounter"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#Procedure">
@@ -1518,17 +1517,17 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#methodCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Identifies the means or technique used to perform the procedure.Discussion: For any Procedure there may be several different methods to achieve by and large the same result, but may be important to know when interpreting a report more thoroughly (e.g., cholecystectomy: open vs. laparoscopic). Method concepts can be "pre-coordinated" in the Act definition. There are many possible methods, which all depend heavily on the particular kind of Procedure, so that defining a vocabulary domain of all methods is difficult. However, a code system might be designed such that it specifies a set of available methods for each defined Procedure concept. Thus, a user ordering a Procedure could select one of several variances of the act by means of the method code. Available method variances may also be defined in a master service catalog for each defined Procedure. In act definition records (Act.moodCode = DEF) the methodCode attribute is a set of all available method codes that a user may select while ordering, or expect while receiving results.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Procedure"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#approachSiteCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The anatomical site or system through which the procedure reaches its target (see targetSiteCode).Examples:Nephrectomy can have a trans-abdominal or a primarily retroperitoneal approachAn arteria pulmonalis catheter targets a pulmonary artery but the approach site is typically the vena carotis interna or the vena subclavia, at the neck or the fossa subclavia respectively.For non-invasive procedures, e.g., acupuncture, the approach site is the punctured area of the skin.Discussion: If the subject of the Act is something other than a human patient or animal, the attribute is used analogously to specify a structural landmark of the thing where the act focuses.Some approach sites can also be "pre-coordinated" in the Act definition, so that there is never an option to select different body sites. The same information structure can handle both the pre-coordinated and the post-coordinated approach.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CD"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Procedure"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#targetSiteCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The anatomical site or system that is the focus of the procedure.Examples:A Nephrectomy's target site is the right or left kidneyAn arteria pulmonalis catheter targets a pulmonary artery.For non-invasive procedures, e.g., acupuncture, the target site is the organ/system that is sought to be influenced (e.g., "the liver").Discussion: If the subject of the Act is something other than a human patient or animal, the attribute is used analogously to specify a structural landmark of the thing where the act focuses.Some target sites can also be "pre-coordinated" in the Act definition, so that there is never an option to select different body sites. The same information structure can handle both the pre-coordinated and the post-coordinated approach.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CD"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Procedure"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#PublicHealthCase">
@@ -1665,27 +1664,27 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#approachSiteCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The detailed anatomical site where the medication enters or is applied to the subject.Discussion: This attribute is only needed if the routeCode requires further specification. For example, if the routeCode is "by mouth", no further specification of approach site is needed. If, however, routeCode is intravenous or intra-muscular, the precise site may be specified in this attribute (e.g., right forearm or left deltoid muscle respectively).Route, site of administration (approachSiteCode) and the device used in administration are closely related. All three (if present) must be closely coordinated and in agreement. In some cases, the coding system used to specify one may pre-coordinate one or more of the others.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CD"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#SubstanceAdministration"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#doseQuantity">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The amount of the therapeutic agent or other substance given at one administration event.Discussion: The dose may be specified either as a physical quantity of active ingredient (e.g. 200 mg) or as the count of administration-units (e.g., tablets, capsules, "eaches"). Which approach is chosen depends upon the player of the 'consumable' participation (which identifies the drug being administered). If the consumable has a non-countable dosage form (e.g. measured in milligram or litre) then the dose must be expressed in those units. If the consumable has a countable dosage form (tablets, capsules, "eaches"), then the dose must be expressed as a dimensionless count (i.e., with no other unit of measure specified).The unit of measure is restricted to a measurable unit such as milliliters and milligrams. Non-measurable, but countable units such as tablets and capsules must not be specified using the unit component of the PQ data type, except as an annotation, marked by {xxx}. Refer to Data Types Part II Unabridged Specification, Appendix A :Unified Code for Units of Measure.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_PQ"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#SubstanceAdministration"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#rateQuantity">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Identifies the speed with which the substance is introduced into the subject. Expressed as a physical (extensive) quantity over elapsed time (e.g., examples are 100 mL/h, 1 g/d, 40 mmol/h, etc.)Discussion: This is appropriate for continuously divisible dose forms (e.g., liquids, gases). If specified as an interval, the rate should be anywhere in the specified range. This attribute is specified as a extensive physical quantity over elapsed time, i.e., a quantity that could be used for the doseQuantity divided by a duration quantity.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_PQ"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#SubstanceAdministration"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#doseCheckQuantity">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This attribute identifies the expected quantity to be consumed over a period of time. It is used as a verification check on the values specified for other values.Discussion: This attribute should not generally be used; it is only provided for a special purpose. In some countries, especially Japan, there is a regulatory requirement to note the total daily dose on the prescription and associated documentation. The purpose of this requirement obviously is to encourage and facilitate reviewing the total dose prescribed to avoid over- (or under-) dosage.Examples:With Erythromycin 250 mg 1 tablet 3 times a day one can calculate the total daily dose as "doseCheckQuantity = doseQuantity (1) * Ingredient.quantity (250 mg) * effectiveTime (3 /d) = 750 mg/1d."For an intravenous example, this term would be "doseCheckQuantity = doseQuantity (100 ml) * Ingredient.quantity (5mg/L) / rateQuantity (1 h) = 0.5 mg/h" which can be calculated on a daily basis as "doseCheckQuantity = 0.5 mg/h * 24 h/d = 12 mg/d."Rationale: Rather than defining a "total daily dose" attribute as HL7 v2.3 did, we define this general purpose doseCheckQuantity attribute of the Ratio (RTO) data type. Constraints: invariant(SubstanceAdministration med, RTO max) where med.doseCheckQuantity.contains(max) {max.numerator.compares(med.doseQuantity); max.denominator.compares(1 s);} Numerator must be in units comparable to doseQuantity and denominator must be a measurement of time.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_RTO"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#SubstanceAdministration"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#maxDoseQuantity">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Identifies the maximum total quantity of a therapeutic substance that may be administered to a subject over the period of time.Discussion: This attribute is particularly useful where the allowed dosage is specified as a range or the timing is variable or PRN (as needed). It provides an overall limit on the quantity that may be administered in a period of time. Multiple occurrences of maxDoseQuantity may be used to indicate different limits over different time periods.Examples: 500 mg/day; 1200mg/week.Constraints: invariant(SubstanceAdministration med, RTO max) where med.maxDoseQuantity.contains(max) {max.numerator.compares(med.doseQuantity); max.denominator.compares(1 s);} Numerator must be in units comparable to doseQuantity and denominator must be a measurement of time.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_RTO"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#SubstanceAdministration"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#administrationUnitCode">
@@ -1729,7 +1728,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#expectedUseTime">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Identifies the period time over which the supplied product is expected to be used, or the length of time the supply is expected to last.In some situations, this attribute may be used instead of Supply.quantity to identify the amount supplied by how long it is expected to last, rather than the physical quantity issued. E.g. 90 days supply of medication (based on an ordered dosage), 10 hours of jet fuel, etc. NOTE: When possible, it is always better to specify Supply.quantity, as this tends to be more precise. Supply.expectedUseTime will always be an estimate that can be influenced by external factors.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Supply"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#WorkingList">
@@ -2132,7 +2131,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#id">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unique identifier for the Entity.Rationale: Successful communication only requires that an entity have a single identifier assigned to it. However, it is recognized that as different systems maintain different databases, there may be different instance identifiers assigned by different systems. Note that an instance identifier is a pure identifier and not a classifier. For Material, serial numbers assigned by specific manufacturers, catalog numbers of specific distributors, or inventory numbers issued by owners, may also be represented by the Role.id, which allows a more clear expression of the fact that such a code is assigned by a specific party associated with that material.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_II"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Entity"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#code">
@@ -2142,12 +2141,12 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#quantity">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The number or quantity of the Entity, with appropriate units, congruent with the value of Entity.determinerCode. Examples: With undetermined kinds, the quantity is but a reference quantity for the specification of the proportion of ingredients or components (e.g. through a has-part, has-ingredient, or has-content Role). For example, a kind of group with 60% females is Person(quantity = 100) has-part Person(quantity = 60; sex = female). Amoxicillin 500 mg per tablet is Material(Tablet, quantity = 1) has-ingredient Material(Amoxicillin, quantity = 500 mg). Glucose 5% (D5W) is Material(D5W, quantity = 1 kg) has-ingredient Material(Glucose, quantity = 50 g).Material-specific quantity relations are expressed using the fact that the data type of this attribute is a set of physical quantity (SET&lt;PQ&gt;). If more than one quantity value are specified in this set, each element in this set is considered to specify the same amount of the material. For example, for one liter of water one could use the set 1 L, 1 kg, 55.56 mol to specify the volume, mass, and amount of substance for the same amount of water, this is equivalent with specifying the mass density (volumic mass 1 kg/L) and the molar mass (18 g/mol). For Glucose one could specify 180 g, 1 mol according to the molar mass (180 g/mol).Discussion: When the Entity instance is a portion of a substance, the quantity specifies the amount of that substance comprised by that portion. For an undetermined substance (kind) the quantity serves two purposes at the same time: (a) it provides a means of relations between quantities specific for that substance, and (b) it is a reference quantity for the specification of ingredients or components. In all cases, the quantity is an extensive "amount" kind of quantity (e.g., number, length, volume, mass, surface area, energy, etc.). Note that most relative or fractional quantities are not amounts, in particular, mass fraction, substance concentration, mass ratios, percentages, etc. are not extensive quantities and are prohibited values for this attribute.Constraints: For Entities with determinerCode = INSTANCE, the quantity is 1. For an Entity with determinerCode = QUANTIFIED_KIND, the quantity is the number of individual members in the group; for an Entity with a determinerCode = KIND, the value is undetermined.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_PQ"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Entity"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#name">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A non-unique textual identifier or moniker for the Entity.Examples: Proper names, nicknames, legal names of persons, places or things.Rationale: Most entities have a commonly used name that can be used to differentiate them from other Entities, but does not provide a unique identifier.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG_EN"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Entity"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#desc">
@@ -2162,12 +2161,12 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#existenceTime">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An interval of time specifying the period in which the Entity physically existed. Examples: ManufactureDate/DisposalDateConstraints: This period may represent past, present or future time periods.Rationale: Physical entities have specified periods in which they exist. Equipment is manufactured, placed in service, retired and salvaged. The relevance of this attribute is in planning, availability and retrospective analysis.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Entity"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#telecom">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A telecommunication address for the Entity.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG_TEL"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Entity"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#riskCode">
@@ -2436,12 +2435,12 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#expirationTime">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The date and time the manufacturer no longer ensures the safety, quality, and/or proper functioning of the material.Rationale: There is a need in many situations that the materials used are of a specific quality or potency or functional status. The ending date for this guarantee is specified by the manufacturer. After that date, while the material may still provide the same characteristics, the manufacturer no longer takes responsibility that the product will perform as specified and denies responsibility for failure of the material after that date.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ManufacturedMaterial"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#stabilityTime">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The time at which the material is considered useable after it is activated.Examples: After opening a bottle of a liquid. The mixing of two chemicals for an analysis that must be mixed and used within two hours or their activity diminishes. Discussion: If a kind of material is described (determinerCode = KIND) only the width of that interval can be known, i.e., the duration after opening the reagent container at which the reagent substance is considered useable for its normal testing purpose. For an actual instance of the reagent (e.g., a specific bottle), the stabilityTime.low TS marks the time at which the reagent bottle has been opened (or the reagent was otherwise activated). Together with the typical stability duration, this determines the stabilityTime.high TS beyond which the reagent is no longer considered useable for its normal testing purpose.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ManufacturedMaterial"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#Material">
@@ -2530,7 +2529,7 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#addr">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The postal and/or residential address of an organization.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG_AD"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Organization"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#standardIndustryClassCode">
@@ -2617,7 +2616,7 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#addr">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The postal and/or residential address of a Person.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG_AD"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Person"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#maritalStatusCode">
@@ -2632,7 +2631,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#disabilityCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A value identifying a person's disability.Examples: vision impaired, hearing impaired.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Person"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#livingArrangementCode">
@@ -2647,12 +2646,12 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#raceCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A value representing the race of a person.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Person"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#ethnicGroupCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The ethnic group of the person.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Person"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#Place">
@@ -3157,7 +3156,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#id">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A unique identifier for the player Entity in this Role.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_II"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Role"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#code">
@@ -3172,17 +3171,17 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#name">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A non-unique textual identifier or moniker for the playing Entity intended for use principally when playing the Role.Examples: Names used as an employee, as a licensed professional, etc.Usage: In general, names are specified using Entity.name. Role.name is only used when the standard wishes to distinguish names that are appropriate for use when referring to the Entity in one Role as opposed to other Roles..</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG_EN"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Role"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#addr">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An address for the Entity while in the Role.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG_AD"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Role"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#telecom">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A telecommunication address for the Entity while in the Role.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG_TEL"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Role"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#statusCode">
@@ -3192,7 +3191,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#effectiveTime">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An interval of time specifying the period during which the Role is in effect, if such time limit is applicable and known.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Role"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#certificateText">
@@ -3202,7 +3201,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#confidentialityCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A code that controls the disclosure of information about this Role with respect to the playing Entity..Discussion: It is important to note that the necessary confidentiality of the medical record cannot be achieved solely through confidentiality codes to mask individual record items from certain types of users. There are two important problems with per-item confidentiality: one is inference and the other is the danger of holding back information that may be critical in a certain care situation. Inference means that filtered sensitive information can still be assumed given the other information that was not filtered. The simplest form of inference is that even the existence of a test order for an HIV Western Blot test or a T4/T8 lymphocyte count is a strong indication for an existing HIV infection, even if the results are not known. Very often, diagnoses can be inferred from medication, such as Zidovudin for treatment of HIV infections. The problem of hiding individual items becomes especially difficult with current medications, since the continuing administration of the medication must be assured.To mitigate some of the inference-risk, aggregations of data should assume the confidentiality level of the most confidential action in the aggregation.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Role"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#quantity">
@@ -3212,7 +3211,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#positionNumber">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An integer specifying the position of the Entity playing the Role with respect to the Entity that scopes the Role.Discussion: This attribute is primarily used with respect to containment roles. For example, some containers have discrete positions in which content may be located. Depending on the geometry of the container, the position may be referenced as a scalar ordinal number, or as a vector of ordinal numbers (coordinates). Coordinates always begin counting at 1.Some containers may have customary ways of referring to the positions or no way at all. In the absence of any specific regulation for a specific container type, the rule of thumb is that the coordinate that is changed earlier is positioned first. For an automated blood chemistry analyzer with a square shaped tray, this means that the first coordinate is the one in which direction the tray moves at each step and the second coordinate is the one in which the tray moves only every 10 (or so) steps.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#LIST"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#LIST_INT"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Role"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#RoleLink">
@@ -3291,7 +3290,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#effectiveTime">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An interval of time specifying the period during which the connection between Roles is in effect.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleLink"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#CommunicationInfrastructure">
@@ -3358,7 +3357,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#realmCode">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">When valued in an instance, this attribute signals the imposition of realm-specific constraints. The value of this attribute identifies the realm in question.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CS"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#InfrastructureRoot"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#typeId">
@@ -3368,7 +3367,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#templateId">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">When valued in an instance, this attribute signals the imposition of a set of template-defined constraints. The value of this attribute provides a unique identifier for the templates in question.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#LIST"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#LIST_II"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#InfrastructureRoot"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#RoleHeir">
@@ -3562,7 +3561,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#location">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Identifies a position within the message being acknowledged that is related to the message.Discussion: Not all messages will have an associated location. Some messages may relate to multiple locations.Example: There is no location for a missing element, and there may be two locations if two elements violate a conditionality constraint.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_ST"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#AcknowledgementDetail"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#Attachment">
@@ -3737,7 +3736,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#batchComment">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This attribute is available to capture comments related to the batch.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_ST"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Batch"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#transmissionQuantity">
@@ -3747,7 +3746,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#batchTotalNumber">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The batch total. It is possible that more than a single batch total exists.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_INT"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Batch"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#CommunicationFunction">
@@ -3886,7 +3885,7 @@
    </owl:Class>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#profileId">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The message profile identifier allows a given implementation to explicitly state how it varies from the standard message definition.When multiple profiles are specified, the message instance must be valid against all of them. However, a receiver may choose to validate against only the first one recognized. For this reason, 'preferred' or more-rigorous profiles should be listed first.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#LIST"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#LIST_II"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Message"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#processingCode">
@@ -3916,7 +3915,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#attachmentText">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Contains arbitrary attachments of data blocks to which can be referred to from the interior of the message. Any ITS is advised to represent the attachments behind the main message body. Attachments are referred to from the message body using the reference functionality of the ED data type.OpenIssue: Constrain the use of the ED data type in the attachment message type. Additionally, the appropriateness of this attribute in the Message class is in question. An alternative to consider would be the placement of this attribute in a new class maintaining a 0 to many relationship with the Message class.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_ED"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Message"/>
    </owl:ObjectProperty>
    <owl:Class rdf:about="http://veggente.berlios.de/ns/RIMOntology#Transmission">
@@ -4481,7 +4480,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#responseElementGroupId">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The responseElementGroupId identifies the specific message type to be returned in the query response. This message type must be chosen from the set of message types supported by the receiver responsibilities associated with the query interaction.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_II"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#QuerySpec"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#responseModalityCode">
@@ -4779,7 +4778,7 @@
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#bibliographicDesignationText">
       <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Citation for a cataloged document that permits its identification, location and/or retrieval from common collections.</rdfs:comment>
-      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET"/>
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_ED"/>
       <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Document"/>
    </owl:ObjectProperty>
    <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/RIMOntology#acknowledgementDetail">

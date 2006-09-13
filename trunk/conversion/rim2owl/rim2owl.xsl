@@ -186,9 +186,18 @@
 					</xsl:attribute>
 					<xsl:call-template name="add_info"/>
 					<rdfs:range>
-							<xsl:attribute name="rdf:resource">
-									<xsl:value-of select="$rim_dt"/>#<xsl:value-of select="hl7:type/@name"/>
-							</xsl:attribute>
+							<xsl:choose>
+									<xsl:when test="hl7:type/hl7:supplierBindingArgumentDatatype">
+											<xsl:attribute name="rdf:resource">
+													<xsl:value-of select="$rim_dt"/>#<xsl:value-of select="concat(hl7:type/@name,'_')"/><xsl:value-of select="hl7:type/hl7:supplierBindingArgumentDatatype/@name"/>
+											</xsl:attribute>
+									</xsl:when>
+									<xsl:otherwise>
+											<xsl:attribute name="rdf:resource">
+													<xsl:value-of select="$rim_dt"/>#<xsl:value-of select="hl7:type/@name"/>
+											</xsl:attribute>
+									</xsl:otherwise>
+							</xsl:choose>
 					</rdfs:range>
 					<rdfs:domain>
 							<xsl:attribute name="rdf:resource">

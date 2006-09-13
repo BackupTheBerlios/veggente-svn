@@ -254,6 +254,18 @@
 					<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>#<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
 			</xsl:variable>
 			<xsl:if test="@fixedValue">
+					<owl:Restriction>
+							<owl:onProperty>
+									<xsl:attribute name="rdf:resource" select="$parent_ns"/>
+							</owl:onProperty>
+							<owl:hasValue>
+									<xsl:attribute name="rdf:resource">
+											<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>#<xsl:value-of select="@fixedValue"/>
+									</xsl:attribute>
+							</owl:hasValue>
+					</owl:Restriction>
+			</xsl:if>
+			<!--			<xsl:if test="@fixedValue">
 					<rdfs:subClassOf>
 							<owl:Restriction>
 									<owl:onProperty>
@@ -263,7 +275,6 @@
 											<xsl:attribute name="rdf:resource">
 													<xsl:value-of select="$rim_cm"/><xsl:value-of select="$cmet_name"/>#<xsl:value-of select="@fixedValue"/>
 											</xsl:attribute>
-											<!--
 											<xsl:variable name="type">
 													<xsl:choose>
 															<xsl:when test="hl7:type/hl7:supplierBindingArgumentDatatype">
@@ -289,17 +300,17 @@
 															</xsl:attribute>
 															<xsl:value-of select="@fixedValue"/>																	
 													</rim_dt:fixedValue>
-											</rdf:Description>-->
-											<!--											<xsl:element name="{concat('rim_dt:',$type)}">
+											</rdf:Description>
+											<xsl:element name="{concat('rim_dt:',$type)}">
 													<xsl:attribute name="rdf:about">
 															<xsl:value-of select="$parent_ns"/><xsl:value-of select="'.fixedValue'"/>
 													</xsl:attribute>
 													<xsl:value-of select="@fixedValue"/>
-											</xsl:element>-->
+											</xsl:element>
 									</owl:hasValue>
 							</owl:Restriction>
 					</rdfs:subClassOf>
-			</xsl:if>
+			</xsl:if>-->
 			<xsl:if test="@minimumMultiplicity">
 					<rdfs:subClassOf>
 							<owl:Restriction>
@@ -354,6 +365,27 @@
 									</xsl:otherwise>
 							</xsl:choose>
 					</xsl:for-each>
+					<xsl:if test="hl7:type">
+							<rdfs:range>
+									<xsl:choose>
+											<xsl:when test="hl7:type/hl7:supplierBindingArgumentDatatype">
+													<xsl:attribute name="rdf:resource">
+															<xsl:value-of select="$rim_dt"/>#<xsl:value-of select="concat(hl7:type/@name,'_')"/><xsl:value-of select="hl7:type/hl7:supplierBindingArgumentDatatype/@name"/>
+													</xsl:attribute>
+											</xsl:when>
+											<xsl:otherwise>
+													<xsl:attribute name="rdf:resource">
+															<xsl:value-of select="$rim_dt"/>#<xsl:value-of select="hl7:type/@name"/>
+													</xsl:attribute>
+											</xsl:otherwise>
+									</xsl:choose>
+							</rdfs:range>
+					</xsl:if>
+					<rdfs:domain>
+							<xsl:attribute name="rdf:resource">
+									<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="../@name"/>
+							</xsl:attribute>
+					</rdfs:domain>
 			</owl:ObjectProperty>
 	</xsl:template>
 
