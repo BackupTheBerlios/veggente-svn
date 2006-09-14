@@ -36,6 +36,16 @@ class OWL_Resource:
         self.__init__(resource,node)
     def __str__(self):
         return self.name
+    def get_xml_node(self):
+        return self.xml_node
+    def get_rdf_node(self):
+        return self.rdf_node
+    def get_uri(self):
+        return self.resource
+    def set_xml_node(self,node):
+        self.xml_node=node
+    def set_rdf_node(self,node):
+        self.rdf_node=node
 
 class OWL_Class(OWL_Resource):
     obj_properties=[]
@@ -43,11 +53,35 @@ class OWL_Class(OWL_Resource):
     mandatory_properties=[]
     
     def __init__(self,resource,node):
-        rdf_type='http://www.w3.org/2002/07/owl#Class'
         OWL_Resource.__init__(self,resource,node)
+        self.set_type('http://www.w3.org/2002/07/owl#Class')
+    
+    def get_mandatory_properties(self):
+        return self.mandatory_properties
+    def get_dt_properties(self):
+        return self.dt_properties
+    def get_obj_properties(self):
+        return self.obj_properties
+
+    def set_mandatory_properties(self,prop_list):
+        self.mandatory_properties=prop_list
+    def set_dt_properties(self,prop_list):
+        self.dt_properties=prop_list
+    def set_obj_properties(self,prop_list):
+        self.obj_properties=prop_list
+
 
 class OWL_Property(OWL_Resource):
     domains=[]
     ranges=[]
 
+    def get_domains(self):
+        return self.domains
+    def get_ranges(self):
+        return self.ranges
 
+    def set_ranges(self,range_list):
+        self.ranges=range_list
+    def set_domains(self,domain_list):
+        self.domains=domain_list
+    

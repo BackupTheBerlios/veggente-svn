@@ -191,7 +191,16 @@ class Lifter:
             else:
                 self.removeWhitespaceNodes(child)
 
-   
+    def search_class_for_data(self,obj_property,textual_data):
+        """
+        obj_property (OWL_Property): starting point for the search
+        textual_data (string): value of the DatatypeProperty which is the object of the search
+        """
+        statement_list=[]
+        for r in obj_property.get_ranges():
+            if r
+        # Heuristic valid only on HL7 v.3 domain   
+    
     def add_class_instance(self,class_res):
         """
         Add a class instance to the store
