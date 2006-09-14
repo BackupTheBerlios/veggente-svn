@@ -1,0 +1,1492 @@
+<mif:dynamicModel xmlns:mif="urn:hl7-org:v3/mif">
+   <mif:header>
+      <mif:renderingInformation schemaVersion="1" application="RoseTree 3.0.10">
+         <mif:renderingNotes>This document was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ PubDB to MIF Transform: $RCSfile: PubDbXmlToMIF.xsl,v $ $Revision: 1.8 $ $Date: 2005/07/09 20:19:24 $
+  Fix names transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  HTML to MIF Markup transform: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</mif:renderingNotes>
+      </mif:renderingInformation>
+      <mif:legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
+         <mif:notation>All rights reserved.</mif:notation>
+      </mif:legalese>
+   </mif:header>
+   <mif:hl7Interaction name="010720" title="Prescription Proposal Activate Request">
+      <mif:businessName name="Prescription renewal request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010720"/>
+      <mif:annotations>
+         <mif:description>Requests that a prescriber issue a renewal prescription based on a previously existing prescription.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010400"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010730" title="Prescription Proposal Activate Confirmation">
+      <mif:businessName name="Prescription renewal request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010730"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested prescription has been renewed by a new prescription, referenced by identifier.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010220"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010740" title="Prescription Proposal Activate Rejection">
+      <mif:businessName name="Prescription renewal request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010740"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request for the issuance of a prescription has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010140"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010420" title="Prescription Order Create Request">
+      <mif:businessName name="Medication prescription pre-det. request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010420"/>
+      <mif:annotations>
+         <mif:description>Requests the specified medication prescription proposal be reviewed, and any detected issues be identified.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010390"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010120" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010640" title="Prescription Order Create Confirmation">
+      <mif:businessName name="Prescription clinical pre-determination ok"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010640"/>
+      <mif:annotations>
+         <mif:description>Indicates that the specified issues were found in reviewing the requested prescription proposal.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010190"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010630" title="Prescription Order Create Rejection">
+      <mif:businessName name="Prescription clinical pre-determination not ok"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010630"/>
+      <mif:annotations>
+         <mif:description>Indicates that the specified prescription proposal was reviewed and no issues were detected.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010280"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010670" title="Prescription Order Activate Fulfillment Rejection">
+      <mif:businessName name="Medication prescr. fulfillment request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010670"/>
+      <mif:annotations>
+         <mif:description>Indicates that a facility who was asked to dispense a prescription is not willing to dispense it</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010210"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990010" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010940" title="Prescription Order Activate Fulfillment Rejection Drug w/ proposal">
+      <mif:businessName name="Medication prescr. fulfill. req. refused w/ prop."/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010940"/>
+      <mif:annotations>
+         <mif:description>Indicates that a facility who was asked to dispense a prescription is not willing to dispense it, but that they would be willing to dispense an alternative which they describe</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010210"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010170" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010590" title="Prescription Order Activate Notification Administration Only">
+      <mif:businessName name="Administration order (no supply) notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010590"/>
+      <mif:annotations>
+         <mif:description>Indicates that an order for administration, but no authorization for supply, has been issued for a patient; (Useful in circumstances where the supply will be drawn from ward stock or from a patient's supply-on-hand).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010170"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010100" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010370" title="Prescription Order Activate Notification Drug">
+      <mif:businessName name="Create medication prescription notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010370"/>
+      <mif:annotations>
+         <mif:description>Indicates that a medication prescription has been created.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010180"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060340" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010750" title="Prescription Order Activate Notification Supply Only">
+      <mif:businessName name="Supply order (no admin.) notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010750"/>
+      <mif:annotations>
+         <mif:description>Indicates that a non-patient-specific supply order for a medication has been issued (e.g. to replenish Ward Stock).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010590"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010130" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010600" title="Prescription Order Activate Request Administration Only">
+      <mif:businessName name="Admin. order (no supply) request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010600"/>
+      <mif:annotations>
+         <mif:description>Requests that an order for administration, but no authorization for supply, be recorded for a patient; (Useful in circumstances where the supply will be drawn from ward stock or from a patient's supply-on-hand).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010440"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010100" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010380" title="Prescription Order Activate Request Drug">
+      <mif:businessName name="Create medication prescription request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010380"/>
+      <mif:annotations>
+         <mif:description>Requests that a medication prescription be recorded against the patient's record.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010450"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010120" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010760" title="Prescription Order Activate Request Supply Only">
+      <mif:businessName name="Supply order (no admin.) request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010760"/>
+      <mif:annotations>
+         <mif:description>Requests that the specified non-patient-specific supply order be activated in the receiving system.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010470"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010130" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010930" title="Prescription Order Activate Fulfillment Request Drug w/ proposal">
+      <mif:businessName name="Medication prescr. fulfillment req. (prop allowed)"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010930"/>
+      <mif:annotations>
+         <mif:description>Requests that the specified facility dispense the medication prescription transmitted by the interaction, and is capable of handling a counter-proposal if the request is rejected.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010580"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010120" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010650" title="Prescription Order Activate Fulfillment Request Drug">
+      <mif:businessName name="Medication prescription fulfillment request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010650"/>
+      <mif:annotations>
+         <mif:description>Requests that the specified facility dispense the medication prescription transmitted by this interaction.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010580"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010120" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010390" title="Prescription Order Activate Confirmation">
+      <mif:businessName name="Create prescription request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010390"/>
+      <mif:annotations>
+         <mif:description>Indicates that a prescription has been recorded against the patient's record as requested.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010180"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010610" title="Prescription Order Activate Confirmation Administration Only">
+      <mif:businessName name="Admin. order (no supply) request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010610"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested order for administration with no supply administration has been successfully recorded.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010170"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010770" title="Prescription Order Activate Confirmation Supply Only">
+      <mif:businessName name="Supply order (no admin.) request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010770"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested non-patient-specific supply order has been successfully activated.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010590"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010400" title="Prescription Order Activate Rejection">
+      <mif:businessName name="Create prescription request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010400"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to record a prescription against the patient's record as been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010320"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010620" title="Prescription Order Activate Rejection Administration Only">
+      <mif:businessName name="Admin. order (no supply) request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010620"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested order for administration with no supply administration has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010110"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010780" title="Prescription Order Activate Rejection Supply Only">
+      <mif:businessName name="Supply order (no admin.) request rejected"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010780"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to activate a non-patient-specific supply order be activated has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010120"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010890" title="Prescription Order Revise Notification Remaining Fills">
+      <mif:businessName name="Update remaining prescription refills notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010890"/>
+      <mif:annotations>
+         <mif:description>Indicates that the number of authorized repetitions specified on the referenced prescription has been updated to the indicated value (This could be an increase or reduction in the number of allowed fills).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010310"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010160" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010090" title="Prescription Order Revise Notification Target Facility">
+      <mif:businessName name="Assign dispense responsibility notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010090"/>
+      <mif:annotations>
+         <mif:description>Indicates that the responsibility for fulfilling the dispense portion of a prescription has changed.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010330"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010140" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010900" title="Prescription Order Revise Request Remaining Fills">
+      <mif:businessName name="Update remaining prescription refills request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010900"/>
+      <mif:annotations>
+         <mif:description>Requests that the number of authorized repetitions specified on the referenced prescription be changed to the indicated value; (This could be an increase or reduction in the number of allowed fills).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010520"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010160" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010100" title="Prescription Order Revise Request Target Facility">
+      <mif:businessName name="Assign dispense responsibility request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010100"/>
+      <mif:annotations>
+         <mif:description>Requests that the responsibility for fulfilling the dispense portion of a prescription be changed to the specified facility. Changing to a null flavor of ""Not Applicable"" means that no facility has responsibility. Changing to a null flavor of ""Unknown"" means that the responsibility has been transferred to a facility outside the list of registered facilities.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010510"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010140" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010910" title="Prescription Order Revise Confirmation Remaining Fills">
+      <mif:businessName name="Update remaining refills request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010910"/>
+      <mif:annotations>
+         <mif:description>Indicates that the number of authorized repetitions specified on the referenced prescription has been updated to the requested value.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010310"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010110" title="Prescription Order Revise Confirmation Target Facility">
+      <mif:businessName name="Assign dispense responsibility request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010110"/>
+      <mif:annotations>
+         <mif:description>Indicates that the responsibility for fulfilling the dispense portion of a prescription has been changed to the requested facility.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010330"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060350" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010920" title="Prescription Order Revise Rejection Remaining Fills">
+      <mif:businessName name="Update remaining refills request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010920"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to change the number of authorized repetitions on a prescription has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010050"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010120" title="Prescription Order Revise Rejection Target Facility">
+      <mif:businessName name="Assign dispense responsibility request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010120"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to change the facility responsible for fulfilling the dispense portion of a prescription has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010150"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010430" title="Prescription Order Suspend Notification">
+      <mif:businessName name="Hold prescription notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010430"/>
+      <mif:annotations>
+         <mif:description>Indicates that the specified prescription has been suspended.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010240"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010440" title="Prescription Order Suspend Request">
+      <mif:businessName name="Hold prescription request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010440"/>
+      <mif:annotations>
+         <mif:description>Requests that the specified prescription be suspended.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010420"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010450" title="Prescription Order Suspend Confirmation">
+      <mif:businessName name="Hold prescription request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010450"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested prescription has been suspended.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010240"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010460" title="Prescription Order Suspend Rejection">
+      <mif:businessName name="Hold prescription request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010460"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to suspend specified prescription has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010010"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010510" title="Prescription Order Resume Notification">
+      <mif:businessName name="Release prescription notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010510"/>
+      <mif:annotations>
+         <mif:description>Indicates that the specified prescription has been released.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010250"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010520" title="Prescription Order Resume Request">
+      <mif:businessName name="Release prescription request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010520"/>
+      <mif:annotations>
+         <mif:description>Requests that the specified prescription be released.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010480"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010530" title="Prescription Order Resume Confirmation">
+      <mif:businessName name="Release prescription request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010530"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested prescription has been released.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010250"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010540" title="Prescription Order Resume Rejection">
+      <mif:businessName name="Release prescription request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010540"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to release specified prescription has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010030"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010830" title="Prescription Order Abort Notification">
+      <mif:businessName name="Stop prescription notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010830"/>
+      <mif:annotations>
+         <mif:description>Indicates that the specified prescription has been aborted and should no longer be dispensed or administered.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010260"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010550" title="Prescription Order Abort Notification Supply Portion">
+      <mif:businessName name="Revoke dispensing permission notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010550"/>
+      <mif:annotations>
+         <mif:description>Indicates a prescription has been marked as ""no longer dispensable"", though it should still be administered (until the previously dispensed supply is exhausted or the prescription otherwise completes).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010600"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010840" title="Prescription Order Abort Request">
+      <mif:businessName name="Stop prescription request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010840"/>
+      <mif:annotations>
+         <mif:description>Requests that the specified prescription be aborted (further dispensing or administrative must cease).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010500"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010560" title="Prescription Order Abort Request Supply Portion">
+      <mif:businessName name="Revoke dispensing permission request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010560"/>
+      <mif:annotations>
+         <mif:description>Requests that a prescription be marked as ""no longer dispensable but still administrable"".</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010490"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010850" title="Prescription Order Abort Confirmation">
+      <mif:businessName name="Stop prescription request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010850"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested prescription has been aborted (further dispensing or administrative must cease)</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010260"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010570" title="Prescription Order Abort Confirmation Supply Portion">
+      <mif:businessName name="Revoke dispensing permission request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010570"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requests prescription has been marked as ""no longer dispensable but still administrable"".</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010600"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010860" title="Prescription Order Abort Rejection">
+      <mif:businessName name="Stop prescription request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010860"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to abort specified prescription has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010040"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010580" title="Prescription Order Abort Rejection Supply Portion">
+      <mif:businessName name="Revoke dispensing permission request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010580"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to mark a prescription as ""no longer dispensable but still administrable"" has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010160"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010660" title="Prescription Promise Activate Confirmation Drug">
+      <mif:businessName name="Medication prescr. fulfillment request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010660"/>
+      <mif:annotations>
+         <mif:description>Indicates that a facility who was asked to dispense a medication prescription agrees to dispense it.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010200"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990040" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010050" title="Prescription Event Complete Notification">
+      <mif:businessName name="Add refusal to fill note notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010050"/>
+      <mif:annotations>
+         <mif:description>Indicates that a ""refusal to fill"" note has been recorded against a prescription.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010340"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010080" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010060" title="Prescription Event Complete Request">
+      <mif:businessName name="Add refusal to fill note request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010060"/>
+      <mif:annotations>
+         <mif:description>Requests that the specified ""refusal to fill"" note be recorded against the identified prescription.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010460"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="010080" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010070" title="Prescription Event Complete Confirmation">
+      <mif:businessName name="Add refusal to fill note request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010070"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested ""refusal to fill"" note has been recorded against the identified prescription.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010340"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="010080" title="Prescription Event Complete Rejection">
+      <mif:businessName name="Add refusal to fill note request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="010080"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to record a ""refusal to fill"" against a prescription has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="010020"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020180" title="Dispense Event Activate Notification Drug">
+      <mif:businessName name="Medication dispense processing notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020180"/>
+      <mif:annotations>
+         <mif:description>Indicates that dispense processing (drug preparation, packaging and contraindication checking) has been performed for a particular quantity of medication against a medication prescription and the dispensed medication is awaiting pickup.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020070"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020070" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020190" title="Dispense Event Activate Request Drug">
+      <mif:businessName name="Medication dispense processing request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020190"/>
+      <mif:annotations>
+         <mif:description>Requests the recording in the patient record that the medication dispense processing (drug preparation, packaging and contraindication checking) for a particular quantity of medication against a prescription has been performed and the medication is awaiting pickup.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020150"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020070" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020130" title="Dispense Event Activate Confirmation">
+      <mif:businessName name="Dispense processing request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020130"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested dispense processing information has been successfully recorded in the patient's record.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020070"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020030" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020140" title="Dispense Event Activate Rejection">
+      <mif:businessName name="Dispense processing request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020140"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to record the dispense processing has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020030"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020270" title="Dispense Event Revise Notification Drug">
+      <mif:businessName name="Update medication dispense record notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020270"/>
+      <mif:annotations>
+         <mif:description>Indicates that information (quantity, pickup-time, etc.) about a previously recorded medication dispense event has been updated.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020080"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020090" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020150" title="Dispense Event Abort Notification">
+      <mif:businessName name="Dispense reversal notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020150"/>
+      <mif:annotations>
+         <mif:description>Indicates that a previously submitted dispense has been reversed. The medication has been disposed of without having been picked up nor consumed by the patient.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020090"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990010" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020010" title="Dispense Event Complete Notification Controlled Substance">
+      <mif:businessName name="Controlled substance dispense notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020010"/>
+      <mif:annotations>
+         <mif:description>Provides the information a regulatory agency requires when a controlled substance is dispensed to a patient.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020110"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020010" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020020" title="Dispense Event Complete Notification Dispose Medication">
+      <mif:businessName name="Medication wasted/destroyed notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020020"/>
+      <mif:annotations>
+         <mif:description>Indicates that a quantity of a particular medication has been lost or destroyed; (Usually reserved for use with controlled substances).</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020120"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020040" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020160" title="Dispense Event Complete Notification Drug">
+      <mif:businessName name="Med. dispense processing + pickup notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020160"/>
+      <mif:annotations>
+         <mif:description>Indicates that a particular quantity of medication has been dispensed against a medication prescription amd picked up by the patient. The prescription may or may not have been previously recorded. Pickup and preparation time are not distinguished.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020110"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020070" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020070" title="Dispense Event Complete Notification Pickup">
+      <mif:businessName name="Dispense pickup notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020070"/>
+      <mif:annotations>
+         <mif:description>Indicates that a previously processed prescription has now been picked up.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020100"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020200" title="Dispense Event Complete Notification Ward Stock">
+      <mif:businessName name="Supply event (ward stock) notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020200"/>
+      <mif:annotations>
+         <mif:description>Indicates that a quantity of medication has been issued without accompanying administration instructions. This is generally used for bulk-supply or ward-stock dispenses.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020010"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020050" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020170" title="Dispense Event Complete Request Drug">
+      <mif:businessName name="Med. dispense processing + pickup request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020170"/>
+      <mif:annotations>
+         <mif:description>Requests that the dispensing of a particular quantity of medication against a medication prescription and the associated pickup be recorded in the patient's record. Pickup and preparation time are not distinguished.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020160"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020070" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020080" title="Dispense Event Complete Request Pickup">
+      <mif:businessName name="Dispense pickup request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020080"/>
+      <mif:annotations>
+         <mif:description>Requests that the pickup of a previously processed prescription be recorded.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020170"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020210" title="Dispense Event Complete Request Ward Stock">
+      <mif:businessName name="Supply event (ward stock) request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020210"/>
+      <mif:annotations>
+         <mif:description>Requests that a bulk supply of a medication to a facility be recorded.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020130"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020050" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020110" title="Dispense Event Complete Confirmation">
+      <mif:businessName name="Dispense processing + pickup request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020110"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested dispense information has been recorded.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020110"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990010" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020090" title="Dispense Event Complete Confirmation Pickup">
+      <mif:businessName name="Dispense pickup request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020090"/>
+      <mif:annotations>
+         <mif:description>Indicates that the pickup of the prescription has been recorded as requested</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020100"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020220" title="Dispense Event Complete Confirmation Ward Stock">
+      <mif:businessName name="Supply event (ward stock) request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020220"/>
+      <mif:annotations>
+         <mif:description>Indicates the requested bulk supply of a medication to a facility has been recorded.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020010"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="020030" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020120" title="Dispense Event Complete Rejection">
+      <mif:businessName name="Dispense processing + pickup request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020120"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to record a dispense has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020040"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990010" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020100" title="Dispense Event Complete Rejection Pickup">
+      <mif:businessName name="Dispense pickup request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020100"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to record the pickup of the specified prescription has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020140"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="020230" title="Dispense Event Complete Rejection Ward Stock">
+      <mif:businessName name="Supply event (ward stock) request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="020230"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to record a bulk supply of a medication to a facility has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="020020"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="030090" title="Administration Event Activate Notification">
+      <mif:businessName name="Med. administration event started notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="030090"/>
+      <mif:annotations>
+         <mif:description>Indicates that an ongoing administration (such as an IV) has been started for a patient.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="030050"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="030010" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="030070" title="Administration Event Revise Notification Dose">
+      <mif:businessName name="Med. administration event dose change notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="030070"/>
+      <mif:annotations>
+         <mif:description>Indicates that the dosage associated with an ongoing drug administration has changed.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="030100"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="030020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="030030" title="Administration Event Complete Notification">
+      <mif:businessName name="Record medication administration notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="030030"/>
+      <mif:annotations>
+         <mif:description>Indicates that a particular drug has been administered to a patient at a given date and time.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="030030"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="030080" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="030080" title="Administration Event Complete Notification Continuing">
+      <mif:businessName name="Med. administration event finished notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="030080"/>
+      <mif:annotations>
+         <mif:description>Indicates that an ongoing administration (such as an IV) has been completed for a patient.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="030030"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="030030" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="040010" title="Medication Statement Event Activate Notification">
+      <mif:businessName name="Record other medication notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="040010"/>
+      <mif:annotations>
+         <mif:description>Indicates that a medication has been recorded against the patient's record.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="040030"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="040010" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="040020" title="Medication Statement Event Activate Request">
+      <mif:businessName name="Record other medication request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="040020"/>
+      <mif:annotations>
+         <mif:description>Requests that a medication be recorded against the patient's record.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="040060"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="040010" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="040030" title="Medication Statement Event Activate Confirmation">
+      <mif:businessName name="Record other medication request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="040030"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested medication has been successfully recorded.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="040030"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="990010" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="040040" title="Medication Statement Event Activate Rejection">
+      <mif:businessName name="Record other medication request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="040040"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to add the medication has been denied.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="040010"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="040060" title="Medication Statement Event Revise Notification">
+      <mif:businessName name="Update other medication notification"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="040060"/>
+      <mif:annotations>
+         <mif:description>Indicates that status, comments or other information about an existing medication record have been modified.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="040040"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="040020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="040070" title="Medication Statement Event Revise Request">
+      <mif:businessName name="Update other medication request"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="040070"/>
+      <mif:annotations>
+         <mif:description>Requests that status, comments or other information about an existing medication record be modified.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="040070"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="040020" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="040080" title="Medication Statement Event Revise Confirmation">
+      <mif:businessName name="Update other medication request accepted"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="040080"/>
+      <mif:annotations>
+         <mif:description>Indicates that the requested status, comments and/or other information about an existing medication record have been successfully modified.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="040040"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="040090" title="Medication Statement Event Revise Rejection">
+      <mif:businessName name="Update other medication request refused"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="040090"/>
+      <mif:annotations>
+         <mif:description>Indicates that the request to update information about an existing medication record has been refused.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="040020"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300"/>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060250" title="Patient Medication Record Query Order Query Drug">
+      <mif:businessName name="Medication prescription detail query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060250"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of detailed information about a single medication prescription referenced by id, optionally including detailed dispense information.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060200"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060280" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060290" title="Patient Medication Record Query Order Query Drug Summary">
+      <mif:businessName name="Medication prescription summary query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060290"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of basic information about all medication prescriptions provided to a single patient, optionally filtered by date and status.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060460"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060130" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060190" title="Patient Medication Record Query Order Query Drug With History">
+      <mif:businessName name="Med. prescr. detail with history query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060190"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of detailed information about a single identified medication prescription, including history of changes.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060160"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060280" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060170" title="Patient Medication Record Query Order Query Drug With History And Dispenses">
+      <mif:businessName name="Med. prescr. with hist. and dispenses query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060170"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of detailed information about a single identified medication prescription, including history of changes and all fulfilling dispense events</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060180"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060280" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060430" title="Patient Medication Record Query Order Query Fills Remaining">
+      <mif:businessName name="Prescriptions with remaining fills query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060430"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of basic information about all prescriptions provided to a single patient which have at least one remaining dispense event outstanding.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060430"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060320" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060470" title="Patient Medication Record Query Order Query Unfulfilled by Prescriber Summary">
+      <mif:businessName name="Unfilled prescriptions by prescriber query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060470"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of basic information about all prescriptions provided to a single patient, prescribed by the specified prescriber which have not yet been dispensed, optionally filtered by date and status.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060510"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060270" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060490" title="Patient Medication Record Query Order Query Unfulfilled Summary">
+      <mif:businessName name="Unfilled prescriptions query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060490"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of basic information about all prescriptions provided to a single patient which have not yet been dispensed, optionally filtered by date and status.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060520"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060240" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060410" title="Patient Medication Record Query Order Query With Dispenses">
+      <mif:businessName name="Prescription, with dispenses query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060410"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of basic information about all prescriptions provided to a single patient which *have* been dispensed at least once, optionally filtered by date and status.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060400"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060370" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060260" title="Patient Medication Record Query Order Query Response Drug">
+      <mif:businessName name="Medication prescription detail query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060260"/>
+      <mif:annotations>
+         <mif:description>Returns detailed information about a single medication prescription referenced by id, optionally including detailed dispense information.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060220"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060340" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060300" title="Patient Medication Record Query Order Query Response Drug Summary">
+      <mif:businessName name="Medication prescription summary query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060300"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of basic information about all medication prescriptions provided to a single patient, optionally filtered by date and status.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060480"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="030040" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060200" title="Patient Medication Record Query Order Query Response Drug With History">
+      <mif:businessName name="Med. prescr. detail with history query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060200"/>
+      <mif:annotations>
+         <mif:description>Returns detailed information about a single identified medication prescription, including history of changes.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060130"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060120" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060180" title="Patient Medication Record Query Order Query Response Drug With History And Dispenses">
+      <mif:businessName name="Med. prescr. with hist. and dispenses query resp."/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060180"/>
+      <mif:annotations>
+         <mif:description>Returns detailed information about a single identified medication prescription, including history of changes and all fulfilling dispense events.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060240"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060090" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060440" title="Patient Medication Record Query Order Query Response Fills Remaining">
+      <mif:businessName name="Prescriptions with remaining fills query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060440"/>
+      <mif:annotations>
+         <mif:description>Returns basic information about all prescriptions provided to a single patient which have at least one remaining dispense event outstanding.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060420"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="030040" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060480" title="Patient Medication Record Query Order Query Response Unfulfilled by Prescriber Summary">
+      <mif:businessName name="Unfilled prescr. by prescriber query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060480"/>
+      <mif:annotations>
+         <mif:description>Returns basic information about all prescriptions provided to a single patient, prescribed by the specified prescriber which have not yet been dispensed, optionally filtered by date and status.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060500"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060300" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060500" title="Patient Medication Record Query Order Query Response Unfulfilled Summary">
+      <mif:businessName name="Unfilled prescriptions query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060500"/>
+      <mif:annotations>
+         <mif:description>Returns basic information about all prescriptions provided to a single patient which have not yet been dispensed, optionally filtered by date and status.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060530"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060300" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060420" title="Patient Medication Record Query Order Query Response With Dispenses">
+      <mif:businessName name="Prescription, with dispenses query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060420"/>
+      <mif:annotations>
+         <mif:description>Returns detailed information about a prescription with dispense information and possibly history.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060410"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060340" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060450" title="Patient Medication Record Query Event Query Active Medication Detail">
+      <mif:businessName name="Other medication detail query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060450"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of detailed information about a single ""other medication"" record, referenced by identifier.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060440"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060220" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060210" title="Patient Medication Record Query Event Query Drug Supply">
+      <mif:businessName name="Medication dispense detail query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060210"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of detailed information about a single identified medication dispense event.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060010"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060360" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060230" title="Patient Medication Record Query Event Query Drug Supply Summary">
+      <mif:businessName name="Medication dispense summary query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060230"/>
+      <mif:annotations>
+         <mif:description>Requests basic information about all medication dispenses provided to a particular patient, potentially filtered by date.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060050"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060110" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060270" title="Patient Medication Record Query Event Query For Drug Order">
+      <mif:businessName name="Medication prescription fills query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060270"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of basic information about all medication dispenses performed against a particular prescription referenced by id</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060320"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060080" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060460" title="Patient Medication Record Query Event Query Response Active Medication Detail">
+      <mif:businessName name="Other medication detail query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060460"/>
+      <mif:annotations>
+         <mif:description>Returns detailed information about a single ""other medication"" record, referenced by identifier.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060450"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060210" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060220" title="Patient Medication Record Query Event Query Response Drug Supply">
+      <mif:businessName name="Medication dispense detail query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060220"/>
+      <mif:annotations>
+         <mif:description>Returns detailed information about a single identified medication dispense event.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060030"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060090" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060240" title="Patient Medication Record Query Event Query Response Drug Supply Summary">
+      <mif:businessName name="Medication dispense summary query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060240"/>
+      <mif:annotations>
+         <mif:description>Returns basic information about all medication dispenses provided to a particular patient.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060070"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060100" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060280" title="Patient Medication Record Query Event Query Response For Drug Order">
+      <mif:businessName name="Medication prescription fills query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060280"/>
+      <mif:annotations>
+         <mif:description>Returns basic information about all medication dispenses performed against a particular prescription referenced by id.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060340"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060100" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060350" title="Patient Medication Record Query Event Query Generic">
+      <mif:businessName name="Medication profile detail generic query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060350"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of detailed information about a patient's prescriptions, dispenses and other medications for a specific patient filtered by a variety of criteria, including id, drug, indication, date, etc.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060260"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060180" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060370" title="Patient Medication Record Query Query Medication Profile Detail">
+      <mif:businessName name="Medication profile detail query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060370"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of detailed information about a patient's prescriptions, dispenses and other medications for a specific patient optionally filtered by date.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060280"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060170" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060390" title="Patient Medication Record Query Query Medication Profile Summary">
+      <mif:businessName name="Medication profile summary query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060390"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of basic information about a patient's prescriptions, dispenses and other medications for a specific patient optionally filtered by date.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060300"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060200" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060360" title="Patient Medication Record Query Query Response Generic">
+      <mif:businessName name="Medication profile detail generic query resp."/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060360"/>
+      <mif:annotations>
+         <mif:description>Returns detailed information about a patient's prescriptions, dispenses and other medications for a specific patient filtered by a variety of criteria, including id, drug, indication, date, etc.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060270"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060160" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060380" title="Patient Medication Record Query Query Response Medication Profile Detail">
+      <mif:businessName name="Medication profile detail query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060380"/>
+      <mif:annotations>
+         <mif:description>Returns detailed information about a patient's prescriptions, dispenses and other medications for a specific patient optionally filtered by date.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060290"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060160" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="060400" title="Patient Medication Record Query Query Response Medication Profile Summary">
+      <mif:businessName name="Medication profile summary query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="060400"/>
+      <mif:annotations>
+         <mif:description>Returns basic information about a patient's prescriptions, dispenses and other medications for a specific patient optionally filtered by date.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="060310"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060190" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="080010" title="Medication Record Query Order Query Summary by Patient">
+      <mif:businessName name="Patients on medication query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="080010"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of a list of all patients of a given provider who have an medication record (prescription, recent dispense or ""other active medication"" record) for the specified medication. Useful in recalls and advisories.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="080010"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060250" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="080020" title="Medication Record Query Order Query Response Summary by Patient">
+      <mif:businessName name="Patients on medication query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="080020"/>
+      <mif:annotations>
+         <mif:description>Returns a list of all patients of a given provider who have an medication record (prescription, recent dispense or ""other active medication"" record) for the specified medication. Useful in recalls and advisories.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="080020"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060240" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="050050" title="Knowledge Base Query Event Query Drug Dose Contraindications">
+      <mif:businessName name="Patient drug dose contraindications query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="050050"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of the potential contraindications associated with issuing a specified medication (including dose and timing) to a particular patient based on their existing medication and clinical profile.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="050060"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="060230" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="050010" title="Knowledge Base Query Event Query Drug List">
+      <mif:businessName name="Drug regimen contraindications query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="050010"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of the contraindications associated with issuing a particular combination of drugs based only on a list of concomitant medications.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="050080"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="050010" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="050030" title="Knowledge Base Query Event Query Patient Drug">
+      <mif:businessName name="Patient drug contraindications query"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="050030"/>
+      <mif:annotations>
+         <mif:description>Requests retrieval of the potential contraindications associated with issuing a specified medication to a particular patient based on their existing medication and clinical profile.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="050040"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="021001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="QueryByParameter" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="050020" traversalName="queryByParameter"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="050060" title="Knowledge Base Query Event Query Response Drug Dose Contraindications">
+      <mif:businessName name="Patient drug dose contraindications query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="050060"/>
+      <mif:annotations>
+         <mif:description>Indicates contraindications (if any) associated with placing a patient on a medication with a specified dose and timing based on their existing medication and clinical profile.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="050050"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="980030" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="050020" title="Knowledge Base Query Event Query Response Drug List">
+      <mif:businessName name="Drug regimen contraindications query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="050020"/>
+      <mif:annotations>
+         <mif:description>Indicates the contraindications (if any) associated with a set of medications. Only includes drug-drug and duplicate therapy contraindications because that's all that is deducible based on a list of medications.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="050070"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="980030" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="050040" title="Knowledge Base Query Event Query Response Patient Drug">
+      <mif:businessName name="Patient drug contraindications query response"/>
+      <mif:packageLocation root="DEFN" section="HM" subSection="PO" domain="RX" artifact="IN" realm="UV" id="050040"/>
+      <mif:annotations>
+         <mif:description>Indicates contraindications (if any) associated with placing a patient on a medication based on their existing medication and clinical profile. Excludes contraindications related to dose (which is not known), and may not appropriately reflect duplicate therapy contraindications due to lack of timing information.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="HM" subSection="PO" domain="RX" artifact="TE" realm="UV" id="050030"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000300">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="HM" subSection="PO" domain="RX" artifact="MT-deprecated" realm="UV" id="980030" traversalName="act"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+</mif:dynamicModel>

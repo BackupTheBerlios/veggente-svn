@@ -23,6 +23,7 @@ cmet_container:
 
 cmet:
 	for i in `/bin/ls -1 $(INPUT_MIF)/*_*.mif`; do \
+		echo "Processing $$i"; \
 		touch  $(OUTPUT_DIR)/cmet/`basename $$i .mif`;\
 		$(SAXON) -sall $$i cmet2owl.xsl > $(OUTPUT_DIR)/cmet/`basename $$i .mif`;\
 	done;
@@ -49,6 +50,7 @@ dt_inst:
 
 debug:
 	for i in `/bin/ls -1 $(OUTPUT_DIR)/cmet`; do \
+		echo "Processing $$i"; \
 		$(SAXON) -sall $(OUTPUT_DIR)/cmet/$$i debug.xsl > $(OUTPUT_DIR)/debug/$$i.out;\
 	done;
 deps: main_deps cmet_deps

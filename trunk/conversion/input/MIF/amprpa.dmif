@@ -1,0 +1,704 @@
+<mif:dynamicModel xmlns:mif="urn:hl7-org:v3/mif">
+   <mif:header>
+      <mif:renderingInformation schemaVersion="1" application="RoseTree 3.0.19">
+         <mif:renderingNotes>This document was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ PubDB to MIF Transform: $RCSfile: PubDbXmlToMIF.xsl,v $ $Revision: 1.8 $ $Date: 2005/07/09 20:19:24 $
+  Fix names transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  HTML to MIF Markup transform: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</mif:renderingNotes>
+      </mif:renderingInformation>
+      <mif:legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2006">
+         <mif:notation>All rights reserved.</mif:notation>
+      </mif:legalese>
+   </mif:header>
+   <mif:hl7Interaction name="101001" title="Person Event Activate Notification">
+      <mif:businessName name="New Person Added"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="101001"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a new person is added to a person registry. An informer sends to a tracker a copy of the new person record.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="101001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="101001" traversalName="identifiedPerson"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101002" title="Person Event Revise Notification">
+      <mif:businessName name="Person Information Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="101002"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after information about a person is revised in a person registry. An informer sends to a tracker updated person information.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="101002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="101002" traversalName="identifiedPerson"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101003" title="Person Event Nullify Notification">
+      <mif:businessName name="Person Nullified"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="101003"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an erroneously entered person record is nullified in a person registry. An informer sends to a tracker enough information to identify the nullified record.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="101999"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="101003" traversalName="identifiedPerson"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101105" title="Person Event Find Associated Ids Query">
+      <mif:businessName name="Find Associated Identifiers Query"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" realm="UV" version="01" id="101105"/>
+      <mif:annotations>
+         <mif:description>This interaction sends a query to a Person Registry requesting all other identifiers associated with a specific person identifier.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" realm="UV" version="01" id="101105"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="020001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="ParameterList" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="101101" traversalName="queryByParameterPayload"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101106" title="Person Event Find Associated Ids Query Response">
+      <mif:businessName name="Find Associated Identifiers Response"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" realm="UV" version="01" id="101106"/>
+      <mif:annotations>
+         <mif:description>This interaction returns a set of identifiers associated with a particular person identifier in a Person Registry.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" realm="UV" version="01" id="101106"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="101106" traversalName="target"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101103" title="Person Event Find Candidates Query">
+      <mif:businessName name="Find Candidates Query"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" realm="UV" version="01" id="101103"/>
+      <mif:annotations>
+         <mif:description>This interaction sends a query to a Person Registry requesting a list of candidates that match a particular set of person demographics.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" realm="UV" version="01" id="101103"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="020001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="ParameterList" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="101103" traversalName="queryByParameterPayload"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101104" title="Person Event Find Candidates Query Response">
+      <mif:businessName name="Find Candidates Response"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" realm="UV" version="01" id="101104"/>
+      <mif:annotations>
+         <mif:description>This interaction returns a list of candidates from a Person Registry that match a particular set of person demographics. The response may also include a score indicating the probability of match for each candidate.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" realm="UV" version="01" id="101104"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="101104" traversalName="target"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101101" title="Person Event Get Demographics Query">
+      <mif:businessName name="Get Person Demographics Query"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" realm="UV" version="01" id="101101"/>
+      <mif:annotations>
+         <mif:description>This interaction sends a query to a Person Registry requesting demographic information for a specific person identifier.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" realm="UV" version="01" id="101101"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="020001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="ParameterList" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="101101" traversalName="queryByParameterPayload"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="101102" title="Person Event Get Demographics Query Response">
+      <mif:businessName name="Get Person Demographics Response"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="QU" domain="PA" artifact="IN" realm="UV" version="01" id="101102"/>
+      <mif:annotations>
+         <mif:description>This interaction returns person demographic information from a Person Registry for a specific person identifier.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="QU" domain="PA" artifact="TE" realm="UV" version="01" id="101102"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="QU" domain="QI" artifact="MT-deprecated" realm="UV" version="01" id="120001" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="IM" subSection="QU" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="101102" traversalName="target"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="201101" title="Patientlivingsubject Event Activate Notification">
+      <mif:businessName name="New PatientLivingSubject  Added"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="201101"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a new patient record is added to a patient registry that includes full living subject (person) information. An informer sends to a tracker a copy of the new patient record.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="201001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="201101" traversalName="patient"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="201102" title="Patientlivingsubject Event Revise Notification">
+      <mif:businessName name="PatientLivingSubject Information Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="201102"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after information about a patient is revised in a patient registry that includes full living subject (person) information. An informer sends to a tracker updated patient information.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="201002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="201102" traversalName="patient"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="201103" title="Patientlivingsubject Event Nullify Notification">
+      <mif:businessName name="PatientLivingSubject Nullified"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="201103"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an erroneously entered patient record is nullified in a patient registry that includes full living subject (person) information. An informer sends to a tracker enough information to identify the nullified record.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="201999"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="201103" traversalName="patient"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="202001" title="Service Delivery Location Event Activate Notification">
+      <mif:businessName name="New Service Delivery Location Added"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="MF" domain="PA" artifact="IN" realm="UV" version="01" id="202001"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a new location is added to a service delivery location master file. An informer sends to a tracker a complete location record.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="MF" domain="PA" artifact="TE" realm="UV" version="01" id="202001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="IM" subSection="MF" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="202001" traversalName="serviceDeliveryLocation"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="202002" title="Service Delivery Location Event Revise Notification">
+      <mif:businessName name="Service Delivery Location Information Revised"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="MF" domain="PA" artifact="IN" realm="UV" version="01" id="202002"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after information about a location is revised in a service delivery location master file. An informer sends to a tracker updated location information.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="MF" domain="PA" artifact="TE" realm="UV" version="01" id="202002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="IM" subSection="MF" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="202002" traversalName="serviceDeliveryLocation"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="202003" title="Service Delivery Location Event Nullify Notification">
+      <mif:businessName name="Service Delivery Location Nullified"/>
+      <mif:packageLocation root="DEFN" section="IM" subSection="MF" domain="PA" artifact="IN" realm="UV" version="01" id="202003"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an erroneously entered location record is nullified in a service delivery location master file. An informer sends to a tracker enough information to identify the nullified record.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="IM" subSection="MF" domain="PA" artifact="TE" realm="UV" version="01" id="202999"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" realm="UV" version="01" id="700701" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="RegisteredRole" root="DEFN" section="IM" subSection="MF" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="202003" traversalName="serviceDeliveryLocation"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="411001" title="Ambulatory Encounter Intent Activate Notification">
+      <mif:businessName name="Ambulatory Encounter Appointment Scheduled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="411001"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an ambulatory encounter appointment is scheduled. An informer sends to a tracker a complete ambulatory appointment record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="411001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="411001" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="411004" title="Ambulatory Encounter Intent Revise Reschedule Notification">
+      <mif:businessName name="Ambulatory Encounter Appointment Rescheduled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="411004"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an ambulatory encounter appointment is rescheduled before the encounter takes place. An informer sends to a tracker enough information to identify the appointment, the new date and time, and any schedulable participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="411004"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="411004" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="411002" title="Ambulatory Encounter Intent Revise Notification">
+      <mif:businessName name="Ambulatory Encounter Appointment Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="411002"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an ambulatory encounter appointment is revised before the encounter has started. An informer sends to a tracker a complete ambulatory appointment record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="411002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="411002" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="411003" title="Ambulatory Encounter Intent Abort Notification">
+      <mif:businessName name="Ambulatory Encounter Appointment Canceled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="411003"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an ambulatory encounter appointment is canceled before the encounter has started. An informer sends to a tracker enough information to identify the canceled appointment.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="411003"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="411003" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="401001" title="Ambulatory Encounter Event Activate Notification">
+      <mif:businessName name="Ambulatory Encounter Started"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="401001"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a new ambulatory encounter starts. An informer sends to a tracker a complete ambulatory encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="401001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="401001" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="401002" title="Ambulatory Encounter Event Revise Notification">
+      <mif:businessName name="Ambulatory Encounter Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="401002"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after information about an ambulatory encounter changes (except for changes to Attending Practitioner, Patient Location and Responsible Organization participations that cause separate interactions). An informer sends to a tracker a complete ambulatory encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="401002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="401002" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="401004" title="Ambulatory Encounter Event Abort Notification">
+      <mif:businessName name="Ambulatory Encounter Aborted"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="401004"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an ambulatory encounter is aborted prior to completion. This could have been result of action by either the practitioner or the patient. An informer sends to a tracker information about the end of the encounter and the reason the encounter was aborted.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="401004"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="401004" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="401003" title="Ambulatory Encounter Event Complete Notification">
+      <mif:businessName name="Ambulatory Encounter Ended"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="401003"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an ambulatory encounter ends. An informer sends to a tracker a complete ambulatory encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="401003"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="401003" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="401006" title="Ambulatory Encounter Event Nullify Notification">
+      <mif:businessName name="Ambulatory Encounter Nullified"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="401006"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a previously reported <i xmlns="urn:hl7-org:v3/mif">Ambulatory Encounter Started</i> interaction is nullified. An informer sends to a tracker enough information to identify the nullified encounter.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="401999"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="401005" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="412001" title="Inpatient Encounter Intent Activate Notification">
+      <mif:businessName name="Inpatient Admission Scheduled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="412001"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an inpatient admission is scheduled. An informer sends to a tracker a complete inpatient appointment record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="412001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="412001" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="412004" title="Inpatient Encounter Intent Revise Reschedule Notification">
+      <mif:businessName name="Scheduled Inpatient Admission Rescheduled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="412004"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a scheduled inpatient admission is rescheduled before the encounter takes place. An informer sends to a tracker enough information to identify the scheduled admission, the new date and time, and any schedulable participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="412004"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="412004" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="412002" title="Inpatient Encounter Intent Revise Notification">
+      <mif:businessName name="Scheduled Inpatient Admission Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="412002"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a scheduled inpatient admission is revised before the encounter has started. An informer sends to a tracker a complete inpatient appointment record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="412002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="412002" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="412003" title="Inpatient Encounter Intent Abort Notification">
+      <mif:businessName name="Scheduled Inpatient Admission Canceled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="412003"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a scheduled inpatient admission is canceled before the encounter has started. An informer sends to a tracker enough information to identify the canceled scheduled admission.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="412003"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="412003" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="402001" title="Inpatient Encounter Event Activate Notification">
+      <mif:businessName name="Inpatient Encounter Started"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="402001"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a patient is admitted to an inpatient encounter. An informer sends to a tracker a complete inpatient encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="402001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="402001" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="402002" title="Inpatient Encounter Event Revise Notification">
+      <mif:businessName name="Inpatient Encounter Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="402002"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after information about an inpatient encounter changes (except for changes to Attending Practitioner, Patient Location and Responsible Organization participations that cause separate interactions). An informer sends to a tracker a complete inpatient encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="402002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="402002" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="402004" title="Inpatient Encounter Event Abort Notification">
+      <mif:businessName name="Inpatient Encounter Aborted"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="402004"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an inpatient encounter is aborted prior to completion. This could have been result of action by either the practitioner or the patient. An informer sends to a tracker information about the end of the encounter and the reason the encounter was aborted.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="402004"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="402004" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="402003" title="Inpatient Encounter Event Complete Notification">
+      <mif:businessName name="Inpatient Encounter Ended"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="402003"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an inpatient is discharged. An informer sends to a tracker a complete inpatient encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="402003"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="402003" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="402006" title="Inpatient Encounter Event Nullify Notification">
+      <mif:businessName name="Inpatient Encounter Nullified"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="402006"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a previously reported <i xmlns="urn:hl7-org:v3/mif">Inpatient Encounter Started</i> interaction is nullified. An informer sends to a tracker enough information to identify the nullified encounter.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="402999"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="402005" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="403001" title="Emergency Encounter Event Activate Notification">
+      <mif:businessName name="Emergency Encounter Started"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="403001"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an emergency encounter starts. An informer sends to a tracker a complete emergency encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="403001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="403001" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="403002" title="Emergency Encounter Event Revise Notification">
+      <mif:businessName name="Emergency Encounter Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="403002"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after information about an emergency encounter changes (except for changes to Attending Practitioner, Patient Location and Responsible Organization participations that cause separate interactions). An informer sends to a tracker a complete emergency encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="403002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="403002" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="403004" title="Emergency Encounter Event Abort Notification">
+      <mif:businessName name="Emergency Encounter Aborted"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="403004"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an emergency encounter is aborted prior to completion. This could have been result of action by either the practitioner or the patient. An informer sends to a tracker information about the end of the encounter and the reason the encounter was aborted.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="403004"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="403004" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="403003" title="Emergency Encounter Event Complete Notification">
+      <mif:businessName name="Emergency Encounter Ended"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="403003"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after an emergency encounter ends. An informer sends to a tracker a complete emergency encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="403003"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="403003" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="403006" title="Emergency Encounter Event Nullify Notification">
+      <mif:businessName name="Emergency Encounter Nullified"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="403006"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a previously reported <i xmlns="urn:hl7-org:v3/mif">Emergency Encounter Started</i> interaction is nullified. An informer sends to a tracker enough information to identify the nullified encounter.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="403999"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="403005" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="414001" title="Home Health Encounter Intent Activate Notification">
+      <mif:businessName name="Home Health Encounter Appointment Scheduled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="414001"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a home health encounter appointment is scheduled. An informer sends to a tracker a complete home health appointment record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="414001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="414001" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="414004" title="Home Health Encounter Intent Revise Reschedule Notification">
+      <mif:businessName name="Home Health Encounter Appointment Rescheduled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="414004"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a home health encounter appointment is rescheduled before the encounter takes place. An informer sends to a tracker enough information to identify the appointment, the new date and time, and any schedulable participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="414004"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="414004" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="414002" title="Home Health Encounter Intent Revise Notification">
+      <mif:businessName name="Home Health Encounter Appointment Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="414002"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a home health encounter appointment is revised before the encounter has started. An informer sends to a tracker a complete home health appointment record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="414002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="414002" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="414003" title="Home Health Encounter Intent Abort Notification">
+      <mif:businessName name="Home Health Encounter Appointment Canceled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="414003"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a home health encounter appointment is canceled before the encounter has started. An informer sends to a tracker enough information to identify the canceled appointment.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="414003"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="414003" traversalName="encounterAppointment"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="404001" title="Home Health Encounter Event Activate Notification">
+      <mif:businessName name="Home Health Encounter Started"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="404001"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a home health encounter starts. An informer sends to a tracker a complete emergency encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="404001"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="404001" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="404002" title="Home Health Encounter Event Revise">
+      <mif:businessName name="Home Health Encounter Revised"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="404002"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after information about a home health encounter changes (except for changes to Attending Practitioner, Patient Location and Responsible Organization participations that cause separate interactions). An informer sends to a tracker a complete emergency encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="404002"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="404002" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="404004" title="Home Health Encounter Event Abort">
+      <mif:businessName name="Home Health Encounter Aborted"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="404004"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a home health encounter is aborted prior to completion. This could have been result of action by either the practitioner or the patient. An informer sends to a tracker information about the end of the encounter and the reason the encounter was aborted.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="404004"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="404004" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="404003" title="Home Health Encounter Event Complete">
+      <mif:businessName name="Home Health Encounter Ended"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="404003"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a home health encounter ends. An informer sends to a tracker a complete home health encounter record, including related acts and participations.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="404003"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="404003" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="404006" title="Home Health Encounter Event Nullify">
+      <mif:businessName name="Home Health Encounter Nullified"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="404006"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a previously reported <i xmlns="urn:hl7-org:v3/mif">Home Health Encounter Started</i> interaction is nullified. An informer sends to a tracker enough information to identify the nullified encounter.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="402999"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="404005" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="301011" title="Attending Practitioner Event Activate Change Notification">
+      <mif:businessName name="Attending Practitioner Changed"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="301011"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after the attending practitioner responsibility for an encounter is transferred from one practitioner to another. An informer sends to a tracker a small message identifying the encounter, the patient, the previous attending practitioner and assignment time range, and the new attending practitioner and start time.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="301011"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="301011" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="301012" title="Attending Practitioner Event Nullify Change Notification">
+      <mif:businessName name="Attending Practitioner Change Canceled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="301012"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a previously reported change of attending practitioner is canceled. An informer sends to a tracker a small message identifying the encounter, the patient, the attending practitioner assignment to be reactivated, and attending practitioner assignment to be nullified.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="301012"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="301012" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="302011" title="Encounter Location Event Activate Change Notification">
+      <mif:businessName name="Transfer Patient to New Location"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="302011"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a patient is transferred from one assigned location to another. An informer sends to a tracker a small message identifying the encounter, the patient, the previous location and assignment time range, the new location and start time, and any related Accommodation events.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="302011"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="302011" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="302012" title="Encounter Location Event Nullify Change Notification">
+      <mif:businessName name="Transfer Patient to New Location Canceled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="302012"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a previously reported transfer of a patient from one assigned location to another is canceled. An informer sends to a tracker a small message identifying the encounter, the patient, the location assignment to be reactivated, and location assignment to be nullified.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="302012"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="302012" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="303011" title="Encounter Organization Event Activate Change Notification">
+      <mif:businessName name="Responsible Organization Changed"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="303011"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after clinical responsibility for an encounter is transferred from one organization to another. An informer sends to a tracker a small message identifying the encounter, the patient, the previous organization and assignment time range, and the new organization and start time.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="303011"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="303011" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+   <mif:hl7Interaction name="303012" title="Encounter Organization Event Nullify Change Notification">
+      <mif:businessName name="Responsible Organization Change Canceled"/>
+      <mif:packageLocation root="DEFN" section="AM" subSection="PR" domain="PA" artifact="IN" realm="UV" version="01" id="303012"/>
+      <mif:annotations>
+         <mif:description>This interaction occurs after a previously reported transfer of clinical responsibility for an encounter from one organization to another is canceled. An informer sends to a tracker a small message identifying the encounter, the patient, the organization assignment to be reactivated, and organization assignment to be nullified.</mif:description>
+      </mif:annotations>
+      <mif:callAction root="DEFN" section="AM" subSection="PR" domain="PA" artifact="TE" realm="UV" version="01" id="303012"/>
+      <mif:parameterTypeModel root="DEFN" section="IM" subSection="MC" domain="CI" artifact="MT-deprecated" realm="UV" version="01" id="000100">
+         <mif:supplierBindingArgument templateParameterName="ControlActProcess" root="DEFN" section="IM" subSection="MC" domain="AI" artifact="MT-deprecated" realm="UV" version="01" id="700201" traversalName="controlActProcess">
+            <mif:supplierBindingArgument templateParameterName="Act" root="DEFN" section="AM" subSection="PR" domain="PA" artifact="MT-deprecated" realm="UV" version="01" id="303012" traversalName="encounterEvent"/>
+         </mif:supplierBindingArgument>
+      </mif:parameterTypeModel>
+   </mif:hl7Interaction>
+</mif:dynamicModel>

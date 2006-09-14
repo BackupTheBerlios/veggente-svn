@@ -1,0 +1,204 @@
+<serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="050004">
+   <packageLocation root="DEFN" section="IM" subSection="CO" domain="CT" artifact="MT-deprecated" realm="UV" version="01" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.19">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+ Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
+ Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2006">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="RM-deprecated" id="050004"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="3" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="HD-deprecated" realm="UV" version="01" id="050004"/>
+   </derivationSupplier>
+   <ownedEntryPoint useKind="SemanticPayload" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
+            <text>
+               <p>27 Nov 2003 Used to identify a patient, or provide clinically relevant patient information.</p>
+            </text>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="PatientClinical" isAbstract="false">
+            <derivationSupplier staticModelDerivationId="1" className="Patient"/>
+            <derivationSupplier staticModelDerivationId="2" className="PatientClinical"/>
+            <derivationSupplier staticModelDerivationId="3" className="PatientClinical"/>
+            <annotations/>
+            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="PAT">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="PatientClinical" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="PatientClinical" attributeName="classCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="RoleClass" mnemonic="PAT"/>
+            </attribute>
+            <attribute name="id" sortKey="2" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="false" conformance="R">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="2" className="PatientClinical" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="3" className="PatientClinical" attributeName="id"/>
+               <type name="SET">
+                  <supplierBindingArgumentDatatype name="II"/>
+               </type>
+            </attribute>
+            <attribute name="addr" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="addr"/>
+               <derivationSupplier staticModelDerivationId="2" className="PatientClinical" attributeName="addr"/>
+               <derivationSupplier staticModelDerivationId="3" className="PatientClinical" attributeName="addr"/>
+               <type name="BAG">
+                  <supplierBindingArgumentDatatype name="AD"/>
+               </type>
+            </attribute>
+            <attribute name="telecom" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="telecom"/>
+               <derivationSupplier staticModelDerivationId="2" className="PatientClinical" attributeName="telecom"/>
+               <derivationSupplier staticModelDerivationId="3" className="PatientClinical" attributeName="telecom"/>
+               <type name="BAG">
+                  <supplierBindingArgumentDatatype name="TEL"/>
+               </type>
+            </attribute>
+            <attribute name="statusCode" sortKey="5" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="statusCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="PatientClinical" attributeName="statusCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="PatientClinical" attributeName="statusCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="RoleStatus"/>
+            </attribute>
+            <attribute name="effectiveTime" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="effectiveTime"/>
+               <derivationSupplier staticModelDerivationId="2" className="PatientClinical" attributeName="effectiveTime"/>
+               <derivationSupplier staticModelDerivationId="3" className="PatientClinical" attributeName="effectiveTime"/>
+               <type name="IVL">
+                  <supplierBindingArgumentDatatype name="TS"/>
+               </type>
+            </attribute>
+            <attribute name="confidentialityCode" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="confidentialityCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="PatientClinical" attributeName="confidentialityCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="PatientClinical" attributeName="confidentialityCode"/>
+               <type name="CE"/>
+               <supplierDomainSpecification codingStrength="CWE" domainName="Confidentiality"/>
+            </attribute>
+            <attribute name="veryImportantPersonCode" sortKey="8" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Patient" attributeName="veryImportantPersonCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="PatientClinical" attributeName="veryImportantPersonCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="PatientClinical" attributeName="veryImportantPersonCode"/>
+               <type name="CE"/>
+               <supplierDomainSpecification codingStrength="CWE" domainName="PatientImportance"/>
+            </attribute>
+            <association sortKey="1">
+               <targetConnection name="patientEntityChoiceSubject" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="player"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="patientLivingSubject"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="patientLivingSubject"/>
+                  <participantClassSpecialization className="Person" traversalName="patientPerson"/>
+                  <participantClassSpecialization className="NonPersonLivingSubject" traversalName="patientNonPersonLivingSubject"/>
+                  <participantClass>
+                     <commonModelElementRef name="E_LivingSubjectUniversal" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="LivingSubject"/>
+                        <derivationSupplier staticModelDerivationId="2" className="E_LivingSubjectUniversal"/>
+                        <derivationSupplier staticModelDerivationId="3" className="E_LivingSubjectUniversal"/>
+                        <annotations/>
+                     </commonModelElementRef>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="PatientClinical"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="2">
+               <targetConnection name="providerOrganization" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="scoper"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="providerOrganization"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="providerOrganization"/>
+                  <participantClass>
+                     <commonModelElementRef name="E_OrganizationUniversal" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Organization"/>
+                        <derivationSupplier staticModelDerivationId="2" className="E_OrganizationUniversal"/>
+                        <derivationSupplier staticModelDerivationId="3" className="E_OrganizationUniversal"/>
+                        <annotations/>
+                     </commonModelElementRef>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="PatientClinical"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="3">
+               <targetConnection name="subjectOf" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="CAA_______">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="participation"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="subjectOf"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="subjectOf"/>
+                  <participantClass>
+                     <class name="Subject" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Participation"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Subject"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Subject"/>
+                        <annotations/>
+                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="SBJ">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Subject" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Subject" attributeName="typeCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ParticipationTargetSubject" mnemonic="SBJ"/>
+                        </attribute>
+                        <association sortKey="1">
+                           <targetConnection name="actChoice" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                              <annotations/>
+                              <derivationSupplier staticModelDerivationId="1" className="Participation" associationEndName="act"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Participation" associationEndName="supportingClinicalInformation"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Participation" associationEndName="supportingClinicalInformation"/>
+                              <participantClassSpecialization className="ObservationDx" traversalName="observationDx"/>
+                              <participantClassSpecialization className="ObservationGeneral" traversalName="observationGeneral"/>
+                              <participantClassSpecialization className="ObservationIntolerance" traversalName="observationIntolerance"/>
+                              <participantClassSpecialization className="Procedure" traversalName="procedure"/>
+                              <participantClassSpecialization className="SubstanceAdministration" traversalName="substanceAdministration"/>
+                              <participantClass>
+                                 <commonModelElementRef name="A_SupportingClinicalInformationUniversal" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="ActHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="A_SupportingClinicalInformationUniversal"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="A_SupportingClinicalInformationUniversal"/>
+                                    <annotations/>
+                                 </commonModelElementRef>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Subject"/>
+                           </sourceConnection>
+                        </association>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="PatientClinical"/>
+               </sourceConnection>
+            </association>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
+</serializedStaticModel>

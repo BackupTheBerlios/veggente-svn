@@ -216,7 +216,12 @@
 			</xsl:variable>
 			<xsl:variable name="target_path"><xsl:value-of select="$mif_input_path"/>/<xsl:value-of select="$model_id"/>.mif</xsl:variable>
 			<xsl:variable name="target_element">
-					<xsl:copy-of select="document($target_path)//hl7:serializedStaticModel/hl7:ownedEntryPoint/hl7:specializedClass/hl7:class"/>
+					<xsl:choose>
+							<xsl:when test="not ($target_path=concat($mif_input_path,'/_.mif'))">
+									<xsl:copy-of select="document($target_path)//hl7:serializedStaticModel/hl7:ownedEntryPoint/hl7:specializedClass/hl7:class"/>
+							</xsl:when>
+							<xsl:otherwise/>
+					</xsl:choose>
 			</xsl:variable>
 			<owl:Class>
 					<xsl:attribute name="rdf:about">

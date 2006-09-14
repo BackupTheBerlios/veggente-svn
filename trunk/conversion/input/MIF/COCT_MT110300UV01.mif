@@ -1,0 +1,338 @@
+<serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="110300">
+   <packageLocation root="DEFN" section="IM" subSection="CO" domain="CT" artifact="MT-deprecated" realm="UV" version="01" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.7">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+ Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
+ Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="RM-deprecated" id="110300"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="3" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="CO" domain="CT" artifact="HD-deprecated" realm="UV" version="01" id="110300"/>
+   </derivationSupplier>
+   <ownedEntryPoint useKind="SemanticPayload" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
+            <text>
+               <p>Used to identify the guarantor for a particular account (e.g. patient billing account).</p>
+            </text>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="Account" isAbstract="false">
+            <derivationSupplier staticModelDerivationId="1" className="Account"/>
+            <derivationSupplier staticModelDerivationId="2" className="Account"/>
+            <derivationSupplier staticModelDerivationId="3" className="Account"/>
+            <annotations>
+               <designComments>
+                  <text>
+                     <p>Id may not be known when this is used to notify a recipient about a new guarantor for the encounter.</p>
+                  </text>
+               </designComments>
+            </annotations>
+            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="ACCT">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="Account" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="Account" attributeName="classCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="ActClass" mnemonic="ACCT"/>
+            </attribute>
+            <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="DEF">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="Account" attributeName="moodCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="Account" attributeName="moodCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="DEF"/>
+            </attribute>
+            <attribute name="id" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations>
+                  <designComments>
+                     <text>
+                        <p>e.g. Bank account, transit number, credit card, patient billing account, etc.</p>
+                     </text>
+                  </designComments>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="2" className="Account" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="3" className="Account" attributeName="id"/>
+               <type name="II"/>
+            </attribute>
+            <association sortKey="1">
+               <targetConnection name="holder" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="ABE_______">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="participation"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="holder"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="holder"/>
+                  <participantClass>
+                     <class name="Holder" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Participation"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Holder"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Holder"/>
+                        <annotations/>
+                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="HLD">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Holder" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Holder" attributeName="typeCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ParticipationType" mnemonic="HLD"/>
+                        </attribute>
+                        <association sortKey="1">
+                           <targetConnection name="guarantorRole" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="BZ">
+                              <annotations>
+                                 <designComments>
+                                    <text>
+                                       <p>Person (patient) is the scoper of the guarantor, but is not required for this CMET. Guarantor takes financial responsibility over the account</p>
+                                    </text>
+                                 </designComments>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="Participation" associationEndName="role"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Participation" associationEndName="guarantorRole"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Participation" associationEndName="guarantorRole"/>
+                              <participantClass>
+                                 <class name="GuarantorRole" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="GuarantorRole"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="GuarantorRole"/>
+                                    <annotations>
+                                       <designComments>
+                                          <text>
+                                             <p>Person (patient) is the scoper of the guarantor, but is not required for this CMET. Guarantor takes financial responsibility over the account</p>
+                                          </text>
+                                       </designComments>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="GUAR">
+                                       <annotations/>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="GuarantorRole" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="GuarantorRole" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="RoleClass" mnemonic="GUAR"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" conformance="R">
+                                       <annotations>
+                                          <designComments>
+                                             <text>
+                                                <p>guarantor identifier</p>
+                                             </text>
+                                          </designComments>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="GuarantorRole" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="GuarantorRole" attributeName="id"/>
+                                       <type name="SET">
+                                          <supplierBindingArgumentDatatype name="II"/>
+                                       </type>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="guarantorChoice" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="player"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="guarantorChoice"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="guarantorChoice"/>
+                                          <participantClassSpecialization className="GuarantorPerson" traversalName="guarantorPerson"/>
+                                          <participantClassSpecialization className="GuarantorOrganization" traversalName="guarantorOrganization"/>
+                                          <participantClass>
+                                             <class name="GuarantorChoice" isAbstract="true">
+                                                <derivationSupplier staticModelDerivationId="1" className="Entity"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="GuarantorChoice"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="GuarantorChoice"/>
+                                                <annotations/>
+                                                <specializationChild sortKey="1">
+                                                   <specializedClass>
+                                                      <class name="GuarantorPerson" isAbstract="false">
+                                                         <derivationSupplier staticModelDerivationId="1" className="Person"/>
+                                                         <derivationSupplier staticModelDerivationId="2" className="GuarantorPerson"/>
+                                                         <derivationSupplier staticModelDerivationId="3" className="GuarantorPerson"/>
+                                                         <annotations/>
+                                                         <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="PSN">
+                                                            <annotations/>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="classCode"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorPerson" attributeName="classCode"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorPerson" attributeName="classCode"/>
+                                                            <type name="CS"/>
+                                                            <supplierDomainSpecification codingStrength="CNE" domainName="EntityClass" mnemonic="PSN"/>
+                                                         </attribute>
+                                                         <attribute name="determinerCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="INSTANCE">
+                                                            <annotations/>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="determinerCode"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorPerson" attributeName="determinerCode"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorPerson" attributeName="determinerCode"/>
+                                                            <type name="CS"/>
+                                                            <supplierDomainSpecification codingStrength="CNE" domainName="EntityDeterminer" mnemonic="INSTANCE"/>
+                                                         </attribute>
+                                                         <attribute name="name" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                                            <annotations>
+                                                               <designComments>
+                                                                  <text>
+                                                                     <p>payee name</p>
+                                                                  </text>
+                                                               </designComments>
+                                                            </annotations>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="name"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorPerson" attributeName="name"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorPerson" attributeName="name"/>
+                                                            <type name="PN"/>
+                                                         </attribute>
+                                                         <attribute name="telecom" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                            <annotations/>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="telecom"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorPerson" attributeName="telecom"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorPerson" attributeName="telecom"/>
+                                                            <type name="TEL"/>
+                                                         </attribute>
+                                                         <attribute name="addr" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                            <annotations/>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Person" attributeName="addr"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorPerson" attributeName="addr"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorPerson" attributeName="addr"/>
+                                                            <type name="AD"/>
+                                                         </attribute>
+                                                         <association sortKey="1">
+                                                            <targetConnection name="guarantorLanguage" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="CZ">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Entity" associationEndName="languageCommunication"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="Entity" associationEndName="guarantorLanguage"/>
+                                                               <derivationSupplier staticModelDerivationId="3" className="Entity" associationEndName="guarantorLanguage"/>
+                                                               <participantClass>
+                                                                  <class name="GuarantorLanguage" isAbstract="false">
+                                                                     <derivationSupplier staticModelDerivationId="1" className="LanguageCommunication"/>
+                                                                     <derivationSupplier staticModelDerivationId="2" className="GuarantorLanguage"/>
+                                                                     <derivationSupplier staticModelDerivationId="3" className="GuarantorLanguage"/>
+                                                                     <annotations/>
+                                                                     <attribute name="languageCode" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                                                        <annotations/>
+                                                                        <derivationSupplier staticModelDerivationId="1" className="LanguageCommunication" attributeName="languageCode"/>
+                                                                        <derivationSupplier staticModelDerivationId="2" className="GuarantorLanguage" attributeName="languageCode"/>
+                                                                        <derivationSupplier staticModelDerivationId="3" className="GuarantorLanguage" attributeName="languageCode"/>
+                                                                        <type name="CS"/>
+                                                                        <supplierDomainSpecification codingStrength="CNE" domainName="HumanLanguage"/>
+                                                                     </attribute>
+                                                                     <attribute name="modeCode" sortKey="2" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="RWR">
+                                                                        <annotations>
+                                                                           <designComments>
+                                                                              <text>
+                                                                                 <p>Received Written</p>
+                                                                              </text>
+                                                                           </designComments>
+                                                                        </annotations>
+                                                                        <derivationSupplier staticModelDerivationId="1" className="LanguageCommunication" attributeName="modeCode"/>
+                                                                        <derivationSupplier staticModelDerivationId="2" className="GuarantorLanguage" attributeName="modeCode"/>
+                                                                        <derivationSupplier staticModelDerivationId="3" className="GuarantorLanguage" attributeName="modeCode"/>
+                                                                        <type name="CS"/>
+                                                                        <supplierDomainSpecification codingStrength="CNE" domainName="LanguageAbilityMode"/>
+                                                                     </attribute>
+                                                                     <attribute name="preferenceInd" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R">
+                                                                        <annotations/>
+                                                                        <derivationSupplier staticModelDerivationId="1" className="LanguageCommunication" attributeName="preferenceInd"/>
+                                                                        <derivationSupplier staticModelDerivationId="2" className="GuarantorLanguage" attributeName="preferenceInd"/>
+                                                                        <derivationSupplier staticModelDerivationId="3" className="GuarantorLanguage" attributeName="preferenceInd"/>
+                                                                        <type name="BL"/>
+                                                                     </attribute>
+                                                                  </class>
+                                                               </participantClass>
+                                                            </targetConnection>
+                                                            <sourceConnection>
+                                                               <nonTraversableConnection participantClassName="GuarantorPerson"/>
+                                                            </sourceConnection>
+                                                         </association>
+                                                      </class>
+                                                   </specializedClass>
+                                                </specializationChild>
+                                                <specializationChild sortKey="2">
+                                                   <specializedClass>
+                                                      <class name="GuarantorOrganization" isAbstract="false">
+                                                         <derivationSupplier staticModelDerivationId="1" className="Organization"/>
+                                                         <derivationSupplier staticModelDerivationId="2" className="GuarantorOrganization"/>
+                                                         <derivationSupplier staticModelDerivationId="3" className="GuarantorOrganization"/>
+                                                         <annotations/>
+                                                         <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="ORG">
+                                                            <annotations/>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="classCode"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorOrganization" attributeName="classCode"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorOrganization" attributeName="classCode"/>
+                                                            <type name="CS"/>
+                                                            <supplierDomainSpecification codingStrength="CNE" domainName="EntityClassOrganization" mnemonic="ORG"/>
+                                                         </attribute>
+                                                         <attribute name="determinerCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="INSTANCE">
+                                                            <annotations/>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="determinerCode"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorOrganization" attributeName="determinerCode"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorOrganization" attributeName="determinerCode"/>
+                                                            <type name="CS"/>
+                                                            <supplierDomainSpecification codingStrength="CNE" domainName="EntityDeterminer" mnemonic="INSTANCE"/>
+                                                         </attribute>
+                                                         <attribute name="code" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R">
+                                                            <annotations/>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="code"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorOrganization" attributeName="code"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorOrganization" attributeName="code"/>
+                                                            <type name="CE"/>
+                                                            <supplierDomainSpecification codingStrength="CNE" domainName="EntityCode"/>
+                                                         </attribute>
+                                                         <attribute name="name" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R">
+                                                            <annotations/>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="name"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorOrganization" attributeName="name"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorOrganization" attributeName="name"/>
+                                                            <type name="ON"/>
+                                                         </attribute>
+                                                         <attribute name="telecom" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R">
+                                                            <annotations/>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Entity" attributeName="telecom"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorOrganization" attributeName="telecom"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorOrganization" attributeName="telecom"/>
+                                                            <type name="TEL"/>
+                                                         </attribute>
+                                                         <attribute name="addr" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R">
+                                                            <annotations/>
+                                                            <derivationSupplier staticModelDerivationId="1" className="Organization" attributeName="addr"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="GuarantorOrganization" attributeName="addr"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="GuarantorOrganization" attributeName="addr"/>
+                                                            <type name="AD"/>
+                                                         </attribute>
+                                                      </class>
+                                                   </specializedClass>
+                                                </specializationChild>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="GuarantorRole"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Holder"/>
+                           </sourceConnection>
+                        </association>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="Account"/>
+               </sourceConnection>
+            </association>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
+</serializedStaticModel>

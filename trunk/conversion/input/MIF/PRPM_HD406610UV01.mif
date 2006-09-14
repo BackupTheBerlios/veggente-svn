@@ -1,0 +1,421 @@
+<serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="406610" title="Organization Admin Report Query">
+   <packageLocation root="DEFN" section="AM" subSection="PR" domain="PM" artifact="HD-deprecated" realm="UV" version="01" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.19">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+ Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
+ Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2006">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="AM" subSection="PR" domain="PM" artifact="RM-deprecated" id="406600"/>
+   </derivationSupplier>
+   <derivationClient xmlns:mif="urn:hl7-org:v3/mif">
+      <sourceStaticModel root="DEFN" section="AM" subSection="PR" domain="PM" artifact="MT-deprecated" realm="UV" version="01" id="406610"/>
+   </derivationClient>
+   <ownedEntryPoint useKind="SemanticPayload" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
+            <text>
+               <p>Entry point for Organization Admin Report query.</p>
+            </text>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="QueryByParameterPayload" isAbstract="false">
+            <derivationSupplier staticModelDerivationId="1" className="QueryByParameter"/>
+            <derivationSupplier staticModelDerivationId="2" className="QueryByParameterPayload"/>
+            <annotations/>
+            <attribute name="queryId" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="QueryEvent" attributeName="queryId"/>
+               <derivationSupplier staticModelDerivationId="2" className="QueryByParameterPayload" attributeName="queryId"/>
+               <type name="II"/>
+            </attribute>
+            <attribute name="statusCode" sortKey="2" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="QueryEvent" attributeName="statusCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="QueryByParameterPayload" attributeName="statusCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="QueryStatusCode"/>
+            </attribute>
+            <attribute name="modifyCode" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="QuerySpec" attributeName="modifyCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="QueryByParameterPayload" attributeName="modifyCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="ModifyIndicator"/>
+            </attribute>
+            <attribute name="responseElementGroupId" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="QuerySpec" attributeName="responseElementGroupId"/>
+               <derivationSupplier staticModelDerivationId="2" className="QueryByParameterPayload" attributeName="responseElementGroupId"/>
+               <type name="SET">
+                  <supplierBindingArgumentDatatype name="II"/>
+               </type>
+            </attribute>
+            <attribute name="responseModalityCode" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="QuerySpec" attributeName="responseModalityCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="QueryByParameterPayload" attributeName="responseModalityCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="ResponseModality"/>
+            </attribute>
+            <attribute name="responsePriorityCode" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="QuerySpec" attributeName="responsePriorityCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="QueryByParameterPayload" attributeName="responsePriorityCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="QueryPriority"/>
+            </attribute>
+            <attribute name="initialQuantity" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="QuerySpec" attributeName="initialQuantity"/>
+               <derivationSupplier staticModelDerivationId="2" className="QueryByParameterPayload" attributeName="initialQuantity"/>
+               <type name="INT"/>
+            </attribute>
+            <attribute name="initialQuantityCode" sortKey="8" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="QuerySpec" attributeName="initialQuantityCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="QueryByParameterPayload" attributeName="initialQuantityCode"/>
+               <type name="CE"/>
+               <supplierDomainSpecification codingStrength="CWE" domainName="QueryQuantityUnit"/>
+            </attribute>
+            <association sortKey="1">
+               <targetConnection name="audit" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="Z">
+                  <annotations>
+                     <designComments>
+                        <text>
+                           <p>Specialized Audit filters. Codesystem in datatype identifies responders list of supported parameters.</p>
+                        </text>
+                     </designComments>
+                  </annotations>
+                  <derivationSupplier staticModelDerivationId="1" className="QueryByParameter" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="QueryByParameter" associationEndName="audit"/>
+                  <participantClass>
+                     <class name="Audit" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Audit"/>
+                        <annotations>
+                           <designComments>
+                              <text>
+                                 <p>Specialized Audit filters. Codesystem in datatype identifies responders list of supported parameters.</p>
+                              </text>
+                           </designComments>
+                        </annotations>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" conformance="R">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>e.g. corrected or inactive records</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Audit" attributeName="value"/>
+                           <type name="SET">
+                              <supplierBindingArgumentDatatype name="CV"/>
+                           </type>
+                        </attribute>
+                        <attribute name="semanticsText" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="semanticsText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Audit" attributeName="semanticsText"/>
+                           <type name="ST"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="QueryByParameterPayload"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="2">
+               <targetConnection name="custodianId" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="Z">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="QueryByParameter" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="QueryByParameter" associationEndName="custodianId"/>
+                  <participantClass>
+                     <class name="CustodianId" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="CustodianId"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="CustodianId" attributeName="value"/>
+                           <type name="II"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="QueryByParameterPayload"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="3">
+               <targetConnection name="jurisdiction" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="Z">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="QueryByParameter" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="QueryByParameter" associationEndName="jurisdiction"/>
+                  <participantClass>
+                     <class name="Jurisdiction" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Jurisdiction"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Jurisdiction" attributeName="value"/>
+                           <type name="CD"/>
+                           <supplierDomainSpecification codingStrength="CWE" domainName="EntityCode"/>
+                        </attribute>
+                        <attribute name="semanticsText" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>Jurisdiction.code</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="semanticsText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Jurisdiction" attributeName="semanticsText"/>
+                           <type name="ST"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="QueryByParameterPayload"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="4">
+               <targetConnection name="organizationID" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="Z">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="QueryByParameter" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="QueryByParameter" associationEndName="organizationID"/>
+                  <participantClass>
+                     <class name="OrganizationID" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="OrganizationID"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="OrganizationID" attributeName="value"/>
+                           <type name="II"/>
+                        </attribute>
+                        <attribute name="semanticsText" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>AssigneEntity.id</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="semanticsText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="OrganizationID" attributeName="semanticsText"/>
+                           <type name="ST"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="QueryByParameterPayload"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="5">
+               <targetConnection name="reportId" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="Z">
+                  <annotations>
+                     <designComments>
+                        <text>
+                           <p>Published identifier for preformatted report</p>
+                        </text>
+                     </designComments>
+                  </annotations>
+                  <derivationSupplier staticModelDerivationId="1" className="QueryByParameter" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="QueryByParameter" associationEndName="reportId"/>
+                  <participantClass>
+                     <class name="ReportId" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="ReportId"/>
+                        <annotations>
+                           <designComments>
+                              <text>
+                                 <p>Published identifier for preformatted report</p>
+                              </text>
+                           </designComments>
+                        </annotations>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>report identifier</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="ReportId" attributeName="value"/>
+                           <type name="II"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="QueryByParameterPayload"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="6">
+               <targetConnection name="roleEffectiveDate" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="Z">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="QueryByParameter" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="QueryByParameter" associationEndName="roleEffectiveDate"/>
+                  <participantClass>
+                     <class name="RoleEffectiveDate" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="RoleEffectiveDate"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="RoleEffectiveDate" attributeName="value"/>
+                           <type name="IVL">
+                              <supplierBindingArgumentDatatype name="TS"/>
+                           </type>
+                        </attribute>
+                        <attribute name="semanticsText" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="semanticsText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="RoleEffectiveDate" attributeName="semanticsText"/>
+                           <type name="ST"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="QueryByParameterPayload"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="7">
+               <targetConnection name="roleType" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="Z">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="QueryByParameter" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="QueryByParameter" associationEndName="roleType"/>
+                  <participantClass>
+                     <class name="RoleType" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="RoleType"/>
+                        <annotations/>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="RoleType" attributeName="value"/>
+                           <type name="CD"/>
+                           <supplierDomainSpecification codingStrength="CWE" domainName="RoleCode"/>
+                        </attribute>
+                        <attribute name="semanticsText" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>AssignedEntity.code</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="semanticsText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="RoleType" attributeName="semanticsText"/>
+                           <type name="ST"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="QueryByParameterPayload"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="8">
+               <targetConnection name="sortControl" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="Z">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="QuerySpec" associationEndName="sortControl"/>
+                  <derivationSupplier staticModelDerivationId="2" className="QuerySpec" associationEndName="sortControl"/>
+                  <participantClass>
+                     <class name="SortControl" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="SortControl"/>
+                        <derivationSupplier staticModelDerivationId="2" className="SortControl"/>
+                        <annotations/>
+                        <attribute name="sequenceNumber" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="SortControl" attributeName="sequenceNumber"/>
+                           <derivationSupplier staticModelDerivationId="2" className="SortControl" attributeName="sequenceNumber"/>
+                           <type name="INT"/>
+                        </attribute>
+                        <attribute name="elementName" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="SortControl" attributeName="elementName"/>
+                           <derivationSupplier staticModelDerivationId="2" className="SortControl" attributeName="elementName"/>
+                           <type name="SC"/>
+                        </attribute>
+                        <attribute name="directionCode" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="SortControl" attributeName="directionCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="SortControl" attributeName="directionCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="Sequencing"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="QueryByParameterPayload"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="9">
+               <targetConnection name="transactionType" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="Z">
+                  <annotations>
+                     <designComments>
+                        <text>
+                           <p>E.g. Query, Notification, Report</p>
+                        </text>
+                     </designComments>
+                  </annotations>
+                  <derivationSupplier staticModelDerivationId="1" className="QueryByParameter" associationEndName="parameter"/>
+                  <derivationSupplier staticModelDerivationId="2" className="QueryByParameter" associationEndName="transactionType"/>
+                  <participantClass>
+                     <class name="TransactionType" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ParameterItem"/>
+                        <derivationSupplier staticModelDerivationId="2" className="TransactionType"/>
+                        <annotations>
+                           <designComments>
+                              <text>
+                                 <p>E.g. Query, Notification, Report</p>
+                              </text>
+                           </designComments>
+                        </annotations>
+                        <attribute name="value" sortKey="1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ParameterItem" attributeName="value"/>
+                           <derivationSupplier staticModelDerivationId="2" className="TransactionType" attributeName="value"/>
+                           <type name="CV"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="QueryByParameterPayload"/>
+               </sourceConnection>
+            </association>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
+</serializedStaticModel>

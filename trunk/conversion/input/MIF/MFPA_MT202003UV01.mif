@@ -1,0 +1,123 @@
+<serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="202003">
+   <packageLocation root="DEFN" section="IM" subSection="MF" domain="PA" artifact="MT-deprecated" realm="UV" version="01" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.19">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+ Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
+ Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2006">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <annotations xmlns:mif="urn:hl7-org:v3/mif">
+      <designComments>
+         <text>
+            <p>This message is used to report nullification of an erroneously entered record from a Service Delivery Location master file. It includes only enough information to identify the nullified record.</p>
+         </text>
+      </designComments>
+   </annotations>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="MF" domain="PA" artifact="RM-deprecated" id="202003"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="3" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="MF" domain="PA" artifact="HD-deprecated" realm="UV" version="01" id="202003"/>
+   </derivationSupplier>
+   <ownedEntryPoint useKind="SemanticPayload" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
+            <text>
+               <p>This R-MIM defines the message used to report nullification of an erroneously-entered record from a Service Delivery Location master file. It includes only enough information to identify the nullified record.</p>
+            </text>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="ServiceDeliveryLocation" isAbstract="false">
+            <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+            <derivationSupplier staticModelDerivationId="2" className="ServiceDeliveryLocation"/>
+            <derivationSupplier staticModelDerivationId="3" className="ServiceDeliveryLocation"/>
+            <annotations/>
+            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="SDLOC">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="ServiceDeliveryLocation" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="ServiceDeliveryLocation" attributeName="classCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="RoleClassServiceDeliveryLocation" mnemonic="SDLOC"/>
+            </attribute>
+            <attribute name="id" sortKey="2" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="2" className="ServiceDeliveryLocation" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="3" className="ServiceDeliveryLocation" attributeName="id"/>
+               <type name="SET">
+                  <supplierBindingArgumentDatatype name="II"/>
+               </type>
+            </attribute>
+            <attribute name="code" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="code"/>
+               <derivationSupplier staticModelDerivationId="2" className="ServiceDeliveryLocation" attributeName="code"/>
+               <derivationSupplier staticModelDerivationId="3" className="ServiceDeliveryLocation" attributeName="code"/>
+               <type name="CE"/>
+               <supplierDomainSpecification codingStrength="CWE" domainName="ServiceDeliveryLocationRoleType"/>
+            </attribute>
+            <attribute name="statusCode" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="nullified">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Role" attributeName="statusCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="ServiceDeliveryLocation" attributeName="statusCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="ServiceDeliveryLocation" attributeName="statusCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="RoleStatus"/>
+            </attribute>
+            <association sortKey="1">
+               <targetConnection name="location" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="player"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="location"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="location"/>
+                  <participantClass>
+                     <commonModelElementRef name="E_PlaceUniversal" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Place"/>
+                        <derivationSupplier staticModelDerivationId="2" className="E_PlaceUniversal"/>
+                        <derivationSupplier staticModelDerivationId="3" className="E_PlaceUniversal"/>
+                        <annotations/>
+                     </commonModelElementRef>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ServiceDeliveryLocation"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="2">
+               <targetConnection name="serviceProviderOrganization" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Role" associationEndName="scoper"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Role" associationEndName="serviceProviderOrganization"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Role" associationEndName="serviceProviderOrganization"/>
+                  <participantClass>
+                     <commonModelElementRef name="E_OrganizationContact" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Organization"/>
+                        <derivationSupplier staticModelDerivationId="2" className="E_OrganizationContact"/>
+                        <derivationSupplier staticModelDerivationId="3" className="E_OrganizationContact"/>
+                        <annotations/>
+                     </commonModelElementRef>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ServiceDeliveryLocation"/>
+               </sourceConnection>
+            </association>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
+</serializedStaticModel>

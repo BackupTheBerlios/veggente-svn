@@ -1,0 +1,641 @@
+<serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="630100" title="Invoice Nullify Results">
+   <packageLocation root="DEFN" section="AM" subSection="FI" domain="CR" artifact="HD-deprecated" realm="UV" version="01" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.19">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+ Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
+ Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2006">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="AM" subSection="FI" domain="CR" artifact="RM-deprecated" id="630000"/>
+   </derivationSupplier>
+   <derivationClient xmlns:mif="urn:hl7-org:v3/mif">
+      <sourceStaticModel root="DEFN" section="AM" subSection="FI" domain="CR" artifact="MT-deprecated" realm="UV" version="01" id="630101"/>
+   </derivationClient>
+   <ownedEntryPoint useKind="SemanticPayload" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
+            <text>
+               <p>Entry Point for Invoice abort results message</p>
+            </text>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="InvoiceElementGroup" isAbstract="false">
+            <derivationSupplier staticModelDerivationId="1" className="InvoiceElement"/>
+            <derivationSupplier staticModelDerivationId="2" className="InvoiceElementGroup"/>
+            <annotations>
+               <designComments>
+                  <text>
+                     <p>MoodCode: PRP - auth, pre-det, cov ext RQO - invoice</p>
+                  </text>
+               </designComments>
+            </annotations>
+            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="INVE">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="InvoiceElementGroup" attributeName="classCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="ActClass" mnemonic="INVE"/>
+            </attribute>
+            <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="InvoiceElementGroup" attributeName="moodCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
+            </attribute>
+            <attribute name="id" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R">
+               <annotations>
+                  <designComments>
+                     <text>
+                        <p>may include data centre and sequence numbers</p>
+                     </text>
+                  </designComments>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="2" className="InvoiceElementGroup" attributeName="id"/>
+               <type name="SET">
+                  <supplierBindingArgumentDatatype name="II"/>
+               </type>
+            </attribute>
+            <attribute name="code" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+               <annotations>
+                  <designComments>
+                     <text>
+                        <p>Invoice Type e.g. Healthcare Services, Rx Dispense, Rx Compound, Healthcare Goods, Preferred Accomodation</p>
+                     </text>
+                  </designComments>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+               <derivationSupplier staticModelDerivationId="2" className="InvoiceElementGroup" attributeName="code"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="ActInvoiceGroupCode"/>
+            </attribute>
+            <attribute name="statusCode" sortKey="5" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="nullified">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="statusCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="InvoiceElementGroup" attributeName="statusCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="ActStatus" mnemonic="nullified"/>
+            </attribute>
+            <attribute name="netAmt" sortKey="6" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="InvoiceElement" attributeName="netAmt"/>
+               <derivationSupplier staticModelDerivationId="2" className="InvoiceElementGroup" attributeName="netAmt"/>
+               <type name="MO"/>
+            </attribute>
+            <association sortKey="1">
+               <targetConnection name="reference" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" conformance="R" sortKey="BDK_______">
+                  <annotations>
+                     <designComments>
+                        <text>
+                           <p>Required for Invoice Grouping Nullifys if the Invoice has already been adjudicated. A new PaymentIntent &amp; new EOB will be created to indicate the net effect of the nullify (reversal).</p>
+                        </text>
+                     </designComments>
+                  </annotations>
+                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="reference"/>
+                  <participantClass>
+                     <class name="PreviousAdjudicationResultReference" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                        <derivationSupplier staticModelDerivationId="2" className="PreviousAdjudicationResultReference"/>
+                        <annotations>
+                           <designComments>
+                              <text>
+                                 <p>Required for Invoice Grouping Nullifys if the Invoice has already been adjudicated. A new PaymentIntent &amp; new EOB will be created to indicate the net effect of the nullify (reversal).</p>
+                              </text>
+                           </designComments>
+                        </annotations>
+                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="REFR">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="PreviousAdjudicationResultReference" attributeName="typeCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="REFR"/>
+                        </attribute>
+                        <association sortKey="1">
+                           <targetConnection name="adjudicatedInvoiceElementGroup" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="BZ">
+                              <annotations/>
+                              <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                              <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="referredToAdjudicatedInvoiceElementGroup"/>
+                              <participantClass>
+                                 <class name="AdjudicatedInvoiceElementGroup" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="InvoiceElement"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="AdjudicatedInvoiceElementGroup"/>
+                                    <annotations/>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="INVE">
+                                       <annotations/>
+                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="AdjudicatedInvoiceElementGroup" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="ActClass" mnemonic="INVE"/>
+                                    </attribute>
+                                    <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="EVN">
+                                       <annotations/>
+                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="AdjudicatedInvoiceElementGroup" attributeName="moodCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="EVN"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                       <annotations>
+                                          <designComments>
+                                             <text>
+                                                <p>may include data centre and sequence numbers</p>
+                                             </text>
+                                          </designComments>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="AdjudicatedInvoiceElementGroup" attributeName="id"/>
+                                       <type name="II"/>
+                                    </attribute>
+                                    <attribute name="code" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                       <annotations>
+                                          <designComments>
+                                             <text>
+                                                <p>Invoice Type e.g. Healthcare Services, Rx Dispense, Rx Compound, Healthcare Goods, Preferred Accomodation</p>
+                                             </text>
+                                          </designComments>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="AdjudicatedInvoiceElementGroup" attributeName="code"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="ActInvoiceGroupCode"/>
+                                    </attribute>
+                                    <attribute name="statusCode" sortKey="5" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="nullified">
+                                       <annotations>
+                                          <designComments>
+                                             <text>
+                                                <p>Completed when done, Suspended if waiting for external information, Active if delayed by Adjudicator</p>
+                                             </text>
+                                          </designComments>
+                                       </annotations>
+                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="AdjudicatedInvoiceElementGroup" attributeName="statusCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="ActStatus" mnemonic="nullified"/>
+                                    </attribute>
+                                    <attribute name="netAmt" sortKey="6" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                       <annotations/>
+                                       <derivationSupplier staticModelDerivationId="1" className="InvoiceElement" attributeName="netAmt"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="AdjudicatedInvoiceElementGroup" attributeName="netAmt"/>
+                                       <type name="MO"/>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="reason" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="BCA_______">
+                                          <annotations>
+                                             <designComments>
+                                                <text>
+                                                   <p>Allow walking from AdjudicatedInvoiceElementGroup to PaymentIntent for Nullify Invoice Results only</p>
+                                                </text>
+                                             </designComments>
+                                          </annotations>
+                                          <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="reason"/>
+                                          <participantClass>
+                                             <class name="PaymentIntentReason" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="PaymentIntentReason"/>
+                                                <annotations>
+                                                   <designComments>
+                                                      <text>
+                                                         <p>Allow walking from AdjudicatedInvoiceElementGroup to PaymentIntent for Nullify Invoice Results only</p>
+                                                      </text>
+                                                   </designComments>
+                                                </annotations>
+                                                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="RSON">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="PaymentIntentReason" attributeName="typeCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipReason" mnemonic="RSON"/>
+                                                </attribute>
+                                                <association sortKey="1">
+                                                   <targetConnection name="paymentIntent" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="BZ">
+                                                      <annotations>
+                                                         <designComments>
+                                                            <text>
+                                                               <p>If an Adjudicator adjudicates for multiple insurance policies (EOBs) for multiple Payors and/or Payees, there would be more than 1 Payment Intent payload in the Results message</p>
+                                                            </text>
+                                                         </designComments>
+                                                      </annotations>
+                                                      <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                                                      <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="justifyingPaymentIntent"/>
+                                                      <participantClass>
+                                                         <class name="PaymentIntent" isAbstract="false">
+                                                            <derivationSupplier staticModelDerivationId="1" className="FinancialTransaction"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="PaymentIntent"/>
+                                                            <annotations>
+                                                               <designComments>
+                                                                  <text>
+                                                                     <p>If an Adjudicator adjudicates for multiple insurance policies (EOBs) for multiple Payors and/or Payees, there would be more than 1 Payment Intent payload in the Results message</p>
+                                                                  </text>
+                                                               </designComments>
+                                                            </annotations>
+                                                            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="XACT">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="PaymentIntent" attributeName="classCode"/>
+                                                               <type name="CS"/>
+                                                               <supplierDomainSpecification codingStrength="CNE" domainName="ActClass" mnemonic="XACT"/>
+                                                            </attribute>
+                                                            <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="PRMS">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="PaymentIntent" attributeName="moodCode"/>
+                                                               <type name="CS"/>
+                                                               <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="PRMS"/>
+                                                            </attribute>
+                                                            <attribute name="effectiveTime" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R">
+                                                               <annotations>
+                                                                  <designComments>
+                                                                     <text>
+                                                                        <p>time Payor intends to make payment</p>
+                                                                     </text>
+                                                                  </designComments>
+                                                               </annotations>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="effectiveTime"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="PaymentIntent" attributeName="effectiveTime"/>
+                                                               <type name="TS"/>
+                                                            </attribute>
+                                                            <attribute name="amt" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                                               <annotations>
+                                                                  <designComments>
+                                                                     <text>
+                                                                        <p>payment amount</p>
+                                                                     </text>
+                                                                  </designComments>
+                                                               </annotations>
+                                                               <derivationSupplier staticModelDerivationId="1" className="FinancialTransaction" attributeName="amt"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="PaymentIntent" attributeName="amt"/>
+                                                               <type name="MO"/>
+                                                            </attribute>
+                                                            <association sortKey="1">
+                                                               <targetConnection name="credit" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="BDOAA_____">
+                                                                  <annotations/>
+                                                                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+                                                                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="credit"/>
+                                                                  <participantClass>
+                                                                     <class name="PaymentIntentPayee" isAbstract="false">
+                                                                        <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                                                                        <derivationSupplier staticModelDerivationId="2" className="PaymentIntentPayee"/>
+                                                                        <annotations/>
+                                                                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="CREDIT">
+                                                                           <annotations/>
+                                                                           <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                                                                           <derivationSupplier staticModelDerivationId="2" className="PaymentIntentPayee" attributeName="typeCode"/>
+                                                                           <type name="CS"/>
+                                                                           <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="CREDIT"/>
+                                                                        </attribute>
+                                                                        <association sortKey="1">
+                                                                           <targetConnection name="account" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="BZ">
+                                                                              <annotations>
+                                                                                 <designComments>
+                                                                                    <text>
+                                                                                       <p>Constrain Payee at the Message Type</p>
+                                                                                    </text>
+                                                                                 </designComments>
+                                                                              </annotations>
+                                                                              <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                                                                              <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="accountPayee"/>
+                                                                              <participantClass>
+                                                                                 <commonModelElementRef name="A_AccountPayeeUniversal" isAbstract="false">
+                                                                                    <derivationSupplier staticModelDerivationId="1" className="Account"/>
+                                                                                    <derivationSupplier staticModelDerivationId="2" className="A_AccountPayeeUniversal"/>
+                                                                                    <annotations>
+                                                                                       <designComments>
+                                                                                          <text>
+                                                                                             <p>Constrain Payee at the Message Type</p>
+                                                                                          </text>
+                                                                                       </designComments>
+                                                                                    </annotations>
+                                                                                 </commonModelElementRef>
+                                                                              </participantClass>
+                                                                           </targetConnection>
+                                                                           <sourceConnection>
+                                                                              <nonTraversableConnection participantClassName="PaymentIntentPayee"/>
+                                                                           </sourceConnection>
+                                                                        </association>
+                                                                     </class>
+                                                                  </participantClass>
+                                                               </targetConnection>
+                                                               <sourceConnection>
+                                                                  <nonTraversableConnection participantClassName="PaymentIntent"/>
+                                                               </sourceConnection>
+                                                            </association>
+                                                            <association sortKey="2">
+                                                               <targetConnection name="debit" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="BDOAB_____">
+                                                                  <annotations/>
+                                                                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+                                                                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="debit"/>
+                                                                  <participantClass>
+                                                                     <class name="PaymentIntentPayor" isAbstract="false">
+                                                                        <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                                                                        <derivationSupplier staticModelDerivationId="2" className="PaymentIntentPayor"/>
+                                                                        <annotations/>
+                                                                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="DEBIT">
+                                                                           <annotations/>
+                                                                           <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                                                                           <derivationSupplier staticModelDerivationId="2" className="PaymentIntentPayor" attributeName="typeCode"/>
+                                                                           <type name="CS"/>
+                                                                           <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="DEBIT"/>
+                                                                        </attribute>
+                                                                        <association sortKey="1">
+                                                                           <targetConnection name="account" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="BZ">
+                                                                              <annotations>
+                                                                                 <designComments>
+                                                                                    <text>
+                                                                                       <p>Constrain Payor at the Message Type</p>
+                                                                                    </text>
+                                                                                 </designComments>
+                                                                              </annotations>
+                                                                              <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                                                                              <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="accountPayor"/>
+                                                                              <participantClass>
+                                                                                 <commonModelElementRef name="A_AccountPayorUniversal" isAbstract="false">
+                                                                                    <derivationSupplier staticModelDerivationId="1" className="Account"/>
+                                                                                    <derivationSupplier staticModelDerivationId="2" className="A_AccountPayorUniversal"/>
+                                                                                    <annotations>
+                                                                                       <designComments>
+                                                                                          <text>
+                                                                                             <p>Constrain Payor at the Message Type</p>
+                                                                                          </text>
+                                                                                       </designComments>
+                                                                                    </annotations>
+                                                                                 </commonModelElementRef>
+                                                                              </participantClass>
+                                                                           </targetConnection>
+                                                                           <sourceConnection>
+                                                                              <nonTraversableConnection participantClassName="PaymentIntentPayor"/>
+                                                                           </sourceConnection>
+                                                                        </association>
+                                                                     </class>
+                                                                  </participantClass>
+                                                               </targetConnection>
+                                                               <sourceConnection>
+                                                                  <nonTraversableConnection participantClassName="PaymentIntent"/>
+                                                               </sourceConnection>
+                                                            </association>
+                                                         </class>
+                                                      </participantClass>
+                                                   </targetConnection>
+                                                   <sourceConnection>
+                                                      <nonTraversableConnection participantClassName="PaymentIntentReason"/>
+                                                   </sourceConnection>
+                                                </association>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="AdjudicatedInvoiceElementGroup"/>
+                                       </sourceConnection>
+                                    </association>
+                                    <association sortKey="2">
+                                       <targetConnection name="reference" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="BDK_______">
+                                          <annotations>
+                                             <designComments>
+                                                <text>
+                                                   <p>To tie 2 EOBs together (e.g. ESA invoices) and for Invoice Nullify Results to point to previous EOBs.</p>
+                                                </text>
+                                             </designComments>
+                                          </annotations>
+                                          <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="reference"/>
+                                          <participantClass>
+                                             <class name="Reference" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="Reference"/>
+                                                <annotations>
+                                                   <designComments>
+                                                      <text>
+                                                         <p>To tie 2 EOBs together (e.g. ESA invoices) and for Invoice Nullify Results to point to previous EOBs.</p>
+                                                      </text>
+                                                   </designComments>
+                                                </annotations>
+                                                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="REFR">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Reference" attributeName="typeCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="REFR"/>
+                                                </attribute>
+                                                <association sortKey="1">
+                                                   <targetConnection name="adjudicatedInvoiceElementGroup" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="BZ">
+                                                      <annotations/>
+                                                      <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                                                      <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="referredToAdjudicatedInvoiceElementGroup"/>
+                                                      <participantClass>
+                                                         <reference name="AdjudicatedInvoiceElementGroup"/>
+                                                      </participantClass>
+                                                   </targetConnection>
+                                                   <sourceConnection>
+                                                      <nonTraversableConnection participantClassName="Reference"/>
+                                                   </sourceConnection>
+                                                </association>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="AdjudicatedInvoiceElementGroup"/>
+                                       </sourceConnection>
+                                    </association>
+                                    <association sortKey="3">
+                                       <targetConnection name="referencedBy" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="CDK_______">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="inboundRelationship"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="referencedBy"/>
+                                          <participantClass>
+                                             <class name="AdjudResultsRef" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="AdjudResultsRef"/>
+                                                <annotations/>
+                                                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="REFR">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="AdjudResultsRef" attributeName="typeCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="REFR"/>
+                                                </attribute>
+                                                <association sortKey="1">
+                                                   <targetConnection name="adjudResultsGroup" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" conformance="R" sortKey="AZ">
+                                                      <annotations/>
+                                                      <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="source"/>
+                                                      <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="referringAdjudResultsGroup"/>
+                                                      <participantClass>
+                                                         <class name="AdjudResultsGroup" isAbstract="false">
+                                                            <derivationSupplier staticModelDerivationId="1" className="InvoiceElement"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroup"/>
+                                                            <annotations/>
+                                                            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="INVE">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroup" attributeName="classCode"/>
+                                                               <type name="CS"/>
+                                                               <supplierDomainSpecification codingStrength="CNE" domainName="ActClass" mnemonic="INVE"/>
+                                                            </attribute>
+                                                            <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="EVN">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroup" attributeName="moodCode"/>
+                                                               <type name="CS"/>
+                                                               <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="EVN"/>
+                                                            </attribute>
+                                                            <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                                               <annotations>
+                                                                  <designComments>
+                                                                     <text>
+                                                                        <p>defines the 'categorization'. Only really relevant for summaries.</p>
+                                                                     </text>
+                                                                  </designComments>
+                                                               </annotations>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroup" attributeName="code"/>
+                                                               <type name="CS"/>
+                                                               <supplierDomainSpecification codingStrength="CNE" domainName="ActInvoiceAdjudicationPaymentCode"/>
+                                                            </attribute>
+                                                            <attribute name="effectiveTime" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                                               <annotations>
+                                                                  <designComments>
+                                                                     <text>
+                                                                        <p>summary period</p>
+                                                                     </text>
+                                                                  </designComments>
+                                                               </annotations>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="effectiveTime"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroup" attributeName="effectiveTime"/>
+                                                               <type name="IVL">
+                                                                  <supplierBindingArgumentDatatype name="TS"/>
+                                                               </type>
+                                                            </attribute>
+                                                            <attribute name="netAmt" sortKey="5" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                                               <annotations>
+                                                                  <designComments>
+                                                                     <text>
+                                                                        <p>grand total of all SOFA observations contained in this summary</p>
+                                                                     </text>
+                                                                  </designComments>
+                                                               </annotations>
+                                                               <derivationSupplier staticModelDerivationId="1" className="InvoiceElement" attributeName="netAmt"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroup" attributeName="netAmt"/>
+                                                               <type name="MO"/>
+                                                            </attribute>
+                                                            <association sortKey="1">
+                                                               <targetConnection name="summary" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="BDM_______">
+                                                                  <annotations/>
+                                                                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+                                                                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="summary"/>
+                                                                  <participantClass>
+                                                                     <class name="AdjudResultsGroupSummary" isAbstract="false">
+                                                                        <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                                                                        <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroupSummary"/>
+                                                                        <annotations/>
+                                                                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="SUMM">
+                                                                           <annotations/>
+                                                                           <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                                                                           <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroupSummary" attributeName="typeCode"/>
+                                                                           <type name="CS"/>
+                                                                           <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="SUMM"/>
+                                                                        </attribute>
+                                                                        <association sortKey="1">
+                                                                           <targetConnection name="adjudResultsGroupSummaryData" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                                                                              <annotations/>
+                                                                              <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                                                                              <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="summarizingAdjudResultsGroupSummaryData"/>
+                                                                              <participantClass>
+                                                                                 <class name="AdjudResultsGroupSummaryData" isAbstract="false">
+                                                                                    <derivationSupplier staticModelDerivationId="1" className="Observation"/>
+                                                                                    <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroupSummaryData"/>
+                                                                                    <annotations/>
+                                                                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="OBS">
+                                                                                       <annotations/>
+                                                                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                                                                                       <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroupSummaryData" attributeName="classCode"/>
+                                                                                       <type name="CS"/>
+                                                                                       <supplierDomainSpecification codingStrength="CNE" domainName="ActClassObservation" mnemonic="OBS"/>
+                                                                                    </attribute>
+                                                                                    <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="EVN">
+                                                                                       <annotations/>
+                                                                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                                                                                       <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroupSummaryData" attributeName="moodCode"/>
+                                                                                       <type name="CS"/>
+                                                                                       <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="EVN"/>
+                                                                                    </attribute>
+                                                                                    <attribute name="code" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                                                                       <annotations/>
+                                                                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+                                                                                       <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroupSummaryData" attributeName="code"/>
+                                                                                       <type name="CS"/>
+                                                                                       <supplierDomainSpecification codingStrength="CNE" domainName="ActInvoiceElementSummaryCode"/>
+                                                                                    </attribute>
+                                                                                    <attribute name="value" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                                                                                       <annotations>
+                                                                                          <designComments>
+                                                                                             <text>
+                                                                                                <p>PQ or MO - Value of summary</p>
+                                                                                             </text>
+                                                                                          </designComments>
+                                                                                       </annotations>
+                                                                                       <derivationSupplier staticModelDerivationId="1" className="Observation" attributeName="value"/>
+                                                                                       <derivationSupplier staticModelDerivationId="2" className="AdjudResultsGroupSummaryData" attributeName="value"/>
+                                                                                       <type name="ANY"/>
+                                                                                    </attribute>
+                                                                                 </class>
+                                                                              </participantClass>
+                                                                           </targetConnection>
+                                                                           <sourceConnection>
+                                                                              <nonTraversableConnection participantClassName="AdjudResultsGroupSummary"/>
+                                                                           </sourceConnection>
+                                                                        </association>
+                                                                     </class>
+                                                                  </participantClass>
+                                                               </targetConnection>
+                                                               <sourceConnection>
+                                                                  <nonTraversableConnection participantClassName="AdjudResultsGroup"/>
+                                                               </sourceConnection>
+                                                            </association>
+                                                         </class>
+                                                      </participantClass>
+                                                   </targetConnection>
+                                                   <sourceConnection>
+                                                      <nonTraversableConnection participantClassName="AdjudResultsRef"/>
+                                                   </sourceConnection>
+                                                </association>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="AdjudicatedInvoiceElementGroup"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="PreviousAdjudicationResultReference"/>
+                           </sourceConnection>
+                        </association>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="InvoiceElementGroup"/>
+               </sourceConnection>
+            </association>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
+</serializedStaticModel>

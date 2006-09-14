@@ -1,0 +1,1235 @@
+<serializedStaticModel xmlns="urn:hl7-org:v3/mif" representationKind="serialized" isSerializable="true" packageKind="id" name="700711">
+   <packageLocation root="DEFN" section="IM" subSection="MF" domain="MI" artifact="MT-deprecated" xmlns:mif="urn:hl7-org:v3/mif"/>
+   <header xmlns:mif="urn:hl7-org:v3/mif">
+      <renderingInformation schemaVersion="1" application="RoseTree 3.0.7">
+         <renderingNotes>HMD was rendered into XML using software provided to HL7 by Beeler Consulting LLC.
+ HMD to MIF Transform: $Id: RoseTreeHmdToMIFStaticModel.xsl,v 1.12 2005/07/19 04:27:26 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $
+  HTML To MIF markup: $Id: HtmlToMIFMarkup.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+ Flat to Serialization Transform: $Id: MIFStaticModelFlatToSerialization.xsl,v 1.3 2005/04/17 03:20:15 lmckenzi Exp $
+ Fix Names Transform: $Id: FixMifNames.xsl,v 1.6 2005/04/17 03:20:15 lmckenzi Exp $
+  Base transform: $Id: ConvertBase.xsl,v 1.2 2005/04/17 03:20:15 lmckenzi Exp $
+  Package Id Conversion: $Id: TransformPackageIds.xsl,v 1.3 2005/07/31 05:19:52 lmckenzi Exp $</renderingNotes>
+      </renderingInformation>
+      <legalese copyrightOwner="Health Level Seven, Inc." copyrightYears="2005">
+         <notation>All rights reserved.</notation>
+      </legalese>
+   </header>
+   <derivationSupplier staticModelDerivationId="1" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" artifact="RIM" version="00"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="2" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="MF" domain="MI" artifact="RM-deprecated" id="700710"/>
+   </derivationSupplier>
+   <derivationSupplier staticModelDerivationId="3" xmlns:mif="urn:hl7-org:v3/mif">
+      <targetStaticModel root="DEFN" section="IM" subSection="MF" domain="MI" artifact="HD-deprecated" id="700710"/>
+   </derivationSupplier>
+   <ownedEntryPoint useKind="ControlActWrapper" xmlns:mif="urn:hl7-org:v3/mif">
+      <annotations>
+         <description>
+            <text>
+               <p>This is the entry point for the Master File / Registry Trigger Event Control Act RMIM used for responses to a registry query.</p>
+            </text>
+         </description>
+      </annotations>
+      <specializedClass>
+         <class name="ControlActProcess" isAbstract="false">
+            <derivationSupplier staticModelDerivationId="1" className="ControlAct"/>
+            <derivationSupplier staticModelDerivationId="2" className="ControlActProcess"/>
+            <derivationSupplier staticModelDerivationId="3" className="ControlActProcess"/>
+            <annotations/>
+            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="CACT">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="ControlActProcess" attributeName="classCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="ControlActProcess" attributeName="classCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="ActClassControlAct" mnemonic="CACT"/>
+            </attribute>
+            <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="ControlActProcess" attributeName="moodCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="ControlActProcess" attributeName="moodCode"/>
+               <type name="CS"/>
+               <supplierDomainSpecification codingStrength="CNE" domainName="x_ActMoodIntentEvent"/>
+            </attribute>
+            <attribute name="id" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="2" className="ControlActProcess" attributeName="id"/>
+               <derivationSupplier staticModelDerivationId="3" className="ControlActProcess" attributeName="id"/>
+               <type name="SET">
+                  <supplierBindingArgumentDatatype name="II"/>
+               </type>
+            </attribute>
+            <attribute name="code" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations>
+                  <designComments>
+                     <text>
+                        <p>Event code</p>
+                     </text>
+                  </designComments>
+               </annotations>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+               <derivationSupplier staticModelDerivationId="2" className="ControlActProcess" attributeName="code"/>
+               <derivationSupplier staticModelDerivationId="3" className="ControlActProcess" attributeName="code"/>
+               <type name="CD"/>
+               <supplierDomainSpecification codingStrength="CWE" domainName="HL7TriggerEventCode"/>
+            </attribute>
+            <attribute name="text" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="text"/>
+               <derivationSupplier staticModelDerivationId="2" className="ControlActProcess" attributeName="text"/>
+               <derivationSupplier staticModelDerivationId="3" className="ControlActProcess" attributeName="text"/>
+               <type name="ED"/>
+            </attribute>
+            <attribute name="effectiveTime" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="effectiveTime"/>
+               <derivationSupplier staticModelDerivationId="2" className="ControlActProcess" attributeName="effectiveTime"/>
+               <derivationSupplier staticModelDerivationId="3" className="ControlActProcess" attributeName="effectiveTime"/>
+               <type name="IVL">
+                  <supplierBindingArgumentDatatype name="TS"/>
+               </type>
+            </attribute>
+            <attribute name="priorityCode" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" defaultValue="R">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="priorityCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="ControlActProcess" attributeName="priorityCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="ControlActProcess" attributeName="priorityCode"/>
+               <type name="SET">
+                  <supplierBindingArgumentDatatype name="CE"/>
+               </type>
+               <supplierDomainSpecification codingStrength="CWE" domainName="ActPriority"/>
+            </attribute>
+            <attribute name="reasonCode" sortKey="8" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="reasonCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="ControlActProcess" attributeName="reasonCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="ControlActProcess" attributeName="reasonCode"/>
+               <type name="SET">
+                  <supplierBindingArgumentDatatype name="CE"/>
+               </type>
+               <supplierDomainSpecification codingStrength="CWE" domainName="ActReason"/>
+            </attribute>
+            <attribute name="languageCode" sortKey="9" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+               <annotations/>
+               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="languageCode"/>
+               <derivationSupplier staticModelDerivationId="2" className="ControlActProcess" attributeName="languageCode"/>
+               <derivationSupplier staticModelDerivationId="3" className="ControlActProcess" attributeName="languageCode"/>
+               <type name="CE"/>
+               <supplierDomainSpecification codingStrength="CWE" domainName="HumanLanguage"/>
+            </attribute>
+            <association sortKey="4">
+               <targetConnection name="overseer" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="AC________">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="participation"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="overseer"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="overseer"/>
+                  <participantClass>
+                     <class name="Overseer" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Participation"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Overseer"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Overseer"/>
+                        <annotations/>
+                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Overseer" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Overseer" attributeName="typeCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="x_ParticipationVrfRespSprfWit"/>
+                        </attribute>
+                        <attribute name="contextControlCode" sortKey="2" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" defaultValue="AP">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="contextControlCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Overseer" attributeName="contextControlCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Overseer" attributeName="contextControlCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ContextControl"/>
+                        </attribute>
+                        <attribute name="noteText" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="noteText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Overseer" attributeName="noteText"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Overseer" attributeName="noteText"/>
+                           <type name="ED"/>
+                        </attribute>
+                        <attribute name="time" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>time of verification, attestation, etc.</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="time"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Overseer" attributeName="time"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Overseer" attributeName="time"/>
+                           <type name="IVL">
+                              <supplierBindingArgumentDatatype name="TS"/>
+                           </type>
+                        </attribute>
+                        <attribute name="modeCode" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="modeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Overseer" attributeName="modeCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Overseer" attributeName="modeCode"/>
+                           <type name="CE"/>
+                           <supplierDomainSpecification codingStrength="CWE" domainName="ParticipationMode"/>
+                        </attribute>
+                        <attribute name="signatureCode" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="signatureCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Overseer" attributeName="signatureCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Overseer" attributeName="signatureCode"/>
+                           <type name="CE"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ParticipationSignature"/>
+                        </attribute>
+                        <attribute name="signatureText" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="signatureText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Overseer" attributeName="signatureText"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Overseer" attributeName="signatureText"/>
+                           <type name="ED"/>
+                        </attribute>
+                        <association sortKey="1">
+                           <targetConnection name="assignedPerson" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                              <annotations/>
+                              <derivationSupplier staticModelDerivationId="1" className="Participation" associationEndName="role"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Participation" associationEndName="assignedPerson2"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Participation" associationEndName="assignedPerson2"/>
+                              <participantClass>
+                                 <reference name="R_AssignedPersonUniversal"/>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Overseer"/>
+                           </sourceConnection>
+                        </association>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ControlActProcess"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="1">
+               <targetConnection name="authorOrPerformer" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="AD________">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="participation"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="authorOrPerformer"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="authorOrPerformer"/>
+                  <participantClass>
+                     <class name="AuthorOrPerformer" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Participation"/>
+                        <derivationSupplier staticModelDerivationId="2" className="AuthorOrPerformer"/>
+                        <derivationSupplier staticModelDerivationId="3" className="AuthorOrPerformer"/>
+                        <annotations/>
+                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="AuthorOrPerformer" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="AuthorOrPerformer" attributeName="typeCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="x_ParticipationAuthorPerformer"/>
+                        </attribute>
+                        <attribute name="contextControlCode" sortKey="2" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" defaultValue="AP">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="contextControlCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="AuthorOrPerformer" attributeName="contextControlCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="AuthorOrPerformer" attributeName="contextControlCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ContextControl"/>
+                        </attribute>
+                        <attribute name="noteText" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="noteText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="AuthorOrPerformer" attributeName="noteText"/>
+                           <derivationSupplier staticModelDerivationId="3" className="AuthorOrPerformer" attributeName="noteText"/>
+                           <type name="ED"/>
+                        </attribute>
+                        <attribute name="time" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>time of creation or performance</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="time"/>
+                           <derivationSupplier staticModelDerivationId="2" className="AuthorOrPerformer" attributeName="time"/>
+                           <derivationSupplier staticModelDerivationId="3" className="AuthorOrPerformer" attributeName="time"/>
+                           <type name="IVL">
+                              <supplierBindingArgumentDatatype name="TS"/>
+                           </type>
+                        </attribute>
+                        <attribute name="modeCode" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="modeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="AuthorOrPerformer" attributeName="modeCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="AuthorOrPerformer" attributeName="modeCode"/>
+                           <type name="CE"/>
+                           <supplierDomainSpecification codingStrength="CWE" domainName="ParticipationMode"/>
+                        </attribute>
+                        <attribute name="signatureCode" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="signatureCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="AuthorOrPerformer" attributeName="signatureCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="AuthorOrPerformer" attributeName="signatureCode"/>
+                           <type name="CE"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ParticipationSignature"/>
+                        </attribute>
+                        <attribute name="signatureText" sortKey="7" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="signatureText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="AuthorOrPerformer" attributeName="signatureText"/>
+                           <derivationSupplier staticModelDerivationId="3" className="AuthorOrPerformer" attributeName="signatureText"/>
+                           <type name="ED"/>
+                        </attribute>
+                        <association sortKey="1">
+                           <targetConnection name="participationChoice" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                              <annotations/>
+                              <derivationSupplier staticModelDerivationId="1" className="Participation" associationEndName="role"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Participation" associationEndName="participationChoice"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Participation" associationEndName="participationChoice"/>
+                              <participantClassSpecialization className="R_AssignedDeviceUniversal" traversalName="assignedDevice"/>
+                              <participantClassSpecialization className="R_AssignedPersonUniversal" traversalName="assignedPerson"/>
+                              <participantClass>
+                                 <class name="ParticipationChoice" isAbstract="true">
+                                    <derivationSupplier staticModelDerivationId="1" className="Role"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="ParticipationChoice"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="ParticipationChoice"/>
+                                    <annotations/>
+                                    <specializationChild sortKey="1">
+                                       <specializedClass>
+                                          <commonModelElementRef name="R_AssignedDeviceUniversal" isAbstract="false">
+                                             <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                             <derivationSupplier staticModelDerivationId="2" className="R_AssignedDeviceUniversal"/>
+                                             <derivationSupplier staticModelDerivationId="3" className="R_AssignedDeviceUniversal"/>
+                                             <annotations/>
+                                          </commonModelElementRef>
+                                       </specializedClass>
+                                    </specializationChild>
+                                    <specializationChild sortKey="2">
+                                       <specializedClass>
+                                          <commonModelElementRef name="R_AssignedPersonUniversal" isAbstract="false">
+                                             <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                             <derivationSupplier staticModelDerivationId="2" className="R_AssignedPersonUniversal"/>
+                                             <derivationSupplier staticModelDerivationId="3" className="R_AssignedPersonUniversal"/>
+                                             <annotations/>
+                                          </commonModelElementRef>
+                                       </specializedClass>
+                                    </specializationChild>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="AuthorOrPerformer"/>
+                           </sourceConnection>
+                        </association>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ControlActProcess"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="2">
+               <targetConnection name="dataEnterer" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="AEBB______">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="participation"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="dataEnterer"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="dataEnterer"/>
+                  <participantClass>
+                     <class name="DataEnterer" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Participation"/>
+                        <derivationSupplier staticModelDerivationId="2" className="DataEnterer"/>
+                        <derivationSupplier staticModelDerivationId="3" className="DataEnterer"/>
+                        <annotations/>
+                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="ENT">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="DataEnterer" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="DataEnterer" attributeName="typeCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ParticipationType" mnemonic="ENT"/>
+                        </attribute>
+                        <attribute name="contextControlCode" sortKey="2" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" defaultValue="AP">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="contextControlCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="DataEnterer" attributeName="contextControlCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="DataEnterer" attributeName="contextControlCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ContextControl"/>
+                        </attribute>
+                        <attribute name="noteText" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" defaultValue="AP">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="noteText"/>
+                           <derivationSupplier staticModelDerivationId="2" className="DataEnterer" attributeName="noteText"/>
+                           <derivationSupplier staticModelDerivationId="3" className="DataEnterer" attributeName="noteText"/>
+                           <type name="ED"/>
+                        </attribute>
+                        <attribute name="time" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations>
+                              <designComments>
+                                 <text>
+                                    <p>time recorded</p>
+                                 </text>
+                              </designComments>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="time"/>
+                           <derivationSupplier staticModelDerivationId="2" className="DataEnterer" attributeName="time"/>
+                           <derivationSupplier staticModelDerivationId="3" className="DataEnterer" attributeName="time"/>
+                           <type name="IVL">
+                              <supplierBindingArgumentDatatype name="TS"/>
+                           </type>
+                        </attribute>
+                        <association sortKey="1">
+                           <targetConnection name="assignedPerson" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                              <annotations/>
+                              <derivationSupplier staticModelDerivationId="1" className="Participation" associationEndName="role"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Participation" associationEndName="assignedPerson2"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Participation" associationEndName="assignedPerson2"/>
+                              <participantClass>
+                                 <reference name="R_AssignedPersonUniversal"/>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="DataEnterer"/>
+                           </sourceConnection>
+                        </association>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ControlActProcess"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="3">
+               <targetConnection name="informationRecipient" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="AH________">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="participation"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="informationRecipient"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="informationRecipient"/>
+                  <participantClass>
+                     <class name="InformationRecipient" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="Participation"/>
+                        <derivationSupplier staticModelDerivationId="2" className="InformationRecipient"/>
+                        <derivationSupplier staticModelDerivationId="3" className="InformationRecipient"/>
+                        <annotations/>
+                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="InformationRecipient" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="InformationRecipient" attributeName="typeCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ParticipationInformationRecipient"/>
+                        </attribute>
+                        <attribute name="contextControlCode" sortKey="2" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" defaultValue="AP">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="contextControlCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="InformationRecipient" attributeName="contextControlCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="InformationRecipient" attributeName="contextControlCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ContextControl"/>
+                        </attribute>
+                        <attribute name="time" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="time"/>
+                           <derivationSupplier staticModelDerivationId="2" className="InformationRecipient" attributeName="time"/>
+                           <derivationSupplier staticModelDerivationId="3" className="InformationRecipient" attributeName="time"/>
+                           <type name="IVL">
+                              <supplierBindingArgumentDatatype name="TS"/>
+                           </type>
+                        </attribute>
+                        <association sortKey="1">
+                           <targetConnection name="assignedPerson" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                              <annotations/>
+                              <derivationSupplier staticModelDerivationId="1" className="Participation" associationEndName="role"/>
+                              <derivationSupplier staticModelDerivationId="2" className="Participation" associationEndName="assignedPerson2"/>
+                              <derivationSupplier staticModelDerivationId="3" className="Participation" associationEndName="assignedPerson2"/>
+                              <participantClass>
+                                 <reference name="R_AssignedPersonUniversal"/>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="InformationRecipient"/>
+                           </sourceConnection>
+                        </association>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ControlActProcess"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="5">
+               <targetConnection name="subject" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="false" sortKey="BDB_______">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="subject"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="subject"/>
+                  <participantClass>
+                     <class name="Subject1" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Subject1"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Subject1"/>
+                        <annotations/>
+                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="SUBJ">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Subject1" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Subject1" attributeName="typeCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="SUBJ"/>
+                        </attribute>
+                        <attribute name="contextConductionInd" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="false">
+                           <annotations>
+                              <constraint>
+                                 <text>
+                                    <p>Must be false</p>
+                                 </text>
+                              </constraint>
+                              <constraint>
+                                 <text>
+                                    <p>Must be false</p>
+                                 </text>
+                              </constraint>
+                           </annotations>
+                           <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="contextConductionInd"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Subject1" attributeName="contextConductionInd"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Subject1" attributeName="contextConductionInd"/>
+                           <type name="BL"/>
+                        </attribute>
+                        <association sortKey="1">
+                           <targetConnection name="registrationEvent" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                              <annotations>
+                                 <designComments>
+                                    <text>
+                                       <p>Although this part of the model has been included in a specialization of the Trigger Event Control Act wrapper for reasons of consistency, it is conceptually part of the payload of a HL7 interaction. The Focal Act of all interactions that use this model is the RegistrationProcess act, not the subject Role or Act.</p>
+                                    </text>
+                                 </designComments>
+                              </annotations>
+                              <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                              <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="registrationEvent"/>
+                              <derivationSupplier staticModelDerivationId="3" className="ActRelationship" associationEndName="registrationEvent"/>
+                              <participantClass>
+                                 <class name="RegistrationEvent" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="ActHeir"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="RegistrationEvent"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="RegistrationEvent"/>
+                                    <annotations>
+                                       <designComments>
+                                          <text>
+                                             <p>Although this part of the model has been included in a specialization of the Trigger Event Control Act wrapper for reasons of consistency, it is conceptually part of the payload of a HL7 interaction. The Focal Act of all interactions that use this model is the RegistrationProcess act, not the subject Role or Act.</p>
+                                          </text>
+                                       </designComments>
+                                    </annotations>
+                                    <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="REG">
+                                       <annotations/>
+                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="RegistrationEvent" attributeName="classCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="RegistrationEvent" attributeName="classCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="ActClass" mnemonic="REG"/>
+                                    </attribute>
+                                    <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="EVN">
+                                       <annotations/>
+                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="RegistrationEvent" attributeName="moodCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="RegistrationEvent" attributeName="moodCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="EVN"/>
+                                    </attribute>
+                                    <attribute name="id" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R">
+                                       <annotations/>
+                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="RegistrationEvent" attributeName="id"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="RegistrationEvent" attributeName="id"/>
+                                       <type name="SET">
+                                          <supplierBindingArgumentDatatype name="II"/>
+                                       </type>
+                                    </attribute>
+                                    <attribute name="statusCode" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="active">
+                                       <annotations/>
+                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="RegistrationEvent" attributeName="statusCode"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="RegistrationEvent" attributeName="statusCode"/>
+                                       <type name="CS"/>
+                                       <supplierDomainSpecification codingStrength="CNE" domainName="ActStatus"/>
+                                    </attribute>
+                                    <attribute name="effectiveTime" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="R">
+                                       <annotations/>
+                                       <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="2" className="RegistrationEvent" attributeName="effectiveTime"/>
+                                       <derivationSupplier staticModelDerivationId="3" className="RegistrationEvent" attributeName="effectiveTime"/>
+                                       <type name="IVL">
+                                          <supplierBindingArgumentDatatype name="TS"/>
+                                       </type>
+                                    </attribute>
+                                    <association sortKey="1">
+                                       <targetConnection name="subject1" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="AAA_______">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="participation"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="subject1"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="subject1"/>
+                                          <participantClass>
+                                             <class name="Subject2" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="Participation"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="Subject2"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="Subject2"/>
+                                                <annotations/>
+                                                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="SBJ">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Subject2" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Subject2" attributeName="typeCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ParticipationTargetSubject" mnemonic="SBJ"/>
+                                                </attribute>
+                                                <association sortKey="1">
+                                                   <targetConnection name="registeredRole" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                                                      <annotations>
+                                                         <designComments>
+                                                            <text>
+                                                               <p>Payload stub. Replaced by a role-based payload. Only one of Role subject payload or OR Act subject payload can be present in a message type instance of the master file / registry act.</p>
+                                                            </text>
+                                                         </designComments>
+                                                      </annotations>
+                                                      <derivationSupplier staticModelDerivationId="1" className="Participation" associationEndName="role"/>
+                                                      <derivationSupplier staticModelDerivationId="2" className="Participation" associationEndName="participant"/>
+                                                      <derivationSupplier staticModelDerivationId="3" className="Participation" associationEndName="participant"/>
+                                                      <participantClass>
+                                                         <templateParameter name="RegisteredRole" isAbstract="false">
+                                                            <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="RegisteredRole"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="RegisteredRole"/>
+                                                            <annotations>
+                                                               <designComments>
+                                                                  <text>
+                                                                     <p>Payload stub. Replaced by a role-based payload. Only one of Role subject payload or OR Act subject payload can be present in a message type instance of the master file / registry act.</p>
+                                                                  </text>
+                                                               </designComments>
+                                                            </annotations>
+                                                         </templateParameter>
+                                                      </participantClass>
+                                                   </targetConnection>
+                                                   <sourceConnection>
+                                                      <nonTraversableConnection participantClassName="Subject2"/>
+                                                   </sourceConnection>
+                                                </association>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="RegistrationEvent"/>
+                                       </sourceConnection>
+                                    </association>
+                                    <association sortKey="2">
+                                       <targetConnection name="author" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="AEA_______">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="participation"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="author"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="author"/>
+                                          <participantClass>
+                                             <class name="Author2" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="Participation"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="Author2"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="Author2"/>
+                                                <annotations/>
+                                                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="AUT">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Author2" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Author2" attributeName="typeCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ParticipationType" mnemonic="AUT"/>
+                                                </attribute>
+                                                <attribute name="contextControlCode" sortKey="2" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" defaultValue="AP">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="contextControlCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Author2" attributeName="contextControlCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Author2" attributeName="contextControlCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ContextControl"/>
+                                                </attribute>
+                                                <attribute name="noteText" sortKey="3" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="noteText"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Author2" attributeName="noteText"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Author2" attributeName="noteText"/>
+                                                   <type name="ED"/>
+                                                </attribute>
+                                                <attribute name="time" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                   <annotations>
+                                                      <designComments>
+                                                         <text>
+                                                            <p>time of creation or performance</p>
+                                                         </text>
+                                                      </designComments>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="time"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Author2" attributeName="time"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Author2" attributeName="time"/>
+                                                   <type name="IVL">
+                                                      <supplierBindingArgumentDatatype name="TS"/>
+                                                   </type>
+                                                </attribute>
+                                                <attribute name="modeCode" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="modeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Author2" attributeName="modeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Author2" attributeName="modeCode"/>
+                                                   <type name="CE"/>
+                                                   <supplierDomainSpecification codingStrength="CWE" domainName="ParticipationMode"/>
+                                                </attribute>
+                                                <association sortKey="1">
+                                                   <targetConnection name="assignedEntity" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                                                      <annotations/>
+                                                      <derivationSupplier staticModelDerivationId="1" className="Participation" associationEndName="role"/>
+                                                      <derivationSupplier staticModelDerivationId="2" className="Participation" associationEndName="assignedEntity"/>
+                                                      <derivationSupplier staticModelDerivationId="3" className="Participation" associationEndName="assignedEntity"/>
+                                                      <participantClass>
+                                                         <commonModelElementRef name="R_AssignedEntityContact" isAbstract="false">
+                                                            <derivationSupplier staticModelDerivationId="1" className="RoleHeir"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="R_AssignedEntityContact"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="R_AssignedEntityContact"/>
+                                                            <annotations/>
+                                                         </commonModelElementRef>
+                                                      </participantClass>
+                                                   </targetConnection>
+                                                   <sourceConnection>
+                                                      <nonTraversableConnection participantClassName="Author2"/>
+                                                   </sourceConnection>
+                                                </association>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="RegistrationEvent"/>
+                                       </sourceConnection>
+                                    </association>
+                                    <association sortKey="3">
+                                       <targetConnection name="custodian" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="AG________">
+                                          <annotations>
+                                             <designComments>
+                                                <text>
+                                                   <p>Custodian: the application or organization responsible for the registry.</p>
+                                                </text>
+                                             </designComments>
+                                          </annotations>
+                                          <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="participation"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="custodian"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="custodian"/>
+                                          <participantClass>
+                                             <class name="Custodian" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="Participation"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="Custodian"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="Custodian"/>
+                                                <annotations>
+                                                   <designComments>
+                                                      <text>
+                                                         <p>Custodian: the application or organization responsible for the registry.</p>
+                                                      </text>
+                                                   </designComments>
+                                                </annotations>
+                                                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="CST">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Custodian" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Custodian" attributeName="typeCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ParticipationType" mnemonic="CST"/>
+                                                </attribute>
+                                                <attribute name="contextControlCode" sortKey="2" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" defaultValue="AP">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="contextControlCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Custodian" attributeName="contextControlCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Custodian" attributeName="contextControlCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ContextControl"/>
+                                                </attribute>
+                                                <association sortKey="1">
+                                                   <targetConnection name="assignedEntity" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                                                      <annotations/>
+                                                      <derivationSupplier staticModelDerivationId="1" className="Participation" associationEndName="role"/>
+                                                      <derivationSupplier staticModelDerivationId="2" className="Participation" associationEndName="assignedEntity"/>
+                                                      <derivationSupplier staticModelDerivationId="3" className="Participation" associationEndName="assignedEntity"/>
+                                                      <participantClass>
+                                                         <reference name="R_AssignedEntityContact"/>
+                                                      </participantClass>
+                                                   </targetConnection>
+                                                   <sourceConnection>
+                                                      <nonTraversableConnection participantClassName="Custodian"/>
+                                                   </sourceConnection>
+                                                </association>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="RegistrationEvent"/>
+                                       </sourceConnection>
+                                    </association>
+                                    <association sortKey="4">
+                                       <targetConnection name="inFulfillmentOf" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="BBA_______">
+                                          <annotations>
+                                             <designComments>
+                                                <text>
+                                                   <p>Associates a Registration in Event mood with the original Registration request as well as the author of that request.</p>
+                                                </text>
+                                             </designComments>
+                                          </annotations>
+                                          <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="inFulfillmentOf"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="inFulfillmentOf"/>
+                                          <participantClass>
+                                             <class name="InFulfillmentOf" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="InFulfillmentOf"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="InFulfillmentOf"/>
+                                                <annotations>
+                                                   <designComments>
+                                                      <text>
+                                                         <p>Associates a Registration in Event mood with the original Registration request as well as the author of that request.</p>
+                                                      </text>
+                                                   </designComments>
+                                                </annotations>
+                                                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="FLFS">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="InFulfillmentOf" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="InFulfillmentOf" attributeName="typeCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipFulfills" mnemonic="FLFS"/>
+                                                </attribute>
+                                                <association sortKey="1">
+                                                   <targetConnection name="registrationRequest" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                                                      <annotations/>
+                                                      <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                                                      <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="priorRegistrationRequest"/>
+                                                      <derivationSupplier staticModelDerivationId="3" className="ActRelationship" associationEndName="priorRegistrationRequest"/>
+                                                      <participantClass>
+                                                         <class name="RegistrationRequest" isAbstract="false">
+                                                            <derivationSupplier staticModelDerivationId="1" className="ActHeir"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="RegistrationRequest"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="RegistrationRequest"/>
+                                                            <annotations/>
+                                                            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="REG">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="RegistrationRequest" attributeName="classCode"/>
+                                                               <derivationSupplier staticModelDerivationId="3" className="RegistrationRequest" attributeName="classCode"/>
+                                                               <type name="CS"/>
+                                                               <supplierDomainSpecification codingStrength="CNE" domainName="ActClass" mnemonic="REG"/>
+                                                            </attribute>
+                                                            <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="RQO">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="RegistrationRequest" attributeName="moodCode"/>
+                                                               <derivationSupplier staticModelDerivationId="3" className="RegistrationRequest" attributeName="moodCode"/>
+                                                               <type name="CS"/>
+                                                               <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="RQO"/>
+                                                            </attribute>
+                                                            <attribute name="id" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="id"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="RegistrationRequest" attributeName="id"/>
+                                                               <derivationSupplier staticModelDerivationId="3" className="RegistrationRequest" attributeName="id"/>
+                                                               <type name="SET">
+                                                                  <supplierBindingArgumentDatatype name="II"/>
+                                                               </type>
+                                                            </attribute>
+                                                            <association sortKey="1">
+                                                               <targetConnection name="author" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="AEA_______">
+                                                                  <annotations/>
+                                                                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="participation"/>
+                                                                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="author"/>
+                                                                  <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="author"/>
+                                                                  <participantClass>
+                                                                     <class name="Author1" isAbstract="false">
+                                                                        <derivationSupplier staticModelDerivationId="1" className="Participation"/>
+                                                                        <derivationSupplier staticModelDerivationId="2" className="Author1"/>
+                                                                        <derivationSupplier staticModelDerivationId="3" className="Author1"/>
+                                                                        <annotations/>
+                                                                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="AUT">
+                                                                           <annotations/>
+                                                                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="typeCode"/>
+                                                                           <derivationSupplier staticModelDerivationId="2" className="Author1" attributeName="typeCode"/>
+                                                                           <derivationSupplier staticModelDerivationId="3" className="Author1" attributeName="typeCode"/>
+                                                                           <type name="CS"/>
+                                                                           <supplierDomainSpecification codingStrength="CNE" domainName="ParticipationType" mnemonic="AUT"/>
+                                                                        </attribute>
+                                                                        <attribute name="time" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                                           <annotations/>
+                                                                           <derivationSupplier staticModelDerivationId="1" className="Participation" attributeName="time"/>
+                                                                           <derivationSupplier staticModelDerivationId="2" className="Author1" attributeName="time"/>
+                                                                           <derivationSupplier staticModelDerivationId="3" className="Author1" attributeName="time"/>
+                                                                           <type name="IVL">
+                                                                              <supplierBindingArgumentDatatype name="TS"/>
+                                                                           </type>
+                                                                        </attribute>
+                                                                        <association sortKey="1">
+                                                                           <targetConnection name="assignedEntity" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                                                                              <annotations/>
+                                                                              <derivationSupplier staticModelDerivationId="1" className="Participation" associationEndName="role"/>
+                                                                              <derivationSupplier staticModelDerivationId="2" className="Participation" associationEndName="assignedEntity"/>
+                                                                              <derivationSupplier staticModelDerivationId="3" className="Participation" associationEndName="assignedEntity"/>
+                                                                              <participantClass>
+                                                                                 <reference name="R_AssignedEntityContact"/>
+                                                                              </participantClass>
+                                                                           </targetConnection>
+                                                                           <sourceConnection>
+                                                                              <nonTraversableConnection participantClassName="Author1"/>
+                                                                           </sourceConnection>
+                                                                        </association>
+                                                                     </class>
+                                                                  </participantClass>
+                                                               </targetConnection>
+                                                               <sourceConnection>
+                                                                  <nonTraversableConnection participantClassName="RegistrationRequest"/>
+                                                               </sourceConnection>
+                                                            </association>
+                                                         </class>
+                                                      </participantClass>
+                                                   </targetConnection>
+                                                   <sourceConnection>
+                                                      <nonTraversableConnection participantClassName="InFulfillmentOf"/>
+                                                   </sourceConnection>
+                                                </association>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="RegistrationEvent"/>
+                                       </sourceConnection>
+                                    </association>
+                                    <association sortKey="5">
+                                       <targetConnection name="definition" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="BBB_______">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="definition"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="definition"/>
+                                          <participantClass>
+                                             <class name="Definition" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="Definition"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="Definition"/>
+                                                <annotations/>
+                                                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="INST">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Definition" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Definition" attributeName="typeCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="INST"/>
+                                                </attribute>
+                                                <association sortKey="1">
+                                                   <targetConnection name="actDefinition" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                                                      <annotations>
+                                                         <designComments>
+                                                            <text>
+                                                               <p>Code =type of registration, loosely speaking a catagorization of the kind of registry payload. ID = Id of the master file catalog</p>
+                                                            </text>
+                                                         </designComments>
+                                                      </annotations>
+                                                      <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                                                      <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="actDefinition"/>
+                                                      <derivationSupplier staticModelDerivationId="3" className="ActRelationship" associationEndName="actDefinition"/>
+                                                      <participantClass>
+                                                         <class name="ActDefinition" isAbstract="false">
+                                                            <derivationSupplier staticModelDerivationId="1" className="ActHeir"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="ActDefinition"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="ActDefinition"/>
+                                                            <annotations>
+                                                               <designComments>
+                                                                  <text>
+                                                                     <p>Code =type of registration, loosely speaking a catagorization of the kind of registry payload. ID = Id of the master file catalog</p>
+                                                                  </text>
+                                                               </designComments>
+                                                            </annotations>
+                                                            <attribute name="classCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="ACT">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="classCode"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="ActDefinition" attributeName="classCode"/>
+                                                               <derivationSupplier staticModelDerivationId="3" className="ActDefinition" attributeName="classCode"/>
+                                                               <type name="CS"/>
+                                                               <supplierDomainSpecification codingStrength="CNE" domainName="ActClassRoot" mnemonic="ACT"/>
+                                                            </attribute>
+                                                            <attribute name="moodCode" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="DEF">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="moodCode"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="ActDefinition" attributeName="moodCode"/>
+                                                               <derivationSupplier staticModelDerivationId="3" className="ActDefinition" attributeName="moodCode"/>
+                                                               <type name="CS"/>
+                                                               <supplierDomainSpecification codingStrength="CNE" domainName="ActMood" mnemonic="DEF"/>
+                                                            </attribute>
+                                                            <attribute name="id" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="*" isMandatory="true" conformance="R">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="id"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="ActDefinition" attributeName="id"/>
+                                                               <derivationSupplier staticModelDerivationId="3" className="ActDefinition" attributeName="id"/>
+                                                               <type name="SET">
+                                                                  <supplierBindingArgumentDatatype name="II"/>
+                                                               </type>
+                                                            </attribute>
+                                                            <attribute name="code" sortKey="4" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" conformance="R">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="code"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="ActDefinition" attributeName="code"/>
+                                                               <derivationSupplier staticModelDerivationId="3" className="ActDefinition" attributeName="code"/>
+                                                               <type name="CD"/>
+                                                               <supplierDomainSpecification codingStrength="CWE" domainName="ActCode"/>
+                                                            </attribute>
+                                                            <attribute name="text" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                                                               <annotations/>
+                                                               <derivationSupplier staticModelDerivationId="1" className="Act" attributeName="text"/>
+                                                               <derivationSupplier staticModelDerivationId="2" className="ActDefinition" attributeName="text"/>
+                                                               <derivationSupplier staticModelDerivationId="3" className="ActDefinition" attributeName="text"/>
+                                                               <type name="ED"/>
+                                                            </attribute>
+                                                         </class>
+                                                      </participantClass>
+                                                   </targetConnection>
+                                                   <sourceConnection>
+                                                      <nonTraversableConnection participantClassName="Definition"/>
+                                                   </sourceConnection>
+                                                </association>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="RegistrationEvent"/>
+                                       </sourceConnection>
+                                    </association>
+                                    <association sortKey="6">
+                                       <targetConnection name="subject2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" conformance="NP" sortKey="BDB_______">
+                                          <annotations/>
+                                          <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="outboundRelationship"/>
+                                          <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="subject2"/>
+                                          <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="subject2"/>
+                                          <participantClass>
+                                             <class name="Subject3" isAbstract="false">
+                                                <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                                                <derivationSupplier staticModelDerivationId="2" className="Subject3"/>
+                                                <derivationSupplier staticModelDerivationId="3" className="Subject3"/>
+                                                <annotations/>
+                                                <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" fixedValue="SUBJ">
+                                                   <annotations/>
+                                                   <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Subject3" attributeName="typeCode"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Subject3" attributeName="typeCode"/>
+                                                   <type name="CS"/>
+                                                   <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipType" mnemonic="SUBJ"/>
+                                                </attribute>
+                                                <attribute name="contextConductionInd" sortKey="2" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="false">
+                                                   <annotations>
+                                                      <constraint>
+                                                         <text>
+                                                            <p>Must be false</p>
+                                                         </text>
+                                                      </constraint>
+                                                      <constraint>
+                                                         <text>
+                                                            <p>Must be false</p>
+                                                         </text>
+                                                      </constraint>
+                                                   </annotations>
+                                                   <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="contextConductionInd"/>
+                                                   <derivationSupplier staticModelDerivationId="2" className="Subject3" attributeName="contextConductionInd"/>
+                                                   <derivationSupplier staticModelDerivationId="3" className="Subject3" attributeName="contextConductionInd"/>
+                                                   <type name="BL"/>
+                                                </attribute>
+                                                <association sortKey="1">
+                                                   <targetConnection name="registeredAct" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="BZ">
+                                                      <annotations>
+                                                         <designComments>
+                                                            <text>
+                                                               <p>Payload stub. Replaced by an Act-based payload. Only one of Role subject payload or OR Act subject payload can be present in a message type instance of the master file / registry act.</p>
+                                                            </text>
+                                                         </designComments>
+                                                      </annotations>
+                                                      <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="target"/>
+                                                      <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="registeredAct"/>
+                                                      <derivationSupplier staticModelDerivationId="3" className="ActRelationship" associationEndName="registeredAct"/>
+                                                      <participantClass>
+                                                         <templateParameter name="RegisteredAct" isAbstract="false">
+                                                            <derivationSupplier staticModelDerivationId="1" className="ActHeir"/>
+                                                            <derivationSupplier staticModelDerivationId="2" className="RegisteredAct"/>
+                                                            <derivationSupplier staticModelDerivationId="3" className="RegisteredAct"/>
+                                                            <annotations>
+                                                               <designComments>
+                                                                  <text>
+                                                                     <p>Payload stub. Replaced by an Act-based payload. Only one of Role subject payload or OR Act subject payload can be present in a message type instance of the master file / registry act.</p>
+                                                                  </text>
+                                                               </designComments>
+                                                            </annotations>
+                                                         </templateParameter>
+                                                      </participantClass>
+                                                   </targetConnection>
+                                                   <sourceConnection>
+                                                      <nonTraversableConnection participantClassName="Subject3"/>
+                                                   </sourceConnection>
+                                                </association>
+                                             </class>
+                                          </participantClass>
+                                       </targetConnection>
+                                       <sourceConnection>
+                                          <nonTraversableConnection participantClassName="RegistrationEvent"/>
+                                       </sourceConnection>
+                                    </association>
+                                 </class>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Subject1"/>
+                           </sourceConnection>
+                        </association>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ControlActProcess"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="6">
+               <targetConnection name="reasonOf" minimumMultiplicity="0" maximumMultiplicity="*" isMandatory="false" sortKey="CCA_______">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="Act" associationEndName="inboundRelationship"/>
+                  <derivationSupplier staticModelDerivationId="2" className="Act" associationEndName="reasonOf"/>
+                  <derivationSupplier staticModelDerivationId="3" className="Act" associationEndName="reasonOf"/>
+                  <participantClass>
+                     <class name="Reason" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="ActRelationship"/>
+                        <derivationSupplier staticModelDerivationId="2" className="Reason"/>
+                        <derivationSupplier staticModelDerivationId="3" className="Reason"/>
+                        <annotations/>
+                        <attribute name="typeCode" sortKey="1" isStructural="true" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" defaultValue="RSON">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Reason" attributeName="typeCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Reason" attributeName="typeCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="ActRelationshipReason" mnemonic="RSON"/>
+                        </attribute>
+                        <attribute name="contextConductionInd" sortKey="2" isStructural="true" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="ActRelationship" attributeName="contextConductionInd"/>
+                           <derivationSupplier staticModelDerivationId="2" className="Reason" attributeName="contextConductionInd"/>
+                           <derivationSupplier staticModelDerivationId="3" className="Reason" attributeName="contextConductionInd"/>
+                           <type name="BL"/>
+                        </attribute>
+                        <association sortKey="1">
+                           <targetConnection name="detectedIssueEvent" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="false" sortKey="AZ">
+                              <annotations/>
+                              <derivationSupplier staticModelDerivationId="1" className="ActRelationship" associationEndName="source"/>
+                              <derivationSupplier staticModelDerivationId="2" className="ActRelationship" associationEndName="justifiedDetectedIssue"/>
+                              <derivationSupplier staticModelDerivationId="3" className="ActRelationship" associationEndName="justifiedDetectedIssue"/>
+                              <participantClass>
+                                 <commonModelElementRef name="A_DetectedIssueUniversal" isAbstract="false">
+                                    <derivationSupplier staticModelDerivationId="1" className="Observation"/>
+                                    <derivationSupplier staticModelDerivationId="2" className="A_DetectedIssueUniversal"/>
+                                    <derivationSupplier staticModelDerivationId="3" className="A_DetectedIssueUniversal"/>
+                                    <annotations/>
+                                 </commonModelElementRef>
+                              </participantClass>
+                           </targetConnection>
+                           <sourceConnection>
+                              <nonTraversableConnection participantClassName="Reason"/>
+                           </sourceConnection>
+                        </association>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ControlActProcess"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="7">
+               <targetConnection name="queryAck" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R" sortKey="Z">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="ControlAct" associationEndName="queryEvent"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ControlAct" associationEndName="queryAck"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ControlAct" associationEndName="queryAck"/>
+                  <participantClass>
+                     <class name="QueryAck" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="QueryAck"/>
+                        <derivationSupplier staticModelDerivationId="2" className="QueryAck"/>
+                        <derivationSupplier staticModelDerivationId="3" className="QueryAck"/>
+                        <annotations/>
+                        <attribute name="queryId" sortKey="1" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="QueryEvent" attributeName="queryId"/>
+                           <derivationSupplier staticModelDerivationId="2" className="QueryAck" attributeName="queryId"/>
+                           <derivationSupplier staticModelDerivationId="3" className="QueryAck" attributeName="queryId"/>
+                           <type name="II"/>
+                        </attribute>
+                        <attribute name="statusCode" sortKey="2" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="QueryEvent" attributeName="statusCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="QueryAck" attributeName="statusCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="QueryAck" attributeName="statusCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="QueryStatusCode"/>
+                        </attribute>
+                        <attribute name="queryResponseCode" sortKey="3" minimumMultiplicity="1" maximumMultiplicity="1" isMandatory="true" conformance="R">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="QueryAck" attributeName="queryResponseCode"/>
+                           <derivationSupplier staticModelDerivationId="2" className="QueryAck" attributeName="queryResponseCode"/>
+                           <derivationSupplier staticModelDerivationId="3" className="QueryAck" attributeName="queryResponseCode"/>
+                           <type name="CS"/>
+                           <supplierDomainSpecification codingStrength="CNE" domainName="QueryResponse"/>
+                        </attribute>
+                        <attribute name="resultTotalQuantity" sortKey="4" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="QueryAck" attributeName="resultTotalQuantity"/>
+                           <derivationSupplier staticModelDerivationId="2" className="QueryAck" attributeName="resultTotalQuantity"/>
+                           <derivationSupplier staticModelDerivationId="3" className="QueryAck" attributeName="resultTotalQuantity"/>
+                           <type name="INT"/>
+                        </attribute>
+                        <attribute name="resultCurrentQuantity" sortKey="5" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="QueryAck" attributeName="resultCurrentQuantity"/>
+                           <derivationSupplier staticModelDerivationId="2" className="QueryAck" attributeName="resultCurrentQuantity"/>
+                           <derivationSupplier staticModelDerivationId="3" className="QueryAck" attributeName="resultCurrentQuantity"/>
+                           <type name="INT"/>
+                        </attribute>
+                        <attribute name="resultRemainingQuantity" sortKey="6" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false">
+                           <annotations/>
+                           <derivationSupplier staticModelDerivationId="1" className="QueryAck" attributeName="resultRemainingQuantity"/>
+                           <derivationSupplier staticModelDerivationId="2" className="QueryAck" attributeName="resultRemainingQuantity"/>
+                           <derivationSupplier staticModelDerivationId="3" className="QueryAck" attributeName="resultRemainingQuantity"/>
+                           <type name="INT"/>
+                        </attribute>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ControlActProcess"/>
+               </sourceConnection>
+            </association>
+            <association sortKey="8">
+               <targetConnection name="queryByParameter" minimumMultiplicity="0" maximumMultiplicity="1" isMandatory="false" sortKey="Z">
+                  <annotations/>
+                  <derivationSupplier staticModelDerivationId="1" className="ControlAct" associationEndName="queryEvent"/>
+                  <derivationSupplier staticModelDerivationId="2" className="ControlAct" associationEndName="queryByParameter"/>
+                  <derivationSupplier staticModelDerivationId="3" className="ControlAct" associationEndName="queryByParameter"/>
+                  <participantClass>
+                     <class name="QueryByParameter" isAbstract="false">
+                        <derivationSupplier staticModelDerivationId="1" className="QueryByParameter"/>
+                        <derivationSupplier staticModelDerivationId="2" className="QueryByParameter"/>
+                        <derivationSupplier staticModelDerivationId="3" className="QueryByParameter"/>
+                        <annotations/>
+                     </class>
+                  </participantClass>
+               </targetConnection>
+               <sourceConnection>
+                  <nonTraversableConnection participantClassName="ControlActProcess"/>
+               </sourceConnection>
+            </association>
+         </class>
+      </specializedClass>
+   </ownedEntryPoint>
+</serializedStaticModel>
