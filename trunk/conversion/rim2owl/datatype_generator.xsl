@@ -46,8 +46,11 @@
 			<xsl:param name="type"/>
 			<xsl:param name="value"/>
 			<xsl:param name="uri"/>
+			<!--			<hl7:ciao>
+			<xsl:value-of select="$type"/>
+	</hl7:ciao>-->
 			<xsl:choose>
-					<xsl:when test="CS">
+					<xsl:when test="$type='CS'">
 							<xsl:element name="rim_dt:CS">
 									<xsl:attribute name="rdf:about">
 											<xsl:value-of select="$uri"/>
@@ -55,7 +58,7 @@
 									<rim_dt:code>
 											<rim_dt:ST>
 													<xsl:attribute name="rdf:about">
-															<xsl:value-of select="concat('ST',nerate-id(.))"/>
+															<xsl:value-of select="substring-before($uri,'#')"/>#<xsl:value-of select="concat('ST',generate-id(.))"/>
 													</xsl:attribute>
 													<rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">
 															<xsl:value-of select="$value"/>
@@ -64,12 +67,12 @@
 									</rim_dt:code>
 							</xsl:element>
 					</xsl:when>
-					<xsl:when test="INT">
+					<xsl:when test="$type='INT'">
 							<xsl:element name="rim_dt:INT">
 									<xsl:attribute name="rdf:about">
 											<xsl:value-of select="$uri"/>
 									</xsl:attribute>
-									<rim-dt:INT.value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">
+									<rim_dt:INT.value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">
 											<xsl:value-of select="$value"/>
 									</rim_dt:INT.value>
 							</xsl:element>

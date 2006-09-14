@@ -29,11 +29,13 @@ cmet:
 
 cmet_test:
 	$(SAXON) -sall $(INPUT_MIF)/PORT_MT020001UV01.mif cmet2owl.xsl mif_input_path=$(CMET_INFO_DIR)>$(OUTPUT_DIR)/cmet/PORT_MT020001UV01.owl
+	$(SAXON) -sall $(INPUT_MIF)/PORT_HD020001UV01.mif cmet2owl.xsl mif_input_path=$(CMET_INFO_DIR)>$(OUTPUT_DIR)/cmet/PORT_HD020001UV01.owl
 
 install: rim_inst dt_inst cmet_inst
 
 cmet_testinst:
 	scp $(OUTPUT_DIR)/cmet/PORT_MT020001UV01.owl $(ACCOUNT):$(REMOTE_DIR)/cmet/PORT_MT020001UV01
+	scp $(OUTPUT_DIR)/cmet/PORT_HD020001UV01.owl $(ACCOUNT):$(REMOTE_DIR)/cmet/PORT_HD020001UV01
 
 cmet_inst:
 	scp $(OUTPUT_DIR)/rim_cmet.owl $(ACCOUNT):$(REMOTE_DIR)/RIM_CMET

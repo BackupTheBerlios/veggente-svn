@@ -32,6 +32,7 @@
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 	xmlns:owl="http://www.w3.org/2002/07/owl#">
+	<xsl:import href="datatype_generator.xsl"/>
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:param name="rim_ns" select="'http://veggente.berlios.de/ns/RIMOntology'"/>
 	<xsl:param name="rim_dt" select="'http://veggente.berlios.de/ns/RIMDatatype'"/>
