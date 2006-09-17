@@ -23,7 +23,7 @@
 import getopt
 import SOAPpy
 import RDF
-import OWL
+from OWL import OWL_Resource, OWL_Class, OWL_Property
 from os import sys
 import xml.dom.minidom
 from xml.dom.minidom import Node
@@ -78,42 +78,45 @@ class Lifter:
         self.root_node=doc.documentElement
         self.removeWhitespaceNodes(self.root_node)
         active_classes=[]
-        self.walk(self.root_node,None,RDF.Node(RDF.Uri(document)))
+        self.handle_element(self.root_node,[],None,None)
         doc.unlink()
     
     def handle_element(self,node,active_classes,known_resource,known_type):
         """
         Processes an XML node and converts it in the corresponding RDF triples, according to the ontology supplied to the main class
         """
-        if (known_type!=None) and (known_resource!=None):
+        if (known_type is None) and (known_resource is None):
             rdf_name,rdf_type=self.resolve_node(str(node.nodeName),active_classes)
         else:
             rdf_name=known_resource
             rdf_type=known_type
 
         child_list=[]
-        
+        print '<node>\n <name>'+str(node.nodeName)+'</name>'
         if (rdf_name is None) or (rdf_type is None):
-            print "Error: "+str(node.nodeName)+" not found"
+            print "<NotFoundError>"+str(node.nodeName)+"</NotFoundError>"
             return None
 
         attrs = node.attributes
 
-        #TODO:  per le proprietà inserire i controlli di applicabilità rispetto alla classe attiva
-        #       inserire controllo per vedere se una classe ha tutte le proprietà richieste
+        #TODO:  per le proprieta' inserire i controlli di applicabilita' rispetto alla classe attiva
+        #       inserire controllo per vedere se una classe ha tutte le proprieta' richieste
 
         # Handle OWL types "Class" and "DatatypeProperty"
-        if (rdf_type==self+owl_ns+'Class'):
-            new_class=self.add_instance_class(rdf_name)
+        if (rdf_type==self.owl_ns+'Class'):
+            new_class=self.add_class_instance(rdf_name)
             if (new_class!=None):
+                print ' <Class>'+rdf_name+'</Class>'
                 active_classes.insert(0,new_class)
-        if (rdf_type==self+owl_ns+'DatatypeProperty'):
+        elif (rdf_type==self.owl_ns+'DatatypeProperty'):
             if (node.nodeType==Node.ELEMENT_NODE):
                 for n in node.childNodes:
                     if n.nodeType==Node.TEXT_NODE:
+                        print ' <Datatype>'+rdf_name+'</Datatype>'
                         new_subject=self.add_data_property_instance(subject,rdf_name,n.nodeValue)
                         break
-            if (node.nodeType==Node.ATTRIBUTE_NODE):
+            elif (node.nodeType==Node.ATTRIBUTE_NODE):
+                print ' <Datatype>'+rdf_name+'</Datatype>'
                 self.add_data_property_instance(rdf_name,node.nodeValue)
         else:
             print "Error: type "+rdf_type+" not known"
@@ -124,16 +127,17 @@ class Lifter:
                 child_rdf_res,child_rdf_type=self.resolve_node(str(attrNode.localName),active_classes)
                 if (child_rdf_res!=None) and (child_rdf_type!=None):
                     child_obj=OWL_Resource(child_rdf_res,child_rdf_type,attrNode)
-                    child_list.add(child_obj)
+                    child_list.append(child_obj)
         for child in node.childNodes:
             if (child.nodeType==Node.ELEMENT_NODE):
                 child_rdf_res,child_rdf_type=self.resolve_node(str(child.localName),active_classes)
                 if (child_rdf_res!=None) and (child_rdf_type!=None):
                     child_obj=OWL_Resource(child_rdf_res,child_rdf_type,child)
-                    child_list.add(child_obj)
+                    child_list.append(child_obj)
         # Handle OWL type "ObjectProperty"
-        if (rdf_type==self+owl_ns+'ObjectProperty'):
+        if (rdf_type==self.owl_ns+'ObjectProperty'):
             obj_range_list=self.repository.get_property_range(rdf_name)
+            print ' <Object>'+rdf_name+'</Object>'
             if (obj_range_list==[]):
                 print 'Error: '+rdf_name+' has not a range'
             else:
@@ -143,9 +147,10 @@ class Lifter:
                             # smazzati la objprop
                             child_list.remove(c)
                             break
+        print '</node>'
 
         for el in child_list:
-            return self.handle_element(el.xml_node,active_classes,el.rdf_name,el.rdf_type)
+            return self.handle_element(el.xml_node,active_classes,el.get_uri(),el.get_type())
         return None
         
 
@@ -165,7 +170,7 @@ class Lifter:
             if (node_onto_name!='') or (node_onto_name!=None) or (node_onto_type!="") or (node_onto_type!=None):
                 return node_onto_name,node_onto_type
         # UML-style search failed
-        xml_res_name=self.xml_to_internal(str(node.nodeName),None)
+        xml_res_name=self.xml_to_internal(node,None)
         node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
         if (node_onto_name!='') or (node_onto_name!=None) or (node_onto_type!="") or (node_onto_type!=None):
             return node_onto_name,node_onto_type
@@ -197,8 +202,8 @@ class Lifter:
         textual_data (string): value of the DatatypeProperty which is the object of the search
         """
         statement_list=[]
-        for r in obj_property.get_ranges():
-            if r
+#        for r in obj_property.get_ranges():
+#            if r
         # Heuristic valid only on HL7 v.3 domain   
     
     def add_class_instance(self,class_res):
@@ -266,9 +271,7 @@ try:
         lift_inst.lift(sys.argv[1],sys.argv[2])
         print '</source_file>'
 except KeyboardInterrupt:
-    print "------- "+str(len(lift_inst.unfinished_statements))+" Unfinished Statements ---------"
-    for st in lift_inst.unfinished_statements:
-        print st
+    print "Called interrupt"
 # Testing. Remove when completed
 serializer=RDF.Serializer()
 serializer.set_namespace("doc", RDF.Uri(sys.argv[2]+"#"))

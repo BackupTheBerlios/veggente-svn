@@ -18,22 +18,25 @@
 #	along with this program; if not, write to the Free Software
 #	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
+import RDF
+from xml.dom.minidom import Node
+
 class OWL_Resource:
     name=''
     resource=''
     rdf_type=''
     rdf_node=None
     xml_node=None
-    def __init__(self,resource,node):
+
+    def __init__(self,resource,res_type,node):
         self.name=resource.split('#')[1]
         self.resource=resource
-        if (type(node)==RDF.Node):
-            self.rdf_node=node
-        elif (type(node)==Node):
-            self.xml_node=node
-    def __init__(self,redland_model,resource,type,node):
-        self.rdf_type=type
-        self.__init__(resource,node)
+        self.rdf_type=res_type
+        if (node!=None):
+            if (type(node)==RDF.Node):
+                self.rdf_node=node
+            elif (type(node)==Node):
+                self.xml_node=node
     def __str__(self):
         return self.name
     def get_xml_node(self):
@@ -42,10 +45,14 @@ class OWL_Resource:
         return self.rdf_node
     def get_uri(self):
         return self.resource
+    def get_type(self):
+        return self.rdf_type
     def set_xml_node(self,node):
         self.xml_node=node
     def set_rdf_node(self,node):
         self.rdf_node=node
+    def set_uri(self,value):
+        self.resource=value
 
 class OWL_Class(OWL_Resource):
     obj_properties=[]
@@ -53,8 +60,7 @@ class OWL_Class(OWL_Resource):
     mandatory_properties=[]
     
     def __init__(self,resource,node):
-        OWL_Resource.__init__(self,resource,node)
-        self.set_type('http://www.w3.org/2002/07/owl#Class')
+        OWL_Resource.__init__(self,resource,'http://www.w3.org/2002/07/owl#Class',node)
     
     def get_mandatory_properties(self):
         return self.mandatory_properties
