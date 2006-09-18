@@ -85,13 +85,20 @@ class Lifter:
         """
         Processes an XML node and converts it in the corresponding RDF triples, according to the ontology supplied to the main class
         """
+        tmp_classes=active_classes
+        child_list=[]
+        attr_list=[]
+        attrs=None
+        obj_target_found=False
+
+        if (node is None):
+            return None
         if (known_type is None) and (known_resource is None):
             rdf_name,rdf_type=self.resolve_node(str(node.nodeName),active_classes)
         else:
             rdf_name=known_resource
             rdf_type=known_type
 
-        child_list=[]
         print '<node>\n <name>'+str(node.nodeName)+'</name>'
         if (rdf_name is None) or (rdf_type is None):
             print "<NotFoundError>"+str(node.nodeName)+"</NotFoundError>"
@@ -107,7 +114,7 @@ class Lifter:
             new_class=self.add_class_instance(rdf_name)
             if (new_class!=None):
                 print ' <Class>'+rdf_name+'</Class>'
-                active_classes.insert(0,new_class)
+                tmp_classes.insert(0,new_class)
         elif (rdf_type==self.owl_ns+'DatatypeProperty'):
             if (node.nodeType==Node.ELEMENT_NODE):
                 for n in node.childNodes:
@@ -118,39 +125,73 @@ class Lifter:
             elif (node.nodeType==Node.ATTRIBUTE_NODE):
                 print ' <Datatype>'+rdf_name+'</Datatype>'
                 self.add_data_property_instance(rdf_name,node.nodeValue)
+        elif (rdf_type==self.owl_ns+'ObjectProperty'):
+            pass
         else:
-            print "Error: type "+rdf_type+" not known"
+            print "<type_error>"+rdf_type+"</type_error"
         # Flatten attributes and childs in one list
-        for attrName in attrs.keys():
-            if (not attrName.startswith('xmlns'))and(not attrName=='xsi:schemaLocation'):
-                attrNode = attrs.get(attrName)
-                child_rdf_res,child_rdf_type=self.resolve_node(str(attrNode.localName),active_classes)
-                if (child_rdf_res!=None) and (child_rdf_type!=None):
-                    child_obj=OWL_Resource(child_rdf_res,child_rdf_type,attrNode)
-                    child_list.append(child_obj)
+        print '<info>'
+        if (attrs!=None):
+            for attrName in attrs.keys():
+                if (not attrName.startswith('xmlns'))and(not attrName=='xsi:schemaLocation'):
+                    attrNode = attrs.get(attrName)
+                    child_rdf_res,child_rdf_type=self.resolve_node(str(attrNode.localName),active_classes)
+                    if (child_rdf_res!=None) and (child_rdf_type!=None):
+#                        print '<resolved>\n <name>'+child_rdf_res+'</name>\n <type>'+child_rdf_type+'</type>\n</resolved>'
+                        child_obj=OWL_Resource(child_rdf_res,child_rdf_type,attrNode)
+                        attr_list.append(child_obj)
+                    else:
+                        print '<resolution_error>'+str(attrNode.localName)+'</resolution_error>'
         for child in node.childNodes:
             if (child.nodeType==Node.ELEMENT_NODE):
                 child_rdf_res,child_rdf_type=self.resolve_node(str(child.localName),active_classes)
                 if (child_rdf_res!=None) and (child_rdf_type!=None):
+ #                   print '<resolved>\n <name>'+child_rdf_res+'</name>\n <type>'+child_rdf_type+'</type>\n</resolved>'
                     child_obj=OWL_Resource(child_rdf_res,child_rdf_type,child)
                     child_list.append(child_obj)
+                else:
+                    print '<resolution_error>'+str(child.localName)+'</resolution_error>'
+        print '</info>'
         # Handle OWL type "ObjectProperty"
         if (rdf_type==self.owl_ns+'ObjectProperty'):
-            obj_range_list=self.repository.get_property_range(rdf_name)
-            print ' <Object>'+rdf_name+'</Object>'
+            obj_range_list=self.repository.get_property_range(rdf_name,self.base_onto)
+            print ' <Object>\n <name>'+rdf_name+'</name>'
             if (obj_range_list==[]):
-                print 'Error: '+rdf_name+' has not a range'
+                print '<range_error>'+rdf_name+'</range_error>'
             else:
-                for range in obj_range_list:
-                    for c in child_list:
+                print ' <range>'+str(obj_range_list)+'</range>'
+                print '<active_classes>'+str(active_classes)+'</active_classes>'
+                print '</Object>\n </node>'
+                if (node.nodeType==Node.ATTRIBUTE_NODE):
+                # Begin searching for a datatype property
+                    pass
+                elif (node.nodeType==Node.ELEMENT_NODE):
+                    for range,c in zip(obj_range_list,attr_list):
+                        # Search for a class activator
                         if (range==c.resource):
-                            # smazzati la objprop
+                            # A 'class element' exists
+                            # far ritornare alla handle_element il nuovo soggetto
+                            self.handle_element(c.get_xml_node(),active_classes,c.get_uri(),c.get_type())
                             child_list.remove(c)
+                            obj_target_found=True
                             break
-        print '</node>'
+                    if (not obj_target_found):
+                        for range,c in zip(obj_range_list,child_list):
+                            # Search for a class activator
+                            if (range==c.resource):
+                                # A 'class element' exists
+                                # far ritornare alla handle_element il nuovo soggetto
+                                self.handle_element(c.get_xml_node(),active_classes,c.get_uri(),c.get_type())
+                                child_list.remove(c)
+                                obj_target_found=True
+                                break
+                        if (not obj_target_found):
+                            #Class activator not found, pre-instantiation of the object Class
+                            class_instance=self.add_obj_property_instance(tmp_classes[0],rdf_name,obj_range_list[0])
+                            tmp_classes.insert(0,class_instance)
 
         for el in child_list:
-            return self.handle_element(el.xml_node,active_classes,el.get_uri(),el.get_type())
+            self.handle_element(el.get_xml_node(),active_classes,el.get_uri(),el.get_type())
         return None
         
 
@@ -167,12 +208,12 @@ class Lifter:
         for class_candidate in active_classes:
             xml_res_name=self.xml_to_internal(node,class_candidate.name)
             node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
-            if (node_onto_name!='') or (node_onto_name!=None) or (node_onto_type!="") or (node_onto_type!=None):
+            if (node_onto_name!='') and (node_onto_name!=None) and (node_onto_type!="") and (node_onto_type!=None):
                 return node_onto_name,node_onto_type
         # UML-style search failed
         xml_res_name=self.xml_to_internal(node,None)
         node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
-        if (node_onto_name!='') or (node_onto_name!=None) or (node_onto_type!="") or (node_onto_type!=None):
+        if (node_onto_name!='') and (node_onto_name!=None) and (node_onto_type!="") and (node_onto_type!=None):
             return node_onto_name,node_onto_type
         else:
             return None,None
@@ -180,7 +221,7 @@ class Lifter:
     def xml_to_internal(self,xmltag,base_class):
         """
         Returns the name to use while searching into ontology resources
-        xmltag: Node
+        xmltag: string
         """
         if (xmltag is None):
             return ''
@@ -237,12 +278,13 @@ class Lifter:
         """
         if (subject is None) or (property_res is None) or (dest_class is None):
             return None
-        new_subject=RDF.Node(blank='cls'+str(self.counter))
-        self.rdf_model.add_statement(RDF.Statement(subject.resource,
+        new_class_instance=self.add_class_instance(dest_class)
+        new_subject=new_class_instance.get_rdf_node()
+        self.rdf_model.add_statement(RDF.Statement(subject.get_rdf_node(),
                                                     RDF.Node(RDF.Uri(property_res)),
                                                     new_subject
                                                     ))
-        return self.add_class_instance(new_subject,dest_class)
+        return new_class_instance
 
     def add_data_property_instance(self,subject,property_res,textual_content):
         """

@@ -19,7 +19,7 @@
 #	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 import RDF
-from xml.dom.minidom import Node
+import xml.dom.minidom
 
 class OWL_Resource:
     name=''
@@ -33,9 +33,9 @@ class OWL_Resource:
         self.resource=resource
         self.rdf_type=res_type
         if (node!=None):
-            if (type(node)==RDF.Node):
+            if (isinstance(node,RDF.Node)):
                 self.rdf_node=node
-            elif (type(node)==Node):
+            elif (isinstance(node,xml.dom.minidom.Node)):
                 self.xml_node=node
     def __str__(self):
         return self.name
@@ -75,6 +75,11 @@ class OWL_Class(OWL_Resource):
         self.dt_properties=prop_list
     def set_obj_properties(self,prop_list):
         self.obj_properties=prop_list
+    def get_details(self):
+        print self.name
+        print self.resource
+        print self.obj_properties
+        print self.dt_properties
 
 
 class OWL_Property(OWL_Resource):

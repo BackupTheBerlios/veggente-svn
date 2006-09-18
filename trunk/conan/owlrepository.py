@@ -303,9 +303,11 @@ class OWLRepository(Repository):
         Return a list of a property's range
         """
         res_list=[]
+        if (resource is None) or (ontology is None):
+            return []
         results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(resource),predicate=RDF.Uri(self.rdfs_ns+'range')),RDF.Node(RDF.Uri(ontology)))
         for i in results:
-            res_list.add(str(i.object.uri))
+            res_list.append(str(i.object.uri))
         return res_list
 
     def get_type(self,uri):
