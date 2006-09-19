@@ -43,7 +43,7 @@ class OWL_Resource:
         return self.xml_node
     def get_rdf_node(self):
         return self.rdf_node
-    def get_uri(self):
+    def get_resource(self):
         return self.resource
     def get_type(self):
         return self.rdf_type

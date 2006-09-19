@@ -308,6 +308,20 @@ class OWLRepository(Repository):
         results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(resource),predicate=RDF.Uri(self.rdfs_ns+'range')),RDF.Node(RDF.Uri(ontology)))
         for i in results:
             res_list.append(str(i.object.uri))
+        for imp in self.find_imports(ontology):
+            res_list.extend(self.get_property_range(resource,imp))
+        return res_list
+
+    def get_property_domain(self,resource,ontology):
+        """
+        Return a list of a property's range
+        """
+        res_list=[]
+        if (resource is None) or (ontology is None):
+            return []
+        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(resource),predicate=RDF.Uri(self.rdfs_ns+'domain')),RDF.Node(RDF.Uri(ontology)))
+        for i in results:
+            res_list.append(str(i.object.uri))
         return res_list
 
     def get_type(self,uri):
