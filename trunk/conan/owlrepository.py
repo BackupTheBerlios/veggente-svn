@@ -248,6 +248,7 @@ class OWLRepository(Repository):
                 predicate=RDF.Node(uri_string='http://www.w3.org/2002/07/owl#imports'),
                 object=None)
         global_imports=self.model.find_statements(st,RDF.Node(RDF.Uri(uri)))
+        inferred_docs=self.model.get_contexts()
         if global_imports is None:
             return None
         doc_imports=[]
@@ -303,11 +304,17 @@ class OWLRepository(Repository):
         Return a list of a property's range
         """
         res_list=[]
+        search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=RDF.Uri(self.rdfs_ns+'range'))
         if (resource is None) or (ontology is None):
             return []
-        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(resource),predicate=RDF.Uri(self.rdfs_ns+'range')),RDF.Node(RDF.Uri(ontology)))
+        results=self.model.find_statements(search_st,RDF.Node(RDF.Uri(ontology)))
+        inferred_results=self.model.find_statements(search_st,RDF.Node(RDF.Uri('think_'+ontology)))
         for i in results:
-            res_list.append(str(i.object.uri))
+            if (not str(i.object.uri) in res_list):
+                res_list.append(str(i.object.uri))
+        for inf in inferred_results:
+            if (not str(inf.object.uri) in res_list):
+                res_list.append(str(inf.object.uri))
         for imp in self.find_imports(ontology):
             res_list.extend(self.get_property_range(resource,imp))
         return res_list
@@ -317,11 +324,19 @@ class OWLRepository(Repository):
         Return a list of a property's range
         """
         res_list=[]
+        search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=RDF.Uri(self.rdfs_ns+'domain'))
         if (resource is None) or (ontology is None):
             return []
-        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(resource),predicate=RDF.Uri(self.rdfs_ns+'domain')),RDF.Node(RDF.Uri(ontology)))
+        results=self.model.find_statements(search_st,RDF.Node(RDF.Uri(ontology)))
+        inferred_results=self.model.find_statements(search_st,RDF.Node(RDF.Uri('think_'+ontology)))
         for i in results:
-            res_list.append(str(i.object.uri))
+            if (not str(i.object.uri) in res_list):
+                res_list.append(str(i.object.uri))
+        for inf in inferred_results:
+            if (not str(inf.object.uri) in res_list):
+                res_list.append(str(inf.object.uri))
+        for imp in self.find_imports(ontology):
+            res_list.extend(self.get_property_domain(resource,imp))
         return res_list
 
     def get_type(self,uri):

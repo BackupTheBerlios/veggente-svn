@@ -89,6 +89,7 @@ class Lifter:
         attr_list=[]
         attrs=None
         obj_target_found=False
+        activator=None
 
         if (node is None):
             return None
@@ -102,7 +103,8 @@ class Lifter:
         if (rdf_name is None) or (rdf_type is None):
             print "<NotFoundError>"+str(node.nodeName)+"</NotFoundError>"
             return None
-
+        for a in active_classes:
+            print '<active>'+a.name+'</active>'
 
         #TODO: inserire controllo per vedere se una classe ha tutte le proprieta' richieste
 
@@ -110,17 +112,17 @@ class Lifter:
         if (rdf_type==self.owl_ns+'Class'):
             new_class=self.__add_class_instance(rdf_name)
             if (new_class!=None):
-                print ' <Class>'+rdf_name+'</Class>'
+                print '<Class>'+rdf_name+'</Class>'
                 active_classes.insert(0,new_class)
         elif (rdf_type==self.owl_ns+'DatatypeProperty'):
             if (node.nodeType==Node.ELEMENT_NODE):
                 for n in node.childNodes:
                     if n.nodeType==Node.TEXT_NODE:
-                        print ' <Datatype>'+rdf_name+'</Datatype>'
+                        print '<Datatype>'+rdf_name+'</Datatype>'
                         new_subject=self.__add_data_property_instance(subject,rdf_name,n.nodeValue)
                         break
             elif (node.nodeType==Node.ATTRIBUTE_NODE):
-                print ' <Datatype>'+rdf_name+'</Datatype>'
+                print '<Datatype>'+rdf_name+'</Datatype>'
                 self.__add_data_property_instance(rdf_name,node.nodeValue)
         elif (rdf_type==self.owl_ns+'ObjectProperty'):
             pass
@@ -131,43 +133,60 @@ class Lifter:
         node_list=attr_list
         node_list.extend(child_list)
         # Handle OWL type "ObjectProperty"
+
+
         if (rdf_type==self.owl_ns+'ObjectProperty'):
-            print ' <Object>'+rdf_name+'</Object>'
+            print '<Object>'+rdf_name+'</Object>'
             subject_class=None
             target_class=None
             obj_range_list=self.repository.get_property_range(rdf_name,self.base_onto)
             obj_domain_list=self.repository.get_property_domain(rdf_name,self.base_onto)
             # Subject search
             if (obj_range_list==[]):
-                print ' <no_range_warning/>'
+                print '<no_range_warning/>\n</node>'
             else:
-                print '<range>'+str(obj_range_list)+'</range>'
-                if (obj_domain_list==[]):
+ #               print '<range>'+str(obj_range_list)+'</range>'
+                # --- Search for a subject ---
+                if (active_classes==[]) and (obj_domain_list!=[]):
+                    # 1: The corresponding xml element is the root element
+                    new_class=self.__add_class_instance(str(obj_domain_list[0]))
+                    active_classes.insert(0,new_class)
+                elif (obj_domain_list==[]):
+                    # 2: The property has no domain, forcing the first active class as the current domain
+                    print '<forced_domain>'+(active_classes[0]).name+'</forced_domain>'
                     subject_class=active_classes[0]
                 else:
+                    # 3: Look if an active class is among the domains of the property
+#                    print '<domain>'+str(obj_domain_list)+'</domain>'
                     for candidate_class in active_classes:
                         if candidate_class.get_resource() in obj_domain_list:
                             subject_class=candidate_class
-                if subject_class!=None:
-                    print '<domain>'+subject_class.get_resource()+'</domain>'
-                    if node.nodeType==Node.ELEMENT_NODE:
-                        for el in node_list:
-                            if el.get_resource() in obj_range_list:
+                            break
+                # --- Computing new triples ---
+                if (subject_class!=None):
+                    if (node.nodeType==Node.ELEMENT_NODE):
+                        if (node_list is None):
+                            # Create an empty class instance
+                            new_class=self.__add_class_instance(str(obj_range_list[0]))
+                        else:
+                            for el in node_list:
+                                if el.get_resource() in obj_range_list:
+                                    activator=el
+                                    break
+                            if (activator!=None):
                                 # Class activator found
                                 new_subject=self.__add_obj_property_instance(subject_class,rdf_name,None)
-                                self.__handle_element(el.get_xml_node(),active_classes,el.get_resource(),el.get_type(),new_subject)
-                                node_list.remove(el)
-                                obj_target_found=True
-                                break
-                        if (not obj_target_found):
-                            print '<info>Activator not found</info>'
-                            # Class activator NOT found
-                            if (len(obj_range_list)>1):
-                                print "<WARNING> multiple range detected </WARNING>"
-                            new_class=self.__add_obj_property_instance(subject_class,rdf_name,obj_range_list[0])
-                            print new_class
-                            if (isinstance(new_class,OWL_Class)):
+                                for el in node_list:
+                                    self.__handle_element(el.get_xml_node(),active_classes,el.get_resource(),el.get_type(),new_subject)
+                            else: 
+                                # Class activator NOT found
+                                new_class=self.__add_obj_property_instance(subject_class,rdf_name,obj_range_list[0])
                                 active_classes.insert(0,new_class)
+                                for el in node_list:
+                                    self.__handle_element(el.get_xml_node(),active_classes,el.get_resource(),el.get_type(),None)
+                                active_classes.remove(new_class)
+                        print '</node>'
+                        return None
                     elif node.nodeType==Node.ATTRIBUTE_NODE:
                         pass
         print '</node>'
@@ -200,6 +219,7 @@ class Lifter:
         child_list=[]
         for child in xml_node.childNodes:
             if (child.nodeType==Node.ELEMENT_NODE):
+                print '<child>'+str(child.localName)+'</child>'
                 child_rdf_res,child_rdf_type=self.__resolve_node(str(child.localName),active_classes)
                 if (child_rdf_res!=None) and (child_rdf_type!=None):
                     child_obj=OWL_Resource(child_rdf_res,child_rdf_type,child)
@@ -302,10 +322,8 @@ class Lifter:
         elif dest is None:
             object=RDF.Node(blank='inst'+str(self.blank_counter))
             self.blank_counter=self.blank_counter+1
-        self.rdf_model.add_statement(RDF.Statement(subject.get_rdf_node(),
-                                                    RDF.Node(RDF.Uri(property_res)),
-                                                    object
-                                                    ))
+        new_st=RDF.Statement(subject.get_rdf_node(),RDF.Node(RDF.Uri(property_res)),object)
+        self.rdf_model.add_statement(new_st)
         if new_class_instance is None:
             return object
         else:
