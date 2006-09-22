@@ -25,6 +25,7 @@ import SOAPpy
 import RDF
 from OWL import OWL_Resource, OWL_Class, OWL_Property
 from os import sys
+from sets import Set
 import xml.dom.minidom
 from xml.dom.minidom import Node
 
@@ -46,8 +47,10 @@ class Lifter:
     base_onto=''
     uml_style=True
     blank_counter=0
+    resource_cache=None
 
     def __init__(self,server_url='http://localhost:10000'):
+        self.resource_cache=[]
         if (server_url is None) or (server_url==''):
             raise "Server URL must not be empty"
         self.server=server_url
@@ -90,6 +93,7 @@ class Lifter:
         attrs=None
         obj_target_found=False
         activator=None
+        new_subject=None
 
         if (node is None):
             return None
@@ -110,11 +114,13 @@ class Lifter:
 
         # Handle OWL types "Class" and "DatatypeProperty"
         if (rdf_type==self.owl_ns+'Class'):
-            new_class=self.__add_class_instance(rdf_name)
+            new_class=self.__add_class_instance(rdf_name,known_subject)
+            self.resource_cache.append(OWL_Class(rdf_name,None))
             if (new_class!=None):
                 print '<Class>'+rdf_name+'</Class>'
                 active_classes.insert(0,new_class)
         elif (rdf_type==self.owl_ns+'DatatypeProperty'):
+            self.resource_cache.append(OWL_Property(rdf_name,rdf_type,None))
             if (node.nodeType==Node.ELEMENT_NODE):
                 for n in node.childNodes:
                     if n.nodeType==Node.TEXT_NODE:
@@ -139,25 +145,29 @@ class Lifter:
             print '<Object>'+rdf_name+'</Object>'
             subject_class=None
             target_class=None
+            obj_prop=OWL_Property(rdf_name,rdf_type,None)
             obj_range_list=self.repository.get_property_range(rdf_name,self.base_onto)
             obj_domain_list=self.repository.get_property_domain(rdf_name,self.base_onto)
+            obj_prop.set_ranges(obj_range_list)
+            obj_prop.set_domains(obj_domain_list)
+            self.resource_cache.append(obj_prop)
             # Subject search
             if (obj_range_list==[]):
                 print '<no_range_warning/>\n</node>'
             else:
- #               print '<range>'+str(obj_range_list)+'</range>'
+                print '<range>'+str(obj_range_list)+'</range>'
                 # --- Search for a subject ---
                 if (active_classes==[]) and (obj_domain_list!=[]):
                     # 1: The corresponding xml element is the root element
-                    new_class=self.__add_class_instance(str(obj_domain_list[0]))
+                    new_class=self.__add_class_instance(str(obj_domain_list[0]),None)
                     active_classes.insert(0,new_class)
                 elif (obj_domain_list==[]):
                     # 2: The property has no domain, forcing the first active class as the current domain
-                    print '<forced_domain>'+(active_classes[0]).name+'</forced_domain>'
+                    #print '<forced_domain>'+(active_classes[0]).name+'</forced_domain>'
                     subject_class=active_classes[0]
                 else:
                     # 3: Look if an active class is among the domains of the property
-#                    print '<domain>'+str(obj_domain_list)+'</domain>'
+                    print '<domain>'+str(obj_domain_list)+'</domain>'
                     for candidate_class in active_classes:
                         if candidate_class.get_resource() in obj_domain_list:
                             subject_class=candidate_class
@@ -167,7 +177,7 @@ class Lifter:
                     if (node.nodeType==Node.ELEMENT_NODE):
                         if (node_list is None):
                             # Create an empty class instance
-                            new_class=self.__add_class_instance(str(obj_range_list[0]))
+                            new_class=self.__add_class_instance(str(obj_range_list[0]),None)
                         else:
                             for el in node_list:
                                 if el.get_resource() in obj_range_list:
@@ -182,13 +192,20 @@ class Lifter:
                                 # Class activator NOT found
                                 new_class=self.__add_obj_property_instance(subject_class,rdf_name,obj_range_list[0])
                                 active_classes.insert(0,new_class)
+                                # A new class has been inserted => recalculate node-ontology match
+                                child_list=self.__child_elements_to_resources(node,active_classes)
+                                attr_list=self.__child_attributes_to_resources(node,active_classes)
+                                node_list=attr_list
+                                node_list.extend(child_list)
                                 for el in node_list:
-                                    self.__handle_element(el.get_xml_node(),active_classes,el.get_resource(),el.get_type(),None)
+                                    self.__handle_element(el.get_xml_node(),active_classes,el.get_resource(),el.get_type(),new_subject)
                                 active_classes.remove(new_class)
                         print '</node>'
                         return None
                     elif node.nodeType==Node.ATTRIBUTE_NODE:
+                        new_class=self.__add_obj_property_instance(subject_class,rdf_name,obj_range_list[0])
                         pass
+                        #new_class=self.__add_obj_property_instance()
         print '</node>'
         for el in node_list:
             self.__handle_element(el.get_xml_node(),active_classes,el.get_resource(),el.get_type(),None)
@@ -209,7 +226,7 @@ class Lifter:
                         child_obj=OWL_Resource(child_rdf_res,child_rdf_type,attrNode)
                         attr_list.append(child_obj)
                     else:
-                        print '  <resolution_error>'+str(attrNode.localName)+'</resolution_error>'
+                        print '<resolution_error>'+str(attrNode.localName)+'</resolution_error>'
         return attr_list
 
     def __child_elements_to_resources(self,xml_node,active_classes):
@@ -219,13 +236,12 @@ class Lifter:
         child_list=[]
         for child in xml_node.childNodes:
             if (child.nodeType==Node.ELEMENT_NODE):
-                print '<child>'+str(child.localName)+'</child>'
                 child_rdf_res,child_rdf_type=self.__resolve_node(str(child.localName),active_classes)
                 if (child_rdf_res!=None) and (child_rdf_type!=None):
                     child_obj=OWL_Resource(child_rdf_res,child_rdf_type,child)
                     child_list.append(child_obj)
                 else:
-                    print '  <resolution_error>'+str(child.localName)+'</resolution_error>'
+                    print '<resolution_error>'+str(child.localName)+'</resolution_error>'
         return child_list
 
     def __resolve_node(self,node,active_classes):
@@ -237,15 +253,29 @@ class Lifter:
             (string) Found URI resource
             (string) Found RDF type
         """
-        # Begin searching with UML style notation 
+        # Begin searching with UML style notation
+        node_onto_name=None
+        node_onto_type=None
         for class_candidate in active_classes:
             xml_res_name=self.__xml_to_internal(node,class_candidate.name)
-            node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
+            for res in self.resource_cache:
+                if (res.get_name()==xml_res_name):
+                    node_name=res.get_resource()
+                    node_type=res.get_type()
+                    break
+            if (node_onto_name is None) and (node_onto_type is None):
+                node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
             if (node_onto_name!='') and (node_onto_name!=None) and (node_onto_type!="") and (node_onto_type!=None):
                 return node_onto_name,node_onto_type
         # UML-style search failed
         xml_res_name=self.__xml_to_internal(node,None)
-        node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
+        for res in self.resource_cache:
+            if (res.get_name()==xml_res_name):
+                node_name=res.get_resource()
+                node_type=res.get_type()
+                break
+        if (node_onto_name is None) and (node_onto_type is None):
+            node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
         if (node_onto_name!='') and (node_onto_name!=None) and (node_onto_type!="") and (node_onto_type!=None):
             return node_onto_name,node_onto_type
         else:
@@ -276,11 +306,9 @@ class Lifter:
         textual_data (string): value of the DatatypeProperty which is the object of the search
         """
         statement_list=[]
-#        for r in obj_property.get_ranges():
-#            if r
-        # Heuristic valid only on HL7 v.3 domain   
+        
     
-    def __add_class_instance(self,class_res):
+    def __add_class_instance(self,class_res,subj_node):
         """
         Add a class instance to the store
         Parameters:
@@ -288,16 +316,19 @@ class Lifter:
         Returns:
             OWL_Class
         """
+        new_subject=subj_node
         if (class_res is None):
             return None
-        new_subject=RDF.Node(blank='inst'+str(self.blank_counter))
+        if (subj_node is None):
+            new_subject=RDF.Node(blank='inst'+str(self.blank_counter))
+            self.blank_counter=self.blank_counter+1
         instance=OWL_Class(class_res,new_subject)
         self.rdf_model.add_statement(RDF.Statement(new_subject,
                                                     RDF.Node(RDF.Uri(self.rdf_ns+'type')),
                                                     RDF.Node(RDF.Uri(class_res))
                                                     ))
-        self.blank_counter=self.blank_counter+1
         return instance
+
     
     def __add_obj_property_instance(self,subject,property_res,dest):
         """
@@ -317,7 +348,7 @@ class Lifter:
         if isinstance(dest,RDF.Node):
             object=dest
         elif type(dest)==str:
-            new_class_instance=self.__add_class_instance(dest)
+            new_class_instance=self.__add_class_instance(dest,None)
             object=new_class_instance.get_rdf_node()
         elif dest is None:
             object=RDF.Node(blank='inst'+str(self.blank_counter))

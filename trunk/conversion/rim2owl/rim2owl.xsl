@@ -121,7 +121,7 @@
 	<xsl:template match="hl7:ownedAssociation">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:about">
-							<xsl:value-of select="concat($rim_ns,'#')"/><!--		<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>_--><xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
+							<xsl:value-of select="concat($rim_ns,'#')"/><xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>.<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
 					</xsl:attribute>
 					<xsl:call-template name="add_info"/>
 					<rdfs:range>
@@ -137,11 +137,11 @@
 			</owl:ObjectProperty>
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:about">
-							<xsl:value-of select="$rim_ns"/>#<!--<xsl:value-of select="hl7:connections/hl7:traversableConnection[2]/@participantClassName"/>_--><xsl:value-of select="hl7:connections/hl7:traversableConnection[2]/@name"/>
+							<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:connections/hl7:traversableConnection[2]/@participantClassName"/>.<xsl:value-of select="hl7:connections/hl7:traversableConnection[2]/@name"/>
 					</xsl:attribute>
 					<owl:inverseOf>
 							<xsl:attribute name="rdf:resource">
-									<xsl:value-of select="$rim_ns"/>#<!--<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>_--><xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
+									<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@participantClassName"/>.<xsl:value-of select="hl7:connections/hl7:traversableConnection[1]/@name"/>
 							</xsl:attribute>
 					</owl:inverseOf>
 			</owl:ObjectProperty>
@@ -183,7 +183,7 @@
 	<xsl:template match="hl7:attribute" mode="class">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:about">
-							<xsl:value-of select="concat($rim_ns,'#')"/><xsl:value-of select="@name"/>
+							<xsl:value-of select="concat($rim_ns,'#')"/><xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
 					</xsl:attribute>
 					<xsl:call-template name="add_info"/>
 					<rdfs:range>
@@ -213,7 +213,7 @@
 					<owl:Restriction>
 							<owl:onProperty>
 									<xsl:attribute name="rdf:resource">
-											<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@name"/>
+											<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
 									</xsl:attribute>
 							</owl:onProperty>
 							<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@minimumMultiplicity"/></owl:minCardinality>
@@ -224,7 +224,7 @@
 							<owl:Restriction>
 									<owl:onProperty>
 											<xsl:attribute name="rdf:resource">
-													<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@name"/>
+													<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="../@name"/>.<xsl:value-of select="@name"/>
 											</xsl:attribute>
 									</owl:onProperty>
 									<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@maximumMultiplicity"/></owl:maxCardinality>
@@ -238,7 +238,7 @@
 					<owl:Restriction>
 							<owl:onProperty>
 									<xsl:attribute name="rdf:resource">
-											<xsl:value-of select="$rim_ns"/>#<!--<xsl:value-of select="@participantClassName"/>_--><xsl:value-of select="@name"/>
+											<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@participantClassName"/>.<xsl:value-of select="@name"/>
 									</xsl:attribute>
 							</owl:onProperty>
 							<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@minimumMultiplicity"/></owl:minCardinality>
@@ -249,7 +249,7 @@
 							<owl:Restriction>
 									<owl:onProperty>
 											<xsl:attribute name="rdf:resource">
-													<xsl:value-of select="$rim_ns"/>#<!--<xsl:value-of select="@participantClassName"/>_--><xsl:value-of select="@name"/>
+													<xsl:value-of select="$rim_ns"/>#<xsl:value-of select="@participantClassName"/>.<xsl:value-of select="@name"/>
 											</xsl:attribute>
 									</owl:onProperty>
 									<owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger"><xsl:value-of select="@maximumMultiplicity"/></owl:maxCardinality>

@@ -267,18 +267,6 @@ class OWLRepository(Repository):
                     cluster.append(new_imp)
         return cluster
 
-    def get_ontology(self, uri):
-        if (uri is None) or (uri==''):
-            return -1
-        temp_model=RDF.Model()
-        print 'copying uri '+uri
-        for st in self.model.find_statements(RDF.Statement(subject=None,predicate=None,object=None),RDF.Node(RDF.Uri(uri))):
-            temp_model.add_statement(st)
-        for ist in self.model.find_statements(RDF.Statement(subject=None,predicate=None,object=None),RDF.Node(RDF.Uri('think_'+uri))):
-            temp_model.add_statement(ist)
-        print "Copied "+str(temp_model.size())+' statements'
-        return temp_model.to_string(base_uri=uri)
-
     def get_onto_name(self,resource,ontology):
         """
         Find a class or a property with a given name in an ontology or in its imports

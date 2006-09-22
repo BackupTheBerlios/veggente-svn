@@ -360,7 +360,8 @@
 	<xsl:template match="hl7:association">
 			<owl:ObjectProperty>
 					<xsl:attribute name="rdf:about">
-							<xsl:value-of select="concat($rim_cm,$cmet_name)"/><xsl:value-of select="concat('#',hl7:targetConnection/@name)"/>
+							<xsl:value-of select="concat($rim_cm,$cmet_name)"/>#<xsl:value-of select="hl7:sourceConnection/hl7:nonTraversableConnection/@participantClassName"/>.<xsl:value-of select="hl7:targetConnection/@name"/>
+
 					</xsl:attribute>
 					<rdfs:range>
 							<xsl:attribute name="rdf:resource">

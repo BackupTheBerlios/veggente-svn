@@ -39,6 +39,8 @@ class OWL_Resource:
                 self.xml_node=node
     def __str__(self):
         return self.name
+    def get_name(self):
+        return self.name
     def get_xml_node(self):
         return self.xml_node
     def get_rdf_node(self):
@@ -47,6 +49,8 @@ class OWL_Resource:
         return self.resource
     def get_type(self):
         return self.rdf_type
+    def set_name(self,value):
+        self.name=value
     def set_xml_node(self,node):
         self.xml_node=node
     def set_rdf_node(self,node):

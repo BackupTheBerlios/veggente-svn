@@ -10,13 +10,10 @@ CWM_RULES=../cwm-rules
 
 main: xsl
 
-xsl: rim datatype cmet_container
+xsl: rim cmet cmet_container
 
 rim:
 	$(SAXON) -sall $(INPUT_MIF)/rim.coremif rim2owl.xsl > $(OUTPUT_DIR)/rim.owl
-
-datatype:
-	$(SAXON) rim_datatypes.owl clean_dt.xsl > $(OUTPUT_DIR)/rim_datatypes_fix.owl
 
 cmet_container:
 	$(SAXON) -sall $(INPUT_MIF)/cmetinfo.coremif cmet_container.xsl > $(OUTPUT_DIR)/rim_cmet.owl
