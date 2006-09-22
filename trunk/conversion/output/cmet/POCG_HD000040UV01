@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+	 Conversion of POCG_HD000040UV01 from HL7 standard
+	 to an OWL ontology
+	
+     Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
+
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+     the Free Software Foundation; either version 2 of the License, or
+     (at your option) any later version.
+     
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+     
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+			--><rdf:RDF xmlns:hl7="urn:hl7-org:v3/mif"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01">
+      <rdfs:label>Patient</rdfs:label>
+      <rdfs:comment>This model is intended to be a CMET and has the capability of representing any part of the patient pedigree.</rdfs:comment>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000023UV01"/>
+   </owl:Ontology>
+   <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Patient"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient.id">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_II"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient.classCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PATd2e27"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PATd2e27">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#STd2e27">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PAT</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient.patientPerson">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Person"/>
+      <rdfs:comment>Person holds details that are not specific the family role. Person is also the scoper of the relative roles (for more details see the V3 RoleCode vocabulary, domain = PersonalRelationshipRoleType).</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.name"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.telecom"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.administrativeGenderCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.administrativeGenderCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.birthTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.birthTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.deceasedInd"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.deceasedInd"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.deceasedTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.deceasedTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.raceCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.ethnicGroupCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.determinerCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.id">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_II"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.name">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG_EN"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.telecom">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BAG_TEL"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.administrativeGenderCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.birthTime">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.deceasedInd">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BL"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.deceasedTime">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.raceCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.ethnicGroupCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.classCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PSNd2e57"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PSNd2e57">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#STd2e57">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PSN</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.determinerCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#INSTANCEd2e63"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#INSTANCEd2e63">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#STd2e63">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INSTANCE</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person.personalRelationship">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:comment>The id attribute holds the pedigree-specific id assigned, for example by a pedigree application. Note that this is different than the Person.id which is a more global id. First (and higher)-degree relatives. FAMMEMB could be used for unidentified relatives, but also any of the more specific codes like PRN (parent) or NMTH (natural mother).</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.id">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_II"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.code">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.classCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PRSd2e145"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PRSd2e145">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#STd2e145">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRS</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.relationshipHolder">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Person"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.subjectOf1">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship.subjectOf2">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject3"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#PersonalRelationship"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient.subjectOf1">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject3"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject3">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject3.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject3.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject3.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject3"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject3.subjectEstimatedAge">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#SubjectEstimatedAge"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject3"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#SubjectEstimatedAge">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
+      <rdfs:comment>Estimated age (current or deceased) of the patient / relative when his/her birth date is unknown. For living subject, the code is fixed to LOINC code "21611-9" that represents the concept of an estimated age vs. precise age. For deceased subject, the code should be 39016-1 (AGE AT DEATH).</rdfs:comment>
+      <owl:unionOf rdf:parseType="Collection">
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge"/>
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge"/>
+      </owl:unionOf>
+   </owl:Class>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.value"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.value"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.moodCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.code">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.value">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#INT"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DeceasedEstimatedAge.moodCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#EVNd2e250"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#EVNd2e250">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#STd2e250">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.value"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.value"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.moodCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.code">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.value">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#INT"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#LivingEstimatedAge.moodCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#EVNd2e279"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#EVNd2e279">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#STd2e279">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient.subjectOf2">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Patient"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject.clinicalGenomicChoice">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalGenomicChoice"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalGenomicChoice">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Act"/>
+      <rdfs:comment/>
+      <owl:unionOf rdf:parseType="Collection">
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#"/>
+         <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation"/>
+      </owl:unionOf>
+   </owl:Class>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
+      <rdfs:comment>This will be replaced in further versions with a generic clinical statement CMET when available, so it is capable of holding any pertinent clinical data of the patient or his/her relative. For specifying cause of death, use the LOINC code 21984-0 in the code attribute.</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.negationInd"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.negationInd"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.effectiveTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.effectiveTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.confidentialityCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.uncertaintyCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.uncertaintyCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.value"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.value"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.moodCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.code">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.negationInd">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#BL"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.effectiveTime">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#GTS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.confidentialityCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.uncertaintyCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.value">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ANY"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.moodCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#EVNd2e354"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#EVNd2e354">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#STd2e354">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation.subject">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject4"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#ClinicalObservation"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject4">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:comment>This association should hang off the choice box so that an estimated age could be attributed to the Gentotype CMET. However, the current HL7 methodology doesn't support exiting from a CMET.</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject4.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject4.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject4.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject4"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject4">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject4.typeCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#SUBJd2e413"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#SUBJd2e413">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#STd2e413">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SUBJ</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject4.dataEstimatedAge">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#Subject4"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
+      <rdfs:comment>Holds the estimated age of the subject when the observation was made.</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.value"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.value"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.moodCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.code">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CD"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.value">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#INT"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#DataEstimatedAge.moodCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#EVNd2e443"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#EVNd2e443">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#STd2e443">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/POCG_HD000040UV01#A_GenotypeUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/POCG_MT000023UV01#GenotypeLocus"/>
+   </owl:Class>
+</rdf:RDF>

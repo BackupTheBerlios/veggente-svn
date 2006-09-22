@@ -1,0 +1,1164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+	 Conversion of COCT_MT490000UV01 from HL7 standard
+	 to an OWL ontology
+	
+     Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
+
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+     the Free Software Foundation; either version 2 of the License, or
+     (at your option) any later version.
+     
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+     
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+			--><rdf:RDF xmlns:hl7="urn:hl7-org:v3/mif"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:cmet="http://veggente.berlios.de/ns/RIM_CMET#"
+         xmlns:rim_dt="http://veggente.berlios.de/ns/RIMDatatype#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <owl:Ontology rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01">
+      <rdfs:label>BillableClinicalProduct</rdfs:label>
+      <rdfs:comment>Clinical Products to support billing</rdfs:comment>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/RIMOntology"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01"/>
+      <owl:imports rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT240000UV01"/>
+   </owl:Ontology>
+   <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment"/>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Supply"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#BillableClinicalProduct"/>
+      <rdfs:comment>Patient classes are not referenced in the billable acts, as they are noted in the parent model (e.g. Invoice message) as the CoveredPartyAsPatient moodCode = EVN for Invoices moodCode = INT for Pre-Determination "This is what I supplied"</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.effectiveTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.effectiveTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.moodCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.id">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#II"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.code">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.effectiveTime">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.product">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Product"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Product">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#Product"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Product.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Product.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Product.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Product"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Product">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Product.typeCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PRDd2e86"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PRDd2e86">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e86">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRD</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Product.manufacturedProduct">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Product"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#ManufacturedProduct"/>
+      <rdfs:comment>Scoped by Manufacturer</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.id"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.id">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#II"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.code">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.manufacturedMaterialKind">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ManufacturedMaterial"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#ManufacturedMaterialKind"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.desc"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.desc"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.determinerCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.code">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.desc">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ST"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.asWarrantor">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#Warrantor"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor.effectiveTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor.effectiveTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor.effectiveTime">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#IVL_TS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor.classCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WRTEd2e196"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WRTEd2e196">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e196">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">WRTE</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor.warrantingWarrantorOrganization">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Warrantor"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Organization"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#WarrantorOrganization"/>
+      <rdfs:comment>Organization that holds warranty</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.name"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.name"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.telecom"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.telecom"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.determinerCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.name">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ON"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.telecom">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TEL"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#WarrantorOrganization.determinerCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#INSTANCEd2e241"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#INSTANCEd2e241">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e241">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INSTANCE</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind.contentPackagedProduct">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#RoleHeir"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#ContentPackagedProduct"/>
+      <rdfs:comment>Can be used to include elements within a product such as a battery charger that is part of a wheelchair</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct.quantity"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct.quantity"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct.quantity">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#RTO_PQ"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct.classCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#CONTd2e284"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#CONTd2e284">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e284">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONT</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct.containedManufacturedMaterialKind">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedMaterialKind"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ContentPackagedProduct"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct.manufacturerManufacturedProductOrganization">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Organization"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#ManufacturedProductOrganization"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.name"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.name"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.telecom"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.telecom"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.determinerCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.name">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#ON"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.telecom">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TEL"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ManufacturedProductOrganization.determinerCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#INSTANCEd2e336"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#INSTANCEd2e336">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e336">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INSTANCE</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.performer">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Performer"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Performer">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#Performer"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Performer.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Performer.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Performer.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Performer"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Performer.healthCareProvider">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Performer"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#LicensedEntity"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#HealthCareProvider"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider.id"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider.id">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#SET_II"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider.code">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider.classCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PROVd2e392"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PROVd2e392">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e392">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROV</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider.healthCareProviderPerson">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Person"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#ProviderPerson"/>
+      <rdfs:comment>Telecom, gender, birth time, addr are only required if provider is not known to the Payor</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.determinerCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.determinerCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.name"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.name"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.telecom"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.telecom"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.administrativeGenderCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.administrativeGenderCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.birthTime"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.birthTime"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.addr"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.addr"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.determinerCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.name">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#PN"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.telecom">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TEL"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.administrativeGenderCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.birthTime">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#TS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.addr">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#AD"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.classCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PSNd2e437"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PSNd2e437">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e437">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PSN</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ProviderPerson.determinerCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#INSTANCEd2e444"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#INSTANCEd2e444">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e444">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INSTANCE</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.referrer">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Referrer"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Referrer">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#Referrer"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Referrer.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Referrer.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Referrer.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Referrer"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Referrer">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Referrer.typeCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#REFd2e505"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#REFd2e505">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e505">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REF</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Referrer.healthCareProvider">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Referrer"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.consultant">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Consultant"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Consultant">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#Consultant"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Consultant.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Consultant.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Consultant.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Consultant"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Consultant">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Consultant.typeCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#CONd2e536"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#CONd2e536">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e536">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CON</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Consultant.healthCareProvider">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#HealthCareProvider"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Consultant"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.location">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Location"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Location">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#Location"/>
+      <rdfs:comment>The location identifier is used for the Diagnostic Approval Number (facility id) and the Claim Centre Number if required</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Location.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Location.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Location.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Location"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Location.serviceDeliveryLocation">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#R_ServiceDeliveryLocationUniversal"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Location"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.origin">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Origin"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Origin">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#Origin"/>
+      <rdfs:comment>Only used for justifying shipping from 1 location to another.</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Origin.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Origin.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Origin.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Origin"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Origin">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Origin.typeCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ORGd2e614"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#ORGd2e614">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e614">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORG</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Origin.serviceDeliveryLocation">
+      <rdfs:range rdf:resource=""/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Origin"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.destination">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Destination"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Destination">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Participation"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#Destination"/>
+      <rdfs:comment>Only used for justifying shipping from 1 location to another.</rdfs:comment>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Destination.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Destination.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Destination.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Destination"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Destination">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Destination.typeCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#DSTd2e657"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#DSTd2e657">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e657">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DST</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Destination.serviceDeliveryLocation">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#R_ServiceDeliveryLocationUniversal"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Destination"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct.pertinentInformation">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#BillableClinicalProduct"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#ActRelationship"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#PertinentInformation"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation.typeCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation.typeCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation.sequenceNumber"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation.sequenceNumber"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation.typeCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation.sequenceNumber">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#INT"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation.diagnosis">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#PertinentInformation"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis">
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/RIMOntology#Observation"/>
+      <rdfs:subClassOf rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_HD490000UV01#Diagnosis"/>
+      <rdfs:comment/>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.classCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.classCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.moodCode"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.moodCode"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.code"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.code"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.value"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.value"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.classCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.moodCode">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CS"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.code">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis"/>
+   </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.value">
+      <rdfs:range rdf:resource="http://veggente.berlios.de/ns/RIMDatatype#CE"/>
+      <rdfs:domain rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis"/>
+   </owl:ObjectProperty>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis">
+      <rdfs:subClassOf>
+         <owl:Restriction>
+            <owl:onProperty rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#Diagnosis.moodCode"/>
+            <owl:hasValue rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#EVNd2e724"/>
+         </owl:Restriction>
+      </rdfs:subClassOf>
+   </owl:Class>
+   <rim_dt:CS rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#EVNd2e724">
+      <rim_dt:code>
+         <rim_dt:ST rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#STd2e724">
+            <rim_dt:data rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVN</rim_dt:data>
+         </rim_dt:ST>
+      </rim_dt:code>
+   </rim_dt:CS>
+   <owl:Class rdf:about="http://veggente.berlios.de/ns/cmet/COCT_MT490000UV01#R_ServiceDeliveryLocationUniversal">
+      <owl:equivalentClass rdf:resource="http://veggente.berlios.de/ns/cmet/COCT_MT240000UV01#ServiceDeliveryLocation"/>
+   </owl:Class>
+</rdf:RDF>
