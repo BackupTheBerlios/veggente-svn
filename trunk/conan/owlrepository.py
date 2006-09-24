@@ -36,7 +36,6 @@ class OWLRepository(Repository):
     
     debug_flag=True
     inf_prefix='think_'
-    
     # These two variables have to be defined in some config file!!!
     owl_classes='http://veggente.berlios.de/think/owl.n3'
 #    rdfs_classes='http://veggente.berlios.de/think/rdfs.n3'
@@ -48,6 +47,14 @@ class OWLRepository(Repository):
     rdf_ns='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
     rdfs_ns='http://www.w3.org/2000/01/rdf-schema#'
     owl_ns='http://www.w3.org/2002/07/owl#'
+    
+    # Common URIs for OWL models
+    type_uri=RDF.Uri(rdf_ns+'type')
+    class_uri=RDF.Uri(owl_ns+'Class')
+    range_uri=RDF.Uri(rdfs_ns+'range')
+    domain_uri=RDF.Uri(rdfs_ns+'domain')
+    op_uri=RDF.Uri(owl_ns+'ObjectProperty')
+    dp_uri=RDF.Uri(owl_ns+'DatatypeProperty')
 
     accepted_types=[owl_ns+'Class',owl_ns+'ObjectProperty',owl_ns+'DatatypeProperty']
 
@@ -217,7 +224,7 @@ class OWLRepository(Repository):
         cmd.append(self.xsd_classes)
         cmd.append(self.rdfs_classes)
         cmd.append('--filter='+self.instance_rules)
-        cmd.append('--think')
+        cmd.append('--rete')
         cmd.append('--ugly')
         cmd.append('--purge') 
         cmd.append('--rdf')
@@ -275,11 +282,13 @@ class OWLRepository(Repository):
         returns: 
             string uri of the resource
         """
+        results=[]
         if (resource is None) or (ontology is None) or (resource=='') or (ontology==''):
             return None
         if ontology.endswith('#'):
             ontology=ontology.split('#')[0]
-        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
+        query_st=RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=self.type_uri)
+        results=self.model.find_statements(class_st,RDF.Node(RDF.Uri(ontology)))
         if results!=[]:
             for i in results:
                 if i.subject.is_resource():
@@ -292,7 +301,7 @@ class OWLRepository(Repository):
         Return a list of a property's range
         """
         res_list=[]
-        search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=RDF.Uri(self.rdfs_ns+'range'))
+        search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.range_uri)
         if (resource is None) or (ontology is None):
             return []
         results=self.model.find_statements(search_st,RDF.Node(RDF.Uri(ontology)))
@@ -312,7 +321,7 @@ class OWLRepository(Repository):
         Return a list of a property's range
         """
         res_list=[]
-        search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=RDF.Uri(self.rdfs_ns+'domain'))
+        search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.domain_uri)
         if (resource is None) or (ontology is None):
             return []
         results=self.model.find_statements(search_st,RDF.Node(RDF.Uri(ontology)))
@@ -327,42 +336,23 @@ class OWLRepository(Repository):
             res_list.extend(self.get_property_domain(resource,imp))
         return res_list
 
-    def get_type(self,uri):
-        """
-        Return a list of types associated with a resource URI
-        uri: string of the resource 
-        """
-        res_list=[]
-        ns=uri.split('#')[0]
-        res=uri.split('#')[1]
-        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(uri),
-                                                        predicate=RDF.Uri(self.rdf_ns+'type')),
-                                                        RDF.Node(RDF.Uri(ns))
-                                                        )
-        for i in results:
-            if i.object.is_resource():
-                res_list.append(str(i.object.uri))
-        if res_list!=[]:
-            return res_list
-        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(uri),
-                                                        predicate=RDF.Uri(self.rdf_ns+'type')),
-                                                        RDF.Node(RDF.Uri('think_'+ns))
-                                                        )
-        for i in results:
-            if i.object.is_resource():
-                res_list.append(str(i.object.uri))
-        return res_list
-
     def onto_identify(self,resource,ontology):
         res_name=None
         res_type=None
         ontology=ontology.split('#')[0]
-        
-        results=self.model.find_statements(RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=RDF.Uri(self.rdf_ns+'type')),RDF.Node(RDF.Uri(ontology)))
+       
+        query_st=RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=self.type_uri)
+        results=self.model.find_statements(query_st,RDF.Node(RDF.Uri(ontology)))
         for i in results:
             if str(i.object.uri) in self.accepted_types:
                 res_name=ontology+'#'+resource
                 res_type=str(i.object.uri)
+                break
+        inf_results=self.model.find_statements(query_st,RDF.Node(RDF.Uri('think_'+ontology)))
+        for inf in inf_results:
+            if str(inf.object.uri) in self.accepted_types:
+                res_name=ontology+'#'+resource
+                res_type=str(inf.object.uri)
                 break
         if res_name!=None:
             return res_name, res_type
@@ -373,9 +363,14 @@ class OWLRepository(Repository):
     def get_class_properties(self,class_name,ontology):
         prop_list=[]
         imports=self.find_imports(ontology)
-        for (st,context) in self.model.find_statements_context(RDF.Statement(predicate=RDF.Uri(self.rdfs_ns+'domain'),object=RDF.Uri(class_name))):
-            if (context.uri in imports) or (context.uri==ontology):
-                prop_list.add(st.uri)
+        query_st=RDF.Statement(predicate=self.domain_uri,object=RDF.Uri(class_name))
+        for imp in imports:
+            results=self.model.find_statements(query_st,RDF.Node(RDF.Uri(imp)))
+            inf_results=self.model.find_statements(query_st,RDF.Node(RDF.Uri('think_'+imp)))
+        for res in results:
+            prop_list.add(str((res.subject).uri))
+        for inf_res in inf_results:
+            prop_list.add(str((inf_res.subject).uri))
         return prop_list
 
 

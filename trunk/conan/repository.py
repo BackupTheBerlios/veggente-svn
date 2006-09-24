@@ -177,7 +177,7 @@ class Repository(object):
                         options_string=storage_options)
         elif self.db_type=='mysql':
             try:
-                storage_options="contexts='yes',bulk='yes',database='"+self.db_name+"',host='"+self.host+"',port='"+self.port+"',user='"+self.username+"',password='"+self.password+"',contexts='yes'"
+                storage_options="contexts='yes',bulk='yes',database='"+self.db_name+"',host='"+self.host+"',port='"+self.port+"',user='"+self.username+"',password='"+self.password+"'"
                 self.storage=RDF.Storage(storage_name=self.db_type,
                         name=self.db_name,
                         options_string=storage_options)
