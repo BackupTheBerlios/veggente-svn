@@ -57,6 +57,9 @@ class OWLRepository(Repository):
     dp_uri=RDF.Uri(owl_ns+'DatatypeProperty')
 
     accepted_types=[owl_ns+'Class',owl_ns+'ObjectProperty',owl_ns+'DatatypeProperty']
+    
+    # Caches
+    imports_cache={}
 
     def add_ontology(self, uri, overwrite=False):
         """
@@ -103,6 +106,8 @@ class OWLRepository(Repository):
         if (uri is None) or (uri==''):
             return -1
         if (self.remove_document(uri)==0 and self.remove_document(self.inf_prefix+uri)==0):
+            if uri in self.imports_cache:
+                del self.imports_cache[uri]
             if debug:
                 print 'After remove'
                 print self.list_documents()
@@ -255,7 +260,6 @@ class OWLRepository(Repository):
                 predicate=RDF.Node(uri_string='http://www.w3.org/2002/07/owl#imports'),
                 object=None)
         global_imports=self.model.find_statements(st,RDF.Node(RDF.Uri(uri)))
-        inferred_docs=self.model.get_contexts()
         if global_imports is None:
             return None
         doc_imports=[]
@@ -265,13 +269,19 @@ class OWLRepository(Repository):
 
     def find_imports_cluster(self,ontology):
         cluster=[]
+        # Check if the import path is already in cache
+        if ontology in self.imports_cache:
+            return self.imports_cache[ontology]
+        # Import path not in cache
         for i in self.find_imports(ontology):
             if not (i in cluster):
                 cluster.append(i)
-        if cluster!=None:
-            for imp in cluster:
-                for new_imp in self.find_imports_cluster(imp):
-                    cluster.append(new_imp)
+        if cluster is None:
+            return None
+        for imp in cluster:
+            for new_imp in self.find_imports_cluster(imp):
+                cluster.append(new_imp)
+        self.imports_cache[ontology]=cluster
         return cluster
 
     def get_onto_name(self,resource,ontology):
@@ -282,38 +292,29 @@ class OWLRepository(Repository):
         returns: 
             string uri of the resource
         """
-        results=[]
+        imports=self.find_imports_cluster(ontology)
         if (resource is None) or (ontology is None) or (resource=='') or (ontology==''):
             return None
         if ontology.endswith('#'):
             ontology=ontology.split('#')[0]
         query_st=RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=self.type_uri)
-        results=self.model.find_statements(class_st,RDF.Node(RDF.Uri(ontology)))
-        if results!=[]:
-            for i in results:
-                if i.subject.is_resource():
-                    return str(i.subject.uri)
-        for imp in self.find_imports(ontology):
-            return self.get_onto_name(resource,imp)
+        for (result,context) in self.model.find_statements_context(class_st):
+            if (str(context.uri)==ontology) or (str(context.uri)=='think_'+ontology) or (str(context.uri) in imports):
+                return result
+        return None
         
     def get_property_range(self,resource,ontology):
         """
         Return a list of a property's range
         """
         res_list=[]
+        imports=self.find_imports_cluster(ontology)
         search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.range_uri)
         if (resource is None) or (ontology is None):
             return []
-        results=self.model.find_statements(search_st,RDF.Node(RDF.Uri(ontology)))
-        inferred_results=self.model.find_statements(search_st,RDF.Node(RDF.Uri('think_'+ontology)))
-        for i in results:
-            if (not str(i.object.uri) in res_list):
-                res_list.append(str(i.object.uri))
-        for inf in inferred_results:
-            if (not str(inf.object.uri) in res_list):
-                res_list.append(str(inf.object.uri))
-        for imp in self.find_imports(ontology):
-            res_list.extend(self.get_property_range(resource,imp))
+        for (result,context) in self.model.find_statements_context(search_st):
+            if (str(context.uri)==ontology) or (str(context.uri)=='think_'+ontology) or (str(context.uri) in imports):
+                res_list.append(str(result.object.uri))
         return res_list
 
     def get_property_domain(self,resource,ontology):
@@ -321,56 +322,39 @@ class OWLRepository(Repository):
         Return a list of a property's range
         """
         res_list=[]
+        imports=self.find_imports_cluster(ontology)
         search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.domain_uri)
         if (resource is None) or (ontology is None):
             return []
-        results=self.model.find_statements(search_st,RDF.Node(RDF.Uri(ontology)))
-        inferred_results=self.model.find_statements(search_st,RDF.Node(RDF.Uri('think_'+ontology)))
-        for i in results:
-            if (not str(i.object.uri) in res_list):
-                res_list.append(str(i.object.uri))
-        for inf in inferred_results:
-            if (not str(inf.object.uri) in res_list):
-                res_list.append(str(inf.object.uri))
-        for imp in self.find_imports(ontology):
-            res_list.extend(self.get_property_domain(resource,imp))
+        for (result,context) in self.model.find_statements_context(search_st):
+            if (str(context.uri)==ontology) or (str(context.uri)=='think_'+ontology) or (str(context.uri) in imports):
+                res_list.append(str(result.object.uri))
         return res_list
 
     def onto_identify(self,resource,ontology):
         res_name=None
         res_type=None
+        imports=[]
         ontology=ontology.split('#')[0]
-       
-        query_st=RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=self.type_uri)
-        results=self.model.find_statements(query_st,RDF.Node(RDF.Uri(ontology)))
-        for i in results:
-            if str(i.object.uri) in self.accepted_types:
-                res_name=ontology+'#'+resource
-                res_type=str(i.object.uri)
-                break
-        inf_results=self.model.find_statements(query_st,RDF.Node(RDF.Uri('think_'+ontology)))
-        for inf in inf_results:
-            if str(inf.object.uri) in self.accepted_types:
-                res_name=ontology+'#'+resource
-                res_type=str(inf.object.uri)
-                break
-        if res_name!=None:
-            return res_name, res_type
-        for imp in self.find_imports(ontology):
-            return self.onto_identify(resource,imp)
-        return None, None
+        imports.insert(0,ontology)
+        imports=self.find_imports_cluster(ontology)
+        for doc in imports:
+            query_st=RDF.Statement(subject=RDF.Uri(doc+'#'+resource),predicate=self.type_uri)
+            for (result,context) in self.model.find_statements_context(query_st):
+                if (str(context.uri)==doc) or (str(context.uri)=='think_'+doc) or (str(context.uri) in imports):
+                    if (str(result.object.uri)) in self.accepted_types:
+                        res_name=str(result.subject.uri)
+                        res_type=str(result.object.uri)
+                        break
+        return res_name,res_type
 
     def get_class_properties(self,class_name,ontology):
         prop_list=[]
-        imports=self.find_imports(ontology)
+        imports=self.find_imports_cluster(ontology)
         query_st=RDF.Statement(predicate=self.domain_uri,object=RDF.Uri(class_name))
-        for imp in imports:
-            results=self.model.find_statements(query_st,RDF.Node(RDF.Uri(imp)))
-            inf_results=self.model.find_statements(query_st,RDF.Node(RDF.Uri('think_'+imp)))
-        for res in results:
-            prop_list.add(str((res.subject).uri))
-        for inf_res in inf_results:
-            prop_list.add(str((inf_res.subject).uri))
+        for (result,context) in self.model.find_statements_context(query_st):
+            if (str(context.uri)==ontology) or (str(context.uri)=='think_'+ontology) or (str(context.uri) in imports):
+                prop_list.append(str(subject.uri))
         return prop_list
 
 

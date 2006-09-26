@@ -48,9 +48,10 @@ class Lifter:
     uml_style=True
     blank_counter=0
     resource_cache=None
+    imports=[]
 
     def __init__(self,server_url='http://localhost:10000'):
-        self.resource_cache=[]
+        self.resource_cache={}
         if (server_url is None) or (server_url==''):
             raise "Server URL must not be empty"
         self.server=server_url
@@ -66,21 +67,22 @@ class Lifter:
         if self.rdf_model is None:
             raise "Failed creating in-memory RDF model"
          
-    def lift(self,document,onto_list,uml_mode=True):
+    def lift(self,document,ontology,uml_mode=True):
         """
         Convert the content of an XML document into corresponding RDF triples
         document: uri of the document to convert
         onto_list: list of ontologies intantiated by the document
         """
-        if (onto_list is None) or (document is None):
+        if (ontology is None) or (document is None):
             return None
         self.uml_style=uml_mode
-        self.base_onto=onto_list
+        self.base_onto=ontology
         doc = xml.dom.minidom.parse(document)
         self.doc_context=RDF.Node(document)
         self.root_node=doc.documentElement
         self.__removeWhitespaceNodes(self.root_node)
         active_classes=[]
+        self.imports=self.repository.find_imports(self.base_onto)
         self.__handle_element(self.root_node,[],None,None,None)
         doc.unlink()
     
@@ -115,12 +117,12 @@ class Lifter:
         # Handle OWL types "Class" and "DatatypeProperty"
         if (rdf_type==self.owl_ns+'Class'):
             new_class=self.__add_class_instance(rdf_name,known_subject)
-            self.resource_cache.append(OWL_Class(rdf_name,None))
+            self.resource_cache[rdf_name]=OWL_Class(rdf_name,None)
             if (new_class!=None):
                 print '<Class>'+rdf_name+'</Class>'
                 active_classes.insert(0,new_class)
         elif (rdf_type==self.owl_ns+'DatatypeProperty'):
-            self.resource_cache.append(OWL_Property(rdf_name,rdf_type,None))
+            self.resource_cache[rdf_name]=OWL_Property(rdf_name,rdf_type,None)
             if (node.nodeType==Node.ELEMENT_NODE):
                 for n in node.childNodes:
                     if n.nodeType==Node.TEXT_NODE:
@@ -150,7 +152,8 @@ class Lifter:
             obj_domain_list=self.repository.get_property_domain(rdf_name,self.base_onto)
             obj_prop.set_ranges(obj_range_list)
             obj_prop.set_domains(obj_domain_list)
-            self.resource_cache.append(obj_prop)
+            self.resource_cache[rdf_name]=obj_prop
+            #self.resource_cache.append(obj_prop)
             # Subject search
             if (obj_range_list==[]):
                 print '<no_range_warning/>\n</node>'
@@ -253,12 +256,49 @@ class Lifter:
             (string) Found URI resource
             (string) Found RDF type
         """
+        # --- Begin cache search ---
+        cached_uri=None
+        cached_type=None
+       # cached_uri,cached_type=self.__resolve_cached_node(node,active_classes)
+        if (cached_uri!=None) and (cached_type!=None):
+            return cached_uri,cached_type
+        # --- Cache search failed, proceeding with remote search ---
+        return self.__resolve_uncached_node(node,active_classes)
+
+    def __resolve_cached_node(self,node,active_classes):
+        """
+        Check if a node has already been resolved and it's in the cache
+        """
+        result=None
+        # UML style notation search
+        for imp in self.imports:
+            for current_class in active_classes:
+                candidate_uri=imp+'#'+self.__xml_to_internal(node,current_class.name)
+                if candidate_uri in self.resource_cache:
+                    result=self.resource_cache[candidate_uri]
+                    #print '<cache_hit>'+result.get_resource()+'</cache_hit>'
+                    return result.get_resource(),result.get_type()
+        # UML search failed
+        for imp in self.imports:
+            candidate_uri=imp+'#'+self.__xml_to_internal(node,None)
+            if candidate_uri in self.resource_cache:
+                result=self.resource_cache[candidate_uri]
+                #print '<cache_hit>'+result.get_resource()+'</cache_hit>'
+                return result.get_resource(),result.get_type()
+        return None,None
+
+
+
+    def __resolve_uncached_node(self,node,active_classes):
+        """
+        Check what kind of OWL resource match the input name
+        """
         # Begin searching with UML style notation
         node_onto_name=None
         node_onto_type=None
         for class_candidate in active_classes:
             xml_res_name=self.__xml_to_internal(node,class_candidate.name)
-            for res in self.resource_cache:
+            for uri, res in self.resource_cache.iteritems():
                 if (res.get_name()==xml_res_name):
                     node_name=res.get_resource()
                     node_type=res.get_type()
@@ -269,7 +309,7 @@ class Lifter:
                 return node_onto_name,node_onto_type
         # UML-style search failed
         xml_res_name=self.__xml_to_internal(node,None)
-        for res in self.resource_cache:
+        for uri, res in self.resource_cache.iteritems():
             if (res.get_name()==xml_res_name):
                 node_name=res.get_resource()
                 node_type=res.get_type()
