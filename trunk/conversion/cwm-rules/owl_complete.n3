@@ -2,6 +2,7 @@
 
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 @prefix math: <http://www.w3.org/2000/10/swap/math#>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
@@ -918,7 +919,17 @@ rdfs:seeAlso a owl:AnnotationProperty.
 	 ?A @has rdfs:subClassOf ?R.
 	 ?S a ?A} => {?S ?P _:O.
 	 _:O a ?C}.
-	
+
+### Utility rules@@	
+{?P @has rdf:type owl:ObjectProperty;
+    rdfs:domain _:D.
+    _:D owl:unionOf _:L.
+    ?I :item _:L}=>{?P rdfs:domain ?I}.
+
+{?P @has rdf:type owl:DatatypeProperty;
+    rdfs:domain _:D.
+    _:D owl:unionOf _:L.
+    ?I :item _:L}=>{?P rdfs:domain ?I}.
 
 ### support @@
 

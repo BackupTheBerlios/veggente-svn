@@ -35,7 +35,7 @@ class OWLRepository(Repository):
     """
     
     debug_flag=True
-    inf_prefix='think_'
+    __inf_prefix='think_'
     # These two variables have to be defined in some config file!!!
     owl_classes='http://veggente.berlios.de/think/owl.n3'
 #    rdfs_classes='http://veggente.berlios.de/think/rdfs.n3'
@@ -44,22 +44,30 @@ class OWLRepository(Repository):
     instance_rules='http://veggente.berlios.de/think/instance_rules.n3'
 
     # Namespaces
-    rdf_ns='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
-    rdfs_ns='http://www.w3.org/2000/01/rdf-schema#'
-    owl_ns='http://www.w3.org/2002/07/owl#'
+    __rdf_ns='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    __rdfs_ns='http://www.w3.org/2000/01/rdf-schema#'
+    __owl_ns='http://www.w3.org/2002/07/owl#'
     
     # Common URIs for OWL models
-    type_uri=RDF.Uri(rdf_ns+'type')
-    class_uri=RDF.Uri(owl_ns+'Class')
-    range_uri=RDF.Uri(rdfs_ns+'range')
-    domain_uri=RDF.Uri(rdfs_ns+'domain')
-    op_uri=RDF.Uri(owl_ns+'ObjectProperty')
-    dp_uri=RDF.Uri(owl_ns+'DatatypeProperty')
+    __type_uri=RDF.Uri(__rdf_ns+'type')
+    __class_uri=RDF.Uri(__owl_ns+'Class')
+    __range_uri=RDF.Uri(__rdfs_ns+'range')
+    __domain_uri=RDF.Uri(__rdfs_ns+'domain')
+    __op_uri=RDF.Uri(__owl_ns+'ObjectProperty')
+    __dp_uri=RDF.Uri(__owl_ns+'DatatypeProperty')
+    __sub_class_uri=RDF.Uri(__rdfs_ns+'subClassOf')
 
-    accepted_types=[owl_ns+'Class',owl_ns+'ObjectProperty',owl_ns+'DatatypeProperty']
-    
-    # Caches
-    imports_cache={}
+    accepted_types=[__owl_ns+'Class',__owl_ns+'ObjectProperty',__owl_ns+'DatatypeProperty']
+    query_counter=0
+    cache_hit=0
+
+    # --- Caches ---
+    # Key: document URI
+    # Value: document import cluster plus inferred docs
+    __imports_cache={}
+    # Key: rdf URI
+    # Value: rdf type
+    __name_cache={}
 
     def add_ontology(self, uri, overwrite=False):
         """
@@ -76,7 +84,7 @@ class OWLRepository(Repository):
             self.add_document(uri)
         else:
             print "Document %s is in store"%uri
-            inf_onto=self.isPresent(self.inf_prefix+uri)
+            inf_onto=self.isPresent(self.__inf_prefix+uri)
             if (overwrite==True):
                 self.remove_document(uri)
                 if (inf_onto==True):
@@ -85,14 +93,14 @@ class OWLRepository(Repository):
                 if inf_onto==True:
                     print "Inference over %s is in store"%uri
                     return 0
-        import_list=self.find_imports(uri)
+        import_list=self.get_document_imports(uri)
         for doc in import_list:
             self.add_ontology(doc,overwrite)
         inferred_statements=self.exec_ontology_inference(uri,import_list,overwrite)
         if inferred_statements is None:
             return -1
         for s in inferred_statements:
-            self.model.add_statement(s,RDF.Node(RDF.Uri(self.inf_prefix+uri)))
+            self.model.add_statement(s,RDF.Node(RDF.Uri(self.__inf_prefix+uri)))
         return 0
 
     def remove_ontology(self,uri,recursive=False):
@@ -105,9 +113,9 @@ class OWLRepository(Repository):
         """
         if (uri is None) or (uri==''):
             return -1
-        if (self.remove_document(uri)==0 and self.remove_document(self.inf_prefix+uri)==0):
-            if uri in self.imports_cache:
-                del self.imports_cache[uri]
+        if (self.remove_document(uri)==0 and self.remove_document(self.__inf_prefix+uri)==0):
+            if uri in self.__imports_cache:
+                del self.__imports_cache[uri]
             if debug:
                 print 'After remove'
                 print self.list_documents()
@@ -115,7 +123,7 @@ class OWLRepository(Repository):
         else:
             return -1
         if recursive:
-            for  m in self.find_imports(uri):
+            for  m in self.get_imports(uri):
                 remove_document(m,recursive)
             return 0
             
@@ -143,7 +151,7 @@ class OWLRepository(Repository):
         if inferred_statements is None:
             return -1
         for s in inferred_statements:
-            working_model.add_statement(s,RDF.Node(RDF.Uri(self.inf_prefix+uri)))
+            working_model.add_statement(s,RDF.Node(RDF.Uri(self.__inf_prefix+uri)))
         return 0
 
     def remove_instance_document(self,uri,longterm=False):
@@ -157,12 +165,12 @@ class OWLRepository(Repository):
         if (uri is None) or (uri==''):
             return -1
         if (longterm==True):
-            if (self.remove_document(uri)==0 and self.remove_document(self.inf_prefix+uri)==0):
+            if (self.remove_document(uri)==0 and self.remove_document(self.__inf_prefix+uri)==0):
                 return 0
             else:
                 return -1
         else:
-            if (self.remove_inmem_document(uri)==0 and self.remove_inmem_document(self.inf_prefix+uri)==0):
+            if (self.remove_inmem_document(uri)==0 and self.remove_inmem_document(self.__inf_prefix+uri)==0):
                 return 0
             else:
                 return -1
@@ -186,8 +194,8 @@ class OWLRepository(Repository):
         cmd.append(self.__find_location(original_uri))
         for i in uri_list:
             cmd.append(self.__find_location(i))
-            if self.isPresent(self.inf_prefix+i):
-                cmd.append(self.__find_location(self.inf_prefix+i))
+            if self.isPresent(self.__inf_prefix+i):
+                cmd.append(self.__find_location(self.__inf_prefix+i))
         cmd.append('--n3')
         cmd.append(self.owl_classes)
 #        cmd.append(self.xsd_classes)
@@ -222,8 +230,8 @@ class OWLRepository(Repository):
         cmd.append(self.__find_location(original_uri))
         for i in uri_list:
             cmd.append(self.__find_location(i))
-            if self.isPresent(self.inf_prefix+i):
-                cmd.append(self.__find_location(self.inf_prefix+i))
+            if self.isPresent(self.__inf_prefix+i):
+                cmd.append(self.__find_location(self.__inf_prefix+i))
         cmd.append('--n3')
         cmd.append(self.owl_classes)
         cmd.append(self.xsd_classes)
@@ -252,38 +260,68 @@ class OWLRepository(Repository):
                 # URI is in store
                 return self.db_uri+uri
         return uri
-    
-    def find_imports(self,uri):
+
+    def get_imports(self,uri):
+        return  self.__create_imports_cluster(uri,False)
+
+    def get_document_imports(self,uri):
+        results=[]
         if (uri is None) or (uri==''):
             return None
-        st=RDF.Statement(subject=RDF.Node(uri_string=uri),
-                predicate=RDF.Node(uri_string='http://www.w3.org/2002/07/owl#imports'),
-                object=None)
-        global_imports=self.model.find_statements(st,RDF.Node(RDF.Uri(uri)))
-        if global_imports is None:
-            return None
-        doc_imports=[]
-        for m in global_imports:
-            doc_imports.append(str((m.object).uri))
-        return doc_imports
+        query_st=RDF.Statement(predicate=RDF.Node(uri_string='http://www.w3.org/2002/07/owl#imports'))
+        self.query_counter=self.query_counter+1
+        for imp in self.model.find_statements(query_st,RDF.Node(RDF.Uri(uri))):
+            results.append(str(imp.object.uri))
+        return results
 
-    def find_imports_cluster(self,ontology):
-        cluster=[]
-        # Check if the import path is already in cache
-        if ontology in self.imports_cache:
-            return self.imports_cache[ontology]
-        # Import path not in cache
-        for i in self.find_imports(ontology):
-            if not (i in cluster):
-                cluster.append(i)
-        if cluster is None:
+    def __create_imports_cluster(self,uri,forced_update):
+        continue_search=True
+        if (uri is None) or (uri==''):
             return None
-        for imp in cluster:
-            for new_imp in self.find_imports_cluster(imp):
-                cluster.append(new_imp)
-        self.imports_cache[ontology]=cluster
-        return cluster
+        query_st=RDF.Statement(predicate=RDF.Node(uri_string='http://www.w3.org/2002/07/owl#imports'))
+        if (not (uri in self.__imports_cache)) or (forced_update):
+            print "Re-creating imports"
+            self.query_counter=self.query_counter+1
+            for (result,context) in self.model.find_statements_context(query_st):
+                subject_uri=str(result.subject.uri)
+                object_uri=str(result.object.uri)
+                context_uri=str(context.uri)
+                if subject_uri in self.__imports_cache:
+                    doc_imports=self.__imports_cache[subject_uri]
+                    if not (object_uri in doc_imports):
+                        doc_imports.add(self.__inf_prefix+object_uri)
+                        doc_imports.add(object_uri)
+                else:
+                    value=set()
+                    value.add(self.__inf_prefix+object_uri)
+                    value.add(object_uri)
+                    value.add(self.__inf_prefix+subject_uri)
+                    value.add(subject_uri)
+                    self.__imports_cache[subject_uri]=value
+                if context_uri in self.__imports_cache:
+                    doc_imports=self.__imports_cache[context_uri]
+                    if not (object_uri in doc_imports):
+                        value.add(self.__inf_prefix+object_uri)
+                        doc_imports.add(object_uri)
+                else:
+                    value=set()
+                    value.add(self.__inf_prefix+object_uri)
+                    value.add(object_uri)
+                    value.add(self.__inf_prefix+context_uri)
+                    value.add(context_uri)
+                    self.__imports_cache[context_uri]=value
 
+            while continue_search:
+                continue_search=False
+                for key in self.__imports_cache.iterkeys():
+                    for item in self.__imports_cache[key]:
+                        if item in self.__imports_cache:
+                            new_import=(self.__imports_cache[key]).union(self.__imports_cache[item])
+                            self.__imports_cache[key]=new_import
+                            if len(new_import)==0:
+                                continue_search=True
+        return self.__imports_cache[uri]
+    
     def get_onto_name(self,resource,ontology):
         """
         Find a class or a property with a given name in an ontology or in its imports
@@ -292,14 +330,15 @@ class OWLRepository(Repository):
         returns: 
             string uri of the resource
         """
-        imports=self.find_imports_cluster(ontology)
+        imports=self.get_imports(ontology)
         if (resource is None) or (ontology is None) or (resource=='') or (ontology==''):
             return None
         if ontology.endswith('#'):
             ontology=ontology.split('#')[0]
-        query_st=RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=self.type_uri)
+        query_st=RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=self.__type_uri)
+        self.query_counter=self.query_counter+1
         for (result,context) in self.model.find_statements_context(class_st):
-            if (str(context.uri)==ontology) or (str(context.uri)=='think_'+ontology) or (str(context.uri) in imports):
+            if (str(context.uri)==ontology) or (str(context.uri)==self.__inf_prefix+ontology) or (str(context.uri) in imports):
                 return result
         return None
         
@@ -308,12 +347,13 @@ class OWLRepository(Repository):
         Return a list of a property's range
         """
         res_list=[]
-        imports=self.find_imports_cluster(ontology)
-        search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.range_uri)
         if (resource is None) or (ontology is None):
             return []
+        imports=self.get_imports(ontology)
+        search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.__range_uri)
+        self.query_counter=self.query_counter+1
         for (result,context) in self.model.find_statements_context(search_st):
-            if (str(context.uri)==ontology) or (str(context.uri)=='think_'+ontology) or (str(context.uri) in imports):
+            if (str(context.uri)==ontology) or (str(context.uri)==self.__inf_prefix+ontology) or (str(context.uri) in imports):
                 res_list.append(str(result.object.uri))
         return res_list
 
@@ -322,41 +362,95 @@ class OWLRepository(Repository):
         Return a list of a property's range
         """
         res_list=[]
-        imports=self.find_imports_cluster(ontology)
-        search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.domain_uri)
         if (resource is None) or (ontology is None):
             return []
+        imports=self.get_imports(ontology)
+        search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.__domain_uri)
+        self.query_counter=self.query_counter+1
         for (result,context) in self.model.find_statements_context(search_st):
-            if (str(context.uri)==ontology) or (str(context.uri)=='think_'+ontology) or (str(context.uri) in imports):
+            if (str(context.uri)==ontology) or (str(context.uri)==self.__inf_prefix+ontology) or (str(context.uri) in imports):
                 res_list.append(str(result.object.uri))
         return res_list
 
     def onto_identify(self,resource,ontology):
         res_name=None
         res_type=None
+        candidate_uri=None
         imports=[]
         ontology=ontology.split('#')[0]
-        imports.insert(0,ontology)
-        imports=self.find_imports_cluster(ontology)
-        for doc in imports:
-            query_st=RDF.Statement(subject=RDF.Uri(doc+'#'+resource),predicate=self.type_uri)
+        imports=self.get_imports(ontology)
+        # If Resource is an URI, perform a direct check
+        if '#' in resource:
+            # Check name cache
+            if (resource in self.__name_cache):
+                self.cache_hit=self.cache_hit+1
+                return resource,self.__name_cache[resource]
+            query_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.__type_uri)
+            self.query_counter=self.query_counter+1
             for (result,context) in self.model.find_statements_context(query_st):
-                if (str(context.uri)==doc) or (str(context.uri)=='think_'+doc) or (str(context.uri) in imports):
-                    if (str(result.object.uri)) in self.accepted_types:
+                if (str(context.uri) in imports) and (str(result.object.uri) in self.accepted_types):
                         res_name=str(result.subject.uri)
                         res_type=str(result.object.uri)
-                        break
+                        if (res_name!=None) and (res_type!=None):
+                            self.__name_cache[res_name]=res_type
+                        return res_name,res_type
+        # URI search failed, search name into ontologies
+        for doc in imports:
+            candidate_uri=doc+'#'+resource
+            # Check name cache
+            if (candidate_uri in self.__name_cache):
+                self.cache_hit=self.cache_hit+1
+                return candidate_uri,self.__name_cache[candidate_uri]
+            query_st=RDF.Statement(subject=RDF.Uri(candidate_uri),predicate=self.__type_uri)
+            self.query_counter=self.query_counter+1
+            for (result,context) in self.model.find_statements_context(query_st):
+                if (str(context.uri) in imports) and (str(result.object.uri) in self.accepted_types):
+                        res_name=str(result.subject.uri)
+                        res_type=str(result.object.uri)
+                        if (res_name!=None) and (res_type!=None):
+                            self.__name_cache[res_name]=res_type
+                        return res_name,res_type
         return res_name,res_type
 
-    def get_class_properties(self,class_name,ontology):
+    def get_datatype_properties(self,class_name,ontology):
         prop_list=[]
-        imports=self.find_imports_cluster(ontology)
-        query_st=RDF.Statement(predicate=self.domain_uri,object=RDF.Uri(class_name))
+        op_list=[]
+        imports=self.get_imports(ontology)
+        query_st=RDF.Statement(predicate=self.__domain_uri,object=RDF.Uri(class_name))
+        self.query_counter=self.query_counter+1
         for (result,context) in self.model.find_statements_context(query_st):
-            if (str(context.uri)==ontology) or (str(context.uri)=='think_'+ontology) or (str(context.uri) in imports):
-                prop_list.append(str(subject.uri))
-        return prop_list
+            if (str(context.uri) in imports):
+                prop_list.append(str(result.subject.uri))
+        for i in prop_list:
+            rdf_name,rdf_type=self.onto_identify(i,ontology)
+            if rdf_type==self.__owl_ns+'DatatypeProperty':
+                op_list.append(rdf_name)
+        return op_list
+    
+    def get_object_properties(self,class_name,ontology):
+        prop_list=[]
+        op_list=[]
+        imports=self.get_imports(ontology)
+        query_st=RDF.Statement(predicate=self.__domain_uri,object=RDF.Uri(class_name))
+        self.query_counter=self.query_counter+1
+        for (result,context) in self.model.find_statements_context(query_st):
+            if (str(context.uri) in imports):
+                prop_list.append(str(result.subject.uri))
+        for i in prop_list:
+            rdf_name,rdf_type=self.onto_identify(i,ontology)
+            if rdf_type==self.__owl_ns+'ObjectProperty':
+                op_list.append(rdf_name)
+        return op_list
 
+    def get_superclasses(self,class_name,ontology):
+        class_list=[]
+        imports=self.get_imports(ontology)
+        query_st=RDF.Statement(subject=RDF.Uri(class_name),predicate=self.__sub_class_uri)
+        self.query_counter=self.query_counter+1
+        for (result,context) in self.model.find_statements_context(query_st):
+            if str(context.uri) in imports:
+                class_list.append(str(object.uri))
+        return prop_list
 
 def usage():
     print "Veggente project: Conan OWL repository"
@@ -427,6 +521,8 @@ try:
 except KeyboardInterrupt:
     print "OWL server shutdown"
     soap_server.server_close()
+    print "Total queries: "+str(repository.query_counter)
+    print "Name cache hit: "+str(repository.cache_hit)
     del repository
     print "Data saved"
     sys.exit(0)

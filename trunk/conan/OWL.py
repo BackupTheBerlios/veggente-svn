@@ -59,9 +59,9 @@ class OWL_Resource:
         self.resource=value
 
 class OWL_Class(OWL_Resource):
-    obj_properties=[]
-    dt_properties=[]
-    mandatory_properties=[]
+    obj_properties=set()
+    dt_properties=set()
+    mandatory_properties=set()
     
     def __init__(self,resource,node):
         OWL_Resource.__init__(self,resource,'http://www.w3.org/2002/07/owl#Class',node)
@@ -74,11 +74,11 @@ class OWL_Class(OWL_Resource):
         return self.obj_properties
 
     def set_mandatory_properties(self,prop_list):
-        self.mandatory_properties=prop_list
+        self.mandatory_properties=set(prop_list)
     def set_dt_properties(self,prop_list):
-        self.dt_properties=prop_list
+        self.dt_properties=set(prop_list)
     def set_obj_properties(self,prop_list):
-        self.obj_properties=prop_list
+        self.obj_properties=set(prop_list)
     def get_details(self):
         print self.name
         print self.resource
@@ -87,8 +87,8 @@ class OWL_Class(OWL_Resource):
 
 
 class OWL_Property(OWL_Resource):
-    domains=[]
-    ranges=[]
+    domains=None
+    ranges=None
 
     def get_domains(self):
         return self.domains
@@ -96,7 +96,13 @@ class OWL_Property(OWL_Resource):
         return self.ranges
 
     def set_ranges(self,range_list):
-        self.ranges=range_list
+        if isinstance(range_list,set):
+            self.ranges=range_list
+        else:
+            self.ranges=set(range_list)
     def set_domains(self,domain_list):
-        self.domains=domain_list
+        if isinstance(domain_list,set):
+            self.domains=domain_list
+        else:
+            self.domains=set(domain_list)
     

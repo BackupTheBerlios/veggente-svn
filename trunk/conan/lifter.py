@@ -18,8 +18,6 @@
 #	along with this program; if not, write to the Free Software
 #	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-# TODO: active_classes has to be treated as a STACK!!!!
-
 import getopt
 import SOAPpy
 import RDF
@@ -41,14 +39,25 @@ class Lifter:
     repository=None
     rdf_model=None
     parser=None
+    
     rdf_ns='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
     rdfs_ns='http://www.w3.org/2000/01/rdf-schema#'
     owl_ns='http://www.w3.org/2002/07/owl#'
+    
     base_onto=''
     uml_style=True
     blank_counter=0
     resource_cache=None
     imports=[]
+    class_dt_properties_cache={}
+    class_obj_properties_cache={}
+
+    datatype_blacklisted='http://veggente.berlios.de/ns/RIMDatatype#nullFlavor'
+    
+    node_counter=0
+    cache_hit=0
+    cache_miss=0
+    query_counter=0
 
     def __init__(self,server_url='http://localhost:10000'):
         self.resource_cache={}
@@ -82,7 +91,7 @@ class Lifter:
         self.root_node=doc.documentElement
         self.__removeWhitespaceNodes(self.root_node)
         active_classes=[]
-        self.imports=self.repository.find_imports(self.base_onto)
+        self.imports=self.repository.get_imports(self.base_onto)
         self.__handle_element(self.root_node,[],None,None,None)
         doc.unlink()
     
@@ -104,6 +113,7 @@ class Lifter:
         else:
             rdf_name=known_resource
             rdf_type=known_type
+        self.node_counter=self.node_counter+1
 
         print '<node name="'+str(node.nodeName)+'">'
         if (rdf_name is None) or (rdf_type is None):
@@ -138,6 +148,7 @@ class Lifter:
             print "<type_error>"+rdf_type+"</type_error>"
         child_list=self.__child_elements_to_resources(node,active_classes)
         attr_list=self.__child_attributes_to_resources(node,active_classes)
+        self.node_counter=self.node_counter+len(attr_list)
         node_list=attr_list
         node_list.extend(child_list)
         # Handle OWL type "ObjectProperty"
@@ -153,18 +164,17 @@ class Lifter:
             obj_prop.set_ranges(obj_range_list)
             obj_prop.set_domains(obj_domain_list)
             self.resource_cache[rdf_name]=obj_prop
-            #self.resource_cache.append(obj_prop)
             # Subject search
             if (obj_range_list==[]):
                 print '<no_range_warning/>\n</node>'
             else:
                 print '<range>'+str(obj_range_list)+'</range>'
                 # --- Search for a subject ---
-                if (active_classes==[]) and (obj_domain_list!=[]):
+                if (active_classes==[]) and (len(obj_domain_list)==0):
                     # 1: The corresponding xml element is the root element
                     new_class=self.__add_class_instance(str(obj_domain_list[0]),None)
                     active_classes.insert(0,new_class)
-                elif (obj_domain_list==[]):
+                elif (len(obj_domain_list)==0):
                     # 2: The property has no domain, forcing the first active class as the current domain
                     #print '<forced_domain>'+(active_classes[0]).name+'</forced_domain>'
                     subject_class=active_classes[0]
@@ -207,13 +217,31 @@ class Lifter:
                         return None
                     elif node.nodeType==Node.ATTRIBUTE_NODE:
                         new_class=self.__add_obj_property_instance(subject_class,rdf_name,obj_range_list[0])
+                        self.__search_class_for_data(new_class,node.nodeValue)
                         pass
-                        #new_class=self.__add_obj_property_instance()
         print '</node>'
         for el in node_list:
             self.__handle_element(el.get_xml_node(),active_classes,el.get_resource(),el.get_type(),None)
         return None
 
+    def __search_class_for_data(self,starting_class,textual_data):
+        """
+        starting_class(OWL_Class): starting point for the search
+        textual_data (string): value of the DatatypeProperty which is the object of the search
+        """
+        statement_list=[]
+        dt_props=set(self.repository.get_datatype_properties(starting_class.get_resource(),self.base_onto))
+        self.query_counter=self.query_counter+1
+        print '<dt_props class="'+starting_class.get_name()+'">'+str(dt_props)+'</dt_props>'
+        if (len(dt_props)==0):
+            return None
+        if (self.datatype_blacklisted in dt_props):
+            dt_props.remove(self.datatype_blacklisted)
+        if (len(dt_props)!=0):
+            self.__add_data_property_instance(starting_class.get_rdf_node(),dt_props.pop(),str(textual_data))
+        return None    
+
+ 
     def __child_attributes_to_resources(self,xml_node,active_classes):
         """
         Return a list of OWLResource, resolving all childs XML attributes
@@ -256,38 +284,48 @@ class Lifter:
             (string) Found URI resource
             (string) Found RDF type
         """
+        # --- Fill in info on newly added classes
+        for el in active_classes:
+            class_uri=el.get_resource()
+            if (not (class_uri in self.class_obj_properties_cache)) and (not (class_uri in self.class_dt_properties_cache)):
+                object_properties=self.repository.get_object_properties(class_uri,self.base_onto)
+                if (object_properties!=[]):
+                    self.class_obj_properties_cache[class_uri]=object_properties
+                datatype_properties=self.repository.get_datatype_properties(el.get_resource(),self.base_onto)
+                if (datatype_properties!=[]):
+                    self.class_dt_properties_cache[class_uri]=datatype_properties
         # --- Begin cache search ---
         cached_uri=None
         cached_type=None
-       # cached_uri,cached_type=self.__resolve_cached_node(node,active_classes)
+        cached_uri,cached_type=self.__resolve_cached_node(node,active_classes)
         if (cached_uri!=None) and (cached_type!=None):
+            self.cache_hit=self.cache_hit+1
+            print '<cache_hit>'+cached_uri+'</cache_hit>'
             return cached_uri,cached_type
         # --- Cache search failed, proceeding with remote search ---
+        print '<cache_miss>'+node+'</cache_miss>'
+        self.cache_miss=self.cache_miss+1
         return self.__resolve_uncached_node(node,active_classes)
 
     def __resolve_cached_node(self,node,active_classes):
         """
         Check if a node has already been resolved and it's in the cache
         """
-        result=None
-        # UML style notation search
+        for el in active_classes:
+            class_uri=el.get_resource()
+            uml_name=self.__xml_to_internal(node,class_uri)
+            plain_name=self.__xml_to_internal(node,None)
+            if class_uri in self.class_obj_properties_cache:
+                if uml_name in self.class_obj_properties_cache[class_uri]:
+                    return uml_name,self.owl_ns+'ObjectProperty'
+            if class_uri in self.class_dt_properties_cache:
+                if uml_name in self.class_dt_properties_cache[class_uri]:
+                    return uml_name,self.owl_ns+'DatatypeProperty'
         for imp in self.imports:
-            for current_class in active_classes:
-                candidate_uri=imp+'#'+self.__xml_to_internal(node,current_class.name)
-                if candidate_uri in self.resource_cache:
-                    result=self.resource_cache[candidate_uri]
-                    #print '<cache_hit>'+result.get_resource()+'</cache_hit>'
-                    return result.get_resource(),result.get_type()
-        # UML search failed
-        for imp in self.imports:
-            candidate_uri=imp+'#'+self.__xml_to_internal(node,None)
-            if candidate_uri in self.resource_cache:
-                result=self.resource_cache[candidate_uri]
-                #print '<cache_hit>'+result.get_resource()+'</cache_hit>'
-                return result.get_resource(),result.get_type()
+            candidate_uri=imp+'#'+node
+            if (candidate_uri in self.class_obj_properties_cache) or (candidate_uri in self.class_dt_properties_cache):
+                return candidate_uri,self.owl_ns+'Class'
         return None,None
-
-
 
     def __resolve_uncached_node(self,node,active_classes):
         """
@@ -296,26 +334,38 @@ class Lifter:
         # Begin searching with UML style notation
         node_onto_name=None
         node_onto_type=None
-        for class_candidate in active_classes:
-            xml_res_name=self.__xml_to_internal(node,class_candidate.name)
-            for uri, res in self.resource_cache.iteritems():
-                if (res.get_name()==xml_res_name):
-                    node_name=res.get_resource()
-                    node_type=res.get_type()
-                    break
-            if (node_onto_name is None) and (node_onto_type is None):
-                node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
-            if (node_onto_name!='') and (node_onto_name!=None) and (node_onto_type!="") and (node_onto_type!=None):
-                return node_onto_name,node_onto_type
+#        for el in active_classes:
+#            uml_name=self.__xml_to_internal(node,el.get_name()) 
+#            plain_name=self.__xml_to_internal(node,None)
+#            object_properties=self.repository.get_object_properties(el.get_resource(),self.base_onto)
+#            for prop in object_properties:
+#                prop_name=prop.split('#')[1]
+#                if (uml_name==prop_name) or (plain_name==prop_name):
+#                    return prop,self.owl_ns+'ObjectProperty'
+#            datatype_properties=self.repository.get_datatype_properties(el.get_resource(),self.base_onto)
+#            for prop in datatype_properties:
+#                prop_name=prop.split('#')[1]
+#                if (uml_name==prop_name) or (plain_name==prop_name):
+#                    return prop,self.owl_ns+'DatatypeProperty'
+
+        # UML-style search with complete URI of the class 
+        #for class_candidate in active_classes:
+#            xml_res_name=self.__xml_to_internal(node,class_candidate.get_resource())
+#            node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
+#            self.query_counter=self.query_counter+1
+#            if (node_onto_name!='') and (node_onto_name!=None) and (node_onto_type!="") and (node_onto_type!=None):
+#                return node_onto_name,node_onto_type
+#        # UML-style search with class name only
+#        for class_candidate in active_classes:
+#            xml_res_name=self.__xml_to_internal(node,class_candidate.name)
+#            node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
+#            self.query_counter=self.query_counter+1
+#            if (node_onto_name!='') and (node_onto_name!=None) and (node_onto_type!="") and (node_onto_type!=None):
+#                return node_onto_name,node_onto_type
         # UML-style search failed
         xml_res_name=self.__xml_to_internal(node,None)
-        for uri, res in self.resource_cache.iteritems():
-            if (res.get_name()==xml_res_name):
-                node_name=res.get_resource()
-                node_type=res.get_type()
-                break
-        if (node_onto_name is None) and (node_onto_type is None):
-            node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
+        node_onto_name,node_onto_type=self.repository.onto_identify(xml_res_name,self.base_onto)
+        self.query_counter=self.query_counter+1
         if (node_onto_name!='') and (node_onto_name!=None) and (node_onto_type!="") and (node_onto_type!=None):
             return node_onto_name,node_onto_type
         else:
@@ -340,14 +390,6 @@ class Lifter:
             else:
                 self.__removeWhitespaceNodes(child)
 
-    def __search_class_for_data(self,obj_property,textual_data):
-        """
-        obj_property (OWL_Property): starting point for the search
-        textual_data (string): value of the DatatypeProperty which is the object of the search
-        """
-        statement_list=[]
-        
-    
     def __add_class_instance(self,class_res,subj_node):
         """
         Add a class instance to the store
@@ -425,6 +467,10 @@ try:
         print '<source_file name="'+sys.argv[1]+'"'
         print 'ontology_name="'+sys.argv[2]+'">'
         lift_inst.lift(sys.argv[1],sys.argv[2])
+        print '<stats><node_count>'+str(lift_inst.node_counter)+'</node_count>'
+        print '<query_count>'+str(lift_inst.query_counter)+'</query_count>'
+        print '<cache_hit>'+str(lift_inst.cache_hit)+'</cache_hit>'
+        print '<cache_miss>'+str(lift_inst.cache_miss)+'</cache_miss></stats>'
         print '</source_file>'
 except KeyboardInterrupt:
     print "Called interrupt"
