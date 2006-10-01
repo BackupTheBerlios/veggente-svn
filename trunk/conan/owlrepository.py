@@ -1,22 +1,23 @@
 #!/usr/bin/python
+"""
+Veggente - owlrepository
+    Conan OWL repository
+	
+Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
-#	Veggente - owlrepository
-#	Conan OWL repository
-#	
-#	Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
-#	This program is free software; you can redistribute it and/or modify
-#	it under the terms of the GNU General Public License as published by
-#	the Free Software Foundation; either version 2 of the License, or
-#	(at your option) any later version.
-#
-#	This program is distributed in the hope that it will be useful,
-#	but WITHOUT ANY WARRANTY; without even the implied warranty of
-#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#	GNU General Public License for more details.
-#
-#	You should have received a copy of the GNU General Public License
-#	along with this program; if not, write to the Free Software
-#	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+"""
 
 from os import sys
 from repository import Repository
@@ -71,8 +72,8 @@ class OWLRepository(Repository):
 
     def add_ontology(self, uri, overwrite=False):
         """
-        uri:string : ontology uri
-        @overwrite:boolean   : if True overwrite previously stored ontology
+        uri (string): ontology uri
+        overwrite (boolean): if True overwrite previously stored ontology
         Returns:
             0 on success
             -1 on failure
@@ -106,7 +107,7 @@ class OWLRepository(Repository):
     def remove_ontology(self,uri,recursive=False):
         """
         Removes an ontology and its inferred triples
-        uri:string : ontology uri
+        uri (string): ontology uri
         Returns:
             0 on success
             -1 on failure
@@ -130,9 +131,9 @@ class OWLRepository(Repository):
         
     def add_instance_document(self, uri, ontologies=[], longterm=False, overwrite=True):
         """
-        uri:string : document uri
-        ontologies: [string]: list of ontologies referred by the document
-        overwrite:boolean   : if True overwrite previously stored ontology
+        uri (string): document uri
+        ontologies (string[]): list of ontologies referred by the document
+        overwrite (boolean): if True overwrite previously stored ontology
         Returns:
             0 on success
             -1 on failure
@@ -157,7 +158,7 @@ class OWLRepository(Repository):
     def remove_instance_document(self,uri,longterm=False):
         """
         Removes an instance document and its inferred triples
-        uri:string : document uri
+        uri (string): document uri
         Returns:
             0 on success
             -1 on failure
@@ -178,9 +179,9 @@ class OWLRepository(Repository):
     def exec_ontology_inference(self, original_uri, uri_list=[], overwrite=False):
         """
         Explode an ontology 
-        uri:string : ontology uri
-        uri_list[]:string[] : list of import uri
-        @overwrite:boolean   : if True overwrite previously inferred data
+        uri (string): ontology uri
+        uri_list (string[]): list of import uri
+        overwrite (boolean): if True overwrite previously inferred data
         Returns:
             list of inferred statements about selected ontology
         """
@@ -214,9 +215,9 @@ class OWLRepository(Repository):
 
     def exec_instance_inference(self, original_uri, uri_list=[], overwrite=False):
         """
-        uri:string : ontology uri
-        uri_list[]:string[] : list of import uri
-        @overwrite:boolean   : if True overwrite previously inferred data
+        uri (string): ontology uri
+        uri_list (string[]): list of import uri
+        overwrite (boolean): if True overwrite previously inferred data
         Returns:
             list of inferred statements about selected instance document
         """
@@ -338,7 +339,7 @@ class OWLRepository(Repository):
         query_st=RDF.Statement(subject=RDF.Uri(ontology+'#'+resource),predicate=self.__type_uri)
         self.query_counter=self.query_counter+1
         for (result,context) in self.model.find_statements_context(class_st):
-            if (str(context.uri)==ontology) or (str(context.uri)==self.__inf_prefix+ontology) or (str(context.uri) in imports):
+            if (str(context.uri) in imports):
                 return result
         return None
         
@@ -353,7 +354,7 @@ class OWLRepository(Repository):
         search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.__range_uri)
         self.query_counter=self.query_counter+1
         for (result,context) in self.model.find_statements_context(search_st):
-            if (str(context.uri)==ontology) or (str(context.uri)==self.__inf_prefix+ontology) or (str(context.uri) in imports):
+            if (str(context.uri) in imports):
                 res_list.append(str(result.object.uri))
         return res_list
 
@@ -368,7 +369,7 @@ class OWLRepository(Repository):
         search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.__domain_uri)
         self.query_counter=self.query_counter+1
         for (result,context) in self.model.find_statements_context(search_st):
-            if (str(context.uri)==ontology) or (str(context.uri)==self.__inf_prefix+ontology) or (str(context.uri) in imports):
+            if (str(context.uri) in imports):
                 res_list.append(str(result.object.uri))
         return res_list
 
