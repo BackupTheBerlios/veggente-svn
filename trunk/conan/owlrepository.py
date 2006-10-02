@@ -41,7 +41,7 @@ class OWLRepository(Repository):
     owl_classes='http://veggente.berlios.de/think/owl.n3'
 #    rdfs_classes='http://veggente.berlios.de/think/rdfs.n3'
 #    xsd_classes='http://veggente.berlios.de/think/xsd.n3'
-    owl_rules='http://veggente.berlios.de/think/owl_complete.n3'
+    owl_rules='http://veggente.berlios.de/think/owl-simple.n3'
     instance_rules='http://veggente.berlios.de/think/instance_rules.n3'
 
     # Namespaces
@@ -354,7 +354,7 @@ class OWLRepository(Repository):
         search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.__range_uri)
         self.query_counter=self.query_counter+1
         for (result,context) in self.model.find_statements_context(search_st):
-            if (str(context.uri) in imports):
+            if ((str(context.uri) in imports) and (result.object.is_resource())):
                 res_list.append(str(result.object.uri))
         return res_list
 
@@ -369,7 +369,7 @@ class OWLRepository(Repository):
         search_st=RDF.Statement(subject=RDF.Uri(resource),predicate=self.__domain_uri)
         self.query_counter=self.query_counter+1
         for (result,context) in self.model.find_statements_context(search_st):
-            if (str(context.uri) in imports):
+            if ((str(context.uri) in imports)and (result.object.is_resource())):
                 res_list.append(str(result.object.uri))
         return res_list
 

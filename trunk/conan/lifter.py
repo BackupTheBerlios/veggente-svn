@@ -48,10 +48,13 @@ class Lifter:
     __base_onto=''
     __uml_style=True
     __blank_counter=0
-    __resource_cache=None
     __imports=[]
+    # Caches for all properties that applies to a class (property domain)
     __class_dt_properties_cache={}
     __class_obj_properties_cache={}
+    # Cache for property range
+    __property_range_cache={}
+
 
     __datatype_blacklisted='http://veggente.berlios.de/ns/RIMDatatype#nullFlavor'
 
@@ -138,12 +141,10 @@ class Lifter:
         # Handle OWL types "Class" and "DatatypeProperty"
         if (rdf_type==self.__owl_ns+'Class'):
             new_class=self.__add_class_instance(rdf_name,known_subject)
-            self.__resource_cache[rdf_name]=OWL_Class(rdf_name,None)
             if (new_class!=None):
                 print '<Class>'+rdf_name+'</Class>'
                 active_classes.insert(0,new_class)
         elif (rdf_type==self.__owl_ns+'DatatypeProperty'):
-            self.__resource_cache[rdf_name]=OWL_Property(rdf_name,rdf_type,None)
             if (node.nodeType==Node.ELEMENT_NODE):
                 for n in node.childNodes:
                     if n.nodeType==Node.TEXT_NODE:
@@ -165,20 +166,22 @@ class Lifter:
         
         # Handle OWL type "ObjectProperty"
         if (rdf_type==self.__owl_ns+'ObjectProperty'):
-            print '<Object>'+rdf_name+'</Object>'
+            #print '<Object>'+rdf_name+'</Object>'
             subject_class=None
             target_class=None
-            obj_prop=OWL_Property(rdf_name,rdf_type,None)
-            obj_range_list=self.__repository.get_property_range(rdf_name,self.__base_onto)
+            obj_range_list=None
+            if rdf_name in self.__property_range_cache:
+                obj_range_list=self.__property_range_cache[rdf_name]
+            else:
+                obj_range_list=self.__repository.get_property_range(rdf_name,self.__base_onto)
+                self.__property_range_cache[rdf_name]=obj_range_list
+            # Re-consider how to treat obj domains. There exists A CACHE!
             obj_domain_list=self.__repository.get_property_domain(rdf_name,self.__base_onto)
-            obj_prop.set_ranges(obj_range_list)
-            obj_prop.set_domains(obj_domain_list)
-            self.__resource_cache[rdf_name]=obj_prop
             # Subject search
             if (obj_range_list==[]):
                 print '<no_range_warning/>\n</node>'
             else:
-                print '<range>'+str(obj_range_list)+'</range>'
+                #print '<range>'+str(obj_range_list)+'</range>'
                 # --- Search for a subject ---
                 if (active_classes==[]) and (len(obj_domain_list)==0):
                     # 1: The corresponding xml element is the root element
@@ -190,7 +193,7 @@ class Lifter:
                     subject_class=active_classes[0]
                 else:
                     # 3: Look if an active class is among the domains of the property
-                    print '<domain>'+str(obj_domain_list)+'</domain>'
+                    #print '<domain>'+str(obj_domain_list)+'</domain>'
                     for candidate_class in active_classes:
                         if candidate_class.get_resource() in obj_domain_list:
                             subject_class=candidate_class
@@ -226,53 +229,86 @@ class Lifter:
                         print '</node>'
                         return None
                     elif node.nodeType==Node.ATTRIBUTE_NODE:
-                        new_class=self.__add_obj_property_instance(subject_class,rdf_name,obj_range_list[0])
-                        #self.__search_class_for_data(new_class,node.nodeValue)
-                        pass
+                        print 'Searching from: '+rdf_name
+                        new_obj=self.__search_class_for_data(obj_range_list[0],node.nodeValue)
+                        if new_obj!=None:
+                            print new_obj
+                            self.__add_obj_property_instance(subject_class,rdf_name,new_obj.get_rdf_node())
+                        print '</node>'
+                        return None
         print '</node>'
         for el in node_list:
             self.__handle_element(el.get_xml_node(),active_classes,el.get_resource(),el.get_type(),None)
         return None
 
-    def __search_class_for_data(self,starting_class,textual_data):
+    def __search_class_for_data(self,starting_class,textual_data,path=[]):
         """
         starting_class(OWL_Class): starting point for the search
         textual_data (string): value of the DatatypeProperty which is the object of the search
         """
         dt_props=None
         obj_props=None
-        current_class=starting_class
-        current_class_uri=starting_class.get_resource()
-        found=False
+        current_class=None
+        current_class_uri=None
+        if (textual_data is None) or (starting_class is None):
+            return None
+        if (type(starting_class)==OWL_Class):
+            current_class=starting_class
+            current_class_uri=starting_class.get_resource()
+        elif (type(starting_class==str)):
+            current_class_uri=starting_class
+        if current_class_uri in path:
+            # Found loop, aborting
+            return None
         self.__query_counter=self.__query_counter+1
-
-        # Update DatatypeProperty cache if necessary
+        print 'Current class: '+current_class_uri
+        # --- DatatypeProperty cache update ---
         if current_class_uri in self.__class_dt_properties_cache:
             dt_props=self.__class_dt_properties_cache[current_class_uri]
         else:
             dt_props=self.__repository.get_datatype_properties(current_class_uri,self.__base_onto)
             self.__class_dt_properties_cache[current_class_uri]=dt_props
-
-        if (self.datatype_blacklisted in dt_props):
-            dt_props.remove(self.datatype_blacklisted)
-        if (len(dt_props)!=0):
-            self.__add_data_property_instance(current_class.get_rdf_node(),dt_props[0],str(textual_data))
-            return True
+        # ---
+        for p in dt_props:
+            if p!=self.__datatype_blacklisted:
+                if current_class is None:
+                    current_class=self.__add_class_instance(current_class_uri)
+                self.__add_data_property_instance(current_class.get_rdf_node(),p,str(textual_data))
+                print 'Found datatype: '+str(p)+' for class '+str(current_class)
+                return current_class
+        print 'Datatype search in '+current_class_uri+' failed'
+        # --- ObjectProperty cache update ---
+        if current_class_uri in self.__class_obj_properties_cache:
+            obj_props=self.__class_obj_properties_cache[current_class_uri]
         else:
-            # Update ObjectProperty cache if necessary
-            if current_class_uri in self.__class_obj_properties_cache:
-                obj_props=self.__class_obj_properties_cache[current_class_uri]
+            obj_props=self.__repository.get_object_properties(current_class_uri,self.__base_onto)
+            self.__class_obj_properties_cache[current_class_uri]=obj_props
+        # ---
+        for prop in self.__class_obj_properties_cache[current_class_uri]:
+            print 'Selected property: '+prop
+            ranges=None
+            # --- Range Cache update ---
+            if prop in self.__property_range_cache:
+                ranges=self.__property_range_cache[prop]
             else:
-                obj_props=self.__repository.get_datatype_properties(current_class_uri,self.__base_onto)
-                self.__class_obj_properties_cache[current_class_uri]=obj_props
-            for prop in self.__class_obj_properties_cache[current_class_uri]:
                 ranges=self.__repository.get_property_range(prop,self.__base_onto)
-                for r in ranges:
-                    new_class=self.__add_obj_property_instance(subject_class,rdf_name,obj_range_list[0])
-                    if (self.__search_class_for_data(new_class,node.nodeValue)==True):
-                        return True
-                    else:
-                        disfa
+                self.__property_range_cache[prop]=ranges
+            # ---
+            # Recursion step
+            if (len(ranges)>1):
+                print 'Warning: multiple RANGES'
+            for r in ranges:
+                print 'Path: range '+r
+                path.append(current_class_uri)
+                obj_class=self.__search_class_for_data(r,textual_data,path)
+                if obj_class!=None:
+                    current_class=self.__add_class_instance(current_class_uri)
+                    print 'OP instance: \n subject='+str(current_class)+' predicate='+prop+' object='+str(obj_class)
+                    self.__add_obj_property_instance(current_class,prop,obj_class.get_rdf_node())
+                    return current_class
+                else:
+                    path.remove(current_class_uri)
+        return None
 
         
         
@@ -323,6 +359,7 @@ class Lifter:
                 datatype_properties=self.__repository.get_datatype_properties(el.get_resource(),self.__base_onto)
                 if (datatype_properties!=[]):
                     self.__class_dt_properties_cache[class_uri]=datatype_properties
+        return None
 
     def __resolve_node(self,node,active_classes):
         """
@@ -448,7 +485,7 @@ class Lifter:
             else:
                 self.__removeWhitespaceNodes(child)
 
-    def __add_class_instance(self,class_res,subj_node):
+    def __add_class_instance(self,class_res,subj_node=None):
         """
         Add a class instance to the store
         Parameters:
@@ -484,6 +521,7 @@ class Lifter:
         object=None
         new_class_instance=None
         if (subject is None) or (property_res is None):
+            print 'ObjProp instance failed'
             return None
         if isinstance(dest,RDF.Node):
             object=dest
