@@ -5,7 +5,7 @@ This module implements some basic bits of the web architecture:
 dereferencing a URI to get a document, with content negotiation,
 and deciding on the basis of the Internet Content Type what to do with it.
 
-$Id: webAccess.py,v 1.25 2005/10/24 16:58:38 timbl Exp $
+$Id: webAccess.py,v 1.26 2006/08/02 16:59:14 syosi Exp $
 
 
 Web access functionality building on urllib2
@@ -16,6 +16,8 @@ import sys, os
 
 #import urllib
 import urllib2, urllib  # Python standard
+
+from why import newTopLevelFormula
 
 import uripath # http://www.w3.org/2000/10/swap/uripath.py
 import diag
@@ -45,15 +47,15 @@ def cacheHack(addr):
     local = "/devel/WWW/"
     suffixes = [ "", ".rdf", ".n3" ]
     if addr.startswith(real):
-            rest = local + addr[len(real):]
-            for s in suffixes:
-                    fn = rest + s
-                    try:
-                        os.stat(fn)
-                        progress("Offline: Using local copy %s" % fn)
-                        return "file://" + fn
-                    except OSError:
-                        continue
+        rest = local + addr[len(real):]
+        for s in suffixes:
+            fn = rest + s
+            try:
+                os.stat(fn)
+                progress("Offline: Using local copy %s" % fn)
+                return "file://" + fn
+            except OSError:
+                continue
     return addr
                 
 def urlopenForRDF(addr, referer=None):
@@ -79,7 +81,7 @@ def urlopenForRDF(addr, referer=None):
     return q
 
 def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
-                flags="", referer=None, why=None):
+                flags="", referer=None, why=None, topLevel=False):
     """Get and parse document.  Guesses format if necessary.
 
     uri:      if None, load from standard input.
@@ -94,14 +96,22 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
     """
 #    if referer is None:
 #        raise RuntimeError("We are trying to force things to include a referer header")
-
     # Begin of Redland pseudo-vfs code
     # Alessio Carenini
-    if ((uri!=None) and (':' in uri)) and not (uri.startswith('http:/') or uri.startswith('file:/') or uri.startswith('ftp:/')):
-        print 'Selected '+uri
+    if (uri!=None) and (type(uri)!=str):
+        from redland_vfs import VFS
+        vfs=VFS(None)
+        if openFormula != None:
+            F = openFormula
+        else:
+            F = store.newFormula()
+        F=vfs.parse(uri,store,F,asIfFrom)
+        return F
+    elif ((uri!=None) and (':' in uri)) and not (uri.startswith('http:/') or uri.startswith('file:/') or uri.startswith('ftp:/')):
         db_path=uri.split('+')[0]
         res_path=uri.split('+')[1]
         if diag.chatty_flag>40:
+            print 'Selected '+uri
             print "Using Redland pseudo vfs on "+db_path
             print "Selected resource: "+res_path
         from redland_vfs import VFS
@@ -137,8 +147,8 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
                 if diag.chatty_flag > 9:
                     progress("Recieved Content-type: " + `receivedContentType` + " for "+addr)
                 if receivedContentType.find('xml') >= 0 or (
-                        receivedContentType.find('rdf')>=0
-                        and not (receivedContentType.find('n3')>=0)  ):
+                         receivedContentType.find('rdf')>=0
+                         and not (receivedContentType.find('n3')>=0)  ):
                     guess = "application/rdf+xml"
                 elif receivedContentType.find('n3') >= 0:
                     guess = "text/rdf+n3"
@@ -174,6 +184,8 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
             F = openFormula
         else:
             F = store.newFormula()
+        if topLevel:
+            newTopLevelFormula(F)
         import os
         if guess == "x-application/sparql":
             if diag.chatty_flag > 49: progress("Parsing as SPARQL")
@@ -185,8 +197,8 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
             F = p.parse(sparql_parser.start).close()
         elif guess == 'application/rdf+xml':
             if diag.chatty_flag > 49: progress("Parsing as RDF")
-#	import sax2rdf, xml.sax._exceptions
-#	p = sax2rdf.RDFXMLParser(store, F,  thisDoc=asIfFrom, flags=flags)
+#       import sax2rdf, xml.sax._exceptions
+#       p = sax2rdf.RDFXMLParser(store, F,  thisDoc=asIfFrom, flags=flags)
             if flags == 'rdflib' or int(os.environ.get("CWM_RDFLIB", 0)):
                 parser = 'rdflib'
                 flags = ''

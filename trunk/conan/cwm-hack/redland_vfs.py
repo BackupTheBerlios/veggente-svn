@@ -43,7 +43,10 @@ class VFS(object):
                 mysql:username:password@host:port/db_name
             While a SQLite db uri is in the form
                 sqlite:db_name://db_dir
+            None if you plan to fetch data from an in-memory storage
         """
+        if db_uri is None:
+            return None
         db_type=db_uri.split(':')[0]
         self.db_uri=db_uri[db_uri.find(':')+1:]
         # Database name   
@@ -80,14 +83,19 @@ class VFS(object):
         self.store=cwm_store
         self.formula=cwm_model
         self.asIfFrom=as_if_from
-        
-        if (uri==None) or (uri==''): 
-            return cwm_model
-        context_stream=self.model.as_stream_context(RDF.Node(RDF.Uri(uri)))
-        if context_stream is None:
-            print "URI"+uri+"Not found"
-        else:
-            for (st,con) in context_stream:
+        if (uri is None): 
+            return self.formula
+        if type(uri)==str:
+            if (uri==None) or (uri==''): 
+                return cwm_model
+            context_stream=self.model.as_stream_context(RDF.Node(RDF.Uri(uri)))
+            if context_stream is None:
+                print "URI"+uri+"Not found"
+            else:
+                for (st,con) in context_stream:
+                    self.formula.add(self.convert(st.subject),self.convert(st.predicate),self.convert(st.object))
+        elif (type(uri)==RDF.Model) or (isinstance(uri,RDF.Stream)):
+            for st in uri:
                 self.formula.add(self.convert(st.subject),self.convert(st.predicate),self.convert(st.object))
         return self.formula
 

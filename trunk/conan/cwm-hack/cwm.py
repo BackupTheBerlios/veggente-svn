@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.184 2006/03/09 06:28:53 vkolovsk Exp $
+$Id: cwm.py,v 1.190 2006/08/09 23:20:42 syosi Exp $
 
 Closed World Machine
 
@@ -46,13 +46,13 @@ import string, sys
 
 # From  http://www.w3.org/2000/10/swap/
 from swap import  diag
-from swap.why import  explainFormula
+from swap.why import  explainFormula, newTopLevelFormula
 from swap.diag import verbosity, setVerbosity, progress, tracking, setTracking
 from swap.uripath import join
 from swap.webAccess import urlopenForRDF, load, sandBoxed 
 
-from swap import  notation3    	# N3 parsers and generators
-from swap import  toXML 		#  RDF generator
+from swap import  notation3     # N3 parsers and generators
+from swap import  toXML                 #  RDF generator
 
 from swap.why import BecauseOfCommandLine
 from swap.query import think, applyRules, applyQueries, applySparqlQueries, testIncludes
@@ -63,7 +63,7 @@ from swap import  llyn
 from swap import  RDFSink
 from swap.stringwriter import StringWriter
 
-cvsRevision = "$Revision: 1.184 $"
+cvsRevision = "$Revision: 1.190 $"
     
             
 
@@ -105,6 +105,7 @@ steps, in order left to right:
 --think       as -rules but continue until no more rule matches (or forever!)
 --engine=otter use otter (in your $PATH) instead of llyn for linking, etc
 --why         Replace the store with an explanation of its contents
+--why=u       proof tries to be shorter
 --mode=flags  Set modus operandi for inference (see below)
 --reify       Replace the statements in the store with statements describing them.
 --dereify     Undo the effects of --reify
@@ -112,7 +113,7 @@ steps, in order left to right:
 --unflatten   Undo the effects of --flatten
 --think=foo   as -apply=foo but continue until no more rule matches (or forever!)
 --purge       Remove from store any triple involving anything in class log:Chaff
---data	      Remove all except plain RDF triples (formulae, forAll, etc)
+--data        Remove all except plain RDF triples (formulae, forAll, etc)
 --strings     Dump :s to stdout ordered by :k whereever { :k log:outputString :s }
 --crypto      Enable processing of crypto builtin functions. Requires python crypto.
 --help        print this message
@@ -151,7 +152,8 @@ the closure under the operation of looking up:
  i   any owl:imports documents
  r   any doc:rules documents
  E   errors are ignored --- This is independant of --mode=E
- 
+
+ n   Normalize IRIs to URIs
  e   Smush together any nodes which are = (owl:sameAs)
 
 See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
@@ -180,6 +182,7 @@ rdf/xml files. Note that this requires rdflib.
         option_outputStyle = "-best"
         _gotInput = 0     #  Do we not need to take input from stdin?
         option_meta = 0
+        option_normalize_iri = 0
         
         option_flags = { "rdf":"l", "n3":"", "think":"", "sparql":""}
             # RDF/XML serializer can't do list ("collection") syntax.
@@ -187,6 +190,7 @@ rdf/xml files. Note that this requires rdflib.
         option_quiet = 0
         option_with = None  # Command line arguments made available to N3 processing
         option_engine = "llyn"
+        option_why = ""
         
         _step = 0           # Step number used for metadata
         _genid = 0
@@ -202,7 +206,7 @@ rdf/xml files. Note that this requires rdflib.
         _outURI = _baseURI
         option_baseURI = _baseURI     # To start with - then tracks running base
         
-        #  First pass on command line		- - - - - - - P A S S  1
+        #  First pass on command line           - - - - - - - P A S S  1
         
         for argnum in range(1,len(fargs)):  # options after script name
             arg = fargs[argnum]
@@ -242,7 +246,8 @@ rdf/xml files. Note that this requires rdflib.
             elif _lhs == "-mode":
                 option_flags["think"] = _rhs
             elif _lhs == "-closure":
-                pass
+                if "n" in _rhs:
+                    option_normalize_iri = 1
             #elif _lhs == "-solve":
             #    fargs[argnum+1:argnum+1] = ['-think', '-filter=' + _rhs]
             elif _lhs == "-language":
@@ -254,14 +259,20 @@ rdf/xml files. Note that this requires rdflib.
             elif arg == "-quiet": option_quiet = 1
             elif arg == "-pipe": option_pipe = 1
             elif arg == "-crypto": option_crypto = 1
+            elif _lhs == "-why":
+                diag.tracking=1
+                diag.setTracking(1)
+                option_why = _rhs
             elif arg == "-why":
                 diag.tracking=1
                 diag.setTracking(1)
+                option_why = ""
             elif arg == "-track":
                 diag.tracking=1
                 diag.setTracking(1)
             elif arg == "-bySubject": option_outputStyle = arg
             elif arg == "-no": option_outputStyle = "-no"
+            elif arg == "-debugString": option_outputStyle = "-debugString"
             elif arg == "-strings": option_outputStyle = "-no"
             elif arg == "-sparqlResults": option_outputStyle = "-no"
             elif arg == "-triples" or arg == "-ntriples":
@@ -301,16 +312,22 @@ rdf/xml files. Note that this requires rdflib.
         # Between passes, prepare for processing
         setVerbosity(0)
 
+        if not option_normalize_iri:
+            llyn.canonical = lambda x: x
+
         #  Base defauts
         if option_baseURI == _baseURI:  # Base not specified explicitly - special case
             if _outURI == _baseURI:      # Output name not specified either
                 if _gotInput == 1:  # But input file *is*, 
                     _outURI = option_inputs[0]        # Just output to same URI
                     option_baseURI = _outURI          # using that as base.
+                if diag.tracking:
+                    _outURI = RDFSink.runNamespace()[:-1]
+                    option_baseURI = _outURI
 
         #  Fix the output sink
         if option_format == "rdf":
-            _outSink = toXML.ToRDF(stream, _outURI, base=option_baseURI, 						flags=option_flags["rdf"])
+            _outSink = toXML.ToRDF(stream, _outURI, base=option_baseURI,                                            flags=option_flags["rdf"])
         elif option_format == "n3" or option_format == "sparql":
             _outSink = notation3.ToN3(stream.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_flags["n3"])
@@ -331,7 +348,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.184 2006/03/09 06:28:53 vkolovsk Exp $"
+        version = "$Id: cwm.py,v 1.190 2006/08/09 23:20:42 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -359,18 +376,19 @@ rdf/xml files. Note that this requires rdflib.
 
             if  _gotInput: 
                 workingContext = _store.newFormula(option_inputs [0]+"#_work")
+                newTopLevelFormula(workingContext)
             else: # default input
                 if option_first_format is None: option_first_format = option_format
                 ContentType={ "rdf": "application/xml+rdf", "n3":
                                     "text/rdf+n3" }[option_first_format]
                 workingContext = _store.load(
-    #			    asIfFrom = join(_baseURI, ".stdin"),
+    #                       asIfFrom = join(_baseURI, ".stdin"),
                                 asIfFrom = _baseURI,
                                 contentType = ContentType,
                                 flags = option_flags[option_first_format],
                                 remember = 0,
                                 referer = "",
-                                why = myReason)
+                                why = myReason, topLevel=True)
                 workingContext.reopen()
         workingContext.stayOpen = 1 # Never canonicalize this. Never share it.
         
@@ -391,10 +409,13 @@ rdf/xml files. Note that this requires rdflib.
             global workingContext
             global r
             workingContext = workingContext.canonicalize()
+            _store._formulaeOfLength = {}
             filterContext = _store.newFormula()
+            newTopLevelFormula(filterContext)
             _store.load(_uri, openFormula=filterContext,
                                         why=myReason, referer="")
             _newContext = _store.newFormula()
+            newTopLevelFormula(_newContext)
             applyRules(workingContext, filterContext, _newContext)
             workingContext.close()
             workingContext = _newContext
@@ -481,7 +502,10 @@ rdf/xml files. Note that this requires rdflib.
                 option_quiet = 1
 
             elif arg == "-bySubject":
-                option_outputStyle = arg            
+                option_outputStyle = arg
+
+            elif arg == "-debugString":
+                option_outputStyle = arg
 
             elif arg[:7] == "-apply=":
                 workingContext = workingContext.canonicalize()
@@ -489,7 +513,7 @@ rdf/xml files. Note that this requires rdflib.
                 filterContext = _store.load(_uri, 
                             flags=option_flags[option_format],
                             referer="",
-                            why=myReason)
+                            why=myReason, topLevel=True)
                 workingContext.reopen()
                 applyRules(workingContext, filterContext);
 
@@ -499,7 +523,7 @@ rdf/xml files. Note that this requires rdflib.
                 filterContext = _store.load(_uri, 
                             flags=option_flags[option_format],
                             referer="",
-                            why=myReason)
+                            why=myReason, topLevel=True)
                 workingContext.reopen()
                 applyRules(workingContext, filterContext);
 
@@ -509,7 +533,7 @@ rdf/xml files. Note that this requires rdflib.
                 filterContext = _store.load(_uri, 
                             flags=option_flags[option_format],
                             referer="",
-                            why=myReason)
+                            why=myReason, topLevel=True)
                 workingContext.reopen()
                 patch(workingContext, filterContext);
 
@@ -521,7 +545,7 @@ rdf/xml files. Note that this requires rdflib.
                 filterContext = _store.load(_uri, 
                             flags=option_flags[option_format],
                             referer="",
-                            why=myReason)
+                            why=myReason, topLevel=True)
                 _newContext = _store.newFormula()
                 applyQueries(workingContext, filterContext, _newContext)
                 workingContext.close()
@@ -536,13 +560,13 @@ rdf/xml files. Note that this requires rdflib.
                 _newContext.stayOpen = True
                 sparql_query_formula = filterContext
                 applySparqlQueries(workingContext, filterContext, _newContext)
-#		workingContext.close()
+#               workingContext.close()
                 workingContext = _newContext
 
-            elif arg == "-why":
+            elif _lhs == "-why" or arg == "-why":
                 workingContext.stayOpen = False
                 workingContext = workingContext.close()
-                workingContext = explainFormula(workingContext)
+                workingContext = explainFormula(workingContext, option_why)
 
             elif arg == "-dump":
                 
@@ -550,7 +574,6 @@ rdf/xml files. Note that this requires rdflib.
                 progress("\nDump of working formula:\n" + workingContext.debugString())
                 
             elif arg == "-purge":
-                
                 workingContext.reopen()
                 _store.purge(workingContext)
                 
@@ -566,7 +589,7 @@ rdf/xml files. Note that this requires rdflib.
 
             elif arg[:7] == "-think=":
                 
-                filterContext = _store.load(_uri, referer="", why=myReason)
+                filterContext = _store.load(_uri, referer="", why=myReason, topLevel=True)
                 if verbosity() > 4:
                     progress( "Input rules to --think from " + _uri)
                 workingContext.reopen()
@@ -580,7 +603,8 @@ rdf/xml files. Note that this requires rdflib.
             elif _lhs == "-engine":
                 option_engine = _rhs
                 
-            elif arg == "-think":  
+            elif arg == "-think":
+                workingContext.isWorkingContext = True
                 think(workingContext, mode=option_flags["think"])
 
             elif arg == '-rete':
@@ -701,6 +725,8 @@ rdf/xml files. Note that this requires rdflib.
                     _store.dumpBySubject(workingContext, _outSink)
                 elif option_outputStyle == "-no":
                     pass
+                elif option_outputStyle == "-debugString":
+                    print workingContext.debugString()
                 else:  # "-best"
                     _store.dumpNested(workingContext, _outSink,
                             flags=option_flags[option_format])
