@@ -210,104 +210,107 @@ rdf/xml files. Note that this requires rdflib.
         
         for argnum in range(1,len(fargs)):  # options after script name
             arg = fargs[argnum]
-            if arg.startswith("--"): arg = arg[1:]   # Chop posix-style -- to -
+            if type(arg)!=str: # If arg is not a string, jump to second stage
+                pass
+            else:
+                if arg.startswith("--"): arg = arg[1:]   # Chop posix-style -- to -
 #            _equals = string.find(arg, "=")
-            _lhs = ""
-            _rhs = ""
-            try:
-                [_lhs,_rhs]=arg.split('=',1)
+                _lhs = ""
+                _rhs = ""
                 try:
-                    _uri = join(option_baseURI, _rhs)
-                except ValueError:
-                    _uri = _rhs
-            except ValueError: pass
-            if arg == "-ugly": option_outputStyle = arg
-            elif _lhs == "-base": option_baseURI = _uri
-            elif arg == "-rdf":
-                option_format = "rdf"
-                if option_first_format == None:
-                    option_first_format = option_format 
-                option_need_rdf_sometime = 1
-            elif _lhs == "-rdf":
-                option_format = "rdf"
-                if option_first_format == None:
-                    option_first_format = option_format 
-                option_flags["rdf"] = _rhs
-                option_need_rdf_sometime = 1
-            elif arg == "-n3":
-                option_format = "n3"
-                if option_first_format == None:
-                    option_first_format = option_format 
-            elif _lhs == "-n3":
-                option_format = "n3"
-                if option_first_format == None:
-                    option_first_format = option_format 
-                option_flags["n3"] = _rhs
-            elif _lhs == "-mode":
-                option_flags["think"] = _rhs
-            elif _lhs == "-closure":
-                if "n" in _rhs:
-                    option_normalize_iri = 1
-            #elif _lhs == "-solve":
-            #    fargs[argnum+1:argnum+1] = ['-think', '-filter=' + _rhs]
-            elif _lhs == "-language":
-                option_format = _rhs
-                if option_first_format == None:
-                    option_first_format = option_format
-            elif _lhs == "-languageOptions":
-                option_flags[option_format] = _rhs
-            elif arg == "-quiet": option_quiet = 1
-            elif arg == "-pipe": option_pipe = 1
-            elif arg == "-crypto": option_crypto = 1
-            elif _lhs == "-why":
-                diag.tracking=1
-                diag.setTracking(1)
-                option_why = _rhs
-            elif arg == "-why":
-                diag.tracking=1
-                diag.setTracking(1)
-                option_why = ""
-            elif arg == "-track":
-                diag.tracking=1
-                diag.setTracking(1)
-            elif arg == "-bySubject": option_outputStyle = arg
-            elif arg == "-no": option_outputStyle = "-no"
-            elif arg == "-debugString": option_outputStyle = "-debugString"
-            elif arg == "-strings": option_outputStyle = "-no"
-            elif arg == "-sparqlResults": option_outputStyle = "-no"
-            elif arg == "-triples" or arg == "-ntriples":
-                option_format = "n3"
-                option_flags["n3"] = "usbpartanev"
-                option_outputStyle = "-bySubject"
-                option_quiet = 1
-            elif _lhs == "-outURI": option_outURI = _uri
-            elif _lhs == "-chatty":
-                setVerbosity(int(_rhs))
-            elif arg[:7] == "-apply=": pass
-            elif arg[:7] == "-patch=": pass
-            elif arg == "-reify": option_reify = 1
-            elif arg == "-flat": option_flat = 1
-            elif arg == "-help":
-                print doCommand.__doc__
-                print notation3.ToN3.flagDocumentation
-                print toXML.ToRDF.flagDocumentation
-                try:
-                    from swap import  sax2rdf      # RDF1.0 syntax parser to N3 RDF stream
-                    print sax2rdf.RDFXMLParser.flagDocumentation
-                except:
-                    pass
-                return
-            elif arg == "-revision":
-                progress( "cwm=",cvsRevision, "llyn=", llyn.cvsRevision)
-                return
-            elif arg == "-with":
-                option_with = fargs[argnum+1:] # The rest of the args are passed to n3
-                break
-            elif arg[0] == "-": pass  # Other option
-            else :
-                option_inputs.append(join(option_baseURI, arg))
-                _gotInput = _gotInput + 1  # input filename
-            
+                    [_lhs,_rhs]=arg.split('=',1)
+                    try:
+                        _uri = join(option_baseURI, _rhs)
+                    except ValueError:
+                        _uri = _rhs
+                except ValueError: pass
+                if arg == "-ugly": option_outputStyle = arg
+                elif _lhs == "-base": option_baseURI = _uri
+                elif arg == "-rdf":
+                    option_format = "rdf"
+                    if option_first_format == None:
+                        option_first_format = option_format 
+                    option_need_rdf_sometime = 1
+                elif _lhs == "-rdf":
+                    option_format = "rdf"
+                    if option_first_format == None:
+                        option_first_format = option_format 
+                    option_flags["rdf"] = _rhs
+                    option_need_rdf_sometime = 1
+                elif arg == "-n3":
+                    option_format = "n3"
+                    if option_first_format == None:
+                        option_first_format = option_format 
+                elif _lhs == "-n3":
+                    option_format = "n3"
+                    if option_first_format == None:
+                        option_first_format = option_format 
+                    option_flags["n3"] = _rhs
+                elif _lhs == "-mode":
+                    option_flags["think"] = _rhs
+                elif _lhs == "-closure":
+                    if "n" in _rhs:
+                        option_normalize_iri = 1
+                #elif _lhs == "-solve":
+                #    fargs[argnum+1:argnum+1] = ['-think', '-filter=' + _rhs]
+                elif _lhs == "-language":
+                    option_format = _rhs
+                    if option_first_format == None:
+                        option_first_format = option_format
+                elif _lhs == "-languageOptions":
+                    option_flags[option_format] = _rhs
+                elif arg == "-quiet": option_quiet = 1
+                elif arg == "-pipe": option_pipe = 1
+                elif arg == "-crypto": option_crypto = 1
+                elif _lhs == "-why":
+                    diag.tracking=1
+                    diag.setTracking(1)
+                    option_why = _rhs
+                elif arg == "-why":
+                    diag.tracking=1
+                    diag.setTracking(1)
+                    option_why = ""
+                elif arg == "-track":
+                    diag.tracking=1
+                    diag.setTracking(1)
+                elif arg == "-bySubject": option_outputStyle = arg
+                elif arg == "-no": option_outputStyle = "-no"
+                elif arg == "-debugString": option_outputStyle = "-debugString"
+                elif arg == "-strings": option_outputStyle = "-no"
+                elif arg == "-sparqlResults": option_outputStyle = "-no"
+                elif arg == "-triples" or arg == "-ntriples":
+                    option_format = "n3"
+                    option_flags["n3"] = "usbpartanev"
+                    option_outputStyle = "-bySubject"
+                    option_quiet = 1
+                elif _lhs == "-outURI": option_outURI = _uri
+                elif _lhs == "-chatty":
+                    setVerbosity(int(_rhs))
+                elif arg[:7] == "-apply=": pass
+                elif arg[:7] == "-patch=": pass
+                elif arg == "-reify": option_reify = 1
+                elif arg == "-flat": option_flat = 1
+                elif arg == "-help":
+                    print doCommand.__doc__
+                    print notation3.ToN3.flagDocumentation
+                    print toXML.ToRDF.flagDocumentation
+                    try:
+                        from swap import  sax2rdf      # RDF1.0 syntax parser to N3 RDF stream
+                        print sax2rdf.RDFXMLParser.flagDocumentation
+                    except:
+                        pass
+                    return
+                elif arg == "-revision":
+                    progress( "cwm=",cvsRevision, "llyn=", llyn.cvsRevision)
+                    return
+                elif arg == "-with":
+                    option_with = fargs[argnum+1:] # The rest of the args are passed to n3
+                    break
+                elif arg[0] == "-": pass  # Other option
+                else :
+                    option_inputs.append(join(option_baseURI, arg))
+                    _gotInput = _gotInput + 1  # input filename
+                
 
         # Between passes, prepare for processing
         setVerbosity(0)
@@ -425,25 +428,13 @@ rdf/xml files. Note that this requires rdflib.
                 
         for arg in fargs[1:]:  # Command line options after script name
             if verbosity()>5: progress("Processing %s." % (arg))
-            if arg.startswith("--"): arg = arg[1:]   # Chop posix-style -- to -
-            _equals = string.find(arg, "=")
-            _lhs = ""
-            _rhs = ""
-            if _equals >=0:
-                _lhs = arg[:_equals]
-                _rhs = arg[_equals+1:]
-            try:
-                _uri = join(option_baseURI, _rhs)
-            except ValueError:
-                _uri =_rhs
-            if arg[0] != "-":
-                _inputURI = join(option_baseURI, arg)
-                assert ':' in _inputURI
+            if type(arg)!=str: # If arg is not a string, pass it directly to loader
                 ContentType={ "rdf": "application/xml+rdf", "n3":
                                 "text/rdf+n3",
                               "sparql": "x-application/sparql"}[option_format]
-
-                if not option_pipe: workingContext.reopen()
+                if not option_pipe: 
+                    workingContext.reopen()
+                _inputURI=arg
                 load(_store, _inputURI,
                             openFormula=workingContext,
                             contentType =ContentType,
@@ -452,257 +443,285 @@ rdf/xml files. Note that this requires rdflib.
                             why=myReason)
 
                 _gotInput = 1
-
-            elif arg == "-help":
-                pass  # shouldn't happen
-            elif arg == "-revision":
-                pass
-            elif _lhs == "-base":
-                option_baseURI = _uri
-                if verbosity() > 10: progress("Base now "+option_baseURI)
-
-            elif arg == "-ugly":
-                option_outputStyle = arg            
-
-            elif arg == "-crypto": pass
-            elif arg == "-pipe": pass
-            elif _lhs == "-outURI": option_outURI = _uri
-
-            elif arg == "-rdf": option_format = "rdf"
-            elif _lhs == "-rdf":
-                option_format = "rdf"
-                option_flags["rdf"] = _rhs
-            elif _lhs == "-mode":
-                option_flags["think"] = _rhs
-            elif _lhs == "-closure":
-                workingContext.setClosureMode(_rhs)
-            elif arg == "-n3": option_format = "n3"
-            elif _lhs == "-n3":
-                option_format = "n3"
-                option_flags["n3"] = _rhs
-            elif _lhs == "-language":
-                option_format = _rhs
-                if option_first_format == None:
-                    option_first_format = option_format
-            elif _lhs == "-languageOptions":
-                option_flags[option_format] = _lhs
-            elif arg == "-quiet" : option_quiet = 1            
-            elif _lhs == "-chatty": setVerbosity(int(_rhs))
-            elif arg[:7] == "-track=":
-                diag.tracking = int(_rhs)
-                
-            elif option_pipe: ############## End of pipable options
-                print "# Command line error: %s illegal option with -pipe", arg
-                break
-
-            elif arg == "-triples" or arg == "-ntriples":
-                option_format = "n3"
-                option_flags["n3"] = "spartan"
-                option_outputStyle = "-bySubject"
-                option_quiet = 1
-
-            elif arg == "-bySubject":
-                option_outputStyle = arg
-
-            elif arg == "-debugString":
-                option_outputStyle = arg
-
-            elif arg[:7] == "-apply=":
-                workingContext = workingContext.canonicalize()
-                
-                filterContext = _store.load(_uri, 
-                            flags=option_flags[option_format],
-                            referer="",
-                            why=myReason, topLevel=True)
-                workingContext.reopen()
-                applyRules(workingContext, filterContext);
-
-            elif arg[:7] == "-apply=":
-                workingContext = workingContext.canonicalize()
-                
-                filterContext = _store.load(_uri, 
-                            flags=option_flags[option_format],
-                            referer="",
-                            why=myReason, topLevel=True)
-                workingContext.reopen()
-                applyRules(workingContext, filterContext);
-
-            elif arg[:7] == "-patch=":
-                workingContext = workingContext.canonicalize()
-                
-                filterContext = _store.load(_uri, 
-                            flags=option_flags[option_format],
-                            referer="",
-                            why=myReason, topLevel=True)
-                workingContext.reopen()
-                patch(workingContext, filterContext);
-
-            elif _lhs == "-filter":
-                filterize()
-
-            elif _lhs == "-query":
-                workingContext = workingContext.canonicalize()
-                filterContext = _store.load(_uri, 
-                            flags=option_flags[option_format],
-                            referer="",
-                            why=myReason, topLevel=True)
-                _newContext = _store.newFormula()
-                applyQueries(workingContext, filterContext, _newContext)
-                workingContext.close()
-                workingContext = _newContext
-
-            elif _lhs == "-sparql":
-                workingContext.stayOpen = False
-                workingContext = workingContext.canonicalize()
-                filterContext = _store.load(_uri, why=myReason,
-                            referer="", contentType="x-application/sparql")
-                _newContext = _store.newFormula()
-                _newContext.stayOpen = True
-                sparql_query_formula = filterContext
-                applySparqlQueries(workingContext, filterContext, _newContext)
-#               workingContext.close()
-                workingContext = _newContext
-
-            elif _lhs == "-why" or arg == "-why":
-                workingContext.stayOpen = False
-                workingContext = workingContext.close()
-                workingContext = explainFormula(workingContext, option_why)
-
-            elif arg == "-dump":
-                
-                workingContext = workingContext.canonicalize()
-                progress("\nDump of working formula:\n" + workingContext.debugString())
-                
-            elif arg == "-purge":
-                workingContext.reopen()
-                _store.purge(workingContext)
-                
-            elif arg == "-purge-rules" or arg == "-data":
-                
-                workingContext.reopen()
-                _store.purgeExceptData(workingContext)
-
-            elif arg == "-rules":
-                
-                workingContext.reopen()
-                applyRules(workingContext, workingContext)
-
-            elif arg[:7] == "-think=":
-                
-                filterContext = _store.load(_uri, referer="", why=myReason, topLevel=True)
-                if verbosity() > 4:
-                    progress( "Input rules to --think from " + _uri)
-                workingContext.reopen()
-                think(workingContext, filterContext, mode=option_flags["think"])
-
-            elif arg[:7] == "-solve=":
-                # --solve is a combination of --think and --filter.
-                think(workingContext, mode=option_flags["think"])
-                filterize()
-                
-            elif _lhs == "-engine":
-                option_engine = _rhs
-                
-            elif arg == "-think":
-                workingContext.isWorkingContext = True
-                think(workingContext, mode=option_flags["think"])
-
-            elif arg == '-rete':
-                from swap import pycwmko                
-                pythink = pycwmko.directPychinkoQuery(workingContext)
-                #return
-                #pythink()
-                """
-                    from pychinko import interpreter
-                    from swap.set_importer import Set, ImmutableSet
-                    pyf = pycwmko.N3Loader.N3Loader()
-                    conv = pycwmko.ToPyStore(pyf)
-                    conv.statements(workingContext)
-                    interp = interpreter.Interpreter(pyf.rules[:])
-                    interp.addFacts(Set(pyf.facts), initialSet=True)
-                    interp.run()
-                    pyf.facts = interp.totalFacts
-                    workingContext = workingContext.store.newFormula()
-                    reconv = pycwmko.FromPyStore(workingContext, pyf)
-                    reconv.run()
-                """
-
-            elif arg == '-sparqlServer':
-                from swap.sparql import webserver
-                from swap import cwm_sparql
-                sandBoxed(True)
-                workingContext.stayOpen = False
-                workingContext = workingContext.canonicalize()
-                def _handler(s):
-                    return cwm_sparql.sparql_queryString(workingContext, s)
-                webserver.sparql_handler = _handler
-                webserver.run()
-
-            elif arg == "-lxkbdump":  # just for debugging
-                raise NotImplementedError
-
-            elif arg == "-lxfdump":   # just for debugging
-                raise NotImplementedError               
-
-            elif _lhs == "-prove":
-
-                # code copied from -filter without really being understood  -sdh
-                _tmpstore = llyn.RDFStore( _outURI+"#_g", metaURI=_metaURI, argv=option_with, crypto=option_crypto)
-
-                tmpContext = _tmpstore.newFormula(_uri+ "#_formula")
-                _newURI = join(_baseURI, "_w_"+`_genid`)  # Intermediate
-                _genid = _genid + 1
-                _newContext = _tmpstore.newFormula(_newURI+ "#_formula")
-                _tmpstore.loadURI(_uri)
-
-                print targetkb
-
-            elif arg == "-flatten":
-                #raise NotImplementedError
-                from swap import reify
-                workingContext = reify.flatten(workingContext)
-
-            elif arg == "-unflatten":
-                from swap import reify
-                workingContext = reify.unflatten(workingContext)
-                #raise NotImplementedError
-                
-            elif arg == "-reify":
-                from swap import reify
-                workingContext = reify.reify(workingContext)
-                
-
-            elif arg == "-dereify":
-                from swap import reify
-                workingContext = reify.dereify(workingContext)                
-                
-
-            elif arg == "-size":
-                progress("Size: %i statements in store, %i in working formula."
-                    %(_store.size, workingContext.size()))
-
-            elif arg == "-strings":  # suppress output
-                workingContext.outputStrings() 
-                option_outputStyle = "-no"
-
-            elif arg == '-sparqlResults':
-                from cwm_sparql import outputString, SPARQL_NS
-                ns = _store.newSymbol(SPARQL_NS)
-                if not sparql_query_formula:
-                    raise ValueError('No query')
-                else:
-                    stream.write(outputString(sparql_query_formula, workingContext).encode('utf_8'))
-                    option_outputStyle = "-no"
-                    
-                
-            elif arg == "-no":  # suppress output
-                option_outputStyle = arg
-                
-            elif arg[:8] == "-outURI=": pass
-            elif arg == "-with": break
             else:
-                progress( "cwm: Unknown option: " + arg)
-                sys.exit(-1)
+                if arg.startswith("--"): arg = arg[1:]   # Chop posix-style -- to -
+                _equals = string.find(arg, "=")
+                _lhs = ""
+                _rhs = ""
+                if _equals >=0:
+                    _lhs = arg[:_equals]
+                    _rhs = arg[_equals+1:]
+                try:
+                    _uri = join(option_baseURI, _rhs)
+                except ValueError:
+                    _uri =_rhs
+                if arg[0] != "-":
+                    _inputURI = join(option_baseURI, arg)
+                    assert ':' in _inputURI
+                    ContentType={ "rdf": "application/xml+rdf", "n3":
+                                    "text/rdf+n3",
+                                  "sparql": "x-application/sparql"}[option_format]
+
+                    if not option_pipe: workingContext.reopen()
+                    load(_store, _inputURI,
+                                openFormula=workingContext,
+                                contentType =ContentType,
+                                flags=option_flags[option_format],
+                                referer="",
+                                why=myReason)
+
+                    _gotInput = 1
+
+                elif arg == "-help":
+                    pass  # shouldn't happen
+                elif arg == "-revision":
+                    pass
+                elif _lhs == "-base":
+                    option_baseURI = _uri
+                    if verbosity() > 10: progress("Base now "+option_baseURI)
+
+                elif arg == "-ugly":
+                    option_outputStyle = arg            
+
+                elif arg == "-crypto": pass
+                elif arg == "-pipe": pass
+                elif _lhs == "-outURI": option_outURI = _uri
+
+                elif arg == "-rdf": option_format = "rdf"
+                elif _lhs == "-rdf":
+                    option_format = "rdf"
+                    option_flags["rdf"] = _rhs
+                elif _lhs == "-mode":
+                    option_flags["think"] = _rhs
+                elif _lhs == "-closure":
+                    workingContext.setClosureMode(_rhs)
+                elif arg == "-n3": option_format = "n3"
+                elif _lhs == "-n3":
+                    option_format = "n3"
+                    option_flags["n3"] = _rhs
+                elif _lhs == "-language":
+                    option_format = _rhs
+                    if option_first_format == None:
+                        option_first_format = option_format
+                elif _lhs == "-languageOptions":
+                    option_flags[option_format] = _lhs
+                elif arg == "-quiet" : option_quiet = 1            
+                elif _lhs == "-chatty": setVerbosity(int(_rhs))
+                elif arg[:7] == "-track=":
+                    diag.tracking = int(_rhs)
+                    
+                elif option_pipe: ############## End of pipable options
+                    print "# Command line error: %s illegal option with -pipe", arg
+                    break
+
+                elif arg == "-triples" or arg == "-ntriples":
+                    option_format = "n3"
+                    option_flags["n3"] = "spartan"
+                    option_outputStyle = "-bySubject"
+                    option_quiet = 1
+
+                elif arg == "-bySubject":
+                    option_outputStyle = arg
+
+                elif arg == "-debugString":
+                    option_outputStyle = arg
+
+                elif arg[:7] == "-apply=":
+                    workingContext = workingContext.canonicalize()
+                    
+                    filterContext = _store.load(_uri, 
+                                flags=option_flags[option_format],
+                                referer="",
+                                why=myReason, topLevel=True)
+                    workingContext.reopen()
+                    applyRules(workingContext, filterContext);
+
+                elif arg[:7] == "-apply=":
+                    workingContext = workingContext.canonicalize()
+                    
+                    filterContext = _store.load(_uri, 
+                                flags=option_flags[option_format],
+                                referer="",
+                                why=myReason, topLevel=True)
+                    workingContext.reopen()
+                    applyRules(workingContext, filterContext);
+
+                elif arg[:7] == "-patch=":
+                    workingContext = workingContext.canonicalize()
+                    
+                    filterContext = _store.load(_uri, 
+                                flags=option_flags[option_format],
+                                referer="",
+                                why=myReason, topLevel=True)
+                    workingContext.reopen()
+                    patch(workingContext, filterContext);
+
+                elif _lhs == "-filter":
+                    filterize()
+
+                elif _lhs == "-query":
+                    workingContext = workingContext.canonicalize()
+                    filterContext = _store.load(_uri, 
+                                flags=option_flags[option_format],
+                                referer="",
+                                why=myReason, topLevel=True)
+                    _newContext = _store.newFormula()
+                    applyQueries(workingContext, filterContext, _newContext)
+                    workingContext.close()
+                    workingContext = _newContext
+
+                elif _lhs == "-sparql":
+                    workingContext.stayOpen = False
+                    workingContext = workingContext.canonicalize()
+                    filterContext = _store.load(_uri, why=myReason,
+                                referer="", contentType="x-application/sparql")
+                    _newContext = _store.newFormula()
+                    _newContext.stayOpen = True
+                    sparql_query_formula = filterContext
+                    applySparqlQueries(workingContext, filterContext, _newContext)
+#               workingContext.close()
+                    workingContext = _newContext
+
+                elif _lhs == "-why" or arg == "-why":
+                    workingContext.stayOpen = False
+                    workingContext = workingContext.close()
+                    workingContext = explainFormula(workingContext, option_why)
+
+                elif arg == "-dump":
+                    
+                    workingContext = workingContext.canonicalize()
+                    progress("\nDump of working formula:\n" + workingContext.debugString())
+                    
+                elif arg == "-purge":
+                    workingContext.reopen()
+                    _store.purge(workingContext)
+                    
+                elif arg == "-purge-rules" or arg == "-data":
+                    
+                    workingContext.reopen()
+                    _store.purgeExceptData(workingContext)
+
+                elif arg == "-rules":
+                    
+                    workingContext.reopen()
+                    applyRules(workingContext, workingContext)
+
+                elif arg[:7] == "-think=":
+                    
+                    filterContext = _store.load(_uri, referer="", why=myReason, topLevel=True)
+                    if verbosity() > 4:
+                        progress( "Input rules to --think from " + _uri)
+                    workingContext.reopen()
+                    think(workingContext, filterContext, mode=option_flags["think"])
+
+                elif arg[:7] == "-solve=":
+                    # --solve is a combination of --think and --filter.
+                    think(workingContext, mode=option_flags["think"])
+                    filterize()
+                    
+                elif _lhs == "-engine":
+                    option_engine = _rhs
+                    
+                elif arg == "-think":
+                    workingContext.isWorkingContext = True
+                    think(workingContext, mode=option_flags["think"])
+
+                elif arg == '-rete':
+                    from swap import pycwmko                
+                    pythink = pycwmko.directPychinkoQuery(workingContext)
+                    #return
+                    #pythink()
+                    """
+                        from pychinko import interpreter
+                        from swap.set_importer import Set, ImmutableSet
+                        pyf = pycwmko.N3Loader.N3Loader()
+                        conv = pycwmko.ToPyStore(pyf)
+                        conv.statements(workingContext)
+                        interp = interpreter.Interpreter(pyf.rules[:])
+                        interp.addFacts(Set(pyf.facts), initialSet=True)
+                        interp.run()
+                        pyf.facts = interp.totalFacts
+                        workingContext = workingContext.store.newFormula()
+                        reconv = pycwmko.FromPyStore(workingContext, pyf)
+                        reconv.run()
+                    """
+
+                elif arg == '-sparqlServer':
+                    from swap.sparql import webserver
+                    from swap import cwm_sparql
+                    sandBoxed(True)
+                    workingContext.stayOpen = False
+                    workingContext = workingContext.canonicalize()
+                    def _handler(s):
+                        return cwm_sparql.sparql_queryString(workingContext, s)
+                    webserver.sparql_handler = _handler
+                    webserver.run()
+
+                elif arg == "-lxkbdump":  # just for debugging
+                    raise NotImplementedError
+
+                elif arg == "-lxfdump":   # just for debugging
+                    raise NotImplementedError               
+
+                elif _lhs == "-prove":
+
+                    # code copied from -filter without really being understood  -sdh
+                    _tmpstore = llyn.RDFStore( _outURI+"#_g", metaURI=_metaURI, argv=option_with, crypto=option_crypto)
+
+                    tmpContext = _tmpstore.newFormula(_uri+ "#_formula")
+                    _newURI = join(_baseURI, "_w_"+`_genid`)  # Intermediate
+                    _genid = _genid + 1
+                    _newContext = _tmpstore.newFormula(_newURI+ "#_formula")
+                    _tmpstore.loadURI(_uri)
+
+                    print targetkb
+
+                elif arg == "-flatten":
+                    #raise NotImplementedError
+                    from swap import reify
+                    workingContext = reify.flatten(workingContext)
+
+                elif arg == "-unflatten":
+                    from swap import reify
+                    workingContext = reify.unflatten(workingContext)
+                    #raise NotImplementedError
+                    
+                elif arg == "-reify":
+                    from swap import reify
+                    workingContext = reify.reify(workingContext)
+                    
+
+                elif arg == "-dereify":
+                    from swap import reify
+                    workingContext = reify.dereify(workingContext)                
+                    
+
+                elif arg == "-size":
+                    progress("Size: %i statements in store, %i in working formula."
+                        %(_store.size, workingContext.size()))
+
+                elif arg == "-strings":  # suppress output
+                    workingContext.outputStrings() 
+                    option_outputStyle = "-no"
+
+                elif arg == '-sparqlResults':
+                    from cwm_sparql import outputString, SPARQL_NS
+                    ns = _store.newSymbol(SPARQL_NS)
+                    if not sparql_query_formula:
+                        raise ValueError('No query')
+                    else:
+                        stream.write(outputString(sparql_query_formula, workingContext).encode('utf_8'))
+                        option_outputStyle = "-no"
+                        
+                    
+                elif arg == "-no":  # suppress output
+                    option_outputStyle = arg
+                    
+                elif arg[:8] == "-outURI=": pass
+                elif arg == "-with": break
+                else:
+                    progress( "cwm: Unknown option: " + arg)
+                    sys.exit(-1)
 
 
 

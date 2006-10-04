@@ -56,7 +56,7 @@ class Lifter:
     __property_range_cache={}
 
 
-    __datatype_blacklisted='http://veggente.berlios.de/ns/RIMDatatype#nullFlavor'
+    __datatype_blacklisted=['http://veggente.berlios.de/ns/RIMDatatype#nullFlavor']
 
     # Stats attributes
     __node_counter=0
@@ -234,6 +234,12 @@ class Lifter:
                         if new_obj!=None:
                             print new_obj
                             self.__add_obj_property_instance(subject_class,rdf_name,new_obj.get_rdf_node())
+                        else:
+                            # Restricted search failed, allowing the use of blacklisted properties
+                            new_obj=self.__search_class_for_data(obj_range_list[0],node.nodeValue,[],True)
+                            if new_obj!=None:
+                                print new_obj
+                                self.__add_obj_property_instance(subject_class,rdf_name,new_obj.get_rdf_node())
                         print '</node>'
                         return None
         print '</node>'
@@ -241,7 +247,7 @@ class Lifter:
             self.__handle_element(el.get_xml_node(),active_classes,el.get_resource(),el.get_type(),None)
         return None
 
-    def __search_class_for_data(self,starting_class,textual_data,path=[]):
+    def __search_class_for_data(self,starting_class,textual_data,path=[],exclude_blacklist=False):
         """
         starting_class(OWL_Class): starting point for the search
         textual_data (string): value of the DatatypeProperty which is the object of the search
@@ -270,12 +276,17 @@ class Lifter:
             self.__class_dt_properties_cache[current_class_uri]=dt_props
         # ---
         for p in dt_props:
-            if p!=self.__datatype_blacklisted:
+            if (not exclude_blacklist):
+                if (p in self.__datatypes_blacklisted):
+                    if current_class is None:
+                        current_class=self.__add_class_instance(current_class_uri)
+                    self.__add_data_property_instance(current_class.get_rdf_node(),p,str(textual_data))
+            else:
                 if current_class is None:
                     current_class=self.__add_class_instance(current_class_uri)
                 self.__add_data_property_instance(current_class.get_rdf_node(),p,str(textual_data))
-                print 'Found datatype: '+str(p)+' for class '+str(current_class)
-                return current_class
+            print 'Found datatype: '+str(p)+' for class '+str(current_class)
+            return current_class
         print 'Datatype search in '+current_class_uri+' failed'
         # --- ObjectProperty cache update ---
         if current_class_uri in self.__class_obj_properties_cache:

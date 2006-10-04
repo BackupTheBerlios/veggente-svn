@@ -258,8 +258,9 @@ class OWLRepository(Repository):
         """
         for i in self.model.get_contexts():
             if str(i.uri)==uri:
+                return self.model,uri
                 # URI is in store
-                return self.db_uri+uri
+                #return self.db_uri+uri
         return uri
 
     def get_imports(self,uri):

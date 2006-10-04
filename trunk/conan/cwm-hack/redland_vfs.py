@@ -77,7 +77,7 @@ class VFS(object):
 
     def parse(self,uri,cwm_store,cwm_model,as_if_from):
         """
-        Translates a set of statements from Redland Model to CWM Formula
+        Translates a set of statements from a Redland Model to CWM Formula
         """
         # CWM variables
         self.store=cwm_store
@@ -86,7 +86,7 @@ class VFS(object):
         if (uri is None): 
             return self.formula
         if type(uri)==str:
-            if (uri==None) or (uri==''): 
+            if (uri==''): 
                 return cwm_model
             context_stream=self.model.as_stream_context(RDF.Node(RDF.Uri(uri)))
             if context_stream is None:
@@ -95,8 +95,20 @@ class VFS(object):
                 for (st,con) in context_stream:
                     self.formula.add(self.convert(st.subject),self.convert(st.predicate),self.convert(st.object))
         elif (type(uri)==RDF.Model) or (isinstance(uri,RDF.Stream)):
-            for st in uri:
+            self.model=uri
+            for st in self.model:
                 self.formula.add(self.convert(st.subject),self.convert(st.predicate),self.convert(st.object))
+        elif (type(uri)==tuple):
+            self.model=uri[0]
+            context=uri[1]
+            if (uri==()) or (self.model is None):
+                return self.formula
+            if (context is None):
+                for st in model:
+                    self.formula.add(self.convert(st.subject),self.convert(st.predicate),self.convert(st.object))
+            else:
+                for (st,con) in self.model.as_stream_context(RDF.Node(RDF.Uri(context))):
+                    self.formula.add(self.convert(st.subject),self.convert(st.predicate),self.convert(st.object))
         return self.formula
 
     def convert(self, s):
