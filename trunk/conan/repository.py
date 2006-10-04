@@ -3,7 +3,7 @@
 #	Veggente - repository
 #	Conan RDF repository
 #	
-#	Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
+#	Copyright(c) 2006 Alessio Carenini <careninigmail.com>
 #	This program is free software; you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by
 #	the Free Software Foundation; either version 2 of the License, or
@@ -60,7 +60,7 @@ class Repository(object):
         if database_type=='sqlite':
             self.db_uri=database_type+':'+self.db_name+'://'+self.db_dir+'+'
         elif self.db_type=='mysql':
-            self.db_uri=self.db_type+':'+self.username+':'+self.password+'@'+self.host+':'+self.port+'/'+self.db_name+'+'
+            self.db_uri=self.db_type+':'+self.username+':'+self.password+''+self.host+':'+self.port+'/'+self.db_name+'+'
         if (self.__init_db()==0):
             print 'RDF repository initialized'
         if (self.__init_memstore()==0):
@@ -72,8 +72,8 @@ class Repository(object):
     #public:
     def add_document(self, uri,  context=None, overwrite=False):
         """
-        @uri:char*
-        @context:char*
+        uri (string): URI of the document to add
+        context (string): URI of the context node (identifies a subgraph)
         """
         current_uri=None
         context_node=None
@@ -98,8 +98,8 @@ class Repository(object):
     
     def add_inmem_document(self, uri,  context=None, overwrite=False):
         """
-        @uri:char*
-        @context:char*
+        uri (string): URI of the document to add
+        context (string): URI of the context node (identifies a subgraph)
         """
         current_uri=None
         context_node=None
@@ -124,7 +124,7 @@ class Repository(object):
 
     def remove_document(self, context): 
         """
-        @context:char*
+        context (string): URI of the context node (identifies a subgraph)
         """
         print "Removing document "+context
         if (context!=''):
@@ -133,7 +133,7 @@ class Repository(object):
 
     def remove_inmem_document(self, context): 
         """
-        @context:char*
+        context (string): URI of the context node (identifies a subgraph)
         """
         if (context!=''):
             return self.mem_model.remove_statements_with_context(RDF.Node(RDF.Uri(context)))
@@ -141,8 +141,8 @@ class Repository(object):
     
     def query_model(self, query_str):
         """
-        @query_str:char*
-        @context:char*
+        query_str:string
+        context:string
         """
         if query_str!=None:
             q=RDF.SPARQLQuery(query_str)

@@ -34,7 +34,6 @@ use_scripts=symlinks
 if sys.argv[1:2]==['sdist'] or not case_sensitive_filesystem:
     use_scripts=scripts
 
-#from swap import __version__
 __version__='0.0.1'
 setup(
         name = 'conan',

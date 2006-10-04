@@ -28,7 +28,7 @@ import SOAPpy
 import getopt,sys
 import datetime
 
-__version__='0.0.1'
+__version__='0.0.2'
 
 class OWLRepository(Repository):
     """
@@ -264,6 +264,9 @@ class OWLRepository(Repository):
         return uri
 
     def get_imports(self,uri):
+        """
+        Return the complete set of documents imported by the base URI
+        """
         return  self.__create_imports_cluster(uri,False)
 
     def get_document_imports(self,uri):
@@ -277,6 +280,11 @@ class OWLRepository(Repository):
         return results
 
     def __create_imports_cluster(self,uri,forced_update):
+        """
+        Return the complete set of documents imported by the base URI
+        forced_update (boolean): if True force the re-generation of the import cluster, regardless of 
+        the cache
+        """
         continue_search=True
         if (uri is None) or (uri==''):
             return None
@@ -375,6 +383,11 @@ class OWLRepository(Repository):
         return res_list
 
     def onto_identify(self,resource,ontology):
+        """
+        Returns URI and type of a resource
+        resource (string): can be a complete URI or only the part of the URI after '#'
+        ontology (string): base ontology to start the search
+        """
         res_name=None
         res_type=None
         candidate_uri=None
@@ -415,6 +428,9 @@ class OWLRepository(Repository):
         return res_name,res_type
 
     def get_datatype_properties(self,class_name,ontology):
+        """
+        Returns a list of datatype properties whose domain is the given class
+        """
         prop_list=[]
         op_list=[]
         imports=self.get_imports(ontology)
@@ -430,6 +446,9 @@ class OWLRepository(Repository):
         return op_list
     
     def get_object_properties(self,class_name,ontology):
+        """
+        Returns a list of object properties whose domain is the given class
+        """
         prop_list=[]
         op_list=[]
         imports=self.get_imports(ontology)
@@ -445,6 +464,9 @@ class OWLRepository(Repository):
         return op_list
 
     def get_superclasses(self,class_name,ontology):
+        """
+        Returns a list of superclasses of the given class
+        """
         class_list=[]
         imports=self.get_imports(ontology)
         query_st=RDF.Statement(subject=RDF.Uri(class_name),predicate=self.__sub_class_uri)
@@ -462,6 +484,9 @@ def usage():
     print "-d: debug flag"
     print "--port n: start the server on a specified port"
     print "--db dir: use the specified dir for db backend"
+    print "--db_type: use the specified db backend (mysql or sqlite)"
+    print "--db_user: user if using MySQL as a Redland backend"
+    print "--db_pass: password if using MySQL as a Redland backend"
     
 def version():
     print "Veggente project: Conan OWL repository v. "+__version__
@@ -526,5 +551,4 @@ except KeyboardInterrupt:
     print "Total queries: "+str(repository.query_counter)
     print "Name cache hit: "+str(repository.cache_hit)
     del repository
-    print "Data saved"
     sys.exit(0)

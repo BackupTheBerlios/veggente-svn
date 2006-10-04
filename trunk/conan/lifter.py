@@ -229,7 +229,6 @@ class Lifter:
                         print '</node>'
                         return None
                     elif node.nodeType==Node.ATTRIBUTE_NODE:
-                        print 'Searching from: '+rdf_name
                         new_obj=self.__search_class_for_data(obj_range_list[0],node.nodeValue)
                         if new_obj!=None:
                             print new_obj
@@ -249,8 +248,12 @@ class Lifter:
 
     def __search_class_for_data(self,starting_class,textual_data,path=[],exclude_blacklist=False):
         """
+        Resolve the case in which an attribute is linked to an ObjectProperty. Search a class with a 
+        DatatypeProperty following the ObjectProperties
         starting_class(OWL_Class): starting point for the search
         textual_data (string): value of the DatatypeProperty which is the object of the search
+        path (list of string): loop detection
+        exclude_blacklist (boolean): if True exclude a set of DatatypeProperties from the search
         """
         dt_props=None
         obj_props=None
@@ -267,7 +270,6 @@ class Lifter:
             # Found loop, aborting
             return None
         self.__query_counter=self.__query_counter+1
-        print 'Current class: '+current_class_uri
         # --- DatatypeProperty cache update ---
         if current_class_uri in self.__class_dt_properties_cache:
             dt_props=self.__class_dt_properties_cache[current_class_uri]
@@ -285,9 +287,7 @@ class Lifter:
                 if current_class is None:
                     current_class=self.__add_class_instance(current_class_uri)
                 self.__add_data_property_instance(current_class.get_rdf_node(),p,str(textual_data))
-            print 'Found datatype: '+str(p)+' for class '+str(current_class)
             return current_class
-        print 'Datatype search in '+current_class_uri+' failed'
         # --- ObjectProperty cache update ---
         if current_class_uri in self.__class_obj_properties_cache:
             obj_props=self.__class_obj_properties_cache[current_class_uri]
@@ -307,14 +307,12 @@ class Lifter:
             # ---
             # Recursion step
             if (len(ranges)>1):
-                print 'Warning: multiple RANGES'
+                print '<warning prop="'+prop+'">multiple RANGES</warning>'
             for r in ranges:
-                print 'Path: range '+r
                 path.append(current_class_uri)
                 obj_class=self.__search_class_for_data(r,textual_data,path)
                 if obj_class!=None:
                     current_class=self.__add_class_instance(current_class_uri)
-                    print 'OP instance: \n subject='+str(current_class)+' predicate='+prop+' object='+str(obj_class)
                     self.__add_obj_property_instance(current_class,prop,obj_class.get_rdf_node())
                     return current_class
                 else:
@@ -440,35 +438,6 @@ class Lifter:
         # Begin searching with UML style notation
         node_onto_name=None
         node_onto_type=None
-#        for el in active_classes:
-#            uml_name=self.__xml_to_internal(node,el.get_name()) 
-#            plain_name=self.__xml_to_internal(node,None)
-#            object_properties=self.__repository.get_object_properties(el.get_resource(),self.__base_onto)
-#            for prop in object_properties:
-#                prop_name=prop.split('#')[1]
-#                if (uml_name==prop_name) or (plain_name==prop_name):
-#                    return prop,self.__owl_ns+'ObjectProperty'
-#            datatype_properties=self.__repository.get_datatype_properties(el.get_resource(),self.__base_onto)
-#            for prop in datatype_properties:
-#                prop_name=prop.split('#')[1]
-#                if (uml_name==prop_name) or (plain_name==prop_name):
-#                    return prop,self.__owl_ns+'DatatypeProperty'
-
-        # UML-style search with complete URI of the class 
-        #for class_candidate in active_classes:
-#            xml_res_name=self.__xml_to_internal(node,class_candidate.get_resource())
-#            node_onto_name,node_onto_type=self.__repository.onto_identify(xml_res_name,self.__base_onto)
-#            self.__query_counter=self.__query_counter+1
-#            if (node_onto_name!='') and (node_onto_name!=None) and (node_onto_type!="") and (node_onto_type!=None):
-#                return node_onto_name,node_onto_type
-#        # UML-style search with class name only
-#        for class_candidate in active_classes:
-#            xml_res_name=self.__xml_to_internal(node,class_candidate.name)
-#            node_onto_name,node_onto_type=self.__repository.onto_identify(xml_res_name,self.__base_onto)
-#            self.__query_counter=self.__query_counter+1
-#            if (node_onto_name!='') and (node_onto_name!=None) and (node_onto_type!="") and (node_onto_type!=None):
-#                return node_onto_name,node_onto_type
-        # UML-style search failed
         xml_res_name=self.__xml_to_internal(node,None)
         node_onto_name,node_onto_type=self.__repository.onto_identify(xml_res_name,self.__base_onto)
         self.__query_counter=self.__query_counter+1
