@@ -56,7 +56,7 @@ class Lifter:
     __property_range_cache={}
 
 
-    __datatype_blacklisted=['http://veggente.berlios.de/ns/RIMDatatype#nullFlavor']
+    __datatypes_blacklisted=['http://veggente.berlios.de/ns/RIMDatatype#nullFlavor']
 
     # Stats attributes
     __node_counter=0
@@ -246,14 +246,14 @@ class Lifter:
             self.__handle_element(el.get_xml_node(),active_classes,el.get_resource(),el.get_type(),None)
         return None
 
-    def __search_class_for_data(self,starting_class,textual_data,path=[],exclude_blacklist=False):
+    def __search_class_for_data(self,starting_class,textual_data,path=[],use_blacklist=True):
         """
         Resolve the case in which an attribute is linked to an ObjectProperty. Search a class with a 
         DatatypeProperty following the ObjectProperties
         starting_class(OWL_Class): starting point for the search
         textual_data (string): value of the DatatypeProperty which is the object of the search
         path (list of string): loop detection
-        exclude_blacklist (boolean): if True exclude a set of DatatypeProperties from the search
+        use_blacklist (boolean): if True exclude a set of DatatypeProperties from the search
         """
         dt_props=None
         obj_props=None
@@ -278,8 +278,8 @@ class Lifter:
             self.__class_dt_properties_cache[current_class_uri]=dt_props
         # ---
         for p in dt_props:
-            if (not exclude_blacklist):
-                if (p in self.__datatypes_blacklisted):
+            if use_blacklist:
+                if (not (p in self.__datatypes_blacklisted)):
                     if current_class is None:
                         current_class=self.__add_class_instance(current_class_uri)
                     self.__add_data_property_instance(current_class.get_rdf_node(),p,str(textual_data))
