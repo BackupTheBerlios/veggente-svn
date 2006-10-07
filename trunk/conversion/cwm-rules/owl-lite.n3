@@ -60,10 +60,14 @@ rdfs:seeAlso a owl:AnnotationProperty.
 
 ### subClassOf - Domain
 {?P a owl:ObjectProperty; rdfs:domain ?Q.
-	?R rdfs:subClassOf ?Q} => { ?P rdfs:domain ?R}.
+	?R rdfs:subClassOf ?Q.
+    ?P log:notIncludes {?R rdfs:subClassOf [owl:Restriction [owl:onProperty ?P; owl:maxCardinality ?M]].
+    ?M math:equalTo 0.
+    }
+    } => { ?P rdfs:domain ?R}.
 
-{?P a owl:DatatypeProperty; rdfs:domain ?Q.
-	?R rdfs:subClassOf ?Q} => { ?P rdfs:domain ?R}.
+#{?P a owl:DatatypeProperty; rdfs:domain ?Q.
+#	?R rdfs:subClassOf ?Q} => { ?P rdfs:domain ?R}.
 
 ### subPropertyOf - Domain
 { ?X a owl:Class.
@@ -111,5 +115,5 @@ rdfs:seeAlso a owl:AnnotationProperty.
 	 ?A @has owl:unionOf ?X.
 	 ?Y :includes ?X} => {?A rdfs:subClassOf ?B}.
 	
-{?A rdfs:domain [a owl:Class;owl:unionOf ?S]. ?S list:member ?I
-    }=>{?A rdfs:domain ?I}.
+#{?A rdfs:domain [a owl:Class;owl:unionOf ?S]. ?S list:member ?I
+#    }=>{?A rdfs:domain ?I}.

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
-Veggente - lifter
-  Implementation of an XML to RDF algorithm
+Veggente - Grounding Agent
+  Implementation of an XML to RDF (and back) algorithm
 
 Copyright(c) 2006 Alessio Carenini <carenini@gmail.com>
 This program is free software; you can redistribute it and/or modify
@@ -29,9 +29,9 @@ import xml.dom.minidom
 from xml.dom.minidom import Node
 
 
-class Lifter:
+class GroundingAgent:
     """
-    Lifter class' rdf graph contains two contexts:
+    GroundingAgent class' rdf graph contains two contexts:
         instance: identify triples coming from the lifting process
         ontology: identify triples coming from the ontology cluster
     """
@@ -543,7 +543,7 @@ class Lifter:
         print '<cache_miss>'+str(self.__cache_miss)+'</cache_miss></stats>'
         print '</source_file>'
 
-lift_inst=Lifter()
+lift_inst=GroundingAgent()
 try:
     if __name__=='__main__':
         print '<?xml version="1.0"?>'
