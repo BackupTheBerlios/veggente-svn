@@ -19,12 +19,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 """
 
-import getopt
 import SOAPpy
 import RDF
 from OWL import OWL_Resource, OWL_Class, OWL_Property
-from os import sys
-from sets import Set
 import xml.dom.minidom
 from xml.dom.minidom import Node
 
@@ -90,6 +87,8 @@ class GroundingAgent:
         document: uri of the document to convert
         onto_list: list of ontologies intantiated by the document
         uml_mode: tells lifter to use UML-style notation for element name resolution
+        Returns:
+            RDF.Model
         """
         if (ontology is None) or (document is None):
             return None
@@ -104,13 +103,22 @@ class GroundingAgent:
         self.__handle_element(self.__root_node,[],None,None,None)
         self.__output_stats()
         doc.unlink()
-
-    def get_rdf_graph(self):
-        """
-        Returns the class' Redland RDF graph
-        """
         return self.__rdf_model
-    
+
+    def lower(self,schema,graph_list,uml_mode=True):
+        """
+        Convert the content of one or more RDF graphs into a XML document instance of an XML Schema
+        """
+        xml_doc=None
+#        if (schema is None) (type(schema)!=str)or (graph_list is None) or (graph_list==[]):
+#            return None
+        from SOAPpy.wstools.XMLSchema import XMLSchema, SchemaReader
+        reader=SchemaReader()
+        schema=reader.loadFromFile(schema)
+        print schema
+        return xml_doc
+
+    #  ------  Private functions  ------
     def __handle_element(self,node,active_classes,known_resource,known_type,known_subject):
         """
         Processes an XML node and converts it in the corresponding RDF triples, according to the ontology supplied to the main class
@@ -542,19 +550,3 @@ class GroundingAgent:
         print '<cache_hit>'+str(self.__cache_hit)+'</cache_hit>'
         print '<cache_miss>'+str(self.__cache_miss)+'</cache_miss></stats>'
         print '</source_file>'
-
-lift_inst=GroundingAgent()
-try:
-    if __name__=='__main__':
-        print '<?xml version="1.0"?>'
-        print '<source_file name="'+sys.argv[1]+'"'
-        print 'ontology_name="'+sys.argv[2]+'">'
-        lift_inst.lift(sys.argv[1],sys.argv[2])
-except KeyboardInterrupt:
-    print "Called interrupt"
-# Testing. Remove when completed
-serializer=RDF.Serializer()
-serializer.set_namespace("doc", RDF.Uri(sys.argv[2]+"#"))
-serializer.set_namespace("rim", RDF.Uri('http://veggente.berlios.de/ns/RIMOntology#'))
-serializer.set_namespace("rim_dt", RDF.Uri('http://veggente.berlios.de/ns/RIMDatatype#'))
-serializer.serialize_model_to_file("test-out.rdf", lift_inst.get_rdf_graph())
