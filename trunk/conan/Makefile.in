@@ -1,0 +1,41 @@
+PLATFORM = @platform@
+COMPILER = @compiler@
+CXXVER = @cxxver@
+GCC = @GCC@
+GXX = @GXX@
+CXXFLAGS = @cxxflags@
+CFLAGS = @cflags@
+LDFLAGS = @ldflags@
+EXTRA_LIBS = @extra_libs@
+PREFIX = @prefix@
+
+OUTDIR= ${XERCESCOUT}/bin/obj/${APP_NAME}
+EXEC=	${XERCESCOUT}/bin
+OBJS=	${OUTDIR}/SCMPrint.o
+SRC=	${XERCESCOUT}/samples/${APP_NAME}
+HEADER_FILES=
+
+## OS390BATCH
+ifeq (${OS390BATCH},1)
+BATCH_TARGET= "//'${LOADMOD}(SCMPRINT)'"
+all:: makedir ${BATCH_TARGET}
+else
+all:: makedir ${EXEC}/${APP_NAME}
+endif
+
+makedir::
+	-mkdir -p $(OUTDIR)
+
+${APP_NAME}:: ${OBJS}
+	${LINK} ${PLATFORM_LIB_LINK_OPTIONS} ${OBJS} -o $@ ${LIBRARY_SEARCH_PATHS} ${LIBRARY_NAMES} ${EXTRA_LINK_OPTIONS}
+${BATCH_TARGET}:: ${OBJS}
+	${LINK} ${PLATFORM_LIB_LINK_OPTIONS} ${OBJS} -o $@ ${LIBRARY_SEARCH_PATHS} ${LIBRARY_NAMES} ${EXTRA_LINK_OPTIONS}
+
+$(OUTDIR)/SCMPrint.o:: ${SRC}/SCMPrint.cpp ${HEADER_FILES}
+	${CC} ${INCLUDES} ${CMP} -o $(OUTDIR)/SCMPrint.o ${SRC}/SCMPrint.cpp
+
+clean::
+	rm -f ${OBJS} ${EXEC}/${APP_NAME}
+
+distclean::clean
+	rm -f Makefile
