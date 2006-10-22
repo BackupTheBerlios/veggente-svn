@@ -599,7 +599,9 @@ class XschemaHandler(handler.ContentHandler):
         if name == IncludeType:
             include=attrs['schemaLocation']
             include_imp=(include.split('/')[-1]).split('.xsd')[0]
-            Xsc
+            print include
+            parseAndGenerate(include_imp+'.py',None, None, include, None, None)
+
         if name == SchemaType:
             # dbgprint(1, '(schema in)')
             self.inSchema = 1
