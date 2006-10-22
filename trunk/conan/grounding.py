@@ -112,8 +112,7 @@ class GroundingAgent:
         xml_doc=None
 #        if (schema is None) (type(schema)!=str)or (graph_list is None) or (graph_list==[]):
 #            return None
-        from SOAPpy.wstools.XMLSchema import XMLSchema, SchemaReader
-        reader=SchemaReader()
+        from generateDS import *
         schema=reader.loadFromFile(schema)
         print schema
         return xml_doc

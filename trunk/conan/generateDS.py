@@ -91,7 +91,7 @@ def set_type_constants(nameSpace):
         DateTimeType, DateType, \
         ComplexContentType, ExtensionType, \
         IDType, IDREFType, IDREFSType, \
-        AnyAttributeType, SimpleTypeType, RestrictionType
+        AnyAttributeType, SimpleTypeType, RestrictionType, IncludeType
     AttributeGroupType = nameSpace + 'attributeGroup'
     AttributeType = nameSpace + 'attribute'
     BooleanType = nameSpace + 'boolean'
@@ -129,6 +129,7 @@ def set_type_constants(nameSpace):
         nameSpace + 'anyURI',
         )
     TokenType = nameSpace + 'token'
+    IncludeType=nameSpace+'include'
 
 
 #
@@ -595,6 +596,10 @@ class XschemaHandler(handler.ContentHandler):
 
     def startElement(self, name, attrs):
         #dbgprint(1, 'before schema name: %s  SchemaType: %s' % (name, SchemaType,))
+        if name == IncludeType:
+            include=attrs['schemaLocation']
+            include_imp=(include.split('/')[-1]).split('.xsd')[0]
+            Xsc
         if name == SchemaType:
             # dbgprint(1, '(schema in)')
             self.inSchema = 1
@@ -2838,45 +2843,45 @@ def get_class_behavior_args(classBehavior):
 # An alternative implementation of get_impl_body() that also
 #   looks in the local file system is commented out below.
 #
+#def get_impl_body(classBehavior, baseImplUrl, implUrl):
+#    impl = '        pass\n'
+#    if implUrl:
+#        if baseImplUrl:
+#            implUrl = '%s%s' % (baseImplUrl, implUrl)
+#        try:
+#            implFile = urllib2.urlopen(implUrl)
+#            impl = implFile.read()
+#            implFile.close()
+#        except urllib2.HTTPError:
+#            print '*** Implementation at %s not found.' % implUrl
+#    return impl
+
+##
+## This alternative implementation of get_impl_body() tries the URL
+##   via http first, then, if that fails, looks in a directory on
+##   the local file system (baseImplUrl) for a file (implUrl)
+##   containing the implementation body.
+##
 def get_impl_body(classBehavior, baseImplUrl, implUrl):
     impl = '        pass\n'
     if implUrl:
+        trylocal = 0
         if baseImplUrl:
             implUrl = '%s%s' % (baseImplUrl, implUrl)
         try:
             implFile = urllib2.urlopen(implUrl)
             impl = implFile.read()
             implFile.close()
-        except urllib2.HTTPError:
-            print '*** Implementation at %s not found.' % implUrl
+        except:
+            trylocal = 1
+        if trylocal:
+            try:
+                implFile = file(implUrl)
+                impl = implFile.read()
+                implFile.close()
+            except:
+                print '*** Implementation at %s not found.' % implUrl
     return impl
-
-###
-### This alternative implementation of get_impl_body() tries the URL
-###   via http first, then, if that fails, looks in a directory on
-###   the local file system (baseImplUrl) for a file (implUrl)
-###   containing the implementation body.
-###
-##def get_impl_body(classBehavior, baseImplUrl, implUrl):
-##    impl = '        pass\n'
-##    if implUrl:
-##        trylocal = 0
-##        if baseImplUrl:
-##            implUrl = '%s%s' % (baseImplUrl, implUrl)
-##        try:
-##            implFile = urllib2.urlopen(implUrl)
-##            impl = implFile.read()
-##            implFile.close()
-##        except:
-##            trylocal = 1
-##        if trylocal:
-##            try:
-##                implFile = file(implUrl)
-##                impl = implFile.read()
-##                implFile.close()
-##            except:
-##                print '*** Implementation at %s not found.' % implUrl
-##    return impl
 
 
 def generateClassBehaviors(wrt, classBehaviors, baseImplUrl):
