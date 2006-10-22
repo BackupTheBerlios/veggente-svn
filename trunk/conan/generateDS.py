@@ -583,6 +583,7 @@ class XschemaHandler(handler.ContentHandler):
         self.inAttribute = 0
         self.inAttributeGroup = 0
         self.inSimpleElement = 0
+        self.includes=[]
 ##        self.dbgcount = 1
 ##        self.dbgnames = []
 
@@ -598,9 +599,7 @@ class XschemaHandler(handler.ContentHandler):
         #dbgprint(1, 'before schema name: %s  SchemaType: %s' % (name, SchemaType,))
         if name == IncludeType:
             include=attrs['schemaLocation']
-            include_imp=(include.split('/')[-1]).split('.xsd')[0]
-            print include
-            parseAndGenerate(include_imp+'.py',None, None, include, None, None)
+            self.includes.append(include)
 
         if name == SchemaType:
             # dbgprint(1, '(schema in)')
@@ -3296,6 +3295,20 @@ def strip_namespace(val):
 
 def parseAndGenerate(outfileName, subclassFilename, prefix, \
         xschemaFileName, behaviorFilename, superModule='???'):
+    includes=[]
+    from xml.dom.ext.reader import Sax2
+    from xml import xpath
+    doc=None
+    if '://' in xschemaFileName:
+        doc = Sax2.FromXmlUrl(xschemaFileName).documentElement
+    else:
+        doc = Sax2.FromXmlFile(xschemaFileName).documentElement
+    for node in xpath.Evaluate('//@schemaLocation', doc):
+        includes.append(str(node.value))
+    for i in includes:
+        outFile=(i.split('/')[-1]).split('.xsd')[0]+'.py'
+        print outFile
+        parseAndGenerate(outFile,None,None,i,None,None)
     global DelayedElements, DelayedElements_subclass, AlreadyGenerated, SaxDelayedElements, \
         AlreadyGenerated_subclass
     DelayedElements = []
