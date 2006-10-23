@@ -35,6 +35,8 @@ import getopt
 import urllib2
 from xml.sax import handler, make_parser
 import xml.sax.xmlreader
+from xml.dom.ext.reader import Sax2
+from xml import xpath
 
 
 #from IPython.Shell import IPShellEmbed
@@ -174,6 +176,7 @@ class SimpleTypeElement(XschemaElementBase):
 
 
 class XschemaElement(XschemaElementBase):
+    includes=[]
     def __init__(self, attrs):
         XschemaElementBase.__init__(self)
         self.cleanName = ''
@@ -466,6 +469,7 @@ class XschemaElement(XschemaElementBase):
                     self.attributeDefs[name] = attr
             else:
                 print '*** Error. attributeGroup %s not defined.' % groupName
+                
 
     def __str__(self):
         s1 = '<"%s" XschemaElement instance at 0x%x>' % \
@@ -597,10 +601,6 @@ class XschemaHandler(handler.ContentHandler):
 
     def startElement(self, name, attrs):
         #dbgprint(1, 'before schema name: %s  SchemaType: %s' % (name, SchemaType,))
-        if name == IncludeType:
-            include=attrs['schemaLocation']
-            self.includes.append(include)
-
         if name == SchemaType:
             # dbgprint(1, '(schema in)')
             self.inSchema = 1
@@ -3296,8 +3296,7 @@ def strip_namespace(val):
 def parseAndGenerate(outfileName, subclassFilename, prefix, \
         xschemaFileName, behaviorFilename, superModule='???'):
     includes=[]
-    from xml.dom.ext.reader import Sax2
-    from xml import xpath
+    included_root_list=[]
     doc=None
     if '://' in xschemaFileName:
         doc = Sax2.FromXmlUrl(xschemaFileName).documentElement
@@ -3307,8 +3306,6 @@ def parseAndGenerate(outfileName, subclassFilename, prefix, \
         includes.append(str(node.value))
     for i in includes:
         outFile=(i.split('/')[-1]).split('.xsd')[0]+'.py'
-        print outFile
-        parseAndGenerate(outFile,None,None,i,None,None)
     global DelayedElements, DelayedElements_subclass, AlreadyGenerated, SaxDelayedElements, \
         AlreadyGenerated_subclass
     DelayedElements = []
@@ -3322,9 +3319,18 @@ def parseAndGenerate(outfileName, subclassFilename, prefix, \
     dh = XschemaHandler()
 ##    parser.setDocumentHandler(dh)
     parser.setContentHandler(dh)
+    for i in includes:
+        print "Parsing include file "+i
+        print parser.parse(i)
+        included_root=dh.getRoot()
+        if included_root!=None:
+            included_root.annotate()
+        included_root_list.append(included_root)
+    print included_root_list
     parser.parse(xschemaFileName)
     root = dh.getRoot()
     if root!=None:
+        root.includes=included_root_list
         root.annotate()
 ##    print 'ElementDict:', ElementDict
 ##    for name, obj in ElementDict.iteritems():
@@ -3377,7 +3383,7 @@ def main():
     outFilename = None
     subclassFilename = None
     behaviorFilename = None
-    nameSpace = 'xs:'
+    nameSpace = 'xsd:'
     superModule = '???'
     for option in options:
         if option[0] == '-p':
